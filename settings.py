@@ -53,6 +53,8 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+AUTH_PROFILE_MODULE = 'calisanProfil.CalisanProfil'
+
 STATIC_URL = '/statik/'
 
 # Absolute path to the directory that holds media.

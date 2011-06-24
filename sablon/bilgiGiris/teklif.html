@@ -4,12 +4,15 @@
 <div class="grid_56"> 
  <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_top.jpg" /></div> 
  <div class="grid_56 one"> 
-   <div class="grid_54 push_1">
-    <form action="/teklif-formu/" method="post">{% csrf_token %}
-     {{ form.as_p }}
-     <input type="submit" value="Submit" />
-    </form>
-   </div> 
+  <div class="grid_54 push_1">
+   <form action="/teklif-formu/" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+   </form>
+   {% for sorumlu in sorumlular %}
+   {{ sorumlu }}
+   {% endfor %}
+  </div> 
  </div> 
  <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_bottom.jpg" /></div> 
 </div> 
