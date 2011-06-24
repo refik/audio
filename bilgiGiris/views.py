@@ -17,7 +17,7 @@ def formSec(tip):
     else:
         raise Http404
 
-def sorumluBul(tip, sehir = None):
+def sorumluBul(tip,sehir):
     sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
     if sehir != None:
         sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = sehir)
@@ -30,6 +30,10 @@ def formIslem(request,tip):
         bilgi = form(request.POST)
         if bilgi.is_valid():
             bilgi.save()
-            sorumlular = sorumluBul(tip,bilgi.cleaned_data['Sehir'])
+            if bilgi.cleaned_data['tip'].isim == 'teklif':
+                sehir = bilgi.cleaned_data['sehir']
+            else:
+                sehir = None
+            sorumlular = sorumluBul(tip,sehir)
     return render_to_response(form().TEMPLATE,{'form':form(),'sorumlular':sorumlular},context_instance=RequestContext(request))
 
