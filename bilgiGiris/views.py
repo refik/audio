@@ -28,7 +28,8 @@ def formIslem(request,tip):
     sorumlular = ['ahmet','mehmet']
     if request.method == 'POST':
         bilgi = form(request.POST)
-        bilgi.save()
-        sorumlular = sorumluBul(tip,'Bitlis')
+        if bilgi.is_valid():
+            bilgi.save()
+            sorumlular = sorumluBul(tip,bilgi.cleaned_data['Sehir'])
     return render_to_response(form().TEMPLATE,{'form':form(),'sorumlular':sorumlular},context_instance=RequestContext(request))
 
