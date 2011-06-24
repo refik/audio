@@ -9,6 +9,6 @@ urlpatterns = patterns('',
     (r'^form/', include('audio.bilgiGiris.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^databrowse/(.*)', databrowse.site.root),
-    
     (r'^$', include('audio.ozelSayfa.urls')),
+    (r'^', include('audio.bilgiGiris.urls')), 
 )
