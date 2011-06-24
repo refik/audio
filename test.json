@@ -1,0 +1,569 @@
+[
+  {
+    "pk": 1, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Adana"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Ad\u0131yaman"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Afyonkarahisar"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "A\u011fr\u0131"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Aksaray"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Amasya"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Ankara"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Antalya"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Ardahan"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Artvin"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Ayd\u0131n"
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bal\u0131kesir"
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bart\u0131n"
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Batman"
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bayburt"
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bilecik"
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bing\u00f6l"
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bitlis"
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bolu"
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Burdur"
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Bursa"
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "\u00c7anakkale"
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "\u00c7ank\u0131r\u0131"
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "\u00c7orum"
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Denizli"
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Diyarbak\u0131r"
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "D\u00fczce"
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Edirne"
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Elaz\u0131\u011f"
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Erzincan"
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Erzurum"
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Eski\u015fehir"
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Gaziantep"
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Giresun"
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "G\u00fcm\u00fc\u015fhane"
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Hakkari"
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Hatay"
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "I\u011fd\u0131r"
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Isparta"
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Mersin"
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "\u0130stanbul"
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "\u0130zmir"
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Karab\u00fck"
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Kars"
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Kastamonu"
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Kayseri"
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "K\u0131rklareli"
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "K\u0131r\u015fehir"
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Kocaeli"
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Konya"
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "K\u00fctahya"
+    }
+  }, 
+  {
+    "pk": 52, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Malatya"
+    }
+  }, 
+  {
+    "pk": 53, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Manisa"
+    }
+  }, 
+  {
+    "pk": 54, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Kahramanmara\u015f"
+    }
+  }, 
+  {
+    "pk": 55, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Karaman"
+    }
+  }, 
+  {
+    "pk": 56, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "K\u0131r\u0131kkale"
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Kilis"
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Mardin"
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Mu\u011fla"
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Mu\u015f"
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Nev\u015fehir"
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Ni\u011fde"
+    }
+  }, 
+  {
+    "pk": 63, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Ordu"
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Osmaniye"
+    }
+  }, 
+  {
+    "pk": 65, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Rize"
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Sakarya"
+    }
+  }, 
+  {
+    "pk": 67, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Samsun"
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Siirt"
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Sinop"
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Sivas"
+    }
+  }, 
+  {
+    "pk": 71, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "\u015e\u0131rnak"
+    }
+  }, 
+  {
+    "pk": 72, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Tekirda\u011f"
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Tokat"
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Trabzon"
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Tunceli"
+    }
+  }, 
+  {
+    "pk": 76, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "\u015eanl\u0131urfa"
+    }
+  }, 
+  {
+    "pk": 77, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "U\u015fak"
+    }
+  }, 
+  {
+    "pk": 78, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Van"
+    }
+  }, 
+  {
+    "pk": 79, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Yalova"
+    }
+  }, 
+  {
+    "pk": 80, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Yozgat"
+    }
+  }, 
+  {
+    "pk": 81, 
+    "model": "bilgiGiris.sehir", 
+    "fields": {
+      "isim": "Zonguldak"
+    }
+  }
+]
