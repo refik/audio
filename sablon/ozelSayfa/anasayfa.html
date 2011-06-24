@@ -1,0 +1,66 @@
+{% extends 'taban.html' %}
+{% block head %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/anasayfa.js"></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}css/anasayfa.css" />
+{% endblock %}
+
+{% block icerik %}
+<div class="grid_14 set4">
+ <div class="grid_14 alpha omega topd"></div>
+ <div class="grid_1 alpha topd"></div>
+ <div class="grid_12 jcarousellite " id='haberler'>
+  <ul>
+   {% for h in haber %}
+   <li>
+    <div class="grid_12 alpha omega" >
+     <div class="grid_12 alpha omega" ><strong>{{ h.baslik }}</strong></div>
+     <div class="grid_8 alpha">{{ h.ozet }}</div>
+     <div class="grid_4 omega">
+      <img src="{{ h.ufakResim.url }}" width="62" height="46" />
+     </div>
+    </div>
+   </li>
+   {% endfor %}
+  </ul>	
+ </div>
+ <div class="grid_1 omega topd"></div>
+</div>
+<div class="grid_14"><img src="{{ sol_resim.dosya.url }}" /></div>
+<div class="grid_14"><img src="{{ sag_resim.dosya.url }}" /></div>
+<div class="grid_14">
+ <div class="grid_14 alpha omega set4_1">
+  <div class="grid_14 alpha omega topd"></div>
+  <div class="grid_1 alpha topd"></div>
+  <div class="grid_12 yeni_urunler" >
+   <ul>
+    <li>
+     <div class="grid_12 alpha omega" >
+      <div class="grid_8 alpha"><a href="/urunler/urun/Görüntülü Diafonlar/konsept-gdm/">Konsept GDM</a></div>
+      <div class="grid_4 omega"><a class="hab4" href="/urunler/urun/Görüntülü Diafonlar/konsept-gdm/"><img src="http://audio.mageroya.com/site_media/site_media/yukleme/Audio_FTO/Audio_GDM/004_62x46.jpg" width="62" height="46"/></a></div>
+     </div>
+    </li>
+    <li>
+     <div class="grid_12 alpha omega" >
+      <div class="grid_8 alpha"><a href="/urunler/urun/Görüntülü Diafonlar/konsept-gdm/">Konsept GDM</a></div>
+      <div class="grid_4 omega"><a class="hab4" href="/urunler/urun/Görüntülü Diafonlar/konsept-gdm/"><img src="http://audio.mageroya.com/site_media/site_media/yukleme/Audio_FTO/Audio_GDM/004_62x46.jpg" width="62" height="46"/></a></div>
+     </div>
+    </li>
+   </ul>
+  </div>
+  <div class="grid_1 omega topd"></div>
+ </div>
+ <div class="grid_14 set4_2">
+  <div class="grid_14 topd"></div>
+  <div class="grid_12 push_1"><strong>Yeniliklerden Haberdar Olun</strong></div>
+ </div>
+ <div class="grid_14 set4_3">
+  <div class="grid_14 topd"></div>
+  <div class="grid_12 push_1 "><strong>Bus Plus Yetkili Montajcisi Olmak Icin Tiklayin</strong></div>
+ </div>
+</div>
+<div class="clear"></div>
+{% endblock %}
+
+
+
+

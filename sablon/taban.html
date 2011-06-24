@@ -1,0 +1,67 @@
+{% load mptt_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+ <title>AUDIO Elektronik</title>
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/960a.css" />
+ <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/superfish.css" /> 
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css" />
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css" />
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+ <script type="text/javascript" src="{{ STATIC_URL }}js/taban.js"></script>
+ <script type="text/javascript" src="{{ STATIC_URL }}js/superfish.js"></script>
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jcarousellite.js"></script>
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.min.js"></script> 
+
+ {% block head %}
+ {% endblock %}
+
+</head>
+
+<body>
+ <div id='bkground'> 
+  <div class="container_56">
+   <div class="grid_16">
+    <img src="{{ STATIC_URL }}resim/logo.jpg" />
+   </div>  
+   <div class="grid_40">
+     <div class="grid_40 harita"></div>
+     <div class="grid_40">
+      {% include "menu.html" with alt_limit=1 ust_limit=6 %}
+     </div>
+   </div>
+   <div class="clear"></div>  
+
+   <div class="grid_56 spacer"></div>
+   <div class="clear"></div> 
+
+   <div class="grid_56 banner">
+    {% for a in afis %}
+    <img src="{{ a.dosya.url }}" alt="{{a.yazi}}" width="952" height="217"/>
+    {% endfor %}
+   </div>
+   <div class="clear"></div>
+
+   <div class="grid_56 spacer"></div>
+   <div class="clear"></div> 
+
+   <div class="grid_56">  
+    {% include "menu.html" with alt_limit=7 ust_limit=13 %}
+   </div>
+   <div class="clear"></div>
+
+   <div class="grid_56 spacer"></div>
+   <div class="clear"></div> 
+
+  {% block icerik %}
+  {% endblock %}
+
+  </div>
+  <img src="{{ STATIC_URL }}resim/bottom.jpg" />
+ </div>
+</body>
+</html>
+

@@ -1,0 +1,1 @@
+Feincms'de fein_tree.js ve style.css deki butun result_list ler changelist e degistirildi. Eski haline dondurmek icin tersini yapmak yanlis olur cunku dosyalarda zaten changelist stringi mevcuttu.

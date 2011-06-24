@@ -1,0 +1,6 @@
+.one {
+	background-size: 	100%;
+	margin:			0 auto;
+	background-image:	url('/statik/resim/b1_back.jpg');
+	background-repeat: 	repeat-y;
+}

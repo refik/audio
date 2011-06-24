@@ -1,0 +1,116 @@
+body {
+	background-color:	#bababa;
+	font-family: 		'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+#bkground {
+	background-size: 	100%;
+	margin:			0 auto;
+	width:			1000px;
+	background-image:	url('/statik/resim/back.jpg');
+	background-repeat: 	repeat-y;
+}
+
+
+.centered {
+	text-align: 		center; 
+}
+
+/*.menu {
+	margin-left: 		2px;
+	font-weight:		bold;
+	text-align:		center;
+	height:			34px;
+
+}
+
+.ust-ilk {
+	margin-left:		46px;
+}
+
+.alt-ilk {
+	margin-left:		0px;
+}
+
+.alt-son {
+	width:			316px;
+	background:		#000000;
+}*/
+
+.topd {
+	height:			17px;
+}
+
+.harita {
+	height:			31px;
+}
+
+.sf-menu {
+	float:			right;
+	margin-bottom:		0px;
+	
+}
+
+.sf-menu li, .sf-menu a:visited {
+	background-image:	url('/statik/resim/button.jpg');
+	color:			#ffffff;
+	width:			104px;
+	height:			34px;
+}
+
+/*superfish
+.sf-menu a {
+	border-top:		0px;
+	border-left:		none;
+	width:			104px;
+	height:			24px;
+	padding: 		0px;
+}
+
+
+
+.sf-sub-indicator {
+	background:		url('/statik/resim/arrows-ffffff.png') no-repeat -10px -100px; 
+}
+
+.sf-shadow ul {
+	background:		url('/statik/resim/shadow.png') no-repeat bottom right;
+
+}
+
+.sf-menu a, .sf-menu a:visited  { 
+	color:			#ffffff;
+}
+
+.sf-menu li {
+	background-image:	url('/statik/resim/button.jpg');
+}
+
+.sf-menu li li {
+	background:		#DF0101;
+}
+
+.sf-menu {
+	float:			left;
+	margin-bottom:		0;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	background:		#CFDEFF;
+}
+superfish*/
+
+
+li {
+	margin-left:		0px;
+}
+
+div.spacer {  
+	height: 		1em;  
+}  
+
+div.ust_menu {  
+	position:		absolute;
+	bottom:			0;
+}  
