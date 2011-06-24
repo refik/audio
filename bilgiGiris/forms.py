@@ -3,6 +3,7 @@ from audio.bilgiGiris.models import Bilgi
 
 class TeklifForm(ModelForm):
     TEMPLATE = 'bilgiGiris/teklif.html'
+    KONU = 'Audio Teklif Formu'
     class Meta:
         model = Bilgi
         exclude = ('firma',)

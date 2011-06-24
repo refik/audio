@@ -4,6 +4,16 @@ from audio.calisanProfil.models import CalisanProfil
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
+SIRA = ['isim','email','sehir','firma','telefon','mesaj']
+
+def mesajOlustur(sozluk):
+    mesaj = ''
+    for madde in SIRA:
+        try:
+            mesaj += madde + ': ' + sozluk[madde] + '\n'
+        except:
+            pass
+    return mesaj
 
 def formSec(tip):
     if tip == 'teklif':
@@ -25,7 +35,6 @@ def sorumluBul(tip,sehir):
 
 def formIslem(request,tip):
     form = formSec(tip)
-    sorumlular = ['ahmet','mehmet']
     if request.method == 'POST':
         bilgi = form(request.POST)
         if bilgi.is_valid():
@@ -35,5 +44,13 @@ def formIslem(request,tip):
             else:
                 sehir = None
             sorumlular = sorumluBul(tip,sehir)
-    return render_to_response(form().TEMPLATE,{'form':form(),'sorumlular':sorumlular},context_instance=RequestContext(request))
+            gonderilecek = []
+            for sorumlu in sorumlular:
+                gonderilecek += [sorumlu.email]
+            konu = bilgi.KONU
+            mesaj = mesajOlustur(bilgi.cleaned_data)
+            #test icin
+            print [gonderilecek, konu, mesaj]
+            #test bitti
+    return render_to_response(form().TEMPLATE,{'form':form()},context_instance=RequestContext(request))
 
