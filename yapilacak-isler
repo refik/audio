@@ -1,9 +1,11 @@
 1* javascript katalog
 2* menu template ini duzeltmek. butonlar 104px genisliginde, aralari 2px, yukseklik 34px. teklif butonu 316px
-3* bilgiGirisdeki formlarin validasyonunu ayarlamak
+3* bilgiGirisdeki formlarin validasyon stilini ayarlamak
 4* urunler icin esnek bir template hazirlanmasi
     _Bir urunun zil paneli yoksa o kismin iptal edilip alttaki sistem kisminin genislemesi
     _Bir kategorinin konsept urunu yoksa basic kismin tum sayfayi kaplamasi
     _(herhangi bir durumda bos bir kutunun gozukmeyecegi sekilde ayarlanmasi)
 5* sitede cesitli resimlerin(ve thumbnaillarin) gozukecegi ideal boyutlarin bakilip grappelli ye soylenmesi
 6* ortakVeri.menu elemani su anki haliyle yeterli mi? 
+
+refik: 3

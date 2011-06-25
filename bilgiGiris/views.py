@@ -35,6 +35,7 @@ def sorumluBul(tip,sehir):
 
 def formIslem(request,tip):
     form = formSec(tip)
+    yollaForm = form()
     if request.method == 'POST':
         bilgi = form(request.POST)
         if bilgi.is_valid():
@@ -52,5 +53,7 @@ def formIslem(request,tip):
             #test icin
             print [gonderilecek, konu, mesaj]
             #test bitti
-    return render_to_response(form().TEMPLATE,{'form':form()},context_instance=RequestContext(request))
+        else:
+            yollaForm = bilgi
+    return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm},context_instance=RequestContext(request))
 
