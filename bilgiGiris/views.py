@@ -27,24 +27,15 @@ def formSec(tip):
     else:
         raise Http404
 
-def sorumluBul(tip,sehir):
-    sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
-    if sehir != None:
-        sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = sehir)
-    return sorumlular
-
 def formIslem(request,tip):
     form = formSec(tip)
-    yollaForm = form()
     if request.method == 'POST':
         bilgi = form(request.POST)
         if bilgi.is_valid():
             bilgi.save()
+            sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
             if bilgi.cleaned_data['tip'].isim == 'teklif':
-                sehir = bilgi.cleaned_data['sehir']
-            else:
-                sehir = None
-            sorumlular = sorumluBul(tip,sehir)
+                sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir'])
             gonderilecek = []
             for sorumlu in sorumlular:
                 gonderilecek += [sorumlu.email]
@@ -55,5 +46,7 @@ def formIslem(request,tip):
             #test bitti
         else:
             yollaForm = bilgi
+    else:
+        yollaForm = form()
     return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm},context_instance=RequestContext(request))
 
