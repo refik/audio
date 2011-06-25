@@ -7,6 +7,5 @@ class MenuAdmin(TreeEditor, admin.ModelAdmin):
     pass
 
 admin.site.register(Afis)
-#admin.site.register(Menu)
 admin.site.register(Menu, MenuAdmin)
 

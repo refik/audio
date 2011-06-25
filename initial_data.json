@@ -1515,5 +1515,34 @@
     "fields": {
       "isim": "Zonguldak"
     }
+  },
+  {
+    "pk": 1, 
+    "model": "bilgiGiris.tip", 
+    "fields": {
+      "isim": "teklif"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "bilgiGiris.tip", 
+    "fields": {
+      "isim": "bulten"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "bilgiGiris.tip", 
+    "fields": {
+      "isim": "akademi"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "bilgiGiris.tip", 
+    "fields": {
+      "isim": "iletisim"
+    }
   }
+
 ]
