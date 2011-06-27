@@ -13,7 +13,8 @@ TIP =(
      )
 
 class Sistem(models.Model):
-    isim = models.CharField("Tip", max_length = 50, choices =TIP)
+    isim = models.CharField("Isim",max_length=200)
+    tip = models.CharField("Tip", max_length = 50, choices =TIP)
     aciklama = models.TextField()
     tanitim = FileBrowseField('Tanitim Brosuru',max_length=50)
     class Meta: 
