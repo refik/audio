@@ -17,6 +17,7 @@ class Sistem(models.Model):
     tip = models.CharField("Tip", max_length = 50, choices =TIP)
     aciklama = models.TextField()
     tanitim = FileBrowseField('Tanitim Brosuru',max_length=50)
+    slug = models.SlugField()
     class Meta: 
         verbose_name_plural = "Sistemler"
     def __unicode__(self):
@@ -44,7 +45,7 @@ class Urun(models.Model):
     tanitim = models.TextField("Tanitim Metni")
     ozellik = models.ManyToManyField(Ozellik, blank= True, related_name = "UrunOzellikler")
     slug = models.SlugField()
-    panel = models.ManyToManyField('self')
+    panel = models.ManyToManyField('self',blank=True,null=True)
     class Meta:
         verbose_name_plural = "Urunler"
     def __unicode__(self):
