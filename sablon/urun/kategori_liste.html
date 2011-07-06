@@ -1,0 +1,15 @@
+<div class="grid_{{ sira_grid  }}">
+ <div class="grid_{{ sira_grid }}"><img src="{{ STATIC_URL }}resim/b{{ sira }}_top.jpg" /></div>
+ <div class="grid_{{ sira_grid }} {% if sira == 1 %}one{% else %}two{% endif %}">
+  <div class="grid_{{ sira_grid_inner }} push_{{ sira_grid_push }}">
+   <div class="grid_{{ sira_grid_inner }} centered">
+    <img src="{{ STATIC_URL }}resim/{{ seri }}.jpg"/>
+   </div>
+   {% for urun in urun_listesi %}
+   <div class="grid_13 {% if sira == 1 %}{% cycle 'alpha' '' '' 'omega' %}{% else %}{% cycle 'alpha' 'omega' %}{% endif %} centered"><img src="{{ urun.resim.url }}" />{{ urun.isim }}</div> 
+   {% endfor %}
+  </div>
+ </div>
+ <div class="grid_{{ sira_grid }}"><img src="{{ STATIC_URL }}resim/b{{ sira }}_bottom.jpg" /></div>
+</div>
+

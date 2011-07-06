@@ -41,7 +41,7 @@ class Urun(models.Model):
     resim = FileBrowseField('Urunun Resmi', max_length=200) 
     sistem = models.ManyToManyField(Sistem)
     kategori = models.ForeignKey(Kategori, related_name="UrunKategori", verbose_name="Kategori")
-    seri = models.CharField("Seri",max_length=10,choices=SERI)
+    seri = models.CharField("Seri",max_length=10,choices=SERI,blank=True)
     tanitim = models.TextField("Tanitim Metni")
     ozellik = models.ManyToManyField(Ozellik, blank= True, related_name = "UrunOzellikler")
     slug = models.SlugField()
