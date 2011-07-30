@@ -1,3 +1,4 @@
+{% load fb_versions %}
 <div class="grid_{{ sira_grid  }}">
  <div class="grid_{{ sira_grid }}"><img src="{{ STATIC_URL }}resim/b{{ sira }}_top.jpg" /></div>
  <div class="grid_{{ sira_grid }} {% if sira == 1 %}one{% else %}two{% endif %}">
@@ -6,7 +7,16 @@
     <img src="{{ STATIC_URL }}resim/{{ seri }}.jpg"/>
    </div>
    {% for urun in urun_listesi %}
-   <div class="grid_13 {% if sira == 1 %}{% cycle 'alpha' '' '' 'omega' %}{% else %}{% cycle 'alpha' 'omega' %}{% endif %} centered"><img src="{{ urun.resim.url }}" />{{ urun.isim }}</div> 
+   <div class="grid_13 {% if sira == 1 %}{% cycle 'alpha' '' '' 'omega' %}{% else %}{% cycle 'alpha' 'omega' %}{% endif %} centered">
+    <div class="grid_13">
+     {% if urun.resim.orientation == "Landscape"  %}
+     <img src="{% version urun.resim.path 'enlem_ufak' %}"/>
+     {% else  %}
+     <img src="{% version urun.resim.path 'boylam_ufak' %}"/>
+     {% endif%}
+    </div>
+    <div class="grid_13">{{ urun.isim }}</div>
+   </div> 
    {% endfor %}
   </div>
  </div>

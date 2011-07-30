@@ -44,9 +44,12 @@ def formIslem(request,tip):
             #test icin
             print [gonderilecek, konu, mesaj]
             #test bitti
+            yollaForm = form()
         else:
             yollaForm = bilgi
+            print 1234
     else:
         yollaForm = form()
+        print 345345435
     return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm},context_instance=RequestContext(request))
 

@@ -1,4 +1,4 @@
-1* javascript katalog
+1* izlenebilir pdf sayfasi
 2* menu template ini duzeltmek. butonlar 104px genisliginde, aralari 2px, yukseklik 34px. teklif butonu 316px
 4* urunler icin esnek bir template hazirlanmasi
     _Bir urunun zil paneli yoksa o kismin iptal edilip alttaki sistem kisminin genislemesi
@@ -7,5 +7,7 @@
 5* sitede cesitli resimlerin(ve thumbnaillarin) gozukecegi ideal boyutlarin bakilip grappelli ye soylenmesi
 6* ortakVeri.menu elemani su anki haliyle yeterli mi? 
 7* anasayfadaki iki linkin admin panelinden ayarlanmasi
+8* sistem modeline resim eklenmesi
+9* urunlerin yanindaki linklerin database e yazilmasi
 
 refik: 6

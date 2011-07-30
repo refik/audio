@@ -76,8 +76,18 @@ FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser/'
 
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = '/home/refik/code/pythonenv/audio/lib/python2.6/site-packages/django_filebrowser-3.3.0-py2.6.egg/filebrowser/static/filebrowser'
 
-FEINCMS_ADMIN_MEDIA = '/statik/feincms/'
+FILEBROWSER_VERSIONS = {
+    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
+    'thumbnail': {'verbose_name': 'Thumbnail (1 col)', 'width': 60, 'height': 60, 'opts': 'crop'},
+    'enlem_ufak': {'verbose_name': 'Enlem Ufak', 'width': 190, 'height': '', 'opts': ''},
+    'boylam_ufak': {'verbose_name': 'Boylam Ufak', 'width': '', 'height': 190, 'opts': ''},
+    'enlem': {'verbose_name': 'Enlem', 'width': 430, 'height': '', 'opts': ''},
+    'boylam': {'verbose_name': 'Boylam', 'width': '', 'height': 430, 'opts': ''},
+}
 
+FILEBROWSER_ADMIN_VERSIONS = ['enlem_ufak', 'boylam_ufak', 'enlem', 'boylam']
+
+FEINCMS_ADMIN_MEDIA = '/statik/feincms/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -154,4 +164,5 @@ INSTALLED_APPS = (
     'audio.calisanProfil',
     'feincms',
     'mptt',
+    'south',
 )

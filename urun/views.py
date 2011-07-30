@@ -5,7 +5,7 @@ from django.template import RequestContext
 
 def urun(request,urun):
     istenenUrun = Urun.objects.get(slug=urun)
-    return HttpResponse(istenenUrun.isim)
+    return render_to_response('urun/urun.html',{'urun':istenenUrun},context_instance=RequestContext(request))
 
 def urunler(request,kategori):
     istenenKategori = Kategori.objects.get(slug=kategori).UrunKategori.all()

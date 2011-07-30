@@ -1,0 +1,37 @@
+<div class="grid_28">
+ <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_top.jpg" /></div>
+ <div class="grid_28 two">
+  <div class="grid_26 push_1">
+   <div class="grid_13 alpha">
+    <div class="grid_13 centered"><img src="{{ STATIC_URL }}resim/konsept.jpg"/></div>
+    <div class="grid_13 centered">
+     {% for panel in urun.panel.all %}
+     {% if panel.seri == 'konsept' %}<img src="{{ panel.resim.url }}"/>{% endif %}
+     {% endfor %}
+    </div>
+    <div class="grid_13">
+     <strong>Konsept Serisi Paneller</strong>
+     {% for panel in urun.panel.all %}
+     {% if panel.seri == 'konsept' %}<div class="grid_13">- {{ panel.isim }}</div>{% endif %}
+     {% endfor %}
+    </div> 
+   </div>
+   <div class="grid_13 omega">
+    <div class="grid_13 centered"><img src="{{ STATIC_URL }}resim/basic.jpg"/></div>
+    <div class="grid_13 centered">
+     {% for panel in urun.panel.all %}
+     {% if panel.seri == 'basic' %}<img src="{{ panel.resim.url }}"/>{% endif %}
+     {% endfor %}
+    </div>
+    <div class="grid_13">
+     <strong>Basic Serisi Paneller</strong>
+     {% for panel in urun.panel.all %}
+     {% if panel.seri == 'basic' %}<div class="grid_13">- {{ panel.isim }}</div>{% endif %}
+     {% endfor %}
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_bottom.jpg"/></div>
+</div>
+
