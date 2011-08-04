@@ -1,2 +1,0 @@
-#!/bin/bash
-/home/refik/code/pythonenv/audio/bin/python manage.py syncdb --noinput
