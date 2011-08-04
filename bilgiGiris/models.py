@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
+from django.contrib.comments.moderation import CommentModerator, moderator
 
 class Tip(models.Model):
     isim = models.CharField('Alan',max_length = 200)
@@ -20,7 +22,13 @@ class Bilgi(models.Model):
     mesaj = models.TextField('Mesaj')
     tip = models.ForeignKey(Tip)
     tarih = models.DateTimeField("Giris Tarihi", default = datetime.now(),editable=False)
+    sorumlu = models.ManyToManyField(User,null=True)
     def __unicode__(self):
         return self.isim
 
+class BilgiModerator(CommentModerator):
+    email_notification = True
+    def email(self, comment, content_object, request):
+        print 'selamin aleykum', content_object
 
+moderator.register(Bilgi, BilgiModerator)

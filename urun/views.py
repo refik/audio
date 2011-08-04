@@ -1,11 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from audio.urun.models import Urun, Kategori
+from audio.dokuman.models import Dokuman
 from django.template import RequestContext
 
 def urun(request,urun):
     istenenUrun = Urun.objects.get(slug=urun)
-    return render_to_response('urun/urun.html',{'urun':istenenUrun},context_instance=RequestContext(request))
+    dokuman = Dokuman.objects.filter(urun_sayfa=True)
+    panelKonsept = istenenUrun.panel.filter(seri='konsept')
+    panelBasic = istenenUrun.panel.filter(seri='basic')
+    print panelKonsept
+    return render_to_response('urun/urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
 
 def urunler(request,kategori):
     istenenKategori = Kategori.objects.get(slug=kategori).UrunKategori.all()

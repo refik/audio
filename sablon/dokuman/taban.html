@@ -1,0 +1,56 @@
+<html>
+ <head>
+  <script type="text/javascript" src="/statik/js/flexpaper_flash.js"></script>
+ </head>
+ <body>
+  <a href='{{ dokuman.dosya.url }}'><h1>{{ dokuman.isim }} indirmek icin tiklayin</h1></a>
+  <a id="viewerPlaceHolder" style="width:660px;height:480px;display:block;"></a>
+  <script type="text/javascript">
+   var viewportwidth;
+   var viewportheight;
+   if (typeof window.innerWidth != 'undefined'){
+       viewportwidth = window.innerWidth,
+       viewportheight = window.innerHeight
+   } 
+   else if (typeof document.documentElement != 'undefined'
+            && typeof document.documentElement.clientWidth !=
+            'undefined' && document.documentElement.clientWidth != 0){
+       viewportwidth = document.documentElement.clientWidth,
+       viewportheight = document.documentElement.clientHeight
+   } 
+   else{
+       viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
+       viewportheight = document.getElementsByTagName('body')[0].clientHeight
+   }
+   document.getElementById('viewerPlaceHolder').style.width = viewportwidth - 50;
+   document.getElementById('viewerPlaceHolder').style.height = viewportheight - 210;
+ 
+   var fp = new FlexPaperViewer(   
+       '/statik/flexpaper/FlexPaperViewer',
+       'viewerPlaceHolder', { config : {
+       SwfFile : "{% templatetag openbrace %}{{ swfUrl }}/[*,0].swf,{{ sayfa }}{% templatetag closebrace %}",
+       Scale : 0.6, 
+       ZoomTransition : 'easeOut',
+       ZoomTime : 0.5,
+       ZoomInterval : 0.2,
+       FitPageOnLoad : true,
+       FitWidthOnLoad : false,
+       PrintEnabled : true,
+       FullScreenAsMaxWindow : false,
+       ProgressiveLoading : true,
+       MinZoomSize : 0.2,
+       MaxZoomSize : 5,
+       SearchMatchAll : false,
+       InitViewMode : 'TwoPage',
+       ViewModeToolsVisible : false,
+       ZoomToolsVisible : true,
+       NavToolsVisible : false,
+       CursorToolsVisible : false,
+       SearchToolsVisible : false,
+       localeChain: 'tr_TR'
+   }});
+  </script>
+  <img src='/statik/resim/geri.png' onClick="getDocViewer().prevPage()"/>
+  <img src='/statik/resim/ileri.png' onClick="getDocViewer().nextPage()"/>
+ </body>
+</html>

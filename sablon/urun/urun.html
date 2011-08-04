@@ -14,15 +14,27 @@
     <img src="{{ STATIC_URL }}resim/{{ urun.seri }}.jpg" />
    </div>
    <div class="grid_27 alpha">
-    <div class="grid_27">
+    <div class="grid_27 centered">
      <strong>{{ urun.isim }}</strong>
     </div>
-    <div class="grid_27">
-     {% if urun.resim.orientation == "Landscape"  %}
-     <img src="{% version urun.resim.path 'enlem' %}"/>
-     {% else  %}
-     <img src="{% version urun.resim.path 'boylam' %}"/>
-     {% endif%}
+    <div class="grid_27 centered">
+     <img src="{% version urun.resim.path 'urun' %}"/>
+    </div>
+    <div class='grid_26' style='text-align:right'>
+     {{ urun.tanitim }}
+    </div>
+    <div class='grid_27' style='height:10px;'></div>
+    <div class='grid_27'>
+     {% for u in urun.digermodel_set.all %}
+     <div class='grid_9'>
+      <div class='grid_9 centered'>
+       <img src='{% version u.resim.path 'diger_model' %}'/>
+      </div>
+      <div class='grid_8' style='text-align:right;'>
+       {{ u.aciklama }}
+      </div>   
+     </div>
+     {% endfor %}
     </div>
    </div>
    <div class="grid_23">
@@ -33,31 +45,19 @@
     <div class="grid_23">- {{ ozellik.isim }}</div>
     {% endfor %}
    </div>
+   
    <div class="grid_4 omega">
+    {% for d in dokuman %}
     <div class="grid_4 centered">
      <div class="grid_4">
-      <img src="http://www.audio.com.tr/site_media/yukleme/fufak.jpg"/>
+      <img src="{% version d.resim.path 'dokuman_ufak' %}"/>
      </div>
      <div class="grid_4">
-      Fiyat Listesi
+      {{ d.isim }}
      </div>
     </div>
-    <div class="grid_4 centered">
-     <div class="grid_4">
-      <img src="http://www.audio.com.tr/site_media/yukleme/fufak.jpg"/>
-     </div>
-     <div class="grid_4">
-      Imaj Brosuru
-     </div>
-    </div>
-    <div class="grid_4 centered">
-     <div class="grid_4">
-      <img src="http://www.audio.com.tr/site_media/yukleme/fufak.jpg"/>
-     </div>
-     <div class="grid_4">
-      Teknik Manuel
-     </div>
-    </div>
+    <div class='grid_4'style='height:10px;'></div>
+    {% endfor %}
    </div>
 
   </div>
@@ -66,54 +66,30 @@
 </div>
 <div class="clear"></div>
 
-<div class="grid_28">
- <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_top.jpg" /></div>
- <div class="grid_28 two">
-  <div class="grid_25 push_2">
-   {% for sistem in urun.sistem.all %}
-   <div class="grid_7 alpha"><img src="{{ sistem.tanitim.url }}"/></div><div class="grid_18 omega">{{ sistem.aciklama }}</div>
-   {% endfor %}
-  </div>
- </div>
- <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_bottom.jpg"/></div>
-</div>
+{% if panelKonsept or panelBasic %}
+{% include 'urun/sistem_liste.html' with sira=2 sira_grid=28 sira_grid_inner=25 sira_grid_push=2 tanitim_grid=18 %}
+{% else %}
+{% include 'urun/sistem_liste.html' with sira=1 sira_grid=56 sira_grid_inner=40 sira_grid_push=8 tanitim_grid=33 %}
+{% endif %}
 
+{% if panelKonsept or panelBasic %}
 <div class="grid_28">
  <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_top.jpg" /></div>
  <div class="grid_28 two">
-  <div class="grid_26 push_1">
-   <div class="grid_13 alpha">
-    <div class="grid_13 centered"><img src="{{ STATIC_URL }}resim/konsept.jpg"/></div>
-    <div class="grid_13 centered">
-     {% for panel in urun.panel.all %}
-     {% if panel.seri == 'konsept' %}<img src="{{ panel.resim.url }}"/>{% endif %}
-     {% endfor %}
-    </div>
-    <div class="grid_13">
-     <strong>Konsept Serisi Paneller</strong>
-     {% for panel in urun.panel.all %}
-     {% if panel.seri == 'konsept' %}<div class="grid_13">- {{ panel.isim }}</div>{% endif %}
-     {% endfor %}
-    </div> 
-   </div>
-   <div class="grid_13 omega">
-    <div class="grid_13 centered"><img src="{{ STATIC_URL }}resim/basic.jpg"/></div>
-    <div class="grid_13 centered">
-     {% for panel in urun.panel.all %}
-     {% if panel.seri == 'basic' %}<img src="{{ panel.resim.url }}"/>{% endif %}
-     {% endfor %}
-    </div>
-    <div class="grid_13">
-     <strong>Basic Serisi Paneller</strong>
-     {% for panel in urun.panel.all %}
-     {% if panel.seri == 'basic' %}<div class="grid_13">- {{ panel.isim }}</div>{% endif %}
-     {% endfor %}
-    </div>
-   </div>
+  <div class="grid_24 {% if panelKonsept and panelBasic %}push_2{% else %}push_7{% endif %} ">
+   {% if panelKonsept %}
+   {% include 'urun/panel_liste.html' with seri='konsept' panel=panelKonsept %}
+   {% endif %}
+   {% if panelBasic %}
+   {% include 'urun/panel_liste.html' with seri='basic' panel=panelBasic %}
+   {% endif %}
+   <div class='grid_24 alpha omega' style='height:20px'></div>
+   <p style='text-align:center;'>Bu urun ile kullanabileceginiz paneller bunlardir</p>
   </div>
  </div>
  <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_bottom.jpg"/></div>
 </div>
+{% endif %}
 <div class="clear"></div>
 
 {% endblock %}

@@ -32,13 +32,15 @@ def formIslem(request,tip):
     if request.method == 'POST':
         bilgi = form(request.POST)
         if bilgi.is_valid():
-            bilgi.save()
+            bilgi_db = bilgi.save()
             sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
             if bilgi.cleaned_data['tip'].isim == 'teklif':
                 sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir'])
             gonderilecek = []
             for sorumlu in sorumlular:
                 gonderilecek += [sorumlu.email]
+                if not sorumlu.is_superuser:
+                    bilgi_db.sorumlu.add(sorumlu)
             konu = bilgi.KONU
             mesaj = mesajOlustur(bilgi.cleaned_data)
             #test icin

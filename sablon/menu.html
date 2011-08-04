@@ -2,7 +2,7 @@
 <ul class="sf-menu">
  {% recursetree menu %}
  {% if node.tree_id >= alt_limit and node.tree_id <= ust_limit %}
- <li>
+ <li id='{% if node.tree_id == 13 %}son_buton{% else %}{% if node.tree_id == 6 %}ust_son{% endif %}{% endif %}' >
   <a href="#" >{{ node.isim }}</a>
   {% if not node.is_leaf_node %}
   <ul>

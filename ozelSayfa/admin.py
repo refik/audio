@@ -1,11 +1,11 @@
-from audio.ozelSayfa.models import Sayfa, SayfaMedya 
+from audio.ozelSayfa.models import Sayfa, SayfaLink
 from django.contrib import admin, databrowse
 
-class SayfaMedyaInline(admin.TabularInline):
-    model = SayfaMedya
-    extra = 2
+class SayfaLinkInline(admin.StackedInline):
+    model = SayfaLink
+    extra = 0
 
 class SayfaAdmin(admin.ModelAdmin):
-    inlines = [ SayfaMedyaInline ]
+    inlines = [ SayfaLinkInline ]
 
 admin.site.register(Sayfa,SayfaAdmin)

@@ -79,13 +79,18 @@ FILEBROWSER_PATH_FILEBROWSER_MEDIA = '/home/refik/code/pythonenv/audio/lib/pytho
 FILEBROWSER_VERSIONS = {
     'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
     'thumbnail': {'verbose_name': 'Thumbnail (1 col)', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'enlem_ufak': {'verbose_name': 'Enlem Ufak', 'width': 190, 'height': '', 'opts': ''},
-    'boylam_ufak': {'verbose_name': 'Boylam Ufak', 'width': '', 'height': 190, 'opts': ''},
-    'enlem': {'verbose_name': 'Enlem', 'width': 430, 'height': '', 'opts': ''},
-    'boylam': {'verbose_name': 'Boylam', 'width': '', 'height': 430, 'opts': ''},
+    'urun_ufak': {'verbose_name': 'Urun Ufak', 'width': 190, 'height': 190, 'opts': ''},
+    'urun': {'verbose_name': 'Urun', 'width': 430, 'height': 430, 'opts': ''},
+    'haber_ufak': {'verbose_name': 'Haber Ufak', 'width': 50, 'height': 50, 'opts': ''},
+    'yeni_ufak': {'verbose_name': 'Yeni Ufak', 'width': 85, 'height': 85, 'opts': ''},
+    'dokuman_ufak': {'verbose_name': 'Dokuman Ufak', 'width': 68, 'height': 68, 'opts': ''},
+    'diger_model': {'verbose_name': 'Dokuman Ufak', 'width': 145, 'height': 145, 'opts': ''},
+
 }
 
-FILEBROWSER_ADMIN_VERSIONS = ['enlem_ufak', 'boylam_ufak', 'enlem', 'boylam']
+FILEBROWSER_MAX_UPLOAD_SIZE = 10000000000000000000
+
+FILEBROWSER_ADMIN_VERSIONS = ['urun', 'urun_ufak', 'haber_ufak', 'yeni_ufak', 'dokuman_ufak']
 
 FEINCMS_ADMIN_MEDIA = '/statik/feincms/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -155,13 +160,14 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django.contrib.flatpages',
     'django.contrib.staticfiles',
-    'django.contrib.databrowse',
+    'django.contrib.comments',
     'audio.ozelSayfa',
     'audio.ortakVeri',
     'audio.haber',
     'audio.urun',
     'audio.bilgiGiris',
     'audio.calisanProfil',
+    'audio.dokuman',
     'feincms',
     'mptt',
     'south',

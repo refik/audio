@@ -6,9 +6,9 @@ jQuery(function(){
 
   $(".jcarousellite").jCarouselLite({  
 		vertical: true,  
-		visible: 2,  
-		auto:2000,  
-		speed:2000
+		visible: 4,  
+		auto:2000,
+		speed:2000        
     });  
 
   $('.banner').cycle({

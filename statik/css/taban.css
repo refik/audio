@@ -1,6 +1,6 @@
 body {
 	background-color:	#bababa;
-	font-family: 		'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+/*	font-family: 		'Lucida Sans Unicode', 'Lucida Grande', sans-serif;*/
 }
 
 #bkground {
@@ -42,7 +42,7 @@ body {
 }
 
 .harita {
-	height:			31px;
+	height:			43px;
 }
 
 .sf-menu {
@@ -56,6 +56,43 @@ body {
 	color:			#ffffff;
 	width:			104px;
 	height:			34px;
+    margin-right:    2px;
+}
+
+.sf-menu li li {
+    background-color:          #b40404;  
+}
+
+.sf-menu li li li {
+    background-color:          #df0101;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	background:		#000000;
+	outline:		0;
+}
+
+
+#son_buton {
+    background-image:   none;
+	background-color:   #000000;
+	color:			#ffffff;
+	width:			316px;
+	height:			34px;
+    margin-right:   0px;
+}
+
+#ust_son {
+    margin-right:   0px;
+}
+
+.sf-menu a {
+    color:          #ffffff;
+    border-left:    0;
+    border-top:     0;
+    padding:        0.75em 0em;
+    text-align:     center;
 }
 
 /*superfish
