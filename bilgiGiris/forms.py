@@ -6,25 +6,25 @@ class TeklifForm(ModelForm):
     KONU = 'Audio Teklif Formu'
     class Meta:
         model = Bilgi
-        exclude = ('firma',)
+        exclude = ('firma','sorumlu','tip')
 
 class AkademiForm(ModelForm):
     TEMPLATE = 'bilgiGiris/teklif.html'
     class Meta:
         model = Bilgi
-        exclude = ('mesaj',)
+        exclude = ('mesaj','sorumlu')
 
 class BultenForm(ModelForm):
     TEMPLATE = 'bilgiGiris/teklif.html'
     class Meta:
         model = Bilgi
-        exclude = ('firma','mesaj',)
+        exclude = ('firma','mesaj','sorumlu')
 
 class IletisimForm(ModelForm):
     TEMPLATE = 'bilgiGiris/teklif.html'
     class Meta:
         model = Bilgi
-        exclude = ('sehir','firma',)
+        exclude = ('sehir','firma','sorumlu')
 
 
 

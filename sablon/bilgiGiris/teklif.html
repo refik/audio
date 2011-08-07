@@ -1,18 +1,37 @@
 {% extends 'taban.html' %}
 
+{% block head %}
+<link rel='stylesheet' href="{{ STATIC_URL }}css/form.css" />
+{% endblock %}
+
 {% block icerik %}
 <div class="grid_56"> 
  <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_top.jpg" /></div> 
  <div class="grid_56 one"> 
-  <div class="grid_54 push_1">
-   <form action="/teklif-formu/" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
-   </form>
-   {% for sorumlu in sorumlular %}
-   {{ sorumlu.email }}
-   {% endfor %}
-  </div> 
+  <div class="grid_27 push_1 alpha">
+   <div class="grid_27 centered"><h1>Teklif Formu</h1></div>
+   <div class="grid_27 form">
+    <form action="/teklif-formu/" method="post">{% csrf_token %}
+     <ol>
+      {{ form.as_ul }}
+      <li><label></label><input type="submit" value="Gonder" /></li>
+     </ol>
+    </form>
+   </div>
+  </div>
+  <div class='grid_27 omega'>
+   <div class="grid_27 centered">
+    <h2>Musteri Temsilciniz</h2>
+    <strong>ogrenmek icin sehrinizi secin</strong>
+   </div>
+   <div class="grid_27">
+      {% for field in form %}
+      {% if field.label == 'Sehir' %}
+      {{ field }}
+      {% endif %}
+      {% endfor%}
+   </div>
+  </div>
  </div> 
  <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_bottom.jpg" /></div> 
 </div> 

@@ -1,4 +1,5 @@
 from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm
+from audio.bilgiGiris.models import Tip
 from django.contrib.auth.models import User
 from audio.calisanProfil.models import CalisanProfil
 from django.template import RequestContext
@@ -9,7 +10,9 @@ SIRA = ['isim','email','sehir','firma','telefon','mesaj']
 def mesajOlustur(sozluk):
     mesaj = ''
     for madde in SIRA:
+        print madde
         try:
+            print mesaj
             mesaj += madde + ': ' + sozluk[madde] + '\n'
         except:
             pass
@@ -32,9 +35,14 @@ def formIslem(request,tip):
     if request.method == 'POST':
         bilgi = form(request.POST)
         if bilgi.is_valid():
+            print bilgi.data
             bilgi_db = bilgi.save()
+            tip_db = Tip.objects.get(isim__contains = tip)
+            bilgi_db.tip = tip_db 
+            bilgi_db.save()
+            print bilgi.cleaned_data['sehir']
             sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
-            if bilgi.cleaned_data['tip'].isim == 'teklif':
+            if tip == 'teklif':
                 sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir'])
             gonderilecek = []
             for sorumlu in sorumlular:
@@ -43,15 +51,11 @@ def formIslem(request,tip):
                     bilgi_db.sorumlu.add(sorumlu)
             konu = bilgi.KONU
             mesaj = mesajOlustur(bilgi.cleaned_data)
-            #test icin
-            print [gonderilecek, konu, mesaj]
-            #test bitti
             yollaForm = form()
+            print mesaj
         else:
             yollaForm = bilgi
-            print 1234
     else:
         yollaForm = form()
-        print 345345435
     return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm},context_instance=RequestContext(request))
 

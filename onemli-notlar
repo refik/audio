@@ -1,3 +1,1 @@
 Feincms'de fein_tree.js ve style.css deki butun result_list ler changelist e degistirildi. Eski haline dondurmek icin tersini yapmak yanlis olur cunku dosyalarda zaten changelist stringi mevcuttu.
-Filebrowser da upload handlerinda eger tif dosyasi upload edildiysa onu jpeg e cevrilmesi soylendi
-Filebrowser versiyonlarda eger width verilmediyse scale_or_crop da bir sorun oluyor ve versiyon yaratilmiyor. Onun icin birseyler commentlendi ama sonra gerek kalmadi 

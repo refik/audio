@@ -1,0 +1,16 @@
+ol {
+    list-style:none;
+}
+
+label {
+    position:absolute;
+    width:90px;
+    text-align:right;
+}
+
+.form input, .form select, .form textarea {
+    margin-left:100px;
+    width:300px;
+    vertical-align:top;
+    position:relative;
+}

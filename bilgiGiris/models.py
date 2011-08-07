@@ -14,13 +14,13 @@ class Sehir(models.Model):
         return self.isim
 
 class Bilgi(models.Model):
-    isim = models.CharField('Isim', max_length = 50)
+    isim = models.CharField('Isim Soyisim', max_length = 50)
     sehir = models.ForeignKey(Sehir)
     telefon = models.CharField('Telefon', max_length = 50)
     email = models.EmailField('Email')
     firma = models.CharField('Firma', max_length = 200)
     mesaj = models.TextField('Mesaj')
-    tip = models.ForeignKey(Tip)
+    tip = models.ForeignKey(Tip,null=True,blank=True)
     tarih = models.DateTimeField("Giris Tarihi", default = datetime.now(),editable=False)
     sorumlu = models.ManyToManyField(User,null=True)
     def __unicode__(self):
