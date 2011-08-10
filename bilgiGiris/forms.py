@@ -3,28 +3,27 @@ from audio.bilgiGiris.models import Bilgi
 
 class TeklifForm(ModelForm):
     TEMPLATE = 'bilgiGiris/teklif.html'
-    KONU = 'Audio Teklif Formu'
     class Meta:
         model = Bilgi
         exclude = ('firma','sorumlu','tip')
 
 class AkademiForm(ModelForm):
-    TEMPLATE = 'bilgiGiris/teklif.html'
+    TEMPLATE = 'bilgiGiris/varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('mesaj','sorumlu')
+        exclude = ('mesaj','sorumlu','tip')
 
 class BultenForm(ModelForm):
-    TEMPLATE = 'bilgiGiris/teklif.html'
+    TEMPLATE = 'bilgiGiris/varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('firma','mesaj','sorumlu')
+        exclude = ('firma','mesaj','sorumlu','tip')
 
 class IletisimForm(ModelForm):
-    TEMPLATE = 'bilgiGiris/teklif.html'
+    TEMPLATE = 'bilgiGiris/varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('sehir','firma','sorumlu')
+        exclude = ('sehir','firma','sorumlu','tip')
 
 
 

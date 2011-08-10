@@ -92,6 +92,8 @@ FILEBROWSER_MAX_UPLOAD_SIZE = 10000000000000000000
 
 FILEBROWSER_ADMIN_VERSIONS = ['urun', 'urun_ufak', 'haber_ufak', 'yeni_ufak', 'dokuman_ufak']
 
+GRAPPELLI_INDEX_DASHBOARD = 'audio.dashboard.CustomIndexDashboard'
+
 FEINCMS_ADMIN_MEDIA = '/statik/feincms/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -123,6 +125,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'audio.ortakVeri.icerik_islemci.afis.afis',
     'audio.ortakVeri.icerik_islemci.menu.menu',
@@ -147,6 +150,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'grappelli.dashboard',
     'grappelli',
     'filebrowser',
     'django.contrib.auth',

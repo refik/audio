@@ -1,7 +1,6 @@
 from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm
 from audio.bilgiGiris.models import Tip
 from django.contrib.auth.models import User
-from audio.calisanProfil.models import CalisanProfil
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
@@ -40,7 +39,6 @@ def formIslem(request,tip):
             tip_db = Tip.objects.get(isim__contains = tip)
             bilgi_db.tip = tip_db 
             bilgi_db.save()
-            print bilgi.cleaned_data['sehir']
             sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
             if tip == 'teklif':
                 sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir'])
@@ -49,13 +47,15 @@ def formIslem(request,tip):
                 gonderilecek += [sorumlu.email]
                 if not sorumlu.is_superuser:
                     bilgi_db.sorumlu.add(sorumlu)
-            konu = bilgi.KONU
+            konu = 'Audio ' + tip + ' Formu'
             mesaj = mesajOlustur(bilgi.cleaned_data)
             yollaForm = form()
-            print mesaj
+            geri_donus = 'Isteginiz Elimize Ulasmistir'
         else:
             yollaForm = bilgi
+            geri_donus = 'Lutfen Formdaki Hatalari Kontrol Edin'
     else:
         yollaForm = form()
-    return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm},context_instance=RequestContext(request))
+        geri_donus = ''
+    return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm, 'tip':tip,'mesaj':geri_donus},context_instance=RequestContext(request))
 

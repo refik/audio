@@ -18,7 +18,7 @@ jQuery(function(){
 
     var mavi = function(){
         $('#son_buton').animate(
-            {backgroundColor: "#0000FF"}, 
+            {backgroundColor: "#df0101"}, 
             {duration: 400,
             complete: siyah}
         );

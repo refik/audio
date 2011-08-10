@@ -1,5 +1,9 @@
-ol {
+ol, ul {
     list-style:none;
+}
+
+li {
+    margin-bottom:5px;
 }
 
 label {
@@ -13,4 +17,24 @@ label {
     width:300px;
     vertical-align:top;
     position:relative;
+}
+
+td {
+    width: 70px;
+}
+
+.errorlist{
+    list-style: none;
+    margin-bottom: 0px;
+    margin-left: 100px;
+    color: #FF0000;
+    font-style: italic;
+}
+
+.errorlist li{
+    margin-bottom: 0px;
+}
+
+#mesaj{
+    margin-left: 100px;
 }

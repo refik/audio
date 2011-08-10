@@ -15,14 +15,16 @@ class Sehir(models.Model):
 
 class Bilgi(models.Model):
     isim = models.CharField('Isim Soyisim', max_length = 50)
-    sehir = models.ForeignKey(Sehir)
-    telefon = models.CharField('Telefon', max_length = 50)
+    sehir = models.ForeignKey(Sehir,null=True,blank=True)
+    telefon = models.CharField('Telefon', max_length = 50,null=True,blank=True)
     email = models.EmailField('Email')
-    firma = models.CharField('Firma', max_length = 200)
-    mesaj = models.TextField('Mesaj')
-    tip = models.ForeignKey(Tip,null=True,blank=True)
-    tarih = models.DateTimeField("Giris Tarihi", default = datetime.now(),editable=False)
-    sorumlu = models.ManyToManyField(User,null=True)
+    firma = models.CharField('Firma', max_length = 200,null=True,blank=True)
+    mesaj = models.TextField('Mesaj',null=True,blank=True)
+    tip = models.ForeignKey(Tip)
+    tarih = models.DateTimeField("Gelis Tarihi", auto_now_add=True)
+    sorumlu = models.ManyToManyField(User,null=True,blank=True)
+    class Meta: 
+        verbose_name_plural = "Bilgiler"
     def __unicode__(self):
         return self.isim
 

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^takip/', include('audio.bilgiTakip.urls')),
     (r'^comments/', include('django.contrib.comments.urls')),
     (r'^dokuman/', include('audio.dokuman.urls')),
+    (r'^', include('audio.calisanProfil.urls')),
     (r'^', include('audio.bilgiGiris.urls')), 
     (r'^', include('audio.ozelSayfa.urls')),
 )
