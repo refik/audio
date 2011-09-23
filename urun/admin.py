@@ -17,7 +17,7 @@ class UrunAdmin(admin.ModelAdmin):
         }),
         ('Urunun Tanitimi', {
             'classes': ('collapse open',),
-            'fields': ('yeni','resim','resim_yazi','tanitim',),
+            'fields': ('yeni','resim','resim_yazi','tanitim','ozellik',),
         }),
         ('Urunun Iliskileri', {
             'classes': ('collapse open',),
