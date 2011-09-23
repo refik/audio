@@ -1,0 +1,17 @@
+{% load mptt_tags %}
+{% load ortakVeri %}
+<ul class="sf-menu">
+ {% recursetree menu %}
+ {% if node.tree_id >= alt_limit and node.tree_id <= ust_limit %}
+ <li id='{% if node.tree_id == 13 %}son_buton{% else %}{% if node.tree_id == 6 %}ust_son{% endif %}{% endif %}' >
+  <a href="{{ node|linkUrl }}" {% ifequal node.dosya.filetype 'Image' %}class='tek_resim'{% endifequal %} {% ifequal node|linkUrl '#' %}style='cursor:default;' onclick='return false;'{% endifequal %}>{{ node.isim }}</a>
+  {% if not node.is_leaf_node %}
+  <ul>
+   {{ children }}
+  </ul>
+  {% endif %}
+ </li>
+ {% endif %}
+ {% endrecursetree %}
+</ul>
+

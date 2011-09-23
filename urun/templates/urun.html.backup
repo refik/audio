@@ -1,0 +1,106 @@
+{% extends 'taban.html' %}
+{% load fb_versions %}
+{% block head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css" />
+{% endblock %}
+
+{% block icerik %}
+<div class="grid_56">
+ <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_top.jpg" /></div>
+ <div class="grid_56 one">
+  <div class="grid_54 push_1">
+
+   <div class="grid_53 push_1">
+    <img src="{{ STATIC_URL }}resim/{{ urun.seri }}.jpg" />
+   </div>
+   <div class="grid_27 alpha">
+    <div class="grid_27 centered">
+     <h2 style='margin-bottom:0px;'>{{ urun.isim }}</h3>
+    </div>
+    <div class="grid_27 centered">
+     <a href={{ urun.resim.url }} class="tek_resim"><img src="{% version urun.resim.path 'urun' %}"/></a>
+    </div>
+    <div class='grid_26' style='text-align:right'>
+     {{ urun.resim_yazi }}
+    </div>
+    <div class='grid_27 push_1'><strong>Diger Modeller</strong></div>
+    <div class='grid_27'>
+     {% for u in urun.digermodel_set.all %}
+     <div class='grid_9'>
+     <div class='grid_9 topd'></div>
+      <div class='grid_9 centered'>
+       <a href={{ u.resim.url }} class="tek_resim"><img src='{% version u.resim.path 'diger_model' %}'/></a>
+      </div>
+      <div class='grid_8' style='text-align:right;'>
+       {{ u.aciklama }}
+      </div>   
+     </div>
+     {% endfor %}
+    </div>
+   </div>
+   <div class="grid_23"> 
+    <div class="grid_23">
+     <div class="grid_23">
+      <strong>Urun Ozellikleri</strong>
+     </div>
+     <div class="grid_23 topd"></div>
+     {% for ozellik in urun.ozellik.all %}
+     <div class="grid_23">- {{ ozellik.isim }}</div>
+     {% endfor %}
+    </div>
+    <div class="grid_22">
+     <div class="grid_22 topd"></div>
+      {% autoescape off %}
+      {{ urun.tanitim }}
+      {% endautoescape %}
+    </div>
+   </div>
+   
+   <div class="grid_4 omega">
+    {% for d in dokuman %}
+    <div class="grid_4 centered" style='margin-top:10px;'>
+     <div class="grid_4">
+      <a href='{{ d.dosya.url }}'><img src="{% version d.resim.path 'dokuman_ufak' %}"/></a>
+     </div>
+     <div class="grid_4">
+      <a class='sade_link' href='{{ d.dosya.url }}'>{{ d.isim }}</a>
+     </div>
+    </div>
+    <div class='grid_4'style='height:10px;'></div>
+    {% endfor %}
+   </div>
+
+  </div>
+ </div>
+ <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_bottom.jpg" /></div>
+</div>
+<div class="clear"></div>
+
+{% if panelKonsept or panelBasic %}
+{% include 'urun/sistem_liste_urun.html' with sira=2 sira_grid=28 sira_grid_inner=25 sira_grid_push=2 tanitim_grid=18 %}
+{% if panelKonsept or panelBasic %}
+<div class="grid_28">
+ <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_top.jpg" /></div>
+ <div class="grid_28 two">
+  <div class="grid_28 topd"></div>
+  <div class="grid_28 centered"><strong>Bu Urun Ile Kullanabileceginiz Paneller</strong></div>
+  <div class="grid_28 topd"></div>
+  <div class="grid_24 {% if panelKonsept and panelBasic %}push_2{% else %}push_7{% endif %} ">
+   {% if panelKonsept %}
+   {% include 'urun/panel_liste.html' with seri='konsept' panel=panelKonsept %}
+   {% endif %}
+   {% if panelBasic %}
+   {% include 'urun/panel_liste.html' with seri='basic' panel=panelBasic %}
+   {% endif %}
+   <div class='grid_24 alpha omega' style='height:20px'></div>
+  </div>
+ </div>
+ <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_bottom.jpg"/></div>
+</div>
+{% endif %}
+<div class="clear"></div>
+{% else %}
+{% include 'urun/sistem_liste_urun.html' with sira=1 sira_grid=56 sira_grid_inner=40 sira_grid_push=8 tanitim_grid=33 %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,110 @@
+<div class="grid_{{ grid }} alpha push_{{ push }}">
+ <div class="grid_{{ grid }} alpha omega">
+  <script type="text/javascript">
+   function guncelle(secilen_sehir){
+       $("#bilgi").empty();
+       $.getJSON('/musteri-temsilcisi/', {sehir:secilen_sehir},function(data) {
+           var items = [];
+
+           $.each(data, function(key, val) {
+               items.push('<tr><td>' + key + '</td><td>' + val + '</td></tr>');
+           });
+           if(items.length){ 
+               $('<table/>', {
+                   'class': 'bilgi-tablosu',
+                   html: items.join('')
+               }).appendTo("#bilgi");
+           }
+       });
+
+   }
+  </script>
+  <select name="sehir" id="id_sehir" onchange="guncelle(this.value)">
+   <option selected="selected">Sehriniz</option>
+   <option>Adana</option>
+   <option>Adıyaman</option>
+   <option>Afyonkarahisar</option>
+   <option>Ağrı</option>
+   <option>Aksaray</option>
+   <option>Amasya</option>
+   <option>Ankara</option>
+   <option>Antalya</option>
+   <option>Ardahan</option>
+   <option>Artvin</option>
+   <option>Aydın</option>
+   <option>Balıkesir</option>
+   <option>Bartın</option>
+   <option>Batman</option>
+   <option>Bayburt</option>
+   <option>Bilecik</option>
+   <option>Bingöl</option>
+   <option>Bitlis</option>
+   <option>Bolu</option>
+   <option>Burdur</option>
+   <option>Bursa</option>
+   <option>Çanakkale</option>
+   <option>Çankırı</option>
+   <option>Çorum</option>
+   <option>Denizli</option>
+   <option>Diyarbakır</option>
+   <option>Düzce</option>
+   <option>Edirne</option>
+   <option>Elazığ</option>
+   <option>Erzincan</option>
+   <option>Erzurum</option>
+   <option>Eskişehir</option>
+   <option>Gaziantep</option>
+   <option>Giresun</option>
+   <option>Gümüşhane</option>
+   <option>Hakkari</option>
+   <option>Hatay</option>
+   <option>Iğdır</option>
+   <option>Isparta</option>
+   <option>Mersin</option>
+   <option>İstanbul (Anadolu)</option>
+   <option>İstanbul (Avrupa)</option>
+   <option>İzmir</option>
+   <option>Karabük</option>
+   <option>Kars</option>
+   <option>Kastamonu</option>
+   <option>Kayseri</option>
+   <option>Kırklareli</option>
+   <option>Kırşehir</option>
+   <option>Kocaeli</option>
+   <option>Konya</option>
+   <option>Kütahya</option>
+   <option>Malatya</option>
+   <option>Manisa</option>
+   <option>Kahramanmaraş</option>
+   <option>Karaman</option>
+   <option>Kırıkkale</option>
+   <option>Kilis</option>
+   <option>Mardin</option>
+   <option>Muğla</option>
+   <option>Muş</option>
+   <option>Nevşehir</option>
+   <option>Niğde</option>
+   <option>Ordu</option>
+   <option>Osmaniye</option>
+   <option>Rize</option>
+   <option>Sakarya</option>
+   <option>Samsun</option>
+   <option>Siirt</option>
+   <option>Sinop</option>
+   <option>Sivas</option>
+   <option>Şırnak</option>
+   <option>Tekirdağ</option>
+   <option>Tokat</option>
+   <option>Trabzon</option>
+   <option>Tunceli</option>
+   <option>Şanlıurfa</option>
+   <option>Uşak</option>
+   <option>Van</option>
+   <option>Yalova</option>
+   <option>Yozgat</option>
+   <option>Zonguldak</option>
+  </select> 
+ </div>
+ <div id="bilgi" class="grid_{{ grid }}">
+ </div> 
+</div>
