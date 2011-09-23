@@ -4,7 +4,7 @@ from filebrowser.sites import site
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/filebrowser/', include(filebrowser.site.urls)),
+    url(r'^admin/filebrowser/', include(site.urls)),
     (r'^grappelli/', include('grappelli.urls')),
     (r'^urun', include('audio.urun.urls')),
     (r'^form/', include('audio.bilgiGiris.urls')),
