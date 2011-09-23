@@ -3,7 +3,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^admin/filebrowser/', include('filebrowser.urls')),
+    (r'^admin/filebrowser/', include('filebrowser.sites.FileBrowserSite')),
     (r'^grappelli/', include('grappelli.urls')),
     (r'^urun', include('audio.urun.urls')),
     (r'^form/', include('audio.bilgiGiris.urls')),
