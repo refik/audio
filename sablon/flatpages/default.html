@@ -1,16 +1,17 @@
 {% extends 'taban.html' %}
 {% block head %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css" />
 <title>{{ flatpage.title }}</title>
+<style type="text/css">
+ table {
+     padding:inherit;
+ }
+</style>
 {% endblock %}
 
 {% block icerik %}
-<div class="grid_56">
- <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_top.jpg" /></div>
- <div class="grid_56 one">
-  <div class="grid_54 push_1">{{ flatpage.content }}</div>
+{% include 'tekli_ac.html' %}
+ <div class="grid_52 push_2">
+  {{ flatpage.content }}
  </div>
- <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_bottom.jpg" /></div>
-</div>
-<div class="clear"></div>
+{% include 'tekli_kapat.html' %}
 {% endblock %}

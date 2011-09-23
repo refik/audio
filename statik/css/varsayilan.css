@@ -23,3 +23,8 @@ h3{
 .capitalize {
     text-transform:     capitalize;
 }
+
+.sade_link {
+    text-decoration:    none;
+    color:              #000000;
+}

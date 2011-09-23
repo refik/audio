@@ -41,3 +41,8 @@
 	height:			82px;
 	background-image: 	url('/statik/resim/basic_4RU_r3_c1.jpg');
 }
+
+.tek_yarim {
+    height:         132px;
+    background-image:   url('/statik/resim/tek_yarim.jpg');
+}

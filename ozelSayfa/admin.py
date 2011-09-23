@@ -7,5 +7,11 @@ class SayfaLinkInline(admin.StackedInline):
 
 class SayfaAdmin(admin.ModelAdmin):
     inlines = [ SayfaLinkInline ]
+    fieldsets = (
+        ('Sayfa Ismi', {
+            'classes': ('collapse open',),
+            'fields': ('isim',),
+        }),
+    )
 
 admin.site.register(Sayfa,SayfaAdmin)

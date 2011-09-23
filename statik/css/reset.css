@@ -76,14 +76,10 @@ strong,
 sub,
 summary,
 sup,
-table,
-tbody,
-td,
 tfoot,
 th,
 thead,
 time,
-tr,
 tt,
 u,
 ul,
@@ -150,13 +146,9 @@ li {
   display: list-item;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
 
-th,
-td,
+
+
 caption {
   font-weight: normal;
   vertical-align: top;

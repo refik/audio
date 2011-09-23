@@ -5,7 +5,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+    ('Refik Turkeli', 'refik.rfk@gmail.com'),
 )
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -34,16 +34,19 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'tr-tr'
 
 LANGUAGES = (
     ('en', 'English'),
     ('tr', 'Turkish'),
 )
 
-DEFAULT_LANGUAGE = 1
+EMAIL_HOST = 'audio.com.tr'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'audiomail@audio.com.tr'
+EMAIL_HOST_PASSWORD = '4455'
 
-SITE_ID = 1
+SITE_ID = 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -77,22 +80,30 @@ FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser/'
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = '/home/refik/code/pythonenv/audio/lib/python2.6/site-packages/django_filebrowser-3.3.0-py2.6.egg/filebrowser/static/filebrowser'
 
 FILEBROWSER_VERSIONS = {
-    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
+    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': ''},
     'thumbnail': {'verbose_name': 'Thumbnail (1 col)', 'width': 60, 'height': 60, 'opts': 'crop'},
     'urun_ufak': {'verbose_name': 'Urun Ufak', 'width': 190, 'height': 190, 'opts': ''},
     'urun': {'verbose_name': 'Urun', 'width': 430, 'height': 430, 'opts': ''},
-    'haber_ufak': {'verbose_name': 'Haber Ufak', 'width': 50, 'height': 50, 'opts': ''},
-    'yeni_ufak': {'verbose_name': 'Yeni Ufak', 'width': 85, 'height': 85, 'opts': ''},
-    'dokuman_ufak': {'verbose_name': 'Dokuman Ufak', 'width': 68, 'height': 68, 'opts': ''},
-    'diger_model': {'verbose_name': 'Dokuman Ufak', 'width': 145, 'height': 145, 'opts': ''},
+    'haber_ufak': {'verbose_name': 'Haber Ufak', 'width': 55, 'height': 55, 'opts': ''},
+    'yeni_ufak': {'verbose_name': 'Yeni Ufak', 'width': 65, 'height': 65, 'opts': ''},
+    'dokuman_ufak': {'verbose_name': 'Dokuman Ufak', 'width': 60, 'height': 60, 'opts': ''},
+    'diger_model': {'verbose_name': 'Diger Model', 'width': 145, 'height': 145, 'opts': ''},
+    'sistem_ufak': {'verbose_name': 'Sistemin Ufak Logosu', 'width': 110, 'height': 110, 'opts': ''},
+    'kalite_belgesi' : {'verbose_name': 'Kalite Belgesi', 'width': 300, 'height': 300, 'opts': ''},
+    'kucuk' : {'verbose_name': 'Kucuk', 'width': 100, 'height': 100, 'opts': ''},
+    'orta' : {'verbose_name': 'Orta', 'width': 200, 'height': 200, 'opts': ''},
+    'buyuk' : {'verbose_name': 'Buyuk', 'width': 300, 'height': 300, 'opts': ''},
+    'tam' : {'verbose_name': 'Tam', 'width': 400, 'height': 400, 'opts': ''},
 
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 10000000000000000000
 
-FILEBROWSER_ADMIN_VERSIONS = ['urun', 'urun_ufak', 'haber_ufak', 'yeni_ufak', 'dokuman_ufak']
+FILEBROWSER_ADMIN_VERSIONS = ['kucuk', 'orta', 'buyuk', 'tam']
 
 GRAPPELLI_INDEX_DASHBOARD = 'audio.dashboard.CustomIndexDashboard'
+
+GRAPPELLI_ADMIN_TITLE = 'Audio Elektronik Web Sitesi Kontrol Paneli'
 
 FEINCMS_ADMIN_MEDIA = '/statik/feincms/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -114,8 +125,8 @@ SECRET_KEY = ')(u1ax)5_3(51!_w=#t27-)v=j2*1&*o8_4#6y4$&81lvrwsr0'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.filesystem.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -172,6 +183,7 @@ INSTALLED_APPS = (
     'audio.bilgiGiris',
     'audio.calisanProfil',
     'audio.dokuman',
+    'audio.bilgiTakip',
     'feincms',
     'mptt',
     'south',

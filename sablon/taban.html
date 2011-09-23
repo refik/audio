@@ -1,19 +1,23 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
  <meta charset="utf-8" />
- <title>AUDIO Elektronik</title>
  <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/960a.css" />
  <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/superfish.css" /> 
  <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css" />
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.fancybox.css" type="text/css" media="screen" />
  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/taban.js"></script>
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.hoverIntent.minified.js"></script>
+ <script type="text/javascript" src="{{ STATIC_URL }}js/supersubs.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/superfish.js"></script>
- <script type="text/javascript" src="{{ STATIC_URL }}js/jcarousellite.js"></script>
- <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.min.js"></script> 
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.js"></script> 
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.fancybox.js"></script> 
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.js"></script>
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script> 
 
  {% block head %}
  {% endblock %}
@@ -29,7 +33,7 @@
    <div class="grid_38">
      <div class="grid_38 harita"></div>
      <div class="grid_38">
-      {% include "ortakVeri/menu.html" with alt_limit=1 ust_limit=6 %}
+      {% include "menu.html" with alt_limit=1 ust_limit=6 %}
      </div>
    </div>
    <div class="clear"></div>  
@@ -39,7 +43,7 @@
 
    <div class="grid_56 banner">
     {% for a in afis %}
-    <img src="{{ a.dosya.url }}" alt="{{a.yazi}}" width="952" height="217"/>
+    <img src="{{ a.resim.url }}" alt="{{a.yazi}}"/>
     {% endfor %}
    </div>
    <div class="clear"></div>
@@ -47,8 +51,8 @@
    <div class="grid_56 spacer"></div>
    <div class="clear"></div> 
 
-   <div class="grid_56">  
-    {% include "ortakVeri/menu.html" with alt_limit=7 ust_limit=13 %}
+   <div class="grid_56" style='z-index:2;'>  
+    {% include "menu.html" with alt_limit=7 ust_limit=13 %}
    </div>
    <div class="clear"></div>
 
@@ -63,4 +67,3 @@
  </div>
 </body>
 </html>
-

@@ -1,8 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from audio.urun.models import Urun, Kategori
+from audio.urun.models import Urun, Kategori, Sistem
 from audio.dokuman.models import Dokuman
 from django.template import RequestContext
+
+def sistem(request):
+    goruntulu = Sistem.objects.filter(tip='goruntulu')
+    sesli = Sistem.objects.filter(tip='sesli')
+    return render_to_response('sistem.html',{'goruntulu':goruntulu,'sesli':sesli},context_instance=RequestContext(request)) 
 
 def urun(request,urun):
     istenenUrun = Urun.objects.get(slug=urun)
@@ -10,11 +15,11 @@ def urun(request,urun):
     panelKonsept = istenenUrun.panel.filter(seri='konsept')
     panelBasic = istenenUrun.panel.filter(seri='basic')
     print panelKonsept
-    return render_to_response('urun/urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
+    return render_to_response('urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
 
 def urunler(request,kategori):
     istenenKategori = Kategori.objects.get(slug=kategori).UrunKategori.all()
     konsept = istenenKategori.filter(seri='konsept')
     basic = istenenKategori.filter(seri='basic')
     ortak = istenenKategori.filter(seri='')
-    return render_to_response('urun/kategori.html',{'konsept':konsept, 'basic':basic, 'ortak':ortak},context_instance=RequestContext(request))
+    return render_to_response('kategori.html',{'konsept':konsept, 'basic':basic, 'ortak':ortak},context_instance=RequestContext(request))

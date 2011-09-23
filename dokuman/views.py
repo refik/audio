@@ -34,4 +34,4 @@ def dokuman(request,isim):
     swfListe.sort(key=lambda f:int(f[:-4]),reverse=True)
     sayfaSayi = swfListe[0][:-4]
     swfUrl =  os.path.dirname(dosya.url) + '/' + klasor
-    return render_to_response('dokuman/taban.html', {'dokuman':dokuman, 'sayfa':sayfaSayi, 'swfUrl':swfUrl})    
+    return render_to_response('dokuman.html', {'dokuman':dokuman, 'sayfa':sayfaSayi, 'swfUrl':swfUrl})    

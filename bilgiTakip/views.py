@@ -1,7 +1,8 @@
-from audio.bilgiGiris.models import Bilgi
+from audio.bilgiGiris.models import Bilgi, Tip
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 def goster(request):
-    bilgi = Bilgi.objects.all()
-    return render_to_response('bilgiTakip/taban.html', {'bilgi':bilgi})    
+    tipler = Tip.objects.all()
+    print request.user
+    return render_to_response('takip.html', {'tipler':tipler},context_instance=RequestContext(request))    

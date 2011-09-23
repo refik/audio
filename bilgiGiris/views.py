@@ -4,14 +4,13 @@ from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
+from django.core.mail import send_mail
 SIRA = ['isim','email','sehir','firma','telefon','mesaj']
 
 def mesajOlustur(sozluk):
     mesaj = ''
     for madde in SIRA:
-        print madde
         try:
-            print mesaj
             mesaj += madde + ': ' + sozluk[madde] + '\n'
         except:
             pass
@@ -34,7 +33,6 @@ def formIslem(request,tip):
     if request.method == 'POST':
         bilgi = form(request.POST)
         if bilgi.is_valid():
-            print bilgi.data
             bilgi_db = bilgi.save()
             tip_db = Tip.objects.get(isim__contains = tip)
             bilgi_db.tip = tip_db 
@@ -45,10 +43,10 @@ def formIslem(request,tip):
             gonderilecek = []
             for sorumlu in sorumlular:
                 gonderilecek += [sorumlu.email]
-                if not sorumlu.is_superuser:
-                    bilgi_db.sorumlu.add(sorumlu)
+                bilgi_db.sorumlu.add(sorumlu)
             konu = 'Audio ' + tip + ' Formu'
             mesaj = mesajOlustur(bilgi.cleaned_data)
+            send_mail(konu,mesaj,'audiomail@audio.com',['refik.rfk@gmail.com'],fail_silently=False)
             yollaForm = form()
             geri_donus = 'Isteginiz Elimize Ulasmistir'
         else:

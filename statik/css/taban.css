@@ -1,12 +1,11 @@
 body {
 	background-color:	#bababa;
-/*	font-family: 		'Lucida Sans Unicode', 'Lucida Grande', sans-serif;*/
 }
 
 #bkground {
 	background-size: 	100%;
-	margin:			0 auto;
-	width:			1000px;
+	margin:		    	0 auto;
+	width:		    	1000px;
 	background-image:	url('/statik/resim/back.jpg');
 	background-repeat: 	repeat-y;
 }
@@ -16,11 +15,11 @@ body {
 	text-align: 		center; 
 }
 
-/*.menu {
+.menu {
 	margin-left: 		2px;
 	font-weight:		bold;
-	text-align:		center;
-	height:			34px;
+	text-align:	    	center;
+	height:		    	34px;
 
 }
 
@@ -33,121 +32,123 @@ body {
 }
 
 .alt-son {
-	width:			316px;
-	background:		#000000;
-}*/
+	width:		    	316px;
+	background:	    	#000000;
+}
 
 .topd {
-	height:			17px;
+	height:	    		17px;
 }
 
 .harita {
-	height:			43px;
+	height:		    	43px;
 }
 
-.sf-menu {
-	float:			right;
-	margin-bottom:		0px;
-	
-}
-
-.sf-menu li, .sf-menu a:visited {
-	background-image:	url('/statik/resim/button.jpg');
-	color:			#ffffff;
-	width:			104px;
-	height:			34px;
-    margin-right:    2px;
-}
-
-.sf-menu li li {
-    background-color:          #b40404;  
-}
-
-.sf-menu li li li {
-    background-color:          #df0101;
-}
-
-.sf-menu li:hover, .sf-menu li.sfHover,
-.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
-	background:		#000000;
-	outline:		0;
-}
-
-
-#son_buton {
-    background-image:   none;
-	background-color:   #000000;
-	color:			#ffffff;
-	width:			316px;
-	height:			34px;
-    margin-right:   0px;
-}
 
 #ust_son {
-    margin-right:   0px;
+    margin-right:       0px;
 }
-
-.sf-menu a {
-    color:          #ffffff;
-    border-left:    0;
-    border-top:     0;
-    padding:        0.75em 0em;
-    text-align:     center;
-}
-
-/*superfish
-.sf-menu a {
-	border-top:		0px;
-	border-left:		none;
-	width:			104px;
-	height:			24px;
-	padding: 		0px;
-}
-
-
-
-.sf-sub-indicator {
-	background:		url('/statik/resim/arrows-ffffff.png') no-repeat -10px -100px; 
-}
-
-.sf-shadow ul {
-	background:		url('/statik/resim/shadow.png') no-repeat bottom right;
-
-}
-
-.sf-menu a, .sf-menu a:visited  { 
-	color:			#ffffff;
-}
-
-.sf-menu li {
-	background-image:	url('/statik/resim/button.jpg');
-}
-
-.sf-menu li li {
-	background:		#DF0101;
-}
-
-.sf-menu {
-	float:			left;
-	margin-bottom:		0;
-}
-
-.sf-menu li:hover, .sf-menu li.sfHover,
-.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
-	background:		#CFDEFF;
-}
-superfish*/
-
 
 li {
 	margin-left:		0px;
 }
 
 div.spacer {  
-	height: 		1em;  
+	height:     		10px;  
 }  
 
 div.ust_menu {  
-	position:		absolute;
-	bottom:			0;
+	position:   		absolute;
+	bottom:	    		0;
 }  
+
+.one {
+	background-size: 	100%;
+	margin:		    	0 auto;
+	background-image:	url('/statik/resim/b1_back.jpg');
+	background-repeat: 	repeat-y;
+}
+
+.two {
+	background-size: 	100%;
+	margin:		    	0 auto;
+	background-image:	url('/statik/resim/ikili_orta_r3_c1.jpg');
+	background-repeat: 	repeat-y;
+}
+
+h3{
+    margin:             0px;
+}
+
+.capitalize {
+    text-transform:     capitalize;
+}
+
+.sade_link {
+    text-decoration:    none;
+    color:              #000000;
+}
+
+
+.sf-menu {
+	float:		     	right;
+	margin-bottom:		0px;
+	
+}
+
+.sf-menu a, .sf-menu a:visited {
+	color:	    		#ffffff;
+}
+
+.sf-menu li {
+	background-image:   url('/statik/resim/button.jpg');
+	color:	    		#ffffff;
+	width:	    		104px;
+    height:             34px;
+    margin-right:       2px;
+}
+
+.sf-menu li li {
+    background-color:   #b40404;  
+}
+
+.sf-menu li li li {
+    background-color:   #df0101;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	background:	    	#000000;
+	outline:	    	0;
+}
+
+.sf-menu a {
+    color:              #ffffff;
+    border-left:        0;
+    border-top:         0;
+    padding:            0.75em 0em;
+    text-align:         center;
+}
+
+.sf-menu li li a, .sf-menu li li li a {
+    color:              #ffffff;
+    border-left:        0;
+    border-top:         0;
+    padding:            0.75em 0em 0.75em 0.5em;
+    text-align:         left;
+}
+
+#son_buton {
+    background-image:   none;
+	background-color:   #000000;
+	color:	    		#ffffff;
+	width:	    		316px;
+	height:	    		34px;
+    margin-right:       0px;
+}
+
+#son_buton a:hover {
+    background-image:   none;
+    background-color:   transparent;
+}
+

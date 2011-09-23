@@ -18,6 +18,5 @@ class DokumanAdmin(admin.ModelAdmin):
             'fields' : ('resim','urun_sayfa',),
         }),
     )
-
 admin.site.register(Dokuman,DokumanAdmin)
 
