@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
+from filebrowser.sites import site
 admin.autodiscover()
 
 urlpatterns = patterns('',
