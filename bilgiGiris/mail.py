@@ -8,6 +8,6 @@ def audiomail(kimden,kime,konu,mesaj):
     fromaddr = kimden
     toaddrs  = kime
     msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s" % (fromaddr, ", ".join(toaddrs),konu,mesaj))
-    server.sendmail(fromaddr, toaddrs, msg)
+    server.sendmail(fromaddr, toaddrs, unicode(msg))
     server.quit()
 
