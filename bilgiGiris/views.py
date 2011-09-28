@@ -1,5 +1,6 @@
 from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm
 from audio.bilgiGiris.models import Tip
+from audio.bilgiGiris.mail import audiomail
 from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -46,7 +47,7 @@ def formIslem(request,tip):
                 bilgi_db.sorumlu.add(sorumlu)
             konu = 'Audio ' + tip + ' Formu'
             mesaj = mesajOlustur(bilgi.cleaned_data)
-            send_mail(konu,mesaj,'audiomail@audio.com',['refik.rfk@gmail.com'],fail_silently=False)
+            audiomail('audioweb@audio.com',['refik.rfk@gmail.com'],konu,mesaj)
             yollaForm = form()
             geri_donus = 'Isteginiz Elimize Ulasmistir'
         else:
