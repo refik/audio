@@ -7,6 +7,11 @@
     <img src="{{ STATIC_URL }}resim/{{ seri }}.jpg"/>
    </div>
    {% for urun in urun_listesi %}
+   {% if sira == 2 %}
+   {% cycle '<div class="grid_26">' '' %}
+   {% else %}
+   {% cycle '<div class="grid_52">' '' '' '' %}
+   {% endif %}
    <div class="grid_13 {% if sira == 1 %}{% cycle 'alpha' '' '' 'omega' %}{% else %}{% cycle 'alpha' 'omega' %}{% endif %} centered">
     <div class="grid_13 topd"></div>
     <div class="grid_13">
@@ -14,7 +19,13 @@
     </div>
     <div class="grid_13"><a href='/urun/{{ urun.slug }}' style='text-decoration:none;color:black;'>{{ urun.isim }}</a></div>
    </div> 
+   {% if sira == 2%}
+   {% cycle '' '</div>' %}
+   {% else %}
+   {% cycle '' '' '' '</div>' %}
+   {% endif %}
    {% endfor %}
+   {% if not urun_listesi.count|divisibleby:'2' %}</div>{% endif %}
   </div>
  </div>
  <div class="grid_{{ sira_grid }}"><img src="{{ STATIC_URL }}resim/b{{ sira }}_bottom.jpg" /></div>

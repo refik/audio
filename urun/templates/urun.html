@@ -14,7 +14,8 @@
   <div class='grid_26' style='text-align:right'>
    {{ urun.resim_yazi }}
   </div>
-  <div class='grid_27 push_1'><strong>Diger Modeller</strong></div>
+  {% if urun.digermodel_set.all %}
+  <div class='grid_27 push_1'><strong>Diğer Modeller</strong></div>
   <div class='grid_27'>
    {% for u in urun.digermodel_set.all %}
    <div class='grid_9'>
@@ -28,6 +29,7 @@
    </div>
    {% endfor %}
   </div>
+  {% endif %}
  </div>
  <div class="grid_23 push_1"> 
   <div class="grid_23">
