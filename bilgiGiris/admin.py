@@ -20,3 +20,4 @@ class BilgiAdmin(admin.ModelAdmin):
     filter_horizontal = ['sorumlu']
 
 admin.site.register(Bilgi, BilgiAdmin)
+admin.site.register(Tip)
