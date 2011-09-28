@@ -7,7 +7,7 @@ def audiomail(kimden,kime,konu,mesaj):
     ntlm_authenticate(server, r"audio\audioweb", "4455")
     fromaddr = kimden
     toaddrs  = kime
-    msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n" % (fromaddr, ", ".join(toaddrs),konu))
+    msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s" % (fromaddr, ", ".join(toaddrs),konu,mesaj))
     server.sendmail(fromaddr, toaddrs, msg)
     server.quit()
 
