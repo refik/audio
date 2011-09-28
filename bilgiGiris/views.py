@@ -47,7 +47,7 @@ def formIslem(request,tip):
                 bilgi_db.sorumlu.add(sorumlu)
             konu = 'Audio ' + tip + ' Formu'
             mesaj = mesajOlustur(bilgi.cleaned_data)
-            audiomail('audioweb@audio.com',['refik.rfk@gmail.com'],konu,mesaj)
+            audiomail('audioweb@audio.com.tr',['refik.rfk@gmail.com'],konu,mesaj)
             yollaForm = form()
             geri_donus = 'Isteginiz Elimize Ulasmistir'
         else:
