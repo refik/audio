@@ -4,5 +4,4 @@ from django.template import RequestContext
 
 def goster(request):
     tipler = Tip.objects.all()
-    print request.user
     return render_to_response('takip.html', {'tipler':tipler},context_instance=RequestContext(request))    
