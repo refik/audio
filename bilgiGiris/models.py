@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.db import models
 from datetime import datetime
+from audio.bilgiGiris.mail import audiomail
 from django.contrib.auth.models import User
 from django.contrib.comments.moderation import CommentModerator, moderator
 
@@ -32,6 +33,6 @@ class Bilgi(models.Model):
 class BilgiModerator(CommentModerator):
     email_notification = True
     def email(self, comment, content_object, request):
-        print 'selamin aleykum', content_object
+        audiomail("audioweb@audio.com.tr",[sorumlu.email for sorumlu in content_object.sorumlu.all()],str(content_object.tip) + u'\' na Yorum Yapıldı',u'%d nolu müşteri isteğine yapılan yorum\n%s\n31.222.163.32:8000/takip adresinden detaylı inceleyebilirsiniz'%(content_object.pk,comment))
 
 moderator.register(Bilgi, BilgiModerator)

@@ -1,3 +1,4 @@
+# coding: utf-8
 from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm
 from audio.bilgiGiris.models import Tip
 from audio.bilgiGiris.mail import audiomail
@@ -12,7 +13,7 @@ def mesajOlustur(sozluk):
     mesaj = ''
     for madde in SIRA:
         try:
-            mesaj += madde + ': ' + sozluk[madde] + '\n'
+            mesaj += madde.capitalize() + ': ' + sozluk[madde] + '\n\n'
         except:
             pass
     return mesaj
@@ -45,14 +46,14 @@ def formIslem(request,tip):
             for sorumlu in sorumlular:
                 gonderilecek += [sorumlu.email]
                 bilgi_db.sorumlu.add(sorumlu)
-            konu = 'Audio ' + tip + ' Formu'
+            konu = 'Audio ' + tip.capitalize() + ' Formu'
             mesaj = mesajOlustur(bilgi.cleaned_data)
             audiomail('audioweb@audio.com.tr',gonderilecek + ['refik.rfk@gmail.com'],konu,mesaj)
             yollaForm = form()
-            geri_donus = 'Isteginiz Elimize Ulasmistir'
+            geri_donus = 'İsteğiniz Elimize Ulaşmıştır'
         else:
             yollaForm = bilgi
-            geri_donus = 'Lutfen Formdaki Hatalari Kontrol Edin'
+            geri_donus = 'Lütfen Formdaki Hataları Kontrol Edin'
     else:
         yollaForm = form()
         geri_donus = ''
