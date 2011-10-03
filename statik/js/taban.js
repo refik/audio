@@ -23,12 +23,12 @@ jQuery(function(){
 	});
 
     var degistir = function(){
-        if($('#son_buton').css('backgroundColor')=="rgb(223, 1, 1)"){
-            $('#son_buton').animate({backgroundColor: "#000000"},{duration:400});
+        if($('#son_buton').css('backgroundColor')=="rgb(223, 1, 1)"||$('#son_buton').css('backgroundColor')=="rgb(223,1,1)"){
+            $('#son_buton').animate({backgroundColor: "#000000"},{duration:700,complete:function(){degistir()}});
         } else {
-            $('#son_buton').animate({backgroundColor: "#DF0101"},{duration:400});
+            $('#son_buton').animate({backgroundColor: "#DF0101"},{duration:700,complete:function(){degistir()}});
         }
     };
 
-    setInterval(function(){ degistir(); },500);
+    degistir();
 });
