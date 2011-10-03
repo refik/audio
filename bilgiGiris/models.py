@@ -33,6 +33,6 @@ class Bilgi(models.Model):
 class BilgiModerator(CommentModerator):
     email_notification = True
     def email(self, comment, content_object, request):
-        audiomail("audioweb@audio.com.tr",[sorumlu.email for sorumlu in content_object.sorumlu.all()],str(content_object.tip) + u'\' na Yorum Yapıldı',u'%d nolu müşteri isteğine yapılan yorum\n%s\n31.222.163.32:8000/takip adresinden detaylı inceleyebilirsiniz'%(content_object.pk,comment))
+        audiomail("audioweb@audio.com.tr",[sorumlu.email for sorumlu in content_object.sorumlu.all()],str(content_object.tip) + u'\' na Yorum Yapıldı',u'%d nolu müşteri isteğine yapılan yorum\n%s\n\n31.222.163.32:8000/takip adresinden detaylı inceleyebilirsiniz'%(content_object.pk,comment))
 
 moderator.register(Bilgi, BilgiModerator)
