@@ -1,6 +1,6 @@
 # Django settings for audio project.
 import os
-from audio.sifre import KEY
+from sifre import KEY
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
