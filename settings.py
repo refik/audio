@@ -1,7 +1,8 @@
 # Django settings for audio project.
 import os
+from audio.sifre import KEY
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -40,11 +41,6 @@ LANGUAGES = (
     ('en', 'English'),
     ('tr', 'Turkish'),
 )
-
-EMAIL_HOST = 'audio.com.tr'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'audiomail@audio.com.tr'
-EMAIL_HOST_PASSWORD = '4455'
 
 SITE_ID = 2
 
@@ -122,7 +118,7 @@ STATICFILES_DIRS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = ')(u1ax)5_3(51!_w=#t27-)v=j2*1&*o8_4#6y4$&81lvrwsr0'
+SECRET_KEY = KEY
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
