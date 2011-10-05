@@ -2,7 +2,7 @@
 import os
 from sifre import KEY
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
