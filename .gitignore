@@ -3,6 +3,4 @@ db
 statik/yukleme/
 baslat
 python
-settings.py
 nohup.out
-serverStatik
