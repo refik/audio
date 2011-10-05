@@ -26,8 +26,11 @@ def dokuman(request,isim):
     if not os.path.exists(swfKlasor):
         os.mkdir(swfKlasor)
         s_p = subprocess.Popen(['pdfinfo','-meta',dosya.path],stdout=subprocess.PIPE)
-        #print type(int(s_p.stdout.readlines()[6].rstrip().split(' ')[-1]))
-        sayfa = int(s_p.stdout.readlines()[6].rstrip().split(' ')[-1])
+        bilgi = s_p.stdout.readlines()
+        try:
+            sayfa = int(bilgi[5].rstrip().split(' ')[-1])
+        except:
+            sayfa = int(bilgi[6].rstrip().split(' ')[-1])
         for i in range(1,sayfa+1):
             cevrim(dosya,swfKlasor,i).start()
         return HttpResponse('Belgeniz Katalog Formuna Cevriliyor, 5 Dakika Sonra Tekrar Gelin')
