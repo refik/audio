@@ -2,7 +2,7 @@
 import os
 from sifre import KEY
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -55,6 +55,8 @@ USE_L10N = True
 AUTH_PROFILE_MODULE = 'calisanProfil.CalisanProfil'
 
 STATIC_URL = '/statik/'
+
+STATIC_ROOT = PROJECT_PATH + '/statikSunucu'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
