@@ -37,6 +37,6 @@ admin.site.register(Menu, MenuAdmin)
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)
 admin.site.unregister(sites.models.Site)
-admin.site.unregister(comments.models.Comment)
+#admin.site.unregister(comments.models.Comment)
 
 

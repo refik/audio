@@ -12,9 +12,11 @@ def sistem(request):
 def urun(request,urun):
     istenenUrun = Urun.objects.get(slug=urun)
     dokuman = Dokuman.objects.filter(urun_sayfa=True)
-    panelKonsept = istenenUrun.panel.filter(seri='konsept')
-    panelBasic = istenenUrun.panel.filter(seri='basic')
-    print panelKonsept
+    if not 'panel' in istenenUrun.kategori.isim:
+        panelKonsept = istenenUrun.panel.filter(seri='konsept')
+        panelBasic = istenenUrun.panel.filter(seri='basic')
+    else:
+        panelKonsept, panelBasic = [], []
     return render_to_response('urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
 
 def urunler(request,kategori):

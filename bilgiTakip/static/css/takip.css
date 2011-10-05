@@ -11,7 +11,7 @@ label {
     width:80px;
 }
 
-span, input, textarea {
+span, input, textarea, select {
     margin-left:80px;
 }
 
