@@ -1,5 +1,6 @@
 {% extends 'taban.html' %}
 {% load fb_versions %}
+{% load ortakVeri %}
 
 {% block icerik %}
 {% include 'tekli_ac.html' %}
@@ -53,10 +54,10 @@
   {% for d in dokuman %}
   <div class="grid_4 centered" style='margin-top:10px;'>
    <div class="grid_4">
-    <a href='{{ d.dosya.url }}'><img src="{% version d.resim.path 'dokuman_ufak' %}"/></a>
+    <a href='{{ d|linkUrl }}'><img src="{% version d.resim.path 'dokuman_ufak' %}"/></a>
    </div>
    <div class="grid_4">
-    <a class='sade_link' href='{{ d.dosya.url }}'>{{ d.isim }}</a>
+    <a class='sade_link' href='{{ d|linkUrl }}'>{{ d.isim }}</a>
    </div>
   </div>
   <div class='grid_4'style='height:10px;'></div>
