@@ -175,6 +175,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.staticfiles',
     'django.contrib.comments',
+    'django.contrib.sitemaps',
     'audio.ozelSayfa',
     'audio.ortakVeri',
     'audio.haber',
