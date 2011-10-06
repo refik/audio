@@ -67,7 +67,7 @@ MEDIA_ROOT = PROJECT_PATH + '/media'
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '127.0.0.1:8000' + STATIC_URL
 
-FILEBROWSER_MEDIA_ROOT = PROJECT_PATH + '/statik/'
+FILEBROWSER_MEDIA_ROOT = PROJECT_PATH + '/statikSunucu/'
 
 FILEBROWSER_MEDIA_URL = '/statik/'
 
