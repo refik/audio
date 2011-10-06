@@ -6,7 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Refik Turkeli', 'refik.rfk@gmail.com'),
+    ('cRefik Turkeli', 'refik.rfk@gmail.com'),
 )
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
