@@ -4,7 +4,7 @@
  <div class="grid_12 centered"><img src="{{ STATIC_URL }}resim/{{ seri }}.jpg"/></div>
  <div class="grid_12 centered">
   {% for p in panel %}
-  <a href='{{ p|linkUrl }}'><img src="{% version p.resim.path 'panel_ufak' %}"/></a>
+  <a href='/urun/{{ p.slug }}'><img src="{% version p.resim.path 'panel_ufak' %}"/></a>
   {% endfor %}
  </div>
  <div class="grid_11 push_1">
