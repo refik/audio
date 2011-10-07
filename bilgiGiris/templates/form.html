@@ -1,9 +1,0 @@
-<div class="grid_{{ grid }} push_{{ push }} {{ class }}">
- {% if mesaj %}<strong id='mesaj'>{{ mesaj}}</strong>{% endif %}
- <form action="/{{ tip }}-formu/" method="post">{% csrf_token %}
-  <ol>
-   {{ form.as_ul }}
-   <li><label></label><input type="submit" value="Gonder" /></li>
-  </ol>
- </form>
-</div>
