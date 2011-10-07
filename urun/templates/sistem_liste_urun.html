@@ -1,0 +1,24 @@
+{% load fb_versions %}
+{% if urun.sistem.all %}
+<div class="grid_{{ sira_grid }}">
+ <div class="grid_{{ sira_grid }}"><img src="{{ STATIC_URL }}resim/b{{ sira }}_top.jpg" /></div>
+ <div class="grid_{{ sira_grid }} {% if sira == 1 %}one{% else %}two{% endif%}">
+  <div class='grid_{{ sira_grid }} topd'></div>
+  <div class="grid_{{ sira_grid_inner }} push_{{ sira_grid_push }}">
+   <div class="grid_{{ sira_grid_inner }} centered">
+    <strong>Bu Urunu Kullanabileceginiz Sistemler</strong>
+   </div>
+   {% for sistem in urun.sistem.all %}
+   <div class="grid_{{ sira_grid_inner }} topd"></div>
+   <div class="grid_{{ grid_sira_grid_inner }}">
+    <div class="grid_7 alpha">
+     <a href={% if sistem.sema %}"{{ sistem.sema.url }}" class="tek_resim"{% else %}"#" style="cursor:default;" onclick="return false;"{% endif %}><img src="{% version sistem.resim.path 'sistem_ufak' %}"/></a>
+    </div>
+    <div class="grid_{{ tanitim_grid }} omega">{{ sistem.aciklama }}</div>
+   </div>
+   {% endfor %}
+  </div>
+ </div>
+ <div class="grid_{{ sira_grid }}"><img src="{{ STATIC_URL }}resim/b{{ sira }}_bottom.jpg"/></div>
+</div>
+{% endif %}

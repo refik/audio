@@ -1,0 +1,16 @@
+**Feincms'de fein_tree.js ve style.css deki butun result_list ler changelist e degistirildi. Eski haline dondurmek icin tersini yapmak yanlis olur cunku dosyalarda zaten changelist stringi mevcuttu.
+**reset.css de table icin yazilanlar silindi
+**filebrowser/functions.py boyle oldu:
+    if width:
+        xr = float(width)
+    else:
+        xr = float(x*float(height)/y)
+    if height:
+        yr = float(height)
+    else:
+        yr = float(y*float(width)/x)
+**swftools u en son versiyonundan compile et
+**smtp de ntlm sifrelemesi icin python-ntlm paketine patch gerekiyor http://code.google.com/p/python-ntlm/issues/detail?id=14
+**filebrowser/site.py boyle oldu (yeni versiyonda gerekmeyebilir):
+    abs_server_path = os.path.join(MEDIA_ROOT, abs_path, form.cleaned_data['name'])
+

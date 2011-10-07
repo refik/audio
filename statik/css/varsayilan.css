@@ -1,0 +1,30 @@
+.one {
+	background-size: 	100%;
+	margin:			0 auto;
+	background-image:	url('/statik/resim/b1_back.jpg');
+	background-repeat: 	repeat-y;
+}
+
+.two {
+	background-size: 	100%;
+	margin:			0 auto;
+	background-image:	url('/statik/resim/ikili_orta_r3_c1.jpg');
+	background-repeat: 	repeat-y;
+}
+
+.centered {
+    text-align:         center; 
+}
+
+h3{
+    margin: 0px;
+}
+
+.capitalize {
+    text-transform:     capitalize;
+}
+
+.sade_link {
+    text-decoration:    none;
+    color:              #000000;
+}

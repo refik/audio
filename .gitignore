@@ -1,0 +1,8 @@
+*.pyc
+db
+statik/yukleme/
+baslat
+python
+nohup.out
+sifre.py
+statikSunucu/

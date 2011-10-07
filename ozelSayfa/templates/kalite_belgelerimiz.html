@@ -1,0 +1,27 @@
+{% extends 'taban.html' %}
+{% load ortakVeri %}
+{% load fb_versions %}
+{% block head %}
+<link rel='stylesheet' href="{{ STATIC_URL }}css/form.css" />
+{% endblock %}
+
+{% block icerik %}
+{% include 'tekli_ac.html' %}
+ <div class="grid_56 capitalize centered">
+  <h2>Kalite Belgelerimiz</h2>
+ </div>
+ <div class="grid_54 push_1">
+  {% for belge in medya %}
+  <div class='grid_18 {% cycle 'alpha' '' 'omega' %} centered'>
+   <div class='grid_18'>
+    <a href={{ belge|linkUrl }} {% ifequal belge.gorunum.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src='{% version belge.gorunum.path 'kalite_belgesi' %}'/></a>
+   </div>
+   <div class='grid_18'>
+    <p>{{ belge.yazi }}</p>
+   </div>
+  </div> 
+  {% endfor %}
+ </div>
+  
+{% include 'tekli_kapat.html' %}
+{% endblock %}

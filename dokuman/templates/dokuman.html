@@ -1,0 +1,90 @@
+<html>
+ <head>
+  <title>Audio Elektronik</title>
+  <script type="text/javascript" src="/statik/js/flexpaper_flash.js"></script>
+  <link rel="stylesheet" href="/statik/css/reset.css" />
+  <link rel="stylesheet" href="/statik/css/text.css" />
+  <link rel="stylesheet" href="/statik/css/dokuman.css" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26169028-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+ </head>
+ <body>
+  <div id='container'>
+  <div class='buton'><img class='tikla' src='/statik/resim/geri.png' onClick="getDocViewer().prevPage()"/></div>
+  <div class='centered dokuman'>
+   <div id='ust_bar'>
+    <img style='float:left;' src='/statik/resim/logo_ufak.jpg'/>
+    <div style='float:right;text-align:right;width:156px;'> 
+     <p><a href='/'>Anasayfa</a></p> 
+     <p><a href='#' onClick="history.go(-1);return false;">Geri</a></p>
+    </div>
+    <div style='margin: 0 auto;'> 
+     <strong>{{ dokuman.isim }}</strong>
+     <p><a href='{{ dokuman.dosya.url }}'>indirmek icin tiklayin ({{ dokuman.dosya.filesize|filesizeformat }})</a></p>
+    </div>
+   </div>
+   <a id="viewerPlaceHolder" style="display:block;"></a>
+  </div>
+  <script type="text/javascript">
+   var viewportwidth;
+   var viewportheight;
+   if (typeof window.innerWidth != 'undefined'){
+       viewportwidth = window.innerWidth,
+       viewportheight = window.innerHeight
+   } 
+   else if (typeof document.documentElement != 'undefined'
+            && typeof document.documentElement.clientWidth !=
+            'undefined' && document.documentElement.clientWidth != 0){
+       viewportwidth = document.documentElement.clientWidth,
+       viewportheight = document.documentElement.clientHeight
+   } 
+   else{
+       viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
+       viewportheight = document.getElementsByTagName('body')[0].clientHeight
+   }
+   document.getElementById('viewerPlaceHolder').style.width = viewportwidth - 286;
+   document.getElementById('viewerPlaceHolder').style.height = viewportheight - 70;
+   document.getElementById('container').style.width = viewportwidth - 20
+   document.getElementById('container').style.height = viewportheight - 20
+   document.getElementById('ust_bar').style.width = viewportwidth - 286;
+ 
+   var fp = new FlexPaperViewer(   
+       '/statik/flexpaper/FlexPaperViewer',
+       'viewerPlaceHolder', { config : {
+       SwfFile : "{% templatetag openbrace %}{{ swfUrl }}/[*,0].swf,{{ sayfa }}{% templatetag closebrace %}",
+       //Scale : 0.6, 
+       ZoomTransition : 'easeOut',
+       ZoomTime : 0.5,
+       ZoomInterval : 0.2,
+       FitPageOnLoad : true,
+       FitWidthOnLoad : false,
+       PrintEnabled : true,
+       FullScreenAsMaxWindow : false,
+       ProgressiveLoading : true,
+       MinZoomSize : 0.2,
+       MaxZoomSize : 5,
+       SearchMatchAll : false,
+       InitViewMode : 'TwoPage',
+       ViewModeToolsVisible : false,
+       ZoomToolsVisible : true,
+       NavToolsVisible : true,
+       CursorToolsVisible : false,
+       SearchToolsVisible : false,
+       localeChain: 'tr_TR'
+   }});
+  </script>
+  <div class='buton'><img class='tikla' src='/statik/resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
+  </div>
+ </body>
+</html>

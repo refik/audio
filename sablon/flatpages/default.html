@@ -1,0 +1,17 @@
+{% extends 'taban.html' %}
+{% block head %}
+<title>{{ flatpage.title }}</title>
+<style type="text/css">
+ table {
+     padding:inherit;
+ }
+</style>
+{% endblock %}
+
+{% block icerik %}
+{% include 'tekli_ac.html' %}
+ <div class="grid_52 push_2">
+  {{ flatpage.content }}
+ </div>
+{% include 'tekli_kapat.html' %}
+{% endblock %}

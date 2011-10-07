@@ -1,0 +1,13 @@
+{% extends 'taban.html' %}
+{% block head %}
+<link rel='stylesheet' href="{{ STATIC_URL }}css/form.css" />
+{% endblock %}
+
+{% block icerik %}
+{% include 'tekli_ac.html' %}
+ <div class="grid_56 capitalize centered">
+  <h2>{{ tip }} Formu</h2>
+ </div>
+ {% include 'form.html' with grid=26 push=14 class='form' %}
+{% include 'tekli_kapat.html' %}
+{% endblock %}
