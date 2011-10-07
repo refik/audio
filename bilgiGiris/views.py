@@ -13,7 +13,7 @@ def mesajOlustur(sozluk):
     mesaj = ''
     for madde in SIRA:
         try:
-            mesaj += madde.capitalize() + ': ' + sozluk[madde] + '\n\n'
+            mesaj += madde.capitalize() + ': ' + unicode(sozluk[madde]) + '\n\n'
         except:
             pass
     return mesaj
