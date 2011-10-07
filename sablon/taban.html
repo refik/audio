@@ -44,7 +44,7 @@
    <div class="grid_18 centered">
     <img src="{{ STATIC_URL }}resim/logo.jpg" />
    </div>  
-   <div class="grid_38">
+   <div class="grid_38" style='z-index:2;'>
      <div class="grid_38 harita"></div>
      <div class="grid_38">
       {% include "menu.html" with alt_limit=1 ust_limit=6 %}
@@ -55,7 +55,7 @@
    <div class="grid_56 spacer"></div>
    <div class="clear"></div> 
 
-   <div class="grid_56 banner" style='overflow:hidden;'>
+   <div class="grid_56 banner" style='overflow:hidden;z-index:1;'>
     {% for a in afis %}
     <img src="{{ a.resim.url }}" alt="{{a.yazi}}"/>
     {% endfor %}
@@ -65,7 +65,7 @@
    <div class="grid_56 spacer"></div>
    <div class="clear"></div> 
 
-   <div class="grid_56">  
+   <div class="grid_56" style='z-index:2;'>  
     {% include "menu.html" with alt_limit=7 ust_limit=13 %}
    </div>
    <div class="clear"></div>
