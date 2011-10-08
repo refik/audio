@@ -1,15 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
- <meta charset="utf-8" />
+ <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
  <title>Audio Elektronik</title>
- <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/960a.css" />
- <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/superfish.css" /> 
- <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.fancybox.css" type="text/css" media="screen" />
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css">
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/960a.css">
+ <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/superfish.css"> 
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css">
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css">
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.fancybox.css" type="text/css" media="screen" >
  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/taban.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.hoverIntent.minified.js"></script>
@@ -42,7 +42,7 @@
  <div id='bkground'> 
   <div class="container_56">
    <div class="grid_18 centered">
-    <img src="{{ STATIC_URL }}resim/logo.jpg" />
+    <img src="{{ STATIC_URL }}resim/logo.jpg" alt="Audio Elektronik Logo">
    </div>  
    <div class="grid_38" style='z-index:2;'>
      <div class="grid_38 harita"></div>
@@ -57,7 +57,7 @@
 
    <div class="grid_56 banner" style='overflow:hidden;z-index:1;'>
     {% for a in afis %}
-    <img src="{{ a.resim.url }}" alt="{{a.yazi}}"/>
+    <img src="{{ a.resim.url }}" alt="{{a.yazi}}">
     {% endfor %}
    </div>
    <div class="clear"></div>
@@ -77,7 +77,7 @@
   {% endblock %}
 
   </div>
-  <img src="{{ STATIC_URL }}resim/bottom.jpg" />
+  <img src="{{ STATIC_URL }}resim/bottom.jpg" alt=''>
  </div>
 </body>
 </html>
