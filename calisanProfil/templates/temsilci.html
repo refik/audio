@@ -1,7 +1,8 @@
 <div class="grid_{{ grid }} alpha push_{{ push }}">
  <div class="grid_{{ grid }} alpha omega">
   <script type="text/javascript">
-   function guncelle(secilen_sehir){
+   function guncelle(){
+       secilen_sehir = document.getElementById("temsilci").options[document.getElementById("temsilci").selectedIndex].value;
        $("#bilgi").empty();
        $.getJSON('/musteri-temsilcisi/', {sehir:secilen_sehir},function(data) {
            var items = [];
@@ -19,7 +20,7 @@
 
    }
   </script>
-  <select name="sehir" id="id_sehir" onchange="guncelle(this.value)">
+  <select name="sehir" id="temsilci" onchange="guncelle();">
    <option selected="selected">Şehriniz</option>
    <option>Adana</option>
    <option>Adıyaman</option>
