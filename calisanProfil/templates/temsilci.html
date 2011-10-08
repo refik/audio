@@ -2,7 +2,7 @@
  <div class="grid_{{ grid }} alpha omega">
   <script type="text/javascript">
    function guncelle(){
-       secilen_sehir = document.getElementById("temsilci").options[document.getElementById("temsilci").selectedIndex].value;
+       secilen_sehir = document.getElementById("temsilci").options[document.getElementById("temsilci").selectedIndex].text;
        $("#bilgi").empty();
        $.getJSON('/musteri-temsilcisi/', {sehir:secilen_sehir},function(data) {
            var items = [];
