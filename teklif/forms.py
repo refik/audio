@@ -1,7 +1,6 @@
 from django import forms
-from django.contrib.comments.forms import CommentForm
 from audio.teklif.models import TeklifYorum, Durum
-
+from django.contrib.comments.forms import CommentForm
 
 class TeklifYorumFormu(CommentForm):
     durum = forms.ModelChoiceField(queryset=Durum.objects.all(),required=False)
