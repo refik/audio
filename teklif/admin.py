@@ -3,4 +3,4 @@ from django.contrib import admin
 
 admin.site.register(Durum)
 admin.site.register(TeklifYorum)
-
+admin.site.register(Teklif)
