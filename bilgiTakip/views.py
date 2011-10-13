@@ -5,5 +5,5 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def goster(request):
-    tipler = Tip.objects.all()
-    return render_to_response('takip.html', {'tipler':tipler},context_instance=RequestContext(request))    
+    tipler = Tip.objects.get(isim='Teklif Formu')
+    return render_to_response('takip.html', {'tipler':[tipler]},context_instance=RequestContext(request))    
