@@ -8,7 +8,8 @@ import json
 def temsilci(request):
     try:
         sorumlu = User.objects.filter(profile__sorumluSehir__isim__contains = request.GET['sehir'])
-        temsilci = sorumlu[0]
+        temsilci = sorumlu.filter(profile__gorev__isim__contains = 'Temsilci')
+        temsilci = temsilci[0]
         kisi = {'İsim' : temsilci.first_name + ' ' + temsilci.last_name, 'Telefon' : temsilci.profile.telefon, 'Email' : temsilci.email}
     except:
         kisi ={}
