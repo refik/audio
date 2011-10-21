@@ -1,2 +1,0 @@
-#!/bin/bash
-/home/refik/virtual_environments/audio/bin/python $@
