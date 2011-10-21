@@ -1,0 +1,2 @@
+#!/bin/bash
+/home/refik/virtual_environments/audio/bin/python manage.py runserver 127.0.0.1:7000
