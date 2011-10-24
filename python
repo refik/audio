@@ -1,3 +1,0 @@
-#!/bin/bash
-/home/refik/code/pythonenv/audio/bin/python $@
-
