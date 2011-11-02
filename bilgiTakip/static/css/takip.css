@@ -6,9 +6,14 @@ ol {
     list-style:none;
 }
 
+ol li {
+    margin-top: 5px;
+        }
+
 label {
     position:absolute;
     width:80px;
+    color:#0000A0;
 }
 
 span, input, textarea, select {

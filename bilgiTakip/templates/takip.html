@@ -32,13 +32,13 @@
    <div id='tabler'>
     <ul>
      {% for tip in tipler %}
-     <li><a href="#tabler-{% cycle 1 2 3 4 5 6 %}">{{ tip.isim }}</a></li>
+     <li><a href="#tabler-{% cycle 1 2 3 4 5 6 %}">{{ tip.0 }}</a></li>
      {% endfor %}
     </ul>
 
     {% for tip in tipler %}
     <div id='tabler-{% cycle 1 2 3 4 5 6 %}'> 
-     {% include 'istek.html' with bilgiler=tip.bilgi_set.all %}
+     {% include 'istek.html' with bilgiler=tip.1 %}
     </div>
     {% endfor %}
    </div>

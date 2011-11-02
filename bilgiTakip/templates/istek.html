@@ -38,11 +38,11 @@
     {% if bilgi.mesaj %}
     <li>
      <label>Mesaj:</label>
-     <span>{{ bilgi.mesaj }}</span>
+     <div style='margin-left:80px'>{{ bilgi.mesaj }}</div>
     </li>
     {% endif %}
     {% if bilgi.sorumlu.all %}
-    <li style='margin-top:5px;'>
+    <li>
      <label>Sorumlular:</label>
       {% for sorumlu_kisi in bilgi.sorumlu.all %}
       <span>{{ sorumlu_kisi.first_name }} {{ sorumlu_kisi.last_name }} - {{ sorumlu_kisi.profile.gorev }}<br/></span>

@@ -5,5 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def goster(request):
-    tipler = Tip.objects.get(isim='Teklif Formu')
-    return render_to_response('takip.html', {'tipler':[tipler]},context_instance=RequestContext(request))    
+    tipler = []
+    for tip in request.user.profile.sorumluTip.all():
+        if tip.isim == 'Teklif Formu':
+            bilgiler = tip.bilgi_set.all().filter(sorumlu__username__contains=request.user.username)
+        else:
+            bilgiler = tip.bilgi_set.all()
+        tipler += [(tip.isim, bilgiler)]
+    return render_to_response('takip.html', {'tipler':tipler},context_instance=RequestContext(request))    
