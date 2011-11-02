@@ -1,9 +1,8 @@
-{% load comments i18n %}
-{% for bilgi in bilgiler %}
+{% load comments %}
 <div class='istek'>
  <div style='padding:10px;margin-top:10px;'>
-  <strong>{{ bilgi.pk }} numarali musteri istegi - {{ bilgi.tarih }}</strong>
-  <div style=''>
+  <strong><a href='/takip/{{ bilgi.pk }}'>{{ bilgi.pk }}</a> numarali musteri istegi - {{ bilgi.tarih }}</strong>
+  <div>
    <ol>
     {% if bilgi.isim %}
     <li>
@@ -17,7 +16,7 @@
      <span>{{ bilgi.email }}</span>
     </li>
     {% endif %}
-    {% if bilgi.isim %}
+    {% if bilgi.sehir %}
     <li>
      <label>Sehir:</label>
      <span>{{ bilgi.sehir }}</span>
@@ -38,7 +37,7 @@
     {% if bilgi.mesaj %}
     <li>
      <label>Mesaj:</label>
-     <span>{{ bilgi.mesaj }}</span>
+     <div style='margin-left:80px'>{{ bilgi.mesaj }}</div>
     </li>
     {% endif %}
     {% if bilgi.sorumlu.all %}
@@ -49,7 +48,12 @@
       {% endfor %}
     </li>
     {% endif %}
-
+    {% if bilgi.teklif %}
+    <li>
+     <label>Durum:</label>
+     <span style='font-style:italic;'>{% if bilgi.teklif.durum %}{{ bilgi.teklif.durum }}{% else %}Eylem Yapılmadi{% endif %}</span>
+    </li>
+    {% endif %}
     </ol>
   </div>
   {% get_comment_count for bilgi as yorum_sayisi %}
@@ -65,26 +69,28 @@
   {% endifnotequal %}
   <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yorum yazmak icin tiklayin</p>
   <div style='display:none;'>
-   <form action="{% comment_form_target %}" method="post">{% csrf_token %}
-   {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
-   {% for field in form %}
-   {% if field.is_hidden %}
-   <div>{{ field }}</div>
-   {% else %}
-   {% if field.errors %}{{ field.errors }}{% endif %}
-   <p>
-   {% if field.errors %} class="error"{% endif %}
-   {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-   {{ field.label_tag }} {{ field }}
-   </p>
-   {% endif %}
-   {% endfor %}
-   <p class="submit">
-    <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
-   </p>
-   </form>
+   {% get_comment_form for bilgi as form %}
+
+<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+  <div><input type="hidden" name="next" value="{{ request.path_info }}" /></div>
+  {% for field in form %}
+    {% if field.is_hidden %}
+      <div>{{ field }}</div>
+    {% else %}
+      {% if field.errors %}{{ field.errors }}{% endif %}
+      <p
+        {% if field.errors %} class="error"{% endif %}
+        {% if field.name == "honeypot" or field.name == "email" or field.name == "name" or field.name == "url" %} style="display:none;"{% endif %}>
+        {{ field.label_tag }} {{ field }}
+      </p>
+    {% endif %}
+  {% endfor %}
+  <p class="submit">
+    <input type="submit" name="post" class="submit-post" value="Gönder" />
+  </p>
+</form>
+
   </div>
  </div>
 </div>
-{% endfor %}
 

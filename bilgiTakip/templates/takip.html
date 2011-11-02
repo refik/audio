@@ -29,6 +29,7 @@
   </div>
   <div class='clear'></div>
   <div class='grid_56'>
+   {% block icerik %}
    <div id='tabler'>
     <ul>
      {% for tip in tipler %}
@@ -38,10 +39,11 @@
 
     {% for tip in tipler %}
     <div id='tabler-{% cycle 1 2 3 4 5 6 %}'> 
-     {% include 'istek.html' with bilgiler=tip.1 %}
+     {% include 'istekler.html' with bilgiler=tip.1 %}
     </div>
     {% endfor %}
    </div>
+   {% endblock icerik %}
   </div>
   <div class='clear'></div>
  </div>

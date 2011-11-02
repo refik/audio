@@ -16,7 +16,7 @@ def yorum_yonet(sender,**kwargs):
             durum_mesaji = u"(Bu işin durumu '%s' olarak değiştirildi)" % yorum.durum
     except:
         pass
-    audiomail("audioweb@audio.com.tr",[sorumlu.email for sorumlu in yorum.content_object.sorumlu.all()] + ['refik.rfk@gmail.com'],str(yorum.content_object.tip) + u'\' na Yorum Yapıldı',u'%d nolu müşteri isteğine yapılan yorum\n\n%s %s\n\nhttp://www.audio.com.tr/takip adresinden detaylı inceleyebilirsiniz'%(yorum.content_object.pk,yorum.comment,durum_mesaji))
+    audiomail("audioweb@audio.com.tr",[sorumlu.email for sorumlu in yorum.content_object.sorumlu.all()] + ['refik.rfk@gmail.com'],str(yorum.content_object.tip) + u'\' na Yorum Yapıldı',u'%d nolu müşteri isteğine yapılan yorum\n\n%s %s\n\nhttp://www.audio.com.tr/takip/%d adresinden detaylı inceleyebilirsiniz'%(yorum.content_object.pk,yorum.comment,durum_mesaji,yorum.content_object.pk))
 
 def teklif_yarat(sender,**kwargs):
     try:
