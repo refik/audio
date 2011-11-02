@@ -68,28 +68,10 @@
   </ol>
   {% endifnotequal %}
   <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yorum yazmak icin tiklayin</p>
-  <div style='display:none;'>
-   {% get_comment_form for bilgi as form %}
-
-<form action="{% comment_form_target %}" method="post">{% csrf_token %}
-  <div><input type="hidden" name="next" value="{{ request.path_info }}" /></div>
-  {% for field in form %}
-    {% if field.is_hidden %}
-      <div>{{ field }}</div>
-    {% else %}
-      {% if field.errors %}{{ field.errors }}{% endif %}
-      <p
-        {% if field.errors %} class="error"{% endif %}
-        {% if field.name == "honeypot" or field.name == "email" or field.name == "name" or field.name == "url" %} style="display:none;"{% endif %}>
-        {{ field.label_tag }} {{ field }}
-      </p>
-    {% endif %}
-  {% endfor %}
-  <p class="submit">
-    <input type="submit" name="post" class="submit-post" value="Gönder" />
-  </p>
-</form>
-
+  <div {% if yorum_formu_goster == 'False' %}style='display:none;'{% endif %}>
+   {% block icerik %}
+   {% render_comment_form for bilgi %}
+   {% endblock icerik %}
   </div>
  </div>
 </div>

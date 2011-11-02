@@ -20,6 +20,19 @@ span, input, textarea, select {
     margin-left:80px;
 }
 
+/* directly taken from form.css. can be merged */
+.errorlist li{
+    margin-bottom: 0px;
+}
+
+.errorlist{
+    list-style: none;
+    margin-bottom: 0px;
+    margin-left: 80px;
+    color: #FF0000;
+    font-style: italic;
+}
+
 div.istek {
     background-color:#CEF6F5;
     margin-left:2px;
