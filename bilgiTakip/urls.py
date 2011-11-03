@@ -1,7 +1,8 @@
 from django.conf.urls.defaults import *
-from audio.bilgiTakip.views import TakipDetailView
+from audio.bilgiTakip.views import BilgiDetailView, TipListView
+from django.contrib.auth.decorators import login_required
 
-urlpatterns = patterns('audio.bilgiTakip.views',
-    (r'^$', 'goster'),
-    (r'^(?P<pk>\d+)', TakipDetailView.as_view()),
+urlpatterns = patterns('',
+    (r'^$', login_required(TipListView.as_view())),
+    (r'^(?P<pk>\d+)/$', login_required(BilgiDetailView.as_view())),
 )

@@ -7,6 +7,7 @@ class UrunDigerInline(admin.StackedInline):
 
 class UrunAdmin(admin.ModelAdmin):
     list_display = ['isim','kategori','yeni']
+    list_filter = ['isim','kategori','yeni']
     inlines = [UrunDigerInline]
     filter_horizontal = ['sistem','ozellik','panel']
     prepopulated_fields = {"slug": ("isim",)}

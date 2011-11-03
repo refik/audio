@@ -1,7 +1,7 @@
 {% load comments %}
 <div class='istek'>
  <div style='padding:10px;margin-top:10px;'>
-  <strong><a href='/takip/{{ bilgi.pk }}'>{{ bilgi.pk }}</a> numarali musteri istegi - {{ bilgi.tarih }}</strong>
+  <strong><a href='/takip/{{ bilgi.pk }}'>{{ bilgi.pk }}</a> numarali musteri istegi - {{ bilgi.tarih|timesince }} önce ulaştı</strong>
   <div>
    <ol>
     {% if bilgi.isim %}
@@ -67,7 +67,7 @@
    {% endfor %}
   </ol>
   {% endifnotequal %}
-  <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yorum yazmak icin tiklayin</p>
+  <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yorum formu aç/kapa</p>
   <div {% if yorum_formu_goster == 'False' %}style='display:none;'{% endif %}>
    {% block icerik %}
    {% render_comment_form for bilgi %}

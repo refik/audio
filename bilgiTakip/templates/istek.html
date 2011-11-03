@@ -1,4 +1,10 @@
 {% extends 'takip.html' %}
 {% block icerik %}
-{% include 'istek-govde.html' with yorum_formu_goster='True' %}
+<div id='tabler'>
+ <ul><li><a href='#tabler-1'>{{ bilgi.tip.isim }}</a></li></ul>
+ <div id='tabler-1'>
+  <strong>Detay görünümü</strong>
+  {% include 'istek-govde.html' with yorum_formu_goster='True' %}
+ </div>
+</div>
 {% endblock %}

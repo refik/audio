@@ -1,0 +1,12 @@
+{% extends 'takip.html' %}
+{% load comments %}
+{% block icerik %}
+<div id='tabler'>
+ <ul><li><a href='#tabler-1'>Yorum Hatasi</a></li></ul>
+ <div id='tabler-1'>
+  <div class='istek' style='padding:10px;margin-top:10px;'>
+   {% include 'comments/form.html' %}
+  </div>
+ </div>
+</div>
+{% endblock icerik %}

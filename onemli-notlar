@@ -13,4 +13,3 @@
 **smtp de ntlm sifrelemesi icin python-ntlm paketine patch gerekiyor http://code.google.com/p/python-ntlm/issues/detail?id=14
 **filebrowser/site.py boyle oldu (yeni versiyonda gerekmeyebilir): (yeni klasor yaratamiyor filebrowser)
     abs_server_path = os.path.join(MEDIA_ROOT, abs_path, form.cleaned_data['name'])
-

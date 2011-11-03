@@ -27,6 +27,7 @@ class Bilgi(models.Model):
     sorumlu = models.ManyToManyField(User,null=True,blank=True)
     class Meta: 
         verbose_name_plural = "Bilgiler"
+        ordering = ['-tarih']
     def __unicode__(self):
         return self.isim
 
