@@ -75,13 +75,17 @@ class IstatistikView(TemplateView):
     template_name = 'istatistik.html'
 
     def get_context_data(self,**kwargs):
+        grafikler = []
         context = super(IstatistikView, self).get_context_data(**kwargs)
         durumlar = Durum.objects.all()
+
         tanim = [("Durum", "string"),
                  ("Sayi", "number")]
         veri = [[durum.isim, durum.teklif_set.all().count()] for durum in durumlar]
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
-        json = data_table.ToJSon()
-        context['durum_veri'] = json
+        json_durum = data_table.ToJSon()
+        grafikler += [(json_durum, 'Duruma Gore Teklif Sayisi', (800,600), 'PieChart')]
+
+        context['grafikler'] = grafikler
         return context

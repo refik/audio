@@ -1,0 +1,31 @@
+<!--sorgu attribute unu valid yapmak icin decleration ayarla-->
+<div style='text-align:center;margin-bottom:5px;'>
+ <strong>|</strong> 
+ <a href='istatistikler'>Istatistikler</a>
+ <strong>|</strong>
+ {% for filtre in filtreler %} 
+ {{ filtre.isim }} 
+ <select class='filtre' style='margin-left:0px;' onchange='filtrele();' sorgu='{{ filtre.sorgu }}' >
+  <option value='' >Tumu</option>
+  {% for madde in filtre.maddeler %}
+  <option value='{{ madde.0 }}' {% ifequal filtre.secili madde.0 %}selected='Selected'{% endifequal %} >{{ madde.1 }}</option>
+  {% endfor %}
+ </select>
+ <strong>|</strong>
+ {% endfor %}
+</div>
+
+<script type='text/javascript'>
+ function filtrele() {
+     sorgular = [];
+     $.each($('.filtre'), function() {
+         if(this.selectedIndex != 0) {
+             deger = this.value;
+             sorgu = this.getAttribute('sorgu');
+             sorgular.push(sorgu + '=' + deger);
+         }
+     });
+     open('?' + sorgular.join('&'),'_self');
+ }
+</script>
+
