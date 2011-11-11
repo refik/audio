@@ -2,10 +2,10 @@ from audio.bilgiGiris.models import Bilgi, Tip
 from audio.teklif.models import Durum
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-import datetime
+import datetime, unicodedata, gviz_api
 
 class TipListView(ListView):
     context_object_name = 'tipler'
@@ -22,7 +22,7 @@ class TipListView(ListView):
                     except:
                         query[key] = query[key][0]
                 self.query = query
-                bilgiler = tip.bilgi_set.all().filter(sorumlu__username=self.request.user.username)
+                bilgiler = tip.bilgi_set.all().filter(sorumlu=self.request.user)
                 bilgiler = bilgiler.filter(**query)
             else:
                 bilgiler = tip.bilgi_set.all()
@@ -69,3 +69,19 @@ class BilgiDetailView(DetailView):
             return object
         else:
             return None
+
+
+class IstatistikView(TemplateView):
+    template_name = 'istatistik.html'
+
+    def get_context_data(self,**kwargs):
+        context = super(IstatistikView, self).get_context_data(**kwargs)
+        durumlar = Durum.objects.all()
+        tanim = [("Durum", "string"),
+                 ("Sayi", "number")]
+        veri = [[durum.isim, durum.teklif_set.all().count()] for durum in durumlar]
+        data_table = gviz_api.DataTable(tanim)
+        data_table.LoadData(veri)
+        json = data_table.ToJSon()
+        context['durum_veri'] = json
+        return context
