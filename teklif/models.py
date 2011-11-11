@@ -9,10 +9,10 @@ def yorum_yonet(sender,**kwargs):
     durum_mesaji = u''
     yorum = kwargs['instance']
     try:
-        yorum.content_object.teklif
+        teklif = yorum.content_object.teklif
         if yorum.durum != None: 
-            yorum.content_object.teklif.durum = yorum.durum
-            durum_mesaji = u"(Bu işin durumu '%s' olarak değiştirildi)" % yorum.durum
+            teklif.durum = yorum.durum
+            durum_mesaji = u"(Bu işin durumu '%s' olarak değiştirildi)" % teklif.durum.isim
             yorum.comment += ' %s' % durum_mesaji
             yorum.content_object.teklif.save()
     except:
@@ -26,10 +26,13 @@ def teklif_yarat(sender,**kwargs):
         if kwargs['created'] == False:
             if 'Teklif' in kwargs['instance'].tip.isim:
                 t = Teklif(bilgi=kwargs['instance'])
+                t.durum = Durum.objects.get(pk=1)
+                t.kapali = False
                 t.save()
 
 class Durum(models.Model):
     isim = models.CharField('Durum', max_length=100)
+    kapali = models.BooleanField(default=False)
     def __unicode__(self):
         return self.isim
 

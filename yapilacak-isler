@@ -17,3 +17,6 @@
 12 tinymce full versiyona css sorunları duzeltilerek gecirilmeli
 13 sistemler' i ozelSayfa app i altina alinmali
 14 kullanim klavuzu ekleme
+15 durumlari server da guncelle
+16 son database i serverden alip teklif migrate et
+17 durumlarin kapali larini false a set et

@@ -21,7 +21,9 @@
  <div class='container_56'>
   <div class='grid_56'>
    <div class='grid_10 alpha'><a href='/'><img src='/statik/resim/logo_ufak.jpg'/></a></div>
-   <div class='grid_36 centered'><h2 style='margin:0;'>Audio Müşteri İstek Takip Sayfasi</h2></div>
+   <div class='grid_36 centered'>
+    <a class='sade_link' href='/takip/'><h2 style='margin:0;'>Audio Müşteri İstek Takip Sayfasi</h2></a>
+   </div>
    <div class='grid_10' style='text-align:right;'>
     <div class='grid_10'><strong>Kullanici: </strong>{{ user }}</div>
     <div class='grid_10'><a href='#' onClick="history.go(-1);return false;">Geri</a></div>
@@ -39,7 +41,7 @@
 
     {% for tip in tipler %}
     <div id='tabler-{% cycle 1 2 3 4 5 6 %}'> 
-     {% include 'istekler.html' with bilgiler=tip.1 %}
+     {% include 'istekler.html' with tip_isim=tip.0 bilgiler=tip.1 %}
     </div>
     {% endfor %}
    </div>

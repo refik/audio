@@ -1,5 +1,7 @@
-<strong>{{ bilgiler.count }} tane müşteri isteği</strong>
+{% ifequal tip_isim 'Teklif Formu' %}
+{% include 'teklif_filtre.html' %}
+{% endifequal %}
+<div style='text-align:right'><strong>{{ bilgiler.count }} tane müşteri isteği</strong></div>
 {% for bilgi in bilgiler %}
-{% include 'istek-govde.html' with yorum_formu_goster='False' %}
+{% include 'istek-govde.html' with yorum_formu_goster='Hayir' %}
 {% endfor %}
-

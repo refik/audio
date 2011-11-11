@@ -51,14 +51,14 @@
     {% if bilgi.teklif %}
     <li>
      <label>Durum:</label>
-     <span style='font-style:italic;'>{% if bilgi.teklif.durum %}{{ bilgi.teklif.durum }}{% else %}Eylem Yapılmadi{% endif %}</span>
+     <span style='font-style:italic;'>{{ bilgi.teklif.durum }}</span>
     </li>
     {% endif %}
     </ol>
   </div>
   {% get_comment_count for bilgi as yorum_sayisi %}
   {% ifnotequal yorum_sayisi 0 %}
-  <strong>Yorumlar</strong>
+  <strong>Yapilanlar</strong>
   {% get_comment_list for bilgi as yorumlar %}
   <ol>
    {% for yorum in yorumlar %}
@@ -67,8 +67,8 @@
    {% endfor %}
   </ol>
   {% endifnotequal %}
-  <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yorum formu aç/kapa</p>
-  <div {% if yorum_formu_goster == 'False' %}style='display:none;'{% endif %}>
+  <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yapildi formu aç/kapa</p>
+  <div {% if yorum_formu_goster == 'Hayir' %}style='display:none;'{% endif %}>
    {% block icerik %}
    {% render_comment_form for bilgi %}
    {% endblock icerik %}
