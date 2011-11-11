@@ -1,5 +1,5 @@
 from audio.bilgiGiris.models import Bilgi, Tip
-from audio.teklif.models import Durum
+from audio.teklif.models import Durum, Teklif
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import DetailView, ListView, TemplateView
@@ -39,18 +39,18 @@ class TipListView(ListView):
 
         filtreler += [('sorumlu__pk',
                        'Temsilci',
-                       [(gorevli.pk, gorevli.first_name + ' ' + gorevli.last_name) for gorevli in gorevliler])]
+                       [(gorevli.pk, gorevli.get_full_name()) for gorevli in gorevliler])]
         filtreler += [('teklif__durum__pk',
                        'Durum',
                        [(durum.pk, durum.isim) for durum in durumlar])]
         filtreler += [('teklif__durum__kapali',
                        'Kapali',
-                       [(1,'Evet'),('0','Hayir')])]
+                       [(1,'Evet'),(0,'Hayir')])]
         filtreler += [('tarih__gt',
                        'Tarih',
-                       [('%s' % (bugun),'Bugun Icinde'),            ('%s' % (bugun - 3*gun),'Uc Gun Icinde'),
-                        ('%s' % (bugun - 7*gun),'Bu Hafta Icinde'), ('%s' % (bugun - 30*gun),'Bu Ay Icinde')])]
+                       [(str(bugun - i*i*gun),'%d gun icinde' % (i*i)) for i in range(1,6,1)])]
 
+ 
         context['filtreler'] = [ { 'sorgu' : filtre[0],
                                    'isim' : filtre[1],
                                    'maddeler' : filtre[2],
@@ -76,16 +76,45 @@ class IstatistikView(TemplateView):
 
     def get_context_data(self,**kwargs):
         grafikler = []
+        bugun = datetime.date.today()
+        on_gun = datetime.timedelta(10)
         context = super(IstatistikView, self).get_context_data(**kwargs)
         durumlar = Durum.objects.all()
+        teklifler = Teklif.objects.all()
 
         tanim = [("Durum", "string"),
                  ("Sayi", "number")]
         veri = [[durum.isim, durum.teklif_set.all().count()] for durum in durumlar]
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
-        json_durum = data_table.ToJSon()
-        grafikler += [(json_durum, 'Duruma Gore Teklif Sayisi', (800,600), 'PieChart')]
+        json = data_table.ToJSon()
+        grafikler += [(json, ' Su Anki Duruma Gore Teklif Sayisi', (800,400), 'PieChart')]
+
+        tanim = [("Tarih", "string"),
+                 ("Gelen Teklif Sayisi", "number")]
+        veri = [[(bugun - on_gun*i).strftime('%d/%m/%Y'),teklifler.filter(bilgi__tarih__gt=bugun-on_gun*(i+1),
+                                                                          bilgi__tarih__lt=bugun-on_gun*i).count()]                                                                          for i in range(4)]
+        data_table = gviz_api.DataTable(tanim)
+        data_table.LoadData(veri)
+        json = data_table.ToJSon(order_by='Tarih')
+        grafikler += [(json, 'Tarihe Gore Gelen Teklif', (800,400), 'ColumnChart')]
 
         context['grafikler'] = grafikler
+        return context
+
+class TemsilciDetailView(DetailView):
+    model = User
+    template_name = 'temsilci_profil.html'
+    context_object_name = 'temsilci' 
+
+    def get_object(self):
+        object = super(TemsilciDetailView,self).get_object()
+        if self.request.user is object or self.request.user.is_staff:
+            return object
+        else:
+            return None
+
+    def get_context_data(self,**kwargs):
+        context = super(TemsilciDetailView, self).get_context_data(**kwargs)
+        context['teklifler'] = 'avc'
         return context

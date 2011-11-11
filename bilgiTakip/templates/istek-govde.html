@@ -44,7 +44,11 @@
     <li>
      <label>Sorumlular:</label>
       {% for sorumlu_kisi in bilgi.sorumlu.all %}
-      <span>{{ sorumlu_kisi.first_name }} {{ sorumlu_kisi.last_name }} - {{ sorumlu_kisi.profile.gorev }}<br/></span>
+      <a class='sade_link' href='/takip/temsilci/{{ sorumlu_kisi.pk }}'>
+       <span>
+        {{ sorumlu_kisi.first_name }} {{ sorumlu_kisi.last_name }} - {{ sorumlu_kisi.profile.gorev }}<br/>
+       </span>
+      </a>
       {% endfor %}
     </li>
     {% endif %}

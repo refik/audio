@@ -23,3 +23,4 @@
 18 database i github a yollarken encrypt edip yolla
 19 unicode lar icin smart_str yi incele
 20 server' a gviz_api yuklemek lazim
+21 get_full_name i kullandim, test edilmeli

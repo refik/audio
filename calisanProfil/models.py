@@ -22,5 +22,5 @@ class CalisanProfil(models.Model):
     def __unicode__(self):
         return unicode(self.user)
     def tam_isim(self):
-        return self.user.first_name + ' ' + self.user.last_name
+        return self.user.get_full_name()
 
