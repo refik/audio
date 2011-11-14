@@ -1,5 +1,7 @@
 td {
-    width:100px;
+    width:76px;
+    border-spacing:0px;
+    padding:0px;
 }
 
 ol {
@@ -16,8 +18,16 @@ label {
     color:#0000A0;
 }
 
+select {
+    width:120px;
+}
+
 span, input, textarea, select {
     margin-left:80px;
+}
+
+table {
+    margin-bottom:5px;
 }
 
 /* directly taken from form.css. can be merged */
@@ -42,3 +52,5 @@ div.istek {
 div.istek:hover {
     background-color:#F7BE81;
 }
+
+

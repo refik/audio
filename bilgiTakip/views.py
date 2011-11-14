@@ -1,5 +1,6 @@
 from audio.bilgiGiris.models import Bilgi, Tip
 from audio.teklif.models import Durum, Teklif
+from audio.calisanProfil.models import CalisanGorev
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import DetailView, ListView, TemplateView
@@ -112,17 +113,30 @@ class IstatistikView(TemplateView):
 
 class TemsilciDetailView(DetailView):
     model = User
-    template_name = 'temsilci_profil.html'
-    context_object_name = 'temsilci' 
+    template_name = 'profil.html'
+    context_object_name = 'calisan' 
 
     def get_object(self):
         object = super(TemsilciDetailView,self).get_object()
-        if self.request.user is object or self.request.user.is_staff:
+        gorev = CalisanGorev.objects.get(isim='Musteri Temsilcisi')
+        if object.profile.gorev == gorev:
             return object
         else:
             return None
 
     def get_context_data(self,**kwargs):
-        context = super(TemsilciDetailView, self).get_context_data(**kwargs)
-        context['teklifler'] = 'avc'
+        context =super(TemsilciDetailView, self).get_context_data(**kwargs)
+        temsilci = self.get_object()
+        teklifler = Teklif.objects.filter(bilgi__sorumlu=temsilci)
+        context['kapali_is'] = teklifler.filter(durum__kapali=True).count()
+        context['acik_is'] = teklifler.filter(durum__kapali=False).count()
         return context
+
+class TemsilciListView(ListView):
+    template_name = 'temsilciler.html'
+    context_object_name = 'temsilciler'
+
+    def get_queryset(self):
+        temsilci_gorev= CalisanGorev.objects.get(isim='Musteri Temsilcisi')
+        temsilciler = User.objects.filter(profile__gorev=temsilci_gorev) 
+        return temsilciler.order_by('first_name')
