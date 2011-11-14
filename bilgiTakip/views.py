@@ -1,12 +1,15 @@
+# coding: utf-8
 from audio.bilgiGiris.models import Bilgi, Tip
-from audio.teklif.models import Durum, Teklif
+from audio.teklif.models import Durum, Teklif, TeklifYorum
 from audio.calisanProfil.models import CalisanGorev
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import DetailView, ListView, TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-import datetime, unicodedata, gviz_api
+import datetime
+import unicodedata
+import gviz_api
 
 class TipListView(ListView):
     context_object_name = 'tipler'
@@ -41,7 +44,8 @@ class TipListView(ListView):
     def get_context_data(self,**kwargs):
         filtreler = []
         context = super(TipListView, self).get_context_data(**kwargs)
-        gorevliler = User.objects.filter(profile__gorev__isim='Musteri Temsilcisi')
+        gorevliler = User.objects.filter(
+            profile__gorev__isim='Musteri Temsilcisi')
         durumlar = Durum.objects.all()
         bugun = datetime.date.today() 
         gun = datetime.timedelta(1)
@@ -90,6 +94,8 @@ class IstatistikView(TemplateView):
         context = super(IstatistikView, self).get_context_data(**kwargs)
         durumlar = Durum.objects.all()
         teklifler = Teklif.objects.all()
+        alinan_isler = TeklifYorum.objects.filter(comment__contains='\'' + 'İşi Aldık' + '\'')
+        kaybedilen_isler = TeklifYorum.objects.filter(comment__contains='\'' + 'İşi Kaybettik' + '\'')
 
         tanim = [("Durum", "string"),
                  ("Sayi", "number")]
@@ -97,16 +103,35 @@ class IstatistikView(TemplateView):
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
         json = data_table.ToJSon()
-        grafikler += [(json, ' Su Anki Duruma Gore Teklif Sayisi', (800,400), 'PieChart')]
+        grafikler += [(json, ' Su Anki Duruma Gore Teklif Sayisi', 
+                      (800,400), 'PieChart')]
 
-        tanim = [("Tarih", "string"),
-                 ("Gelen Teklif Sayisi", "number")]
-        veri = [[(bugun - on_gun*i).strftime('%d/%m/%Y'),teklifler.filter(bilgi__tarih__gt=bugun-on_gun*(i+1),
-                                                                          bilgi__tarih__lt=bugun-on_gun*i).count()]                                                                          for i in range(4)]
+        tanim = [("Tarih", "string"), ("Gelen Teklif Sayisi", "number")]
+        veri = [
+            [(bugun - on_gun*i).strftime('%d/%m/%Y'),
+            teklifler.filter(bilgi__tarih__gt=bugun-on_gun*(i+1),
+            bilgi__tarih__lt=bugun-on_gun*i).count()] for i in range(4)]
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
         json = data_table.ToJSon(order_by='Tarih')
-        grafikler += [(json, 'Tarihe Gore Gelen Teklif', (800,400), 'ColumnChart')]
+        grafikler += [
+            (json, 'Tarihe Gore Gelen Teklif', 
+            (800,400), 'ColumnChart')]
+
+        tanim = [("Tarih", "string"), ("Aldigimiz Isler", "number"),
+                 ("Kaybettigimiz Isler","number")]
+        veri = [
+            [(bugun - on_gun*i).strftime('%d/%m/%Y'),
+            alinan_isler.filter(submit_date__gt=bugun-on_gun*(i+1),
+                                submit_date__lt=bugun-on_gun*i).count(),
+            kaybedilen_isler.filter(submit_date__gt=bugun-on_gun*(i+1),
+                                    submit_date__lt=bugun-on_gun*i).count()] for i in range(4)]
+        data_table = gviz_api.DataTable(tanim)
+        data_table.LoadData(veri)
+        json = data_table.ToJSon(order_by='Tarih')
+        grafikler += [
+            (json, 'Tarihe Gore Alip Kaybettigimiz Isler', 
+            (800,400), 'LineChart')]
 
         context['grafikler'] = grafikler
         return context
