@@ -12,8 +12,13 @@ class TipListView(ListView):
     template_name = 'takip.html'
 
     def get_queryset(self):
-        self.tipler = []
-        for tip in self.request.user.profile.sorumluTip.all():
+        tip_ve_bilgi = []
+        user = self.request.user
+        if user.is_staff:
+            tipler = Tip.objects.all()
+        else:
+            tipler = user.profile.sorumluTip.all()
+        for tip in tipler:
             if tip.isim == 'Teklif Formu':
                 query = dict(self.request.GET.lists())
                 for key in query.keys():
@@ -22,12 +27,15 @@ class TipListView(ListView):
                     except:
                         query[key] = query[key][0]
                 self.query = query
-                bilgiler = tip.bilgi_set.all().filter(sorumlu=self.request.user)
+                if user.is_staff:
+                    bilgiler = tip.bilgi_set.all()
+                else:
+                    bilgiler = tip.bilgi_set.all().filter(sorumlu=user)
                 bilgiler = bilgiler.filter(**query)
             else:
                 bilgiler = tip.bilgi_set.all()
-            self.tipler += [(tip.isim, bilgiler)]
-        return self.tipler
+            tip_ve_bilgi += [(tip.isim, bilgiler)]
+        return tip_ve_bilgi
 
     def get_context_data(self,**kwargs):
         filtreler = []
