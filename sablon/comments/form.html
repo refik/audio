@@ -1,5 +1,5 @@
 {% load comments %}
-<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+<form action="{% comment_form_target %}" method="post" enctype="multipart/form-data" >{% csrf_token %}
   <!--<div><input type="hidden" name="next" value="{{ request.path_info }}" /></div>-->
   <div><input type="hidden" name="next" value="/takip/{% if bilgi %}{{ bilgi.pk }}{% else %}{{ form.data.object_pk }}{% endif %}" /></div>
   {% for field in form %}

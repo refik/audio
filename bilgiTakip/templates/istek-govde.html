@@ -1,7 +1,7 @@
 {% load comments %}
 <div class='istek'>
  <div style='padding:10px;margin-top:10px;'>
-  <strong><a href='/takip/{{ bilgi.pk }}'>{{ bilgi.pk }}</a> numarali musteri istegi - {{ bilgi.tarih|timesince }} önce ulaştı</strong>
+  <strong><a href='/takip/{{ bilgi.pk }}'>{{ bilgi.pk }}</a> numarali musteri istegi - {{ bilgi.tarih }}</strong>
   <div>
    <ol>
     {% if bilgi.isim %}
@@ -62,12 +62,11 @@
   {% ifnotequal yorum_sayisi 0 %}
   <strong>Yapilanlar</strong>
   {% get_comment_list for bilgi as yorumlar %}
+  <!--<div style='height:110px;overflow:auto;background-color:#b0c4de'>-->
   <ol>
-   {% for yorum in yorumlar %}
-   <li>{{ yorum.submit_date }} - {{ yorum.user.first_name }} {{ yorum.user.last_name }}</li>
-   <li><p>{{ yorum.comment }}</p></li>
-   {% endfor %}
+  {% render_comment_list for bilgi %}
   </ol>
+  <!--</div>-->
   {% endifnotequal %}
   <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yapildi formu aç/kapa</p>
   <div {% if yorum_formu_goster == 'Hayir' %}style='display:none;'{% endif %}>

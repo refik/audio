@@ -1,7 +1,7 @@
 # coding: utf-8
 from audio.bilgiGiris.models import Bilgi, Tip
 from audio.teklif.models import Durum, Teklif, TeklifYorum
-from audio.calisanProfil.models import CalisanGorev
+from audio.calisanProfil.models import CalisanGorev, Sehir
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import DetailView, ListView, TemplateView
@@ -46,6 +46,7 @@ class TipListView(ListView):
         context = super(TipListView, self).get_context_data(**kwargs)
         gorevliler = User.objects.filter(
             profile__gorev__isim='Musteri Temsilcisi')
+        sehirler = Sehir.objects.all()
         durumlar = Durum.objects.all()
         bugun = datetime.date.today() 
         gun = datetime.timedelta(1)
@@ -62,6 +63,9 @@ class TipListView(ListView):
         filtreler += [('tarih__gt',
                        'Tarih',
                        [(str(bugun - i*i*gun),'%d gun icinde' % (i*i)) for i in range(1,6,1)])]
+        filtreler += [('sehir__pk',
+                       'Sehir',
+                       [(sehir.pk, sehir.isim) for sehir in sehirler])]
 
  
         context['filtreler'] = [ { 'sorgu' : filtre[0],
@@ -90,13 +94,14 @@ class IstatistikView(TemplateView):
     def get_context_data(self,**kwargs):
         grafikler = []
         bugun = datetime.date.today()
-        on_gun = datetime.timedelta(10)
+        on_gun = datetime.timedelta(5)
         context = super(IstatistikView, self).get_context_data(**kwargs)
         durumlar = Durum.objects.all()
         teklifler = Teklif.objects.all()
-        alinan_isler = TeklifYorum.objects.filter(comment__contains='\'' + 'İşi Aldık' + '\'')
-        kaybedilen_isler = TeklifYorum.objects.filter(comment__contains='\'' + 'İşi Kaybettik' + '\'')
+        alinan_isler = Durum.objects.get(isim__contains='Aldık').teklifyorum_set.all()
+        kaybedilen_isler = Durum.objects.get(isim__contains='Kaybettik').teklifyorum_set.all()
 
+        # Ilk Grafik
         tanim = [("Durum", "string"),
                  ("Sayi", "number")]
         veri = [[durum.isim, durum.teklif_set.all().count()] for durum in durumlar]
@@ -106,32 +111,38 @@ class IstatistikView(TemplateView):
         grafikler += [(json, ' Su Anki Duruma Gore Teklif Sayisi', 
                       (800,400), 'PieChart')]
 
+        # Ikinci Grafik
         tanim = [("Tarih", "string"), ("Gelen Teklif Sayisi", "number")]
         veri = [
             [(bugun - on_gun*i).strftime('%d/%m/%Y'),
             teklifler.filter(bilgi__tarih__gt=bugun-on_gun*(i+1),
-            bilgi__tarih__lt=bugun-on_gun*i).count()] for i in range(4)]
+                             bilgi__tarih__lte=bugun-on_gun*i).count()] for i in range(4)]
+        # veri = [['16/11', 22], ['12/11', 13], ['08/11', 2], ['04/11', 13], ['31/10', 14], ['27/10', 22], ['23/10', 15], ['19/10', 10], ['15/10', 9]]
+        veri.reverse()
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
-        json = data_table.ToJSon(order_by='Tarih')
+        json = data_table.ToJSon()
         grafikler += [
             (json, 'Tarihe Gore Gelen Teklif', 
-            (800,400), 'ColumnChart')]
+            (800,400), 'LineChart')]
 
+        # Ucuncu Grafik
         tanim = [("Tarih", "string"), ("Aldigimiz Isler", "number"),
                  ("Kaybettigimiz Isler","number")]
         veri = [
             [(bugun - on_gun*i).strftime('%d/%m/%Y'),
             alinan_isler.filter(submit_date__gt=bugun-on_gun*(i+1),
-                                submit_date__lt=bugun-on_gun*i).count(),
+                                submit_date__lte=bugun-on_gun*i).count(),
             kaybedilen_isler.filter(submit_date__gt=bugun-on_gun*(i+1),
-                                    submit_date__lt=bugun-on_gun*i).count()] for i in range(4)]
+                                    submit_date__lte=bugun-on_gun*i).count()] for i in range(4)]
+        veri.reverse()
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
-        json = data_table.ToJSon(order_by='Tarih')
+        json = data_table.ToJSon()
         grafikler += [
             (json, 'Tarihe Gore Alip Kaybettigimiz Isler', 
-            (800,400), 'LineChart')]
+            (800,400), 'ColumnChart')]
+        print veri
 
         context['grafikler'] = grafikler
         return context
@@ -153,8 +164,25 @@ class TemsilciDetailView(DetailView):
         context =super(TemsilciDetailView, self).get_context_data(**kwargs)
         temsilci = self.get_object()
         teklifler = Teklif.objects.filter(bilgi__sorumlu=temsilci)
+        bilgiler = Bilgi.objects.filter(sorumlu=temsilci, tip__isim__contains='teklif')
+        grafikler = []
+
+        # Grafik
+        tanim = [("Tarih", "string"), ("Saat", "number")]
+        veri = [[yorumlar[0].content_object.tarih.strftime('%d/%m') ,round((float((yorumlar[0].submit_date - yorumlar[0].content_object.tarih).seconds) / 3600),2)] for yorumlar in [TeklifYorum.objects.filter(object_pk=bilgi.pk) for bilgi in [teklif.bilgi for teklif in teklifler]] if len(yorumlar) != 0]
+        data_table = gviz_api.DataTable(tanim)
+        data_table.LoadData(veri)
+        json = data_table.ToJSon(order_by='Tarih')
+        grafikler += [
+            (json, 'Tarihe Gore Islerine Verdigi Reaksiyon Suresi', 
+            (800,400), 'LineChart')]
+
         context['kapali_is'] = teklifler.filter(durum__kapali=True).count()
         context['acik_is'] = teklifler.filter(durum__kapali=False).count()
+        context['grafikler'] = grafikler
+        context['reaksiyon'] = datetime.timedelta(
+            seconds=sum([tarih[1] for tarih in veri])/len(veri)*3600).__str__().split('.')[0]
+
         return context
 
 class TemsilciListView(ListView):

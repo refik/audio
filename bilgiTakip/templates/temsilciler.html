@@ -1,0 +1,24 @@
+{% extends 'takip.html' %}
+{% block icerik %}
+<div id='tabler'>
+ <ul><li><a href='#tabler-1'>Temsilciler</a></li></ul>
+ <div id='tabler-1'>
+ <strong>{{ temsilciler.count }} Tane Musteri Temsilcisi</strong>
+  <div class='istek' style='padding:10px;margin-top:10px;'>
+   <ol style='margin-bottom:0px'>
+    <li>
+     <label>Sehir:</label>{% include 'temsilci.html' %}
+     <p style='margin-bottom:0px;margin-top:5px;font-size:12px;'>Istediginiz musteri temsilcisini bulmak icin bir sehir secin</p>
+     <p style='margin-bottom:0px;font-size:12px;'>Detayli bilgi almak icin alttaki listeden ismine tiklayin</p>
+    </li>
+   </ol>
+  </div>
+  <div class='istek' style='padding:10px;margin-top:10px;'>
+   {% for temsilci in temsilciler %}
+   <span><a class='sade_link' href='/takip/temsilci/{{temsilci.pk}}'>
+    {{ temsilci.get_full_name }}</a></span></br>
+   {% endfor %}
+  </div>
+ </div>
+</div>
+{% endblock %}

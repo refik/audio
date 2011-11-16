@@ -14,3 +14,4 @@
 **filebrowser/site.py boyle oldu (yeni versiyonda gerekmeyebilir): (yeni klasor yaratamiyor filebrowser)
     abs_server_path = os.path.join(MEDIA_ROOT, abs_path, form.cleaned_data['name'])
 **durumlari guncelle. eylem yapilmadi ekle
+**translationlar yapildi grappelli vs icin

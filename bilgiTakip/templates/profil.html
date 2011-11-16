@@ -1,0 +1,41 @@
+{% extends 'takip.html' %}
+{% block icerik %}
+<div id='tabler'>
+ <ul><li><a href='#tabler-1'>Temsilci</a></li></ul>
+ <div id='tabler-1'>
+ <strong>Profil Gorunumu</strong>
+  <div class='istek' style='padding:10px;margin-top:10px;'>
+  <ol>
+   <li>
+    <label>Isim:</label><span>{{ calisan.get_full_name }}</span>
+   </li>
+   <li>
+    <label>E-Posta:</label><span>{{ calisan.email }}</span>
+   </li>
+   <li>
+    <label>Telefon:</label><span>{{ calisan.profile.telefon }}</span>
+   </li>
+   <li>
+    <label>Gorev:</label><span>{{ calisan.profile.gorev.isim }}</span>
+   </li>
+   <li>
+    <label>Reaksiyon:</label><span>{{ reaksiyon }}</span>
+   </li>
+   <li>
+    <label>Kapali Is:</label><span>{{ kapali_is }}</span>
+   </li>
+   <li>
+    <label>Acik Is:</label><span>{{ acik_is }}</span>
+   </li>
+   <li>
+    <label>Sehir:</label>
+     {% for sehir in calisan.profile.sorumluSehir.all %}
+     <span>{{ sehir.isim }}</span></br>
+     {% endfor %}
+   </li>
+  </ol>
+  </div>
+ {% include 'grafikler.html' with grafikler=grafikler %}
+ </div>
+</div>
+{% endblock %}
