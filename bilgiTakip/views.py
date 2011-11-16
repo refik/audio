@@ -82,7 +82,7 @@ class BilgiDetailView(DetailView):
 
     def get_object(self):
         object = super(BilgiDetailView,self).get_object()
-        if self.request.user in object.sorumlu.all():
+        if self.request.user in object.sorumlu.all() or self.request.user.is_staff:
             return object
         else:
             return None
@@ -142,7 +142,6 @@ class IstatistikView(TemplateView):
         grafikler += [
             (json, 'Tarihe Gore Alip Kaybettigimiz Isler', 
             (800,400), 'ColumnChart')]
-        print veri
 
         context['grafikler'] = grafikler
         return context
