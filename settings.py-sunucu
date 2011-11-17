@@ -11,6 +11,10 @@ ADMINS = (
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
+# audiomail function uses this to determine whether it will actually
+# send the mail or not
+GELISTIRME = False
+
 MANAGERS = ADMINS
 
 DATABASES = {

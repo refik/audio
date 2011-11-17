@@ -1,9 +1,14 @@
 # coding: utf-8
 from ntlm.smtp import ntlm_authenticate
 from audio.sifre import DOMAIN, PASSWORD
+from audio.settings import GELISTIRME
 import smtplib
 
 def audiomail(kimden,kime,konu,mesaj):
+    # Mail function shouldn't work on development machine.
+    if GELISTIRME:
+        return None
+
     server = smtplib.SMTP("mail.audio.com.tr")
     server.ehlo()
     ntlm_authenticate(server, DOMAIN, PASSWORD)
