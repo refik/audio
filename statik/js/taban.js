@@ -11,6 +11,8 @@ jQuery(function(){
     });
 
     $('.banner').cycle({
+        timeout: 6000,
+        speed: 700,
 	    fx: 'fade' 
     });
 
