@@ -71,6 +71,17 @@ MEDIA_ROOT = PROJECT_PATH + '/statik/yukleme'
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = 'http://127.0.0.1:8000' + STATIC_URL + 'yukleme/'
 
+# django_compressor settings
+COMPRESS_ENABLED = False
+
+COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
+
+COMPRESS_CLOSURE_COMPILER_BINARY = '/home/refik/code/closure/compiler.jar'
+
+COMPRESS_CSS_FILTERS = ['compressor.filters.yui.YUICSSFilter']
+
+COMPRESS_YUI_BINARY = '/home/refik/code/yuicompressor-2.4.7/build/yuicompressor-2.4.7.jar'
+
 FILEBROWSER_MEDIA_ROOT = PROJECT_PATH + '/statik/'
 
 FILEBROWSER_MEDIA_URL = '/statik/'
@@ -114,10 +125,11 @@ FEINCMS_ADMIN_MEDIA = '/statik/feincms/'
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'grappelli/'
 
-#STATICFILES_FINDERS = (
-#    "django.contrib.staticfiles.finders.FileSystemFinder",
-#    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-#)
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
+)
 
 STATICFILES_DIRS = (
     PROJECT_PATH + '/statik',
@@ -193,5 +205,6 @@ INSTALLED_APPS = (
     'audio.teklif',
     'feincms',
     'mptt',
+    'compressor',
     'south',
 )

@@ -71,6 +71,15 @@ MEDIA_ROOT = PROJECT_PATH + '/statikSunucu/yukleme'
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = 'http://www.audio.com.tr' + STATIC_URL + 'yukleme/'
 
+# django_compressor settings
+COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
+
+COMPRESS_CLOSURE_COMPILER_BINARY = '/home/refik/other_packages/closure/compiler.jar'
+
+COMPRESS_CSS_FILTERS = ['compressor.filters.yui.YUICSSFilter']
+
+COMPRESS_YUI_BINARY = '/home/refik/other_packages/yuicompressor-2.4.7/build/yuicompressor-2.4.7.jar'
+
 FILEBROWSER_MEDIA_ROOT = PROJECT_PATH + '/statikSunucu/'
 
 FILEBROWSER_MEDIA_URL = '/statik/'

@@ -18,7 +18,7 @@ class Sehir(models.Model):
 class Bilgi(models.Model):
     isim = models.CharField('İsim Soyisim', max_length = 50)
     sehir = models.ForeignKey(Sehir,null=True,blank=True)
-    telefon = models.CharField('Telefon', max_length = 50,null=True,blank=True)
+    telefon = models.CharField('Telefon', max_length = 50,null=True)
     email = models.EmailField('Email')
     firma = models.CharField('Firma', max_length = 200,null=True,blank=True)
     mesaj = models.TextField('Mesaj',null=True,blank=True)
