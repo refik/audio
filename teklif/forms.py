@@ -1,8 +1,8 @@
 # coding: utf-8
 from django import forms
-from audio.teklif.models import TeklifYorum, Durum
 from django.contrib.comments.forms import CommentForm
 from django.contrib.auth.models import User
+from audio.teklif.models import TeklifYorum, Durum, Rakip, Sebep
 
 class TeklifYorumFormu(CommentForm):
     durum = forms.ModelChoiceField(queryset=Durum.objects.all(),required=False)
@@ -16,6 +16,11 @@ class TeklifYorumFormu(CommentForm):
                 self.fields['tutar'] = forms.IntegerField(required=False)
             if not teklif.daire:
                 self.fields['daire'] = forms.IntegerField(required=False)
+            if teklif.durum.isim == u'İşi Kaybettik':
+                if not teklif.kaybedilen_rakip:
+                    self.fields['rakip'] = forms.ModelChoiceField(queryset=Rakip.objects.all(),required=False)
+                if not teklif.kaybetme_sebepleri.all():
+                    self.fields['sebep'] = forms.ModelMultipleChoiceField(queryset=Sebep.objects.all(), required=False)
             if teklif.durum.isim == u'Eylem Yapılmadı' and u'İstanbul' in teklif.bilgi.sehir.isim:
                 self.fields['delege'] = forms.ModelChoiceField(queryset=User.objects.filter(profile__sorumluTip__isim__contains='Teklif').exclude(profile__sorumluSehir__isim__contains=''), required=False)
         except:

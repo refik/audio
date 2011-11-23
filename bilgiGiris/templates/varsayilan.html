@@ -6,5 +6,13 @@
   <h2>{{ tip }} Formu</h2>
  </div>
  {% include 'form.html' with grid=26 push=14 class='form' %}
+ {% ifequal tip 'iletisim' %}
+ <div class='clear'></div>
+ <div class='grid_24 push_14' style='text-align:right;'>
+  <p style='margin-bottom:5px;'>Teknik Konular icin: <span style='color:#ff0000'>444 11 58</span></p>
+  <p style='margin-bottom:5px'>Teklif istiyorsaniz: <a href='/teklif-formu/'>Audio Teklif Formu</a></p>
+  <strong style='font-style:italic;margin-bottom:5px;'>bu sekilde size daha hizli yardimci oluruz</strong>
+ </div>
+ {% endifequal %}
 {% include 'tekli_kapat.html' %}
 {% endblock %}

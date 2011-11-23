@@ -50,3 +50,5 @@ class TeklifYorum(Comment):
     daire = models.IntegerField(null=True,blank=True)
     tutar = models.IntegerField(null=True,blank=True)
     delege = models.ForeignKey(User,blank=True,null=True) 
+    kaybedilen_rakip = models.ForeignKey(Rakip,blank=True,null=True)
+    kaybetme_sebepleri = models.ManyToManyField(Sebep,blank=True,null=True)
