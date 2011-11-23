@@ -117,7 +117,6 @@ class IstatistikView(TemplateView):
             [(bugun - on_gun*i).strftime('%d/%m/%Y'),
             teklifler.filter(bilgi__tarih__gt=bugun-on_gun*(i+1),
                              bilgi__tarih__lte=bugun-on_gun*i).count()] for i in range(4)]
-        # veri = [['16/11', 22], ['12/11', 13], ['08/11', 2], ['04/11', 13], ['31/10', 14], ['27/10', 22], ['23/10', 15], ['19/10', 10], ['15/10', 9]]
         veri.reverse()
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)

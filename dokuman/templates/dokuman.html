@@ -1,11 +1,16 @@
+{% load compress %}
 <html>
  <head>
   <title>Audio Elektronik</title>
-  <script type="text/javascript" src="/statik/js/flexpaper_flash.js"></script>
+
+{% compress css %}
   <link rel="stylesheet" href="/statik/css/reset.css" />
   <link rel="stylesheet" href="/statik/css/text.css" />
   <link rel="stylesheet" href="/statik/css/dokuman.css" />
-<script type="text/javascript">
+{% endcompress %}
+{% compress js %}
+  <script type="text/javascript" src="/statik/js/flexpaper_flash.js"></script>
+  <script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26169028-1']);
@@ -17,7 +22,8 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
+  </script>
+{% endcompress %}
  </head>
  <body>
   <div id='container'>
@@ -36,6 +42,7 @@
    </div>
    <a id="viewerPlaceHolder" style="display:block;"></a>
   </div>
+{% compress js inline %}
   <script type="text/javascript">
    var viewportwidth;
    var viewportheight;
@@ -84,7 +91,11 @@
        localeChain: 'tr_TR'
    }});
   </script>
+{% endcompress %}
   <div class='buton'><img class='tikla' src='/statik/resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
   </div>
  </body>
 </html>
+
+
+

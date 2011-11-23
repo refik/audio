@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from audio.bilgiGiris.mail import audiomail
 from audio.teklif.models import TeklifYorum
 from audio.settings import MEDIA_ROOT
+from audio.teklif.models import Durum
 
 DOSYA = None
 
@@ -14,20 +15,26 @@ DOSYA = None
 def yorum_yonet(sender,**kwargs):
     durum_mesaji = u''
     yorum = kwargs['instance']
+    teklif = yorum.content_object.teklif
     if DOSYA:
         yorum.dosya.save(DOSYA['isim'], DOSYA['icerik'],save=False)
-    try:
-        teklif = yorum.content_object.teklif
-        if yorum.durum != None:
-            eski_durum = teklif.durum
-            yeni_durum = yorum.durum
-            teklif.durum = yeni_durum
-            durum_mesaji = u"\n[İşin durumu: %s -> %s ]" % (eski_durum.isim, yeni_durum.isim)
-            if yorum.dosya:
-                durum_mesaji += u"\n Yoruma eklenen dosya: %s" % yorum.dosya.url
-            yorum.content_object.teklif.save()
-    except:
-        pass
+        durum_mesaji += u"\n[Yoruma eklenen dosya: %s]" % yorum.dosya.url
+    if yorum.durum:
+        eski_durum = teklif.durum
+        yeni_durum = yorum.durum
+        teklif.durum = yeni_durum
+        durum_mesaji = u"\n[İşin durumu: %s -> %s]" % (eski_durum.isim, yeni_durum.isim)
+    if yorum.tutar:
+        yorum.content_object.teklif.tutar = yorum.tutar
+        durum_mesaji += u"\n[Tutar girildi: %s]" % yorum.tutar
+    if yorum.daire:
+        yorum.content_object.teklif.daire = yorum.daire
+        durum_mesaji += u"\n[Daire girildi: %s]" % yorum.daire
+    if yorum.delege:
+        teklif.bilgi.sorumlu.add(yorum.delege)
+        durum_mesaji += u"\n[Delege edilen kisi: %s]" % yorum.delege.get_full_name()
+    yorum.content_object.teklif.save()
+    print durum_mesaji
     audiomail("audioweb@audio.com.tr",[sorumlu.email for sorumlu in yorum.content_object.sorumlu.all()] + ['refik.rfk@gmail.com'],str(yorum.content_object.tip) + u'\' na Yorum Yapıldı',u'%d nolu müşteri isteğine yapılan yorum\n\n%s %s\n\nhttp://www.audio.com.tr/takip/%d adresinden detaylı inceleyebilirsiniz'%(yorum.content_object.pk,yorum.comment,durum_mesaji,yorum.content_object.pk))
 
 def yorum_dosya(request):

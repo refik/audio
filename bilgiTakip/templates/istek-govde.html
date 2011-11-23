@@ -52,6 +52,14 @@
     {% endif %}
     {% if bilgi.teklif %}
     <li>
+     <label>Daire:</label>
+     <span>{% if bilgi.teklif.daire %}{{ bilgi.teklif.daire }}{% else %}Lutfen Daire Sayisini Girin{% endif %}</span>
+    </li>
+    <li>
+     <label>Tutar:</label>
+     <span>{% if bilgi.teklif.tutar %}{{ bilgi.teklif.tutar }}{% else %}Lutfen Proje Tutarini Girin{% endif %} </span>
+    </li>
+    <li>
      <label>Durum:</label>
      <span style='font-style:italic;'>{{ bilgi.teklif.durum }}</span>
     </li>
