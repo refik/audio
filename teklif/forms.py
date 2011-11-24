@@ -1,42 +1,37 @@
 # coding: utf-8
 from django import forms
+from django.forms import ModelForm
 from django.contrib.comments.forms import CommentForm
 from django.contrib.auth.models import User
-from audio.teklif.models import TeklifYorum, Durum, Rakip, Sebep
+from audio.teklif.models import Teklif, Durum, Rakip, Sebep, Yapildi
 
-class TeklifYorumFormu(CommentForm):
-    durum = forms.ModelChoiceField(queryset=Durum.objects.all(),required=False)
-    dosya = forms.FileField(required=False)
-
+class TeklifYapildiForm(ModelForm):
     def __init__(self, *args, **kwargs):
-        super(TeklifYorumFormu, self).__init__(*args, **kwargs)
-        try:
-            teklif = args[0].teklif
-            if not teklif.tutar:
-                self.fields['tutar'] = forms.IntegerField(required=False)
-            if not teklif.daire:
-                self.fields['daire'] = forms.IntegerField(required=False)
-            if teklif.durum.isim == u'İşi Kaybettik':
-                if not teklif.kaybedilen_rakip:
-                    self.fields['rakip'] = forms.ModelChoiceField(queryset=Rakip.objects.all(),required=False)
-                if not teklif.kaybetme_sebepleri.all():
-                    self.fields['sebep'] = forms.ModelMultipleChoiceField(queryset=Sebep.objects.all(), required=False)
-            if teklif.durum.isim == u'Eylem Yapılmadı' and u'İstanbul' in teklif.bilgi.sehir.isim:
-                self.fields['delege'] = forms.ModelChoiceField(queryset=User.objects.filter(profile__sorumluTip__isim__contains='Teklif').exclude(profile__sorumluSehir__isim__contains=''), required=False)
-        except:
-            pass
-
-    def get_comment_model(self):
-        return TeklifYorum
-
-    def get_comment_create_data(self):
-        data = super(TeklifYorumFormu, self).get_comment_create_data()
-        data['durum'] = self.cleaned_data['durum']
-        data['dosya'] = self.cleaned_data['dosya']
-        if self.cleaned_data.has_key('tutar'):
-            data['tutar'] = self.cleaned_data['tutar']
-        if self.cleaned_data.has_key('daire'):
-            data['daire'] = self.cleaned_data['daire']
-        if self.cleaned_data.has_key('delege'):
-            data['delege'] = self.cleaned_data['delege']
-        return data
+        super(TeklifYapildiForm, self).__init__(*args, **kwargs)
+        if args:
+            teklif_pk = int(args[0]['teklif'])
+        else:
+            teklif_pk = kwargs['initial']['teklif']    
+        teklif = Teklif.objects.get(pk=teklif_pk)
+        if not teklif.tutar:
+            self.fields['tutar'] = forms.IntegerField(required=False)
+        if not teklif.daire:
+            self.fields['daire'] = forms.IntegerField(required=False)
+        if teklif.durum.isim == u'İşi Kaybettik':
+            if not teklif.rakip:
+                self.fields['rakip'] = forms.ModelChoiceField(
+                    queryset=Rakip.objects.all(),
+                    required=False)
+            if not teklif.sebep.all():
+                self.fields['sebep'] = forms.ModelMultipleChoiceField(
+                    queryset=Sebep.objects.all(), 
+                    required=False)
+        if teklif.durum.isim == u'Eylem Yapılmadı' and \
+           u'İstanbul' in teklif.bilgi.sehir.isim:
+            self.fields['delege'] = forms.ModelChoiceField(
+                queryset=User.objects. \
+                filter(profile__sorumluTip__isim__contains='Teklif') \
+                .exclude(profile__sorumluSehir__isim__contains=''), 
+                required=False)
+    class Meta:
+        model = Yapildi

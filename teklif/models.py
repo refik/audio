@@ -39,16 +39,17 @@ class Teklif(models.Model):
     durum = models.ForeignKey(Durum,null=True,blank=True)
     daire = models.IntegerField(null=True,blank=True)
     tutar = models.IntegerField(null=True,blank=True)
-    kaybedilen_rakip = models.ForeignKey(Rakip,blank=True,null=True)
-    kaybetme_sebepleri = models.ManyToManyField(Sebep,blank=True,null=True)
+    rakip = models.ForeignKey(Rakip,blank=True,null=True)
+    sebep = models.ManyToManyField(Sebep,blank=True,null=True)
     def __unicode__(self):
         return self.bilgi.tip.isim
 
-class TeklifYorum(Comment):
+class Yapildi(models.Model):
+    kullanici = models.ForeignKey(User)
+    teklif = models.ForeignKey(Teklif)
+    mesaj = models.TextField()
+    tarih = models.DateTimeField(auto_now_add=True)
     durum = models.ForeignKey(Durum,null=True,blank=True)
     dosya = models.FileField(upload_to='teklif',null=True,blank=True)
-    daire = models.IntegerField(null=True,blank=True)
-    tutar = models.IntegerField(null=True,blank=True)
-    delege = models.ForeignKey(User,blank=True,null=True) 
-    kaybedilen_rakip = models.ForeignKey(Rakip,blank=True,null=True)
-    kaybetme_sebepleri = models.ManyToManyField(Sebep,blank=True,null=True)
+
+

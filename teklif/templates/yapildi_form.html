@@ -1,0 +1,18 @@
+<form action="/teklif/yapildi" method="post" enctype="multipart/form-data" >
+  {% for field in form %}
+    {% if field.is_hidden %}
+      <div>{{ field }}</div>
+    {% else %}
+        {% if field.errors %}{{ field.errors }}{% endif %}
+        <p
+          {% if field.errors %} class="error"{% endif %}
+          {% if field.name == "kullanici" or field.name == "teklif" %} style="display:none;"{% endif %}>
+          {{ field.label_tag }} {{ field }}
+        </p>
+    {% endif %}
+  {% endfor %}
+  <p class="submit">
+    <input type="submit" name="post" class="submit-post" value="Gönder" />
+  </p>
+</form>
+

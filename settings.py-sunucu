@@ -173,8 +173,6 @@ TEMPLATE_DIRS = (
     PROJECT_PATH + '/sablon',
 )
 
-COMMENTS_APP = 'audio.teklif'
-
 INSTALLED_APPS = (
     'grappelli.dashboard',
     'grappelli',
@@ -190,7 +188,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django.contrib.flatpages',
     'django.contrib.staticfiles',
-    'django.contrib.comments',
     'django.contrib.sitemaps',
     'audio.ozelSayfa',
     'audio.ortakVeri',
@@ -203,5 +200,6 @@ INSTALLED_APPS = (
     'audio.teklif',
     'feincms',
     'mptt',
+    'compressor',
     'south',
 )
