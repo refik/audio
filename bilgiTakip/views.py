@@ -1,6 +1,6 @@
 # coding: utf-8
 from audio.bilgiGiris.models import Bilgi, Tip
-from audio.teklif.models import Durum, Teklif, TeklifYorum
+from audio.teklif.models import Durum, Teklif
 from audio.calisanProfil.models import CalisanGorev, Sehir
 from django.shortcuts import render_to_response
 from django.template import RequestContext
