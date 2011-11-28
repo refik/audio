@@ -1,8 +1,8 @@
-ol, ul {
+.form ol, .form ul {
     list-style:none;
 }
 
-li {
+.form li {
     margin-bottom:5px;
 }
 
@@ -19,7 +19,7 @@ label {
     position:relative;
 }
 
-td {
+.form td {
     width: 70px;
 }
 

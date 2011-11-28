@@ -53,7 +53,8 @@ class TipListView(ListView):
 
         filtreler += [('sorumlu__pk',
                        'Temsilci',
-                       [(gorevli.pk, gorevli.get_full_name()) for gorevli in gorevliler])]
+                       [(gorevli.pk, gorevli.get_full_name()) \
+                       for gorevli in gorevliler])]
         filtreler += [('teklif__durum__pk',
                        'Durum',
                        [(durum.pk, durum.isim) for durum in durumlar])]
@@ -62,16 +63,19 @@ class TipListView(ListView):
                        [(1,'Evet'),(0,'Hayir')])]
         filtreler += [('tarih__gt',
                        'Tarih',
-                       [(str(bugun - i*i*gun),'%d gun icinde' % (i*i)) for i in range(1,6,1)])]
+                       [(str(bugun - i*i*gun),'%d gun icinde' % (i*i)) \
+                       for i in range(1,6,1)])]
         filtreler += [('sehir__pk',
                        'Sehir',
                        [(sehir.pk, sehir.isim) for sehir in sehirler])]
 
  
-        context['filtreler'] = [ { 'sorgu' : filtre[0],
-                                   'isim' : filtre[1],
-                                   'maddeler' : filtre[2],
-                                   'secili' : self.query.get(filtre[0], None) } for filtre in filtreler ]
+        context['filtreler'] = [{'sorgu': filtre[0],
+                                 'isim': filtre[1],
+                                 'maddeler': filtre[2],
+                                 'secili': self.query.get(filtre[0], 
+                                                          None)} \
+                                           for filtre in filtreler]
         return context
 
 
@@ -82,7 +86,8 @@ class BilgiDetailView(DetailView):
 
     def get_object(self):
         object = super(BilgiDetailView,self).get_object()
-        if self.request.user in object.sorumlu.all() or self.request.user.is_staff:
+        if self.request.user in object.sorumlu.all() or \
+           self.request.user.is_staff:
             return object
         else:
             return None
@@ -98,13 +103,16 @@ class IstatistikView(TemplateView):
         context = super(IstatistikView, self).get_context_data(**kwargs)
         durumlar = Durum.objects.all()
         teklifler = Teklif.objects.all()
-        alinan_isler = Durum.objects.get(isim__contains='Aldık').teklifyorum_set.all()
-        kaybedilen_isler = Durum.objects.get(isim__contains='Kaybettik').teklifyorum_set.all()
+        alinan_isler = Durum.objects.get(isim__contains='Aldık'). \
+                       yapildi_set.all()
+        kaybedilen_isler = Durum.objects.get(isim__contains='Kaybettik'). \
+                           yapildi_set.all()
 
         # Ilk Grafik
         tanim = [("Durum", "string"),
                  ("Sayi", "number")]
-        veri = [[durum.isim, durum.teklif_set.all().count()] for durum in durumlar]
+        veri = [[durum.isim, durum.teklif_set.all().count()] \
+               for durum in durumlar]
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
         json = data_table.ToJSon()
@@ -113,10 +121,10 @@ class IstatistikView(TemplateView):
 
         # Ikinci Grafik
         tanim = [("Tarih", "string"), ("Gelen Teklif Sayisi", "number")]
-        veri = [
-            [(bugun - on_gun*i).strftime('%d/%m/%Y'),
-            teklifler.filter(bilgi__tarih__gt=bugun-on_gun*(i+1),
-                             bilgi__tarih__lte=bugun-on_gun*i).count()] for i in range(4)]
+        veri = [[(bugun - on_gun*i).strftime('%d/%m/%Y'),
+                 teklifler.filter(bilgi__tarih__gt=bugun-on_gun*(i+1),
+                 bilgi__tarih__lte=bugun-on_gun*i).count()] \
+                for i in range(4)]
         veri.reverse()
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
@@ -128,12 +136,12 @@ class IstatistikView(TemplateView):
         # Ucuncu Grafik
         tanim = [("Tarih", "string"), ("Aldigimiz Isler", "number"),
                  ("Kaybettigimiz Isler","number")]
-        veri = [
-            [(bugun - on_gun*i).strftime('%d/%m/%Y'),
-            alinan_isler.filter(submit_date__gt=bugun-on_gun*(i+1),
-                                submit_date__lte=bugun-on_gun*i).count(),
-            kaybedilen_isler.filter(submit_date__gt=bugun-on_gun*(i+1),
-                                    submit_date__lte=bugun-on_gun*i).count()] for i in range(4)]
+        veri = [[(bugun - on_gun*i).strftime('%d/%m/%Y'),
+                alinan_isler.filter(tarih__gt=bugun-on_gun*(i+1),
+                                    tarih__lte=bugun-on_gun*i).count(),
+                kaybedilen_isler.filter(tarih__gt=bugun-on_gun*(i+1),
+                                        tarih__lte=bugun-on_gun*i). \
+                count()] for i in range(4)]
         veri.reverse()
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
@@ -162,12 +170,13 @@ class TemsilciDetailView(DetailView):
         context =super(TemsilciDetailView, self).get_context_data(**kwargs)
         temsilci = self.get_object()
         teklifler = Teklif.objects.filter(bilgi__sorumlu=temsilci)
-        bilgiler = Bilgi.objects.filter(sorumlu=temsilci, tip__isim__contains='teklif')
+        bilgiler = Bilgi.objects.filter(sorumlu=temsilci, 
+                                        tip__isim__contains='teklif')
         grafikler = []
 
         # Grafik
         tanim = [("Tarih", "string"), ("Saat", "number")]
-        veri = [[yorumlar[0].content_object.tarih.strftime('%d/%m') ,round((float((yorumlar[0].submit_date - yorumlar[0].content_object.tarih).seconds) / 3600),2)] for yorumlar in [TeklifYorum.objects.filter(object_pk=bilgi.pk) for bilgi in [teklif.bilgi for teklif in teklifler]] if len(yorumlar) != 0]
+        veri = [[yapilan[0].teklif.bilgi.tarih.strftime('%d/%m') ,round((float((yapilan[0].tarih - yapilan[0].teklif.bilgi.tarih).seconds) / 3600),2)] for yapilan in [teklif.yapildi_set.all() for teklif in teklifler] if len(yapilan) != 0]
         data_table = gviz_api.DataTable(tanim)
         data_table.LoadData(veri)
         json = data_table.ToJSon(order_by='Tarih')

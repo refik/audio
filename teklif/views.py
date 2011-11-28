@@ -54,6 +54,7 @@ def yapildi_yolla(request):
                 teklif.bilgi.sorumlu.add(value)
                 durum_mesaji += u"\n[Is delege edildi: %s]" \
                                 % value.get_full_name()
+                audiomail('audioweb@audio.com.tr', [value.email], 'Audio Takip Sistemi', 'Size %s bir teklif delege etti, numarasi: %d.\n\nBu adresten bilgilere erisebilirsiniz: http://www.audio.com.tr/takip/%d' % (yapilan.kullanici.get_full_name(), teklif.bilgi.pk, teklif.bilgi.pk))
         if form.fields.has_key('sebep'):
             value = form.cleaned_data['sebep']
             if value:
@@ -73,7 +74,7 @@ def yapildi_yolla(request):
                                             yapilan.mesaj, 
                                             durum_mesaji,
                                             teklif.bilgi.pk))
-        return redirect('/takip/%d' % yapilan.bilgi.pk)
+        return redirect('/takip/%d' % yapilan.teklif.bilgi.pk)
     else:
         return render_to_response('onizleme.html', 
                                   {'form':form},
