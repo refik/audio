@@ -6,7 +6,7 @@
     margin-bottom:5px;
 }
 
-label {
+.form label {
     position:absolute;
     width:90px;
     text-align:right;
