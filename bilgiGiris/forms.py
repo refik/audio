@@ -2,11 +2,6 @@ from django.forms import ModelForm
 from audio.bilgiGiris.models import Bilgi
 
 class TeklifForm(ModelForm):
-#    def __init__(self, *args, **kwargs):
-#        super(TeklifForm, self).__init__(*args, **kwargs)
-#        print args, kwargs
-#        self.fields.pop('sehir')
-#        print self
     TEMPLATE = 'teklif.html'
     class Meta:
         model = Bilgi

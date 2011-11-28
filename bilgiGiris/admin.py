@@ -2,6 +2,7 @@ from audio.bilgiGiris.models import Bilgi, Tip, Sehir
 from django.contrib import admin
 
 class BilgiAdmin(admin.ModelAdmin):
+    search_fields = ['isim']
     list_display = ['isim', 'tip','tarih']
     fieldsets = (
         ('Gonderenin Bilgileri', {

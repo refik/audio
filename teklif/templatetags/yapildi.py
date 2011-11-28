@@ -11,6 +11,8 @@ def yapildi_listesi(teklif):
 
 @register.simple_tag(takes_context=True)
 def yapildi_formu(context,instance):
+    print type(instance), instance.pk
     form = TeklifYapildiForm(initial={'kullanici':context['request'].user.pk, 'teklif': instance.pk})
+    print 'abbaw'
     return render_to_string('yapildi_form.html', {'form': form}) 
 

@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.views.generic import DetailView, ListView, TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage
 import datetime
 import unicodedata
 import gviz_api
@@ -18,13 +19,18 @@ class TipListView(ListView):
     def get_queryset(self):
         tip_ve_bilgi = []
         user = self.request.user
+        get = self.request.GET.copy()
+        try:
+            page = get.pop('page')[0]
+        except:
+            page = 1
         if user.is_staff:
             tipler = Tip.objects.all()
         else:
             tipler = user.profile.sorumluTip.all()
         for tip in tipler:
             if tip.isim == 'Teklif Formu':
-                query = dict(self.request.GET.lists())
+                query = dict(get.lists())
                 for key in query.keys():
                     try:
                         query[key] = int(query[key][0])
@@ -36,9 +42,15 @@ class TipListView(ListView):
                 else:
                     bilgiler = tip.bilgi_set.all().filter(sorumlu=user)
                 bilgiler = bilgiler.filter(**query)
+                paginator = Paginator(bilgiler,20)
+                try:
+                    bilgiler = paginator.page(page)
+                except EmptyPage:
+                    bilgiler = paginator.page(paginator.num_pages)
             else:
                 bilgiler = tip.bilgi_set.all()
             tip_ve_bilgi += [(tip.isim, bilgiler)]
+        print tip_ve_bilgi
         return tip_ve_bilgi
 
     def get_context_data(self,**kwargs):
@@ -73,9 +85,8 @@ class TipListView(ListView):
         context['filtreler'] = [{'sorgu': filtre[0],
                                  'isim': filtre[1],
                                  'maddeler': filtre[2],
-                                 'secili': self.query.get(filtre[0], 
-                                                          None)} \
-                                           for filtre in filtreler]
+                                 'secili': self.query.get(filtre[0], \
+                                           None)} for filtre in filtreler]
         return context
 
 
