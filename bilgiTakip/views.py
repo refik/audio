@@ -50,7 +50,6 @@ class TipListView(ListView):
             else:
                 bilgiler = tip.bilgi_set.all()
             tip_ve_bilgi += [(tip.isim, bilgiler)]
-        print tip_ve_bilgi
         return tip_ve_bilgi
 
     def get_context_data(self,**kwargs):

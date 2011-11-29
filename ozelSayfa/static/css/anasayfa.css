@@ -1,3 +1,22 @@
+#yeni_urunler > div {
+	position: absolute;
+	visibility: hidden;
+}
+
+#yeni_urunler > div:first-child {
+	visibility: visible;
+}
+
+#haberler > div {
+	position: absolute;
+	visibility: hidden;
+}
+
+#haberler > div:first-child {
+	visibility: visible;
+}
+
+
 .one {
 	background-size: 	100%;
 	margin:			0 auto;

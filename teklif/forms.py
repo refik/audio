@@ -13,7 +13,6 @@ class TeklifYapildiForm(ModelForm):
         else:
             teklif_pk = kwargs['initial']['teklif']    
         teklif = Teklif.objects.get(pk=teklif_pk)
-        print teklif.tutar, teklif.daire, teklif.durum, teklif.bilgi.pk
         if not teklif.tutar:
             self.fields['tutar'] = forms.IntegerField(required=False)
         if not teklif.daire:

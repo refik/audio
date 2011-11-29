@@ -2,6 +2,15 @@ body {
 	background-color:	#bababa;
 }
 
+#afis > img {
+	position: absolute;
+	visibility: hidden;
+}
+
+#afis > img:first-child {
+	visibility: visible;
+}
+
 #bkground {
 	background-size: 	100%;
 	margin:		    	0 auto;

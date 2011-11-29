@@ -10,6 +10,7 @@ sitemaps = {
 
 urlpatterns = patterns('',
     url(r'^admin/filebrowser/', include(site.urls)),
+    (r'^favicon.ico$', 'django.views.generic.simple.redirect_to', {'url': '/statik/resim/favicon.ico'}),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     (r'^grappelli/', include('grappelli.urls')),
     (r'^urun', include('audio.urun.urls')),

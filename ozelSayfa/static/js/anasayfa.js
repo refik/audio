@@ -14,4 +14,6 @@ jQuery(function(){
         cleartype: true,
         cleartypeNoBg: true
     });
+    $('#haberler > div').css('visibility', 'visible');
+    $('#yeni_urunler > div').css('visibility', 'visible');
 });

@@ -33,4 +33,5 @@ jQuery(function(){
     };
 
     degistir();
+    $('#afis > img').css('visiblity','visible');
 });
