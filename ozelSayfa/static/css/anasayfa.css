@@ -16,21 +16,6 @@
 	visibility: visible;
 }
 
-
-.one {
-	background-size: 	100%;
-	margin:			0 auto;
-	background-image:	url('/statik/resim/b1_back.jpg');
-	background-repeat: 	repeat-y;
-}
-
-.two {
-	background-size: 	100%;
-	margin:			0 auto;
-	background-image:	url('/statik/resim/ikili_orta_r3_c1.jpg');
-	background-repeat: 	repeat-y;
-}
-
 .set4 {
 	height:			265px;
 	background-image: 	url('/statik/resim/basic_4.jpg');

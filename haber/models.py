@@ -1,6 +1,10 @@
 from django.db import models
 from filebrowser.fields import FileBrowseField
 from datetime import datetime
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from audio.settings import STATIC_ROOT, STATIC_URL
+from audio.ozelSayfa.sprite import PngSpriteRefik
 
 class Haber(models.Model):
     baslik = models.CharField('Baslik',max_length=32)
@@ -10,4 +14,20 @@ class Haber(models.Model):
         verbose_name_plural = "Haberler"
     def __unicode__(self):
         return unicode(self.baslik)
+
+@receiver(post_save, sender=Haber)
+def haber_sprite(sender, **kwargs):
+    haber = kwargs['instance']
+    haber.resim.version_generate('yeni_ufak')
+    type = 'png-sprite'
+    name = 'news'
+    path = STATIC_ROOT + '/yukleme/'
+    url = STATIC_URL + 'yukleme/'
+    css_file = STATIC_ROOT + '/css/news.css'
+    files = tuple([os.path.dirname(haber.resim.directory) + '/' + \
+                   haber.resim.version_name('yeni_ufak') \
+                   for haber in Haber.objects.all()])
+    bundler = PngSpriteRefik(name, path, url, files, type, css_file)
+    bundler.make_bundle(0)
+
 

@@ -4,7 +4,7 @@
 
 {% block icerik %}
 <div class="grid_14" style='z-index:1;'>
- <div class="grid_14 tek_yarim alpha omega">
+ <div class="grid_14 sprites sprites-ceyrek_yarim-png alpha omega">
   <div class="grid_14 topd"></div>
   <div class="grid_1 alpha topd"></div>
   <div class="grid_12" style='color:red;'><strong>Audio' dan Haberler</strong></div>
@@ -20,14 +20,14 @@
    {% endfor %}
   </div>
  </div>
- <div class="grid_14 alpha omega">
+ <div class="grid_14 sprites sprites sprites-ceyrek_yarim-png alpha omega">
   <a href='{{ sol_alt_resim|linkUrl }}' {% ifequal sol_alt_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ sol_alt_resim.gorunum.url }}" alt=""></a>
  </div>
 </div>
-<div class="grid_14"><a href='{{ orta_sol_resim|linkUrl }}' {% ifequal orta_sol_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sol_resim.gorunum.url }}" alt=''></a></div>
-<div class="grid_14"><a href='{{ orta_sag_resim|linkUrl }}' {% ifequal orta_sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sag_resim.gorunum.url }}" alt=''></a></div>
+<div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sol_resim|linkUrl }}' {% ifequal orta_sol_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sol_resim.gorunum.url }}" alt=''></a></div>
+<div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sag_resim|linkUrl }}' {% ifequal orta_sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sag_resim.gorunum.url }}" alt=''></a></div>
 <div class="grid_14">
- <div class="grid_14 set4_1">
+ <div class="grid_14 sprites sprites-ceyrek_yarim-png">
   <div class="grid_14 topd"></div>
   <div class="grid_1 alpha topd"></div>
   <div class="grid_12" style='color:red;'><strong>Yeni Urunler</strong></div>
@@ -41,11 +41,11 @@
   </div>
   <div class="grid_1 omega topd"></div>
  </div>
- <div class="grid_14 set4_2">
+ <div class="grid_14 sprites sprites-ceyrek_yarim_ufak-png">
   <div class="grid_14 topd"></div>
   <div class="grid_12 push_1 centered"><a style='text-decoration:none;color:black;' href='{{ sag_orta_yazi|linkUrl }}'><strong>{{ sag_orta_yazi.yazi }}</strong></a></div>
  </div>
- <div class="grid_14 set4_3">
+ <div class="grid_14 sprites sprites-ceyrek_yarim_orta-png">
   <div class="grid_14 topd"></div>
   <div class="grid_12 push_1 centered"><a style='text-decoration:none;color:red;' href='{{ sag_alt_yazi|linkUrl }}'><strong>{{ sag_alt_yazi.yazi }}</strong></a></div>
  </div>

@@ -74,14 +74,14 @@ div.ust_menu {
 .one {
 	background-size: 	100%;
 	margin:		    	0 auto;
-	background-image:	url('/statik/resim/b1_back.jpg');
+	background-image:	url('/statik/resim/tam_orta.png');
 	background-repeat: 	repeat-y;
 }
 
 .two {
 	background-size: 	100%;
 	margin:		    	0 auto;
-	background-image:	url('/statik/resim/ikili_orta_r3_c1.jpg');
+	background-image:	url('/statik/resim/yarim_orta.png');
 	background-repeat: 	repeat-y;
 }
 

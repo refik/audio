@@ -15,3 +15,7 @@
     abs_server_path = os.path.join(MEDIA_ROOT, abs_path, form.cleaned_data['name'])
 **durumlari guncelle. eylem yapilmadi ekle
 **translationlar yapildi grappelli vs icin
+**pngcrush kutupkanesi
+**google closure compiler
+**java-jdk
+**YUI compressor
