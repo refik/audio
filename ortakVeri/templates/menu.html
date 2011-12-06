@@ -3,16 +3,8 @@
 <ul class="sf-menu">
  {% recursetree menu %}
  {% if node.tree_id >= alt_limit and node.tree_id <= ust_limit %}
- <li
-{% if node.is_root_node %}
-class='sprites sprites-button-png'
-{% if node.tree_id == 13 %}
-id='son_buton'
-{% else %}
-{% if node.tree_id == 6 %}
-id='ust_son'
-{% endif %}{% endif %}{% endif %} >
-  <a href="{{ node|linkUrl }}" {% ifequal node.dosya.filetype 'Image' %}class='tek_resim'{% endifequal %} {% ifequal node|linkUrl '#' %}style='cursor:default;' onclick='return false;'{% endifequal %}>{{ node.isim }}</a>
+ <li{% if node.is_root_node %}class='sprites sprites-button-png'{% if node.tree_id == 13 %}id='son_buton'{% else %}{% if node.tree_id == 6 %}id='ust_son'{% endif %}{% endif %}{% endif %}>
+  <a href="{{ node|linkUrl }}"{% ifequal node.dosya.filetype 'Image' %}class='tek_resim'{% endifequal %}{% ifequal node|linkUrl '#' %}style='cursor:default;' onclick='return false;'{% endifequal %}>{{ node.isim }}</a>
   {% if not node.is_leaf_node %}
   <ul>
    {{ children }}

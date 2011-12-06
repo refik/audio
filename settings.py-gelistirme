@@ -1,6 +1,6 @@
 # Django settings for audio project.
 import os
-from sifre import KEY
+from sifre import KEY, RACK_KEY
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -58,21 +58,12 @@ USE_L10N = True
 
 AUTH_PROFILE_MODULE = 'calisanProfil.CalisanProfil'
 
-STATIC_URL = '/statik/'
-
-STATIC_ROOT = PROJECT_PATH + '/statikSunucu'
-
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = PROJECT_PATH + '/statik/yukleme'
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://127.0.0.1:8000' + STATIC_URL + 'yukleme/'
-
 # django_compressor settings
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
+
+COMPRESS_URL = 'http://c415788.r88.cf3.rackcdn.com/'
+
+COMPRESS_STORAGE = 'audio.ortakVeri.storage.AudioStorage'
 
 COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
 
@@ -82,6 +73,52 @@ COMPRESS_CSS_FILTERS = ['compressor.filters.yui.YUICSSFilter']
 
 COMPRESS_YUI_BINARY = '/home/refik/code/yuicompressor-2.4.7/build/yuicompressor-2.4.7.jar'
 
+STATIC_URL = COMPRESS_URL#'/statik/'
+
+STATIC_ROOT = PROJECT_PATH + '/statikSunucu'
+
+# Absolute path to the directory that holds media.
+# Example: "/home/media/media.lawrence.com/"
+MEDIA_ROOT = PROJECT_PATH + '/statik/yukleme' 
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_URL = 'http://127.0.0.1:8000' + STATIC_URL + 'yukleme/'
+
+# CDN settings (django-storages)
+CLOUDFILES_USERNAME = 'refik'
+CLOUDFILES_API_KEY = RACK_KEY
+CLOUDFILES_CONTAINER = 'audio'
+DEFAULT_FILE_STORAGE = 'audio.ortakVeri.storage.AudioStorage'
+
+# Memcache
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+# django-media-bundler settings
+# it is used by the update.py 
+MEDIA_BUNDLES = ({'type': 'png-sprite',
+                  'name': 'sprites',
+                  'path': PROJECT_PATH + '/statik/resim/',
+                  'url': STATIC_URL + 'resim/',
+                  'css_file': STATIC_ROOT + '/css/sprites.css',
+                  'files': (
+                      'ceyrek.png',
+                      'ceyrek_yarim.png',
+                      'ceyrek_yarim_orta.png',
+                      'ceyrek_yarim_ufak.png',
+                      'yarim_ust.png',
+                      'yarim_alt.png',
+                      'logo.jpg',
+                      'button.png',
+                      'tam_ust.png',
+                      'tam_alt.png',
+                      'bottom.jpg',)},) 
+
 FILEBROWSER_MEDIA_ROOT = PROJECT_PATH + '/statik/'
 
 FILEBROWSER_MEDIA_URL = '/statik/'
@@ -90,7 +127,7 @@ FILEBROWSER_DIRECTORY = 'yukleme/'
 
 FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser/'
 
-FILEBROWSER_PATH_FILEBROWSER_MEDIA = '/home/refik/code/pythonenv/audio/lib/python2.6/site-packages/django_filebrowser-3.3.0-py2.6.egg/filebrowser/static/filebrowser'
+FILEBROWSER_PATH_FILEBROWSER_MEDIA = '/home/refik/code/pythonenv/audio/lib/python2.7/site-packages/filebrowser/static/filebrowser'
 
 FILEBROWSER_VERSIONS = {
     'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'upscale'},
@@ -98,8 +135,8 @@ FILEBROWSER_VERSIONS = {
     'urun_ufak': {'verbose_name': 'Urun Ufak', 'width': 190, 'height': 190, 'opts': 'upscale'},
     'panel_ufak': {'verbose_name': 'Panel Ufak', 'width': '', 'height': '110', 'opts': 'upscale'},
     'urun': {'verbose_name': 'Urun', 'width': 430, 'height': 430, 'opts': 'upscale'},
-    'haber_ufak': {'verbose_name': 'Haber Ufak', 'width': 55, 'height': 55, 'opts': 'upscale'},
-    'yeni_ufak': {'verbose_name': 'Yeni Ufak', 'width': 65, 'height': 65, 'opts': 'upscale'},
+    'haber_ufak': {'verbose_name': 'Haber Ufak', 'width': 60, 'height': 60, 'opts': 'upscale'},
+    'yeni_ufak': {'verbose_name': 'Yeni Ufak', 'width': 90, 'height': 75, 'opts': 'upscale'},
     'dokuman_ufak': {'verbose_name': 'Dokuman Ufak', 'width': 60, 'height': 60, 'opts': 'upscale'},
     'diger_model': {'verbose_name': 'Diger Model', 'width': 145, 'height': 145, 'opts': 'upscale'},
     'sistem_ufak': {'verbose_name': 'Sistemin Ufak Logosu', 'width': 110, 'height': 110, 'opts': 'upscale'},
@@ -203,5 +240,7 @@ INSTALLED_APPS = (
     'feincms',
     'mptt',
     'compressor',
+    'media_bundler',
+    'storages',
     'south',
 )
