@@ -46,7 +46,7 @@ body {
 }
 
 .topd {
-	height:	    		17px;
+	height:	    		16px;
 }
 
 .harita {
@@ -102,7 +102,6 @@ h3{
 .sf-menu {
 	float:		     	right;
 	margin-bottom:		0px;
-	
 }
 
 .sf-menu a, .sf-menu a:visited {
@@ -110,7 +109,6 @@ h3{
 }
 
 .sf-menu li {
-	background-image:   url('/statik/resim/button.jpg');
 	color:	    		#ffffff;
 	width:	    		104px;
     height:             34px;

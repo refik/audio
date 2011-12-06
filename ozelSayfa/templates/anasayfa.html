@@ -33,9 +33,9 @@
   <div class="grid_12" style='color:red;'><strong>Yeni Urunler</strong></div>
   <div class="grid_12 push_1" id='yeni_urunler'>
    {% for urun in yeni_urun %}
-   <div class="grid_12" style='height:65px;'>
-    <div class="grid_7 alpha centered" style='margin-top:0px;'><a style='text-decoration:none;color:black;background-color:white;' href="/urun/{{ urun.slug }}">{{ urun.isim }}</a></div>
-    <div class="grid_5 omega centered"><a href="/urun/{{ urun.slug }}"><img src="{% version urun.resim.path 'yeni_ufak' %}" alt="{{ urun.isim }}"></a></div>
+   <div class="grid_12" style='height:90px;'>
+    <div class="grid_6 alpha centered" style='margin-top:0px;'><a style='text-decoration:none;color:black;background-color:white;' href="/urun/{{ urun.slug }}">{{ urun.isim }}</a></div>
+    <div class="grid_6 omega centered"><a href="/urun/{{ urun.slug }}"><img src="{% version urun.resim.path 'yeni_ufak' %}" alt="{{ urun.isim }}"></a></div>
    </div>
    {% endfor %}
   </div>

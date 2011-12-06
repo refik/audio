@@ -1,7 +1,7 @@
 /* Generated classes for django-media-bundler sprites.  Don't edit! */
 
 .sprites {
-     background-image: url('/statik/resim/sprites1c6771ea5e0b.png');
+     background-image: url('/statik/resim/sprites9a3d77b295b7.png');
 }
 
 .sprites-ceyrek-png {
@@ -20,6 +20,12 @@
      width: 300px;
      background-position: -476px 0px;
      height: 77px;
+}
+
+.sprites-button-png {
+     width: 104px;
+     background-position: -776px 0px;
+     height: 34px;
 }
 
 .sprites-ceyrek_yarim_orta-png {

@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.db import models
 from datetime import datetime
-from audio.bilgiGiris.mail import audiomail
+from audio.ortakVeri.mail import audiomail
 from django.contrib.auth.models import User
 from django.contrib.comments.moderation import CommentModerator, moderator
 

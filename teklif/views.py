@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import RequestContext
-from audio.bilgiGiris.mail import audiomail
+from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum
 from audio.teklif.forms import TeklifYapildiForm
 

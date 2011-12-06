@@ -1,12 +1,11 @@
 # coding: utf-8
 from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm
 from audio.bilgiGiris.models import Tip
-from audio.bilgiGiris.mail import audiomail
+from audio.ortakVeri.mail import audiomail
 from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
-from django.core.mail import send_mail
 SIRA = ['isim','email','sehir','firma','telefon','mesaj']
 
 def mesajOlustur(sozluk):

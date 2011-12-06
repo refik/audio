@@ -19,3 +19,12 @@
 **google closure compiler
 **java-jdk
 **YUI compressor
+**superfish.css .sf-menu li{ -background: #BD2FF- } # sprite in background image ini kesiyor
+**yarim_orta, tam_orta degistirirken yeni isimle yapmalisin
+**storages/backend/mosso.py de cloudfiles.get_connection a extra olarak authurl=cloudfiles.uk_authurl verdim. cunku uk serverlarindayiz
+**storages/backends/mosso.py de from cStringIO import StringIO yu comment out ettim cunku ona content_type attribute veremiyoruz ve upload olmuyor. StringIO.StringIO duruyor o da calisiyor zaten
+**ubuntu memcached paketini yukle
+**filebrowser da relative_path = path_strip(path, site.directory) degisicek. path -> path + '/' olucak. cunku path_strip ilk if den kurtuluyor kurtulmamasi gerekirken. salak bir nedenden dolayi
+**filebrowser base.py de _dimensions metodunu method_cache e al yoksa inanilmaz yavas calisiyor
+**optipng paketini yukle
+**jpegtran paketini yukle

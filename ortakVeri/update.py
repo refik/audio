@@ -1,8 +1,8 @@
-from audio.ozelSayfa.sprite import PngSpriteRefik
+from audio.ortakVeri.sprite import PngSpriteCustom
 from audio.settings import MEDIA_BUNDLES
 
 bundle = MEDIA_BUNDLES[0]
-bundler = PngSpriteRefik(bundle['name'], bundle['path'], 
+bundler = PngSpriteCustom(bundle['name'], bundle['path'], 
                           bundle['url'], bundle['files'], 
                           bundle['type'], bundle['css_file'])
 
