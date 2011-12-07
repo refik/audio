@@ -25,6 +25,35 @@
 **storages/backends/mosso.py de from cStringIO import StringIO yu comment out ettim cunku ona content_type attribute veremiyoruz ve upload olmuyor. StringIO.StringIO duruyor o da calisiyor zaten
 **ubuntu memcached paketini yukle
 **filebrowser da relative_path = path_strip(path, site.directory) degisicek. path -> path + '/' olucak. cunku path_strip ilk if den kurtuluyor kurtulmamasi gerekirken. salak bir nedenden dolayi
-**filebrowser base.py de _dimensions metodunu method_cache e al yoksa inanilmaz yavas calisiyor
+**filebrowser base.py de _dimensions metodunu method_cache e al yoksa inanilmaz yavas calisiyor. import da et tabi
 **optipng paketini yukle
 **jpegtran paketini yukle
+**filebrowser functions.py de from datetime import datetime geldi
+**filebrowser functions.py de handle_file_upload boyle oldu
+def handle_file_upload(path, file, site):
+    """
+    Handle File Upload.
+    """
+    
+    #Refik
+    ext = file.name.split('.')[-1]
+    if ext is 'png' or ext is 'jpg':
+        tmp = open('/tmp/image_to_optimize','wb')
+        tmp.write(file)
+        tmp.close()
+        if ext is 'png':
+            os.system('optipng /tmp/image_to_optimize')
+        else:
+            os.system('jpegoptim --strip-all /tmp/image_to_optimize')
+        optimized = open('/tmp/image_to_optimize', 'rb')
+        os.remove('/tmp/image_to_optimize')
+        file = optimized
+
+    uploadedfile = None
+    try:
+        file_path = os.path.join(path, file.name[:-len(ext)-1] + datetime.now().strftime('%d%m%y') + '.' + ext)
+        uploadedfile = site.storage.save(file_path, file)
+    except Exception, inst:
+        raise inst
+    return uploadedfile
+

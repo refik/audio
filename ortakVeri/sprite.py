@@ -1,6 +1,8 @@
+from django.core.files.storage import default_storage
 from media_bundler.bundler import PngSpriteBundle
 from compressor.cache import get_hexdigest
 import time
+import os
 
 class PngSpriteCustom(PngSpriteBundle):
     def __init__(self, *args, **kwargs):
@@ -16,3 +18,8 @@ class PngSpriteCustom(PngSpriteBundle):
         self.name = versioned_name
         return css_name
 
+    def make_bundle(self, versioner):
+        super(PngSpriteCustom, self).__init__(versioner)
+        file_path = self.get_bundle_path()
+        file_name = os.path.basename(file_path)
+        default_storage.save('resim/sprite/' + file_name, open(file_path,'rb'))
