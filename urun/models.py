@@ -1,5 +1,7 @@
 # coding: utf-8
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from filebrowser.fields import FileBrowseField
 
 SERI=(
@@ -54,6 +56,22 @@ class Urun(models.Model):
         verbose_name_plural = "Urunler"
     def __unicode__(self):
         return self.isim
+
+@receiver(post_save, sender=Urun)
+def yeniurun_sprite(sender, **kwargs):
+    pic_urun = [urun.resim for urun in Urun.objects.filter(yeni=True)]
+    pic_ver = [pic.version_generate('yeni_ufak') for pic in pic_urun]
+    pictures = [pic.name for pic in pic_ver]
+    for picture in pictures:
+        save_to_local(picture, '/tmp/%s' % os.path.basename(picture))
+    type = 'png-sprite'
+    name = 'products'
+    path = '/tmp/'
+    url = STATUC_URL + 'resim/sprite/'
+    css_file = STATIC_ROOT + '/css/products.css'
+    files = tuple([os.path.basename(picture) for picture in pictures])
+    bundler = PngSpriteCustom(name, path, url, files, type, css_file)
+    bundler.make_bundle(0)
 
 class DigerModel(models.Model):
     urun = models.ForeignKey(Urun)

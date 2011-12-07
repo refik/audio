@@ -19,9 +19,9 @@ class Haber(models.Model):
 
 @receiver(post_save, sender=Haber)
 def haber_sprite(sender, **kwargs):
-    haber = kwargs['instance']
-    haber.resim.version_generate('yeni_ufak')
-    pictures = [haber.resim.name for haber in Haber.objects.all()]
+    pic_haber = [haber.resim for haber in Haber.objects.all()]
+    pic_ver = [pic.version_generate('haber_ufak') for pic in pic_haber]
+    pictures = [pic.name for pic in pic_ver]
     for picture in pictures:
         save_to_local(picture,'/tmp/%s' % os.path.basename(picture))
     type = 'png-sprite'
