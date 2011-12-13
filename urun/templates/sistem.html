@@ -5,9 +5,7 @@
 {% endblock %}
 
 {% block icerik %}
-<div class="grid_56">
- <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_top.jpg" /></div>
- <div class="grid_56 one">
+{% include 'tekli_ac.html' %}
   <div class="grid_52 push_2">
    <div class="grid_52">
     <h2>Sistemler</h2>
@@ -15,8 +13,5 @@
    {% include 'sistem_liste.html' with tip='Görüntülü' sistemler=goruntulu class='alpha' %}
    {% include 'sistem_liste.html' with tip='Sesli' sistemler=sesli class='omega' %}
   </div>
- </div>
- <div class="grid_56"><img src="{{ STATIC_URL }}resim/b1_bottom.jpg" /></div>
-</div>
-<div class="clear"></div>
+{% include 'tekli_kapat.html' with clear=True %}
 {% endblock %}

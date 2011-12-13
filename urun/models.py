@@ -3,6 +3,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from filebrowser.fields import FileBrowseField
+from audio.settings import STATIC_ROOT
 
 SERI=(
      ("konsept","Konsept"),
