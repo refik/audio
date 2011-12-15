@@ -12,7 +12,7 @@
    <div class="grid_{{ sira_grid_inner }} topd"></div>
    <div class="grid_{{ grid_sira_grid_inner }}">
     <div class="grid_7 alpha">
-     <a href={% if sistem.sema %}"{{ sistem.sema.url }}" class="tek_resim"{% else %}"#" style="cursor:default;" onclick="return false;"{% endif %}><img src="{% version sistem.resim.path 'sistem_ufak' %}"/></a>
+     <a href={% if sistem.sema %}"{{ sistem.sema.url }}" class="tek_resim"{% else %}"#" style="cursor:default;" onclick="return false;"{% endif %}><div class="systems systems-{{ sistem.resim.filename_root }}_sistem_ufak-{{ sistem.resim.extension|cut:'.' }}"></div></a>
     </div>
     <div class="grid_{{ tanitim_grid }} omega">{{ sistem.aciklama }}</div>
    </div>

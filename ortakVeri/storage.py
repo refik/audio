@@ -1,6 +1,8 @@
-from storages.backends.mosso import CloudFilesStorage, CloudStorageDirectory
+from storages.backends.mosso import CloudFilesStorage
+from storages.backends.mosso import CloudStorageDirectory
 from filebrowser.storage import StorageMixin
 from audio.ortakVeri.cache import method_cache
+from audio.settings import STATIC_URL
 import traceback
 import datetime
 import time
@@ -78,3 +80,6 @@ class AudioStorage(CloudFilesStorage, StorageMixin):
 
     def makedirs(self, name):
         return self._save(name, CloudStorageDirectory(name))
+
+    def url(self, name):
+        return '%s/%s' % (STATIC_URL, name)

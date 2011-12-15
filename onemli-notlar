@@ -58,3 +58,4 @@ def handle_file_upload(path, file, site):
     return uploadedfile
 **django.core.files base.py de cString i comment out ettim tipki mosso daki gibi - BUNU Django-Cumulus a gecerek duzeltebilirsin. yap bunu
 **collectstatic i bir dry run ile test etmek lazim dosya adlarinin sonuna 1 koyuyor sanki 
+**cok cirkin bir hack, yanliz bazi versiyonlar 1 pixel kucuk cikiyor, floating point arithmetic ile ilgili. cozum functions da su: int(y*r) -> int(float(str(y*r))) 

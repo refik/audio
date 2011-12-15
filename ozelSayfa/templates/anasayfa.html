@@ -14,7 +14,7 @@
     <div class="grid_12" style='background-color:white;' ><strong>{{ h.baslik }}</strong></div>
     <div class="grid_8 alpha">{{ h.icerik }}</div>
     <div class="grid_4 omega centered">
-     <img src="{% version h.resim.path 'haber_ufak' %}" alt='{{ h.baslik }}'>
+     <div class="news news-{{ h.resim.filename_root }}_haber_ufak-{{ h.resim.extension|cut:'.' }}" style="margin: 0 auto;"></div>
     </div>
    </div>
    {% endfor %}
@@ -35,7 +35,11 @@
    {% for urun in yeni_urun %}
    <div class="grid_12" style='height:90px;'>
     <div class="grid_6 alpha centered" style='margin-top:0px;'><a style='text-decoration:none;color:black;background-color:white;' href="/urun/{{ urun.slug }}">{{ urun.isim }}</a></div>
-    <div class="grid_6 omega centered"><a href="/urun/{{ urun.slug }}"><img src="{% version urun.resim.path 'yeni_ufak' %}" alt="{{ urun.isim }}"></a></div>
+    <div class="grid_6 omega centered">
+     <a href="/urun/{{ urun.slug }}" class="centeted">
+      <div class="products products-{{ urun.resim.filename_root }}_yeni_ufak-{{ urun.resim.extension|cut:'.' }}" style="margin: 0 auto;"></div>
+     </a>
+    </div>
    </div>
    {% endfor %}
   </div>

@@ -4,12 +4,12 @@
   <title>Audio Elektronik</title>
 
 {% compress css %}
-  <link rel="stylesheet" href="/statik/css/reset.css" />
-  <link rel="stylesheet" href="/statik/css/text.css" />
-  <link rel="stylesheet" href="/statik/css/dokuman.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/dokuman.css" />
 {% endcompress %}
 {% compress js inline %}
-  <script type="text/javascript" src="/statik/js/flexpaper_flash.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/flexpaper_flash.js"></script>
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -27,10 +27,10 @@
  </head>
  <body>
   <div id='container'>
-  <div class='buton'><img class='tikla' src='/statik/resim/geri.png' onClick="getDocViewer().prevPage()"/></div>
+  <div class='buton'><img class='tikla' src='{{ STATIC_URL }}resim/geri.png' onClick="getDocViewer().prevPage()"/></div>
   <div class='centered dokuman'>
    <div id='ust_bar'>
-    <img style='float:left;' src='/statik/resim/logo_ufak.jpg'/>
+    <img style='float:left;' src='{{ STATIC_URL }}resim/logo_ufak.jpg'/>
     <div style='float:right;text-align:right;width:156px;'> 
      <p><a href='/'>Anasayfa</a></p> 
      <p><a href='#' onClick="history.go(-1);return false;">Geri</a></p>
@@ -67,7 +67,7 @@
    document.getElementById('ust_bar').style.width = viewportwidth - 286;
  
    var fp = new FlexPaperViewer(   
-       '/statik/flexpaper/FlexPaperViewer',
+       '{{ STATIC_URL }}flexpaper/FlexPaperViewer.swf',
        'viewerPlaceHolder', { config : {
        SwfFile : "{% templatetag openbrace %}{{ swfUrl }}/[*,0].swf,{{ sayfa }}{% templatetag closebrace %}",
        Scale : 1, 
@@ -92,7 +92,7 @@
    }});
   </script>
 {% endcompress %}
-  <div class='buton'><img class='tikla' src='/statik/resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
+  <div class='buton'><img class='tikla' src='{{ STATIC_URL }}resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
   </div>
  </body>
 </html>

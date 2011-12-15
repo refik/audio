@@ -4,8 +4,7 @@ from datetime import datetime
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.files.storage import default_storage
-from audio.settings import STATIC_ROOT, STATIC_URL
-from audio.ortakVeri.sprite import PngSpriteCustom
+from audio.ortakVeri.sprite import sprite_generator
 import os
 
 class Haber(models.Model):
@@ -21,15 +20,4 @@ class Haber(models.Model):
 def haber_sprite(sender, **kwargs):
     pic_haber = [haber.resim for haber in Haber.objects.all()]
     pic_ver = [pic.version_generate('haber_ufak') for pic in pic_haber]
-    files = [default_storage.open(pic.path).file for pic in pic_ver]
-    for f in files:
-        f.save_to_filename('/tmp/%s' % os.path.basename(f.name))
-    type = 'png-sprite'
-    name = 'news'
-    path = '/tmp/'
-    url = STATIC_URL + 'resim/sprite/'
-    css_file = STATIC_ROOT + '/css/news.css'
-    files = tuple([os.path.basename(f.name) for f in files])
-    bundler = PngSpriteCustom(name, path, url, files, type, css_file)
-    bundler.make_bundle(0)
-
+    sprite_generator('news', pic_ver)
