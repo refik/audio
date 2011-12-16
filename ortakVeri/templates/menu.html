@@ -3,7 +3,7 @@
 <ul class="sf-menu">
  {% recursetree menu %}
  {% if node.tree_id >= alt_limit and node.tree_id <= ust_limit %}
- <li {% if node.tree_id == 13 and node.is_root_node %}id='son_buton'{% else %}{% if node.tree_id == 6 and node.is_root_node %}id='ust_son'{% endif %}{% endif %} >
+ <li {% if node.tree_id == 11 %}id='fiyat' style='background-color:black;background-image:none;'{% endif %}{% if node.tree_id == 13 and node.is_root_node %}id='son_buton'{% else %}{% if node.tree_id == 6 and node.is_root_node %}id='ust_son'{% endif %}{% endif %} >
   <a href="{{ node|linkUrl }}" {% ifequal node.dosya.filetype 'Image' %}class='tek_resim'{% endifequal %} {% ifequal node|linkUrl '#' %}style='cursor:default;' onclick='return false;'{% endifequal %}>{{ node.isim }}</a>
   {% if not node.is_leaf_node %}
   <ul>
