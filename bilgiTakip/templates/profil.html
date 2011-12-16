@@ -29,9 +29,13 @@
    </li>
    <li>
     <label>Sehir:</label>
+     {% if calisan.profile.sorumluSehir.all %}
      {% for sehir in calisan.profile.sorumluSehir.all %}
      <span>{{ sehir.isim }}</span></br>
      {% endfor %}
+     {% else %}
+     <span>{{ calisan.yapildi_set.all.0.teklif.bilgi.sehir.isim }}</span>
+     {% endif %}
    </li>
   </ol>
   </div>

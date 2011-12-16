@@ -1,7 +1,13 @@
 {% ifequal tip_isim 'Teklif Formu' %}
 {% include 'teklif_filtre.html' %}
 {% endifequal %}
-<div style='text-align:center;'><strong>{{ bilgiler.count }} tane müşteri isteği</strong></div>
-{% for bilgi in bilgiler %}
+<div style='text-align:center;'>
+ <strong>Toplam {% if tip_isim == 'Teklif Formu' %}{{ bilgiler.paginator.count }} (bu sayfada {{ bilgiler.object_list.count }}){% else %}{{ bilgiler.count }}{% endif %} müşteri isteği</strong>
+ - {% ifequal tip_isim 'Teklif Formu' %}
+{% include 'paginator.html' %}
+{% endifequal %}
+</div>
+{% for bilgi in bilgiler.object_list %}
 {% include 'istek-govde.html' with yorum_formu_goster='Hayir' %}
 {% endfor %}
+

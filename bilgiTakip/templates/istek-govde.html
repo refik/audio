@@ -1,4 +1,4 @@
-{% load comments %}
+{% load yapildi %}
 <div class='istek'>
  <div style='padding:10px;margin-top:10px;'>
   <strong><a href='/takip/{{ bilgi.pk }}'>{{ bilgi.pk }}</a> numarali musteri istegi - {{ bilgi.tarih }}</strong>
@@ -6,43 +6,43 @@
    <ol>
     {% if bilgi.isim %}
     <li>
-     <label>Isim:</label>
+     <label>Isim</label>
      <span>{{ bilgi.isim }}</span>
     </li>
     {% endif %}
     {% if bilgi.email %}
     <li>
-     <label>E-posta:</label>
+     <label>E-posta</label>
      <span>{{ bilgi.email }}</span>
     </li>
     {% endif %}
     {% if bilgi.sehir %}
     <li>
-     <label>Sehir:</label>
+     <label>Sehir</label>
      <span>{{ bilgi.sehir }}</span>
     </li>
     {% endif %}
     {% if bilgi.firma %}
     <li>
-     <label>Firma:</label>
+     <label>Firma</label>
      <span>{{ bilgi.firma }}</span>
     </li>
     {% endif %}
     {% if bilgi.telefon %}
     <li>
-     <label>Telefon:</label>
+     <label>Telefon</label>
      <span>{{ bilgi.telefon }}</span>
     </li>
     {% endif %}
     {% if bilgi.mesaj %}
     <li>
-     <label>Mesaj:</label>
+     <label>Mesaj</label>
      <div style='margin-left:80px'>{{ bilgi.mesaj }}</div>
     </li>
     {% endif %}
     {% if bilgi.sorumlu.all %}
     <li>
-     <label>Sorumlular:</label>
+     <label>Sorumlular</label>
       {% for sorumlu_kisi in bilgi.sorumlu.all %}
       <span>
        {{ sorumlu_kisi.first_name }} {{ sorumlu_kisi.last_name }} - {{ sorumlu_kisi.profile.gorev }}<br/>
@@ -52,28 +52,46 @@
     {% endif %}
     {% if bilgi.teklif %}
     <li>
-     <label>Durum:</label>
+     <label>Daire</label>
+     <span>{% if bilgi.teklif.daire %}{{ bilgi.teklif.daire }}{% else %}Lutfen Daire Sayisini Girin{% endif %}</span>
+    </li>
+    <li>
+     <label>Tutar</label>
+     <span>{% if bilgi.teklif.tutar %}{{ bilgi.teklif.tutar }}{% else %}Lutfen Proje Tutarini Girin{% endif %} </span>
+    </li>
+    <li>
+     <label>Durum</label>
      <span style='font-style:italic;'>{{ bilgi.teklif.durum }}</span>
     </li>
+    {% if bilgi.teklif.rakip %}
+    <li>
+     <label>Alan</label>
+     <span>{{ bilgi.teklif.rakip }}</span>
+    </li>
+    {% endif %}
+    {% if bilgi.teklif.sebep.all %}
+    <li>
+     <label>Sebep:</label>
+     {% for sebep in bilgi.teklif.sebep.all %}
+     <span>
+      {{ sebep.isim }}<br/>
+     </span>
+     {% endfor %}
+    </li>
+    {% endif %}
     {% endif %}
     </ol>
   </div>
-  {% get_comment_count for bilgi as yorum_sayisi %}
-  {% ifnotequal yorum_sayisi 0 %}
+  {% if bilgi.teklif %}
   <strong>Yapilanlar</strong>
-  {% get_comment_list for bilgi as yorumlar %}
-  <!--<div style='height:110px;overflow:auto;background-color:#b0c4de'>-->
   <ol>
-  {% render_comment_list for bilgi %}
+  {% yapildi_listesi bilgi.teklif %}
   </ol>
-  <!--</div>-->
-  {% endifnotequal %}
   <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yapildi formu aç/kapa</p>
   <div {% if yorum_formu_goster == 'Hayir' %}style='display:none;'{% endif %}>
-   {% block icerik %}
-   {% render_comment_form for bilgi %}
-   {% endblock icerik %}
+   {% yapildi_formu bilgi.teklif %}
   </div>
+  {% endif %}
  </div>
 </div>
 

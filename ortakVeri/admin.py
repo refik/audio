@@ -1,4 +1,5 @@
 from audio.ortakVeri.models import Afis, Menu
+from audio.settings import STATIC_URL
 from django.contrib import admin, sites, comments
 from feincms.admin.tree_editor import TreeEditor
 from django.contrib.flatpages.models import FlatPage
@@ -7,8 +8,8 @@ from django.contrib.flatpages.admin import FlatPageAdmin as FlatPageAdminOld
 class FlatPageAdmin(FlatPageAdminOld):
     class Media:
         js = [
-            '/statik/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
-            '/statik/js/tinymce_setup.js',
+            '/statik/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            STATIC_URL + 'js/tinymce_setup.js',
         ]
 
 class MenuAdmin(TreeEditor, admin.ModelAdmin):

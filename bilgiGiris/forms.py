@@ -24,8 +24,3 @@ class IletisimForm(ModelForm):
     class Meta:
         model = Bilgi
         exclude = ('sehir','firma','sorumlu','tip')
-
-
-
-
-

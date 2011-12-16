@@ -1,4 +1,5 @@
 from audio.urun.models import Urun, Sistem, Kategori, Ozellik, DigerModel
+from audio.settings import STATIC_URL
 from django.contrib import admin
 
 class UrunDigerInline(admin.StackedInline):
@@ -27,8 +28,8 @@ class UrunAdmin(admin.ModelAdmin):
     )
     class Media:
         js = [
-            '/statik/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
-            '/statik/js/tinymce_setup.js',
+            STATIC_URL + 'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            STATIC_URL + 'js/tinymce_setup.js',
         ]
 
 

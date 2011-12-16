@@ -1,0 +1,11 @@
+<span class="pagination" style='text-align: center;margin-left:0px;'>
+ Sayfalar: 
+ {% for page in bilgiler.paginator.page_range %}
+  {% if bilgiler.number == page %}
+   {{ page }}
+  {% else %}
+   <a href='?page={{ page }}' style='color:blue;'>{{ page }}</a>
+  {% endif %}
+ {% endfor %}
+</span>
+

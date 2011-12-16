@@ -2,11 +2,20 @@ body {
 	background-color:	#bababa;
 }
 
+#afis > img {
+	position: absolute;
+	visibility: hidden;
+}
+
+#afis > img:first-child {
+	visibility: visible;
+}
+
 #bkground {
 	background-size: 	100%;
 	margin:		    	0 auto;
 	width:		    	1000px;
-	background-image:	url('/statik/resim/back.jpg');
+	background-image:	url('/resim/back.jpg');
 	background-repeat: 	repeat-y;
 }
 
@@ -37,7 +46,7 @@ body {
 }
 
 .topd {
-	height:	    		17px;
+	height:	    		16px;
 }
 
 .harita {
@@ -65,14 +74,14 @@ div.ust_menu {
 .one {
 	background-size: 	100%;
 	margin:		    	0 auto;
-	background-image:	url('/statik/resim/b1_back.jpg');
+	background-image:	url('/resim/tam_orta.png');
 	background-repeat: 	repeat-y;
 }
 
 .two {
 	background-size: 	100%;
 	margin:		    	0 auto;
-	background-image:	url('/statik/resim/ikili_orta_r3_c1.jpg');
+	background-image:	url('/resim/yarim_orta.png');
 	background-repeat: 	repeat-y;
 }
 
@@ -93,7 +102,6 @@ h3{
 .sf-menu {
 	float:		     	right;
 	margin-bottom:		0px;
-	
 }
 
 .sf-menu a, .sf-menu a:visited {
@@ -101,7 +109,6 @@ h3{
 }
 
 .sf-menu li {
-	background-image:   url('/statik/resim/button.jpg');
 	color:	    		#ffffff;
 	width:	    		104px;
     height:             34px;

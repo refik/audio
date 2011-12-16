@@ -10,7 +10,7 @@
  <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/takip.css" />
  <link type="text/css" href="{{ STATIC_URL }}css/blitzer/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
- <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+ <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/takip.js"></script>
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -20,7 +20,7 @@
 <div id='bkground'>
  <div class='container_56'>
   <div class='grid_56'>
-   <div class='grid_10 alpha'><a href='/'><img src='/statik/resim/logo_ufak.jpg'/></a></div>
+   <div class='grid_10 alpha'><a href='/'><img src='{{ STATIC_URL }}resim/logo_ufak.jpg'/></a></div>
    <div class='grid_36 centered'>
     <a class='sade_link' href='/takip/'><h2 style='margin:0;'>Audio Müşteri İstek Takip Sayfasi</h2></a>
    </div>
@@ -49,7 +49,7 @@
   </div>
   <div class='clear'></div>
  </div>
- <img src="{{ STATIC_URL }}resim/bottom.jpg" />
+ <div class="sprites sprites-bottom-jpg"></div>
 </div>
 </body>
 </html>

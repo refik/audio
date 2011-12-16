@@ -17,13 +17,21 @@
 12 tinymce full versiyona css sorunları duzeltilerek gecirilmeli
 13 sistemler ozelSayfa app i altina alinmali
 14 kullanim klavuzu ekleme
-15 durumlari server da guncelle
-16 son database i serverden alip teklif migrate et
-17 durumlarin kapali larini false a set et
-18 database i github a yollarken encrypt edip yolla(yada github a koyma dropbox a koy)
+15* durumlari server da guncelle
+16* son database i serverden alip teklif migrate et
+17* durumlarin kapali larini false a set et
+18* database i github a yollarken encrypt edip yolla(yada github a koyma dropbox a koy)
 19 unicode lar icin smart_str yi incele
-20 server' a gviz_api yuklemek lazim
+20* server' a gviz_api yuklemek lazim
 21 get_full_name i kullandim, test edilmeli
 22 anlatimli video sistemi, kullanim klavuzu
-23 teklif dosya klasorunu server da ac
-24 pagination for bilgiTakip
+23* teklif dosya klasorunu server da ac
+24* pagination for bilgiTakip
+25 teklif icin migration yap
+26 yeni durumlari server a ekle
+27 sinan ve buragin title larini degistir
+28* flatpage icin css problemini duzelt
+29* TeklifYapildi formu ajaxla dondursun fazla yavas
+30 teklifi olmayan butun teklif formlarini sil
+31 edip e dikkat et
+32 move ve rmdir metodunu uygulamak lazim

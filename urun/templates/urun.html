@@ -67,9 +67,7 @@
 {% if panelKonsept or panelBasic %}
 {% include 'sistem_liste_urun.html' with sira=2 sira_grid=28 sira_grid_inner=25 sira_grid_push=2 tanitim_grid=18 %}
 {% if panelKonsept or panelBasic %}
-<div class="grid_28">
- <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_top.jpg" /></div>
- <div class="grid_28 two">
+ {% include 'ikili_ac.html' %}
   <div class="grid_28 topd"></div>
   <div class="grid_28 centered"><strong>Bu Ürün İle Kullanabileceğiniz Paneller</strong></div>
   <div class="grid_28 topd"></div>
@@ -82,9 +80,7 @@
    {% endif %}
    <div class='grid_24 alpha omega' style='height:20px'></div>
   </div>
- </div>
- <div class="grid_28"><img src="{{ STATIC_URL }}resim/b2_bottom.jpg"/></div>
-</div>
+ {% include 'ikili_kapat.html' %}
 {% endif %}
 <div class="clear"></div>
 {% else %}

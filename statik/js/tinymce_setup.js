@@ -1,4 +1,3 @@
-
 function CustomFileBrowser(field_name, url, type, win) {
     
     var cmsURL = '/admin/filebrowser/browse/?pop=2';
@@ -19,126 +18,52 @@ function CustomFileBrowser(field_name, url, type, win) {
     });
     return false;
 }
+    tinyMCE.init({
+        // General options
+        mode : "textareas",
+        theme : "advanced",
+        plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
 
-tinyMCE.init({
-    
-    // see
-    // http://wiki.moxiecode.com/index.php/TinyMCE:Configuration
-    
-    // Init
-    mode: 'textareas',
-    theme: 'advanced',
-    skin: 'grappelli',
-    
-    // General
-    //accessibility_warnings: false,
-    browsers: 'gecko,msie,safari,opera',
-    dialog_type: 'window',
-    editor_deselector: 'mceNoEditor',
-    keep_styles: false,
-    language: 'en',
-    object_resizing: false,
-    media_strict: true,
-    
-    // Callbackss
-    file_browser_callback: 'CustomFileBrowser',
-    
-    // Layout
-    width: 758,
-    height: 300,
-    indentation: '10px',
-    
-    // Cleanup
-    cleanup: true,
-    cleanup_on_startup: true,
-    element_format: 'xhtml',
-    fix_list_elements: true,
-    fix_table_elements: true,
-    fix_nesting: true,
-    forced_root_block : 'p',
-    
-    // URL
-    relative_urls: false,
-    remove_script_host: true,
-    
-    // Content CSS
-    // content_css : "css/example.css",
-    
-    // Plugins
-    plugins: 'advimage,advlink,fullscreen,paste,media,searchreplace,grappelli,grappelli_contextmenu,template',
-    
-    // Theme Advanced
-    theme_advanced_toolbar_location: 'top',
-    theme_advanced_toolbar_align: 'left',
-    theme_advanced_statusbar_location: 'bottom',
-    theme_advanced_buttons1: 'formatselect,styleselect,|,bold,italic,underline,|,bullist,numlist,blockquote,|,undo,redo,|,link,unlink,|,image,|,fullscreen,|,grappelli_adv',
-    theme_advanced_buttons2: 'search,|,pasteword,template,media,charmap,|,code,|,table,cleanup,grappelli_documentstructure',
-    theme_advanced_buttons3: '',
-    theme_advanced_path: false,
-    theme_advanced_blockformats: 'p,h2,h3,h4,pre',
-    theme_advanced_resizing: true,
-    theme_advanced_resize_horizontal: false,
-    theme_advanced_resizing_use_cookie: true,
-    theme_advanced_styles: 'Image Left=img_left;Image Right=img_right;Image Block=img_block',
-    
-    // Style formats
-    // see http://wiki.moxiecode.com/index.php/TinyMCE:Configuration/style_formats
-    style_formats : [
-        {title : 'Paragraph Small', block : 'p', classes: 'p_small'},
-        {title : 'Paragraph ImageCaption', block : 'p', classes: 'p_caption'},
-        {title : 'Clearfix', block : 'p', classes: 'clearfix'},
-        {title : 'Code', block : 'p', classes: 'code'}
-    ],
-    
-    // Templates
-    // see http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/template
-    // please note that you need to add the URLs (src) to your url-patterns
-    // with django.views.generic.simple.direct_to_template
-    template_templates : [
-        {
-            title : '2 Columns',
-            src : '/path/to/your/template/',
-            description : '2 Columns.'
-        },
-        {
-            title : '4 Columns',
-            src : '/path/to/your/template/',
-            description : '4 Columns.'
+        //Callbacks
+        file_browser_callback: 'CustomFileBrowser',
+
+        //Layout
+        width: 952,
+        height: 400,
+
+        // Theme options
+        theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+        theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+        theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+        theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        theme_advanced_statusbar_location : "bottom",
+        theme_advanced_resizing : true,
+
+        // Example content CSS (should be your site CSS)
+        content_css : "css/content.css",
+
+        // Drop lists for link/image/media/template dialogs
+        template_external_list_url : "lists/template_list.js",
+        external_link_list_url : "lists/link_list.js",
+        external_image_list_url : "lists/image_list.js",
+        media_external_list_url : "lists/media_list.js",
+
+        // Style formats
+        style_formats : [
+            {title : 'Bold text', inline : 'b'},
+            {title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
+            {title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
+            {title : 'Example 1', inline : 'span', classes : 'example1'},
+            {title : 'Example 2', inline : 'span', classes : 'example2'},
+            {title : 'Table styles'},
+            {title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+        ],
+
+        // Replace values for the template plugin
+        template_replace_values : {
+            username : "Some User",
+            staffid : "991234"
         }
-    ],
-    
-    // Adv
-    advlink_styles: 'Internal Link=internal;External Link=external',
-    advimage_update_dimensions_onchange: true,
-    
-    // Grappelli
-    grappelli_adv_hidden: false,
-    grappelli_show_documentstructure: 'on'
-    
-    // Elements
-    // valid_elements: '@[id|class|style|title|dir<ltr?rtl|lang|xml::lang|onclick|ondblclick|'
-    // + 'onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|'
-    // + 'onkeydown|onkeyup],a[rel|rev|charset|hreflang|tabindex|accesskey|type|'
-    // + 'name|href|target|title|class|onfocus|onblur],strong/b,em/i,strike,u,'
-    // + '#p,-ol[type|compact],-ul[type|compact],-li,br,img[longdesc|usemap|'
-    // + 'src|border|alt=|title|hspace|vspace|width|height|align],-sub,-sup,'
-    // + '-blockquote,-table[border=0|cellspacing|cellpadding|width|frame|rules|'
-    // + 'height|align|summary|bgcolor|background|bordercolor],-tr[rowspan|width|'
-    // + 'height|align|valign|bgcolor|background|bordercolor],tbody,thead,tfoot,'
-    // + '#td[colspan|rowspan|width|height|align|valign|bgcolor|background|bordercolor'
-    // + '|scope],#th[colspan|rowspan|width|height|align|valign|scope],caption,-div,'
-    // + '-span,-code,-pre,address,-h1,-h2,-h3,-h4,-h5,-h6,hr[size|noshade],-font[face'
-    // + '|size|color],dd,dl,dt,cite,abbr,acronym,del[datetime|cite],ins[datetime|cite],'
-    // + 'object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width'
-    // + '|height|src|*],script[src|type],map[name],area[shape|coords|href|alt|target],bdo,'
-    // + 'button,col[align|char|charoff|span|valign|width],colgroup[align|char|charoff|span|'
-    // + 'valign|width],dfn,fieldset,form[action|accept|accept-charset|enctype|method],'
-    // + 'input[accept|alt|checked|disabled|maxlength|name|readonly|size|src|type|value],'
-    // + 'kbd,label[for],legend,noscript,optgroup[label|disabled],option[disabled|label|selected|value],'
-    // + 'q[cite],samp,select[disabled|multiple|name|size],small,'
-    // + 'textarea[cols|rows|disabled|name|readonly],tt,var,big',
-    // extended_valid_elements : 'embed[width|height|name|flashvars|src|bgcolor|align|play|'
-    // + 'loop|quality|allowscriptaccess|type|pluginspage]'
-    
-});
-
+    });

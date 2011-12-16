@@ -1,6 +1,11 @@
 # coding: utf-8
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.core.files.storage import default_storage
 from filebrowser.fields import FileBrowseField
+from audio.ortakVeri.sprite import sprite_generator
+import os
 
 SERI=(
      ("konsept","Konsept"),
@@ -55,6 +60,7 @@ class Urun(models.Model):
     def __unicode__(self):
         return self.isim
 
+
 class DigerModel(models.Model):
     urun = models.ForeignKey(Urun)
     resim = FileBrowseField('Diger Modelin Resmi',max_length=200)
@@ -63,4 +69,24 @@ class DigerModel(models.Model):
         verbose_name_plural = 'Diger Modeller'
     def __unicode__(self):
         return unicode(self.aciklama)
+
+@receiver(post_save, sender=Sistem)
+def sistem_sprite(sender, **kwargs):
+    pic_sistem = [sistem.resim for sistem in Sistem.objects.all()]
+    pic_ver = [pic.version_generate('sistem_ufak') for pic in pic_sistem]
+    sprite_generator('systems', pic_ver)
+
+@receiver(post_save, sender=Urun)
+def urun_sprite(sender, **kwargs):
+    instance = kwargs['instance']
+    if instance.yeni == True:
+        pic_urun = [urun.resim for urun in Urun.objects.filter(yeni=True)]
+        pic_ver = [pic.version_generate('yeni_ufak') for pic in pic_urun]
+        sprite_generator('products', pic_ver)
+    if 'panel' in instance.kategori.isim:
+        pic_urun = [urun.resim for urun in Urun.objects.filter(
+            kategori__isim__contains='panel')]
+        pic_ver = [pic.version_generate('panel_ufak') for pic in pic_urun]
+        sprite_generator('panels', pic_ver)
+
 

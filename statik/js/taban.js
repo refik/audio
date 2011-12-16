@@ -1,4 +1,4 @@
-jQuery(function(){
+jQuery(document).ready(function(){
     $('ul.sf-menu').supersubs({ 
         minWidth:    12,   // minimum width of sub-menus in em units 
         maxWidth:    27,   // maximum width of sub-menus in em units 
@@ -11,6 +11,8 @@ jQuery(function(){
     });
 
     $('.banner').cycle({
+        timeout: 6000,
+        speed: 700,
 	    fx: 'fade' 
     });
 
@@ -31,4 +33,5 @@ jQuery(function(){
     };
 
     degistir();
+    $('#afis > img').css('visibility','visible');
 });

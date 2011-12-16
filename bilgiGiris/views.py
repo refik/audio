@@ -1,12 +1,11 @@
 # coding: utf-8
 from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm
 from audio.bilgiGiris.models import Tip
-from audio.bilgiGiris.mail import audiomail
+from audio.ortakVeri.mail import audiomail
 from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
-from django.core.mail import send_mail
 SIRA = ['isim','email','sehir','firma','telefon','mesaj']
 
 def mesajOlustur(sozluk):
@@ -48,7 +47,9 @@ def formIslem(request,tip):
                 bilgi_db.sorumlu.add(sorumlu)
             konu = 'Audio ' + tip.capitalize() + ' Formu'
             mesaj = mesajOlustur(bilgi.cleaned_data)
+            mesaj += u'http://www.audio.com.tr/takip/%d adresinden detayli inceleyebilirsiniz' % bilgi_db.pk
             audiomail('audioweb@audio.com.tr',gonderilecek + ['refik.rfk@gmail.com'],konu,mesaj)
+            audiomail('audioweb@audio.com.tr', [bilgi.cleaned_data['email']],konu,'Isteginiz elimize ulasti, size en kisa zamanda cevap verecegiz.\n\nMesajiniz: %s\n\nAudio Elektronik\nwww.audio.com.tr - 444 11 58\n\nnot: lutfen bu adrese cevap atmayin, kontrol edilmiyor.' % (bilgi.cleaned_data['mesaj'],))
             yollaForm = form()
             geri_donus = 'İsteğiniz Elimize Ulaşmıştır'
         else:

@@ -1,9 +1,13 @@
 from django.db import models
-from filebrowser.fields import FileBrowseField
-from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.flatpages.models import FlatPage
+from django.dispatch import receiver
+from mptt.models import MPTTModel, TreeForeignKey
+from filebrowser.fields import FileBrowseField
+from storages.backends.mosso import CloudFilesStorage
 from audio.urun.models import Kategori, Urun
 from audio.dokuman.models import Dokuman
+
+
 
 class Link(models.Model):
     sayfa = models.ForeignKey(FlatPage,blank=True, null=True)

@@ -7,7 +7,7 @@
  {% for sistem in sistemler %}
  <div class="grid_26">
   <div class="grid_7 alpha">
-   <a href={% if sistem.sema %}"{{ sistem.sema.url }}" class="tek_resim"{% else %}"#" style="cursor:default;" onclick="return false;"{% endif %}><img style='' src="{% version sistem.resim.path 'sistem_ufak' %}"/></a>
+   <a href={% if sistem.sema %}"{{ sistem.sema.url }}" class="tek_resim"{% else %}"#" style="cursor:default;" onclick="return false;"{% endif %}><div class="systems systems-{{ sistem.resim.filename_root }}_sistem_ufak-{{ sistem.resim.extension|cut:'.' }}"></div></a>
   </div>
   <div class="grid_18 omega">
    {{ sistem.aciklama }}

@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.db import models
 from datetime import datetime
-from audio.bilgiGiris.mail import audiomail
+from audio.ortakVeri.mail import audiomail
 from django.contrib.auth.models import User
 from django.contrib.comments.moderation import CommentModerator, moderator
 
@@ -17,8 +17,8 @@ class Sehir(models.Model):
 
 class Bilgi(models.Model):
     isim = models.CharField('İsim Soyisim', max_length = 50)
-    sehir = models.ForeignKey(Sehir,null=True,blank=True)
-    telefon = models.CharField('Telefon', max_length = 50,null=True,blank=True)
+    sehir = models.ForeignKey(Sehir)
+    telefon = models.CharField('Telefon', max_length = 50,null=True)
     email = models.EmailField('Email')
     firma = models.CharField('Firma', max_length = 200,null=True,blank=True)
     mesaj = models.TextField('Mesaj',null=True,blank=True)

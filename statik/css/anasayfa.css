@@ -1,0 +1,53 @@
+#yeni_urunler > div {
+	position: absolute;
+	visibility: hidden;
+}
+
+#yeni_urunler > div:first-child {
+	visibility: visible;
+}
+
+
+#haberler > div {
+	position: absolute;
+	visibility: hidden;
+}
+
+#haberler > div:first-child {
+	visibility: visible;
+}
+
+.set4 {
+	height:			265px;
+	background-image: 	url('/resim/basic_4.jpg');
+}
+
+.set4b {
+	height:			265px;
+	background-image: 	url('/resim/basic.jpg');
+}
+
+.set4k {
+	height:			265px;
+	background-image: 	url('/resim/konsept.jpg');
+}
+
+.set4_1 {
+	height:			114px;
+	background-image: 	url('/resim/basic_4RU_r1_c1.jpg');
+}
+
+.set4_2 {
+	height:			69px;
+	background-image: 	url('/resim/basic_4RU_r2_c1.jpg');
+}
+
+.set4_3 {
+	height:			82px;
+	background-image: 	url('/resim/basic_4RU_r3_c1.jpg');
+}
+
+.tek_yarim {
+    height:         132px;
+    background-image:   url('/resim/tek_yarim.jpg');
+}
