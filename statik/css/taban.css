@@ -15,7 +15,7 @@ body {
 	background-size: 	100%;
 	margin:		    	0 auto;
 	width:		    	1000px;
-	background-image:	url('/resim/back.jpg');
+	background-image:	url('http://s.aucdn.net/resim/back.jpg');
 	background-repeat: 	repeat-y;
 }
 
@@ -74,14 +74,14 @@ div.ust_menu {
 .one {
 	background-size: 	100%;
 	margin:		    	0 auto;
-	background-image:	url('/resim/tam_orta.png');
+	background-image:	url('http://s.aucdn.net/resim/tam_orta.png');
 	background-repeat: 	repeat-y;
 }
 
 .two {
 	background-size: 	100%;
 	margin:		    	0 auto;
-	background-image:	url('/resim/yarim_orta.png');
+	background-image:	url('http://s.aucdn.net/resim/yarim_orta.png');
 	background-repeat: 	repeat-y;
 }
 

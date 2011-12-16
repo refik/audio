@@ -1,19 +1,23 @@
+{% load compress %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
 </html>
 <head>
  <meta charset="utf-8" />
  <title>AUDIO Elektronik</title>
+{% compress css %}
  <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/960a.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css" />
  <link rel="stylesheet" href="{{ STATIC_URL }}css/takip.css" />
  <link type="text/css" href="{{ STATIC_URL }}css/blitzer/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+{% endcompress %}
+{% compress js %}
  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/takip.js"></script>
- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+{% endcompress %}
 </head>
 
 <body>
@@ -49,7 +53,7 @@
   </div>
   <div class='clear'></div>
  </div>
- <div class="sprites sprites-bottom-jpg"></div>
+ <img src="{{ STATIC_URL }}resim/bottom.jpg" />
 </div>
 </body>
 </html>
