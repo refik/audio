@@ -8,20 +8,19 @@
   <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}css/dokuman.css" />
 {% endcompress %}
+{% compress js %}
+ <script type="text/javascript" src="{{ STATIC_URL }}js/flexpaper_flash.js"></script>
+{% endcompress %}
 {% compress js inline %}
-  <script type="text/javascript" src="{{ STATIC_URL }}js/flexpaper_flash.js"></script>
   <script type="text/javascript">
-
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26169028-1']);
   _gaq.push(['_trackPageview']);
-
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-
   </script>
 {% endcompress %}
  </head>
@@ -37,12 +36,12 @@
     </div>
     <div style='margin: 0 auto;'> 
      <strong>{{ dokuman.isim }}</strong>
-     <p><a href='{{ dokuman.dosya.url }}'>indirmek icin tiklayin ({{ dokuman.dosya.filesize|filesizeformat }})</a></p>
+     <p><a href='{{ dokuman.dosya.url }}'>indirmek icin sag tiklayip 'farkli kaydet'i secin ({{ dokuman.dosya.filesize|filesizeformat }})</a></p>
     </div>
    </div>
    <a id="viewerPlaceHolder" style="display:block;"></a>
   </div>
-{% compress js inline %}
+ {% compress js inline %}
   <script type="text/javascript">
    var viewportwidth;
    var viewportheight;
@@ -67,7 +66,7 @@
    document.getElementById('ust_bar').style.width = viewportwidth - 286;
  
    var fp = new FlexPaperViewer(   
-       '{{ STATIC_URL }}flexpaper/FlexPaperViewer.swf',
+       '/statik/FlexPaperViewer',
        'viewerPlaceHolder', { config : {
        SwfFile : "{% templatetag openbrace %}{{ swfUrl }}/[*,0].swf,{{ sayfa }}{% templatetag closebrace %}",
        Scale : 1, 
@@ -91,11 +90,9 @@
        localeChain: 'tr_TR'
    }});
   </script>
-{% endcompress %}
+ {% endcompress %}
   <div class='buton'><img class='tikla' src='{{ STATIC_URL }}resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
   </div>
  </body>
 </html>
-
-
 

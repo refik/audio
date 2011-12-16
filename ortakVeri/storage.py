@@ -43,10 +43,6 @@ class AudioStorage(CloudFilesStorage, StorageMixin):
     def size(self, *args, **kwargs):
         return super(AudioStorage, self).size(*args, **kwargs)
 
-    #@method_cache(30)
-    def url(self, name):
-        return super(AudioStorage, self).url(name)
-
     def _get_cloud_obj(self, name):
         # Filebrowser checks folders with '/' at the end, doesnt work
         if name.endswith('/'):
@@ -81,5 +77,6 @@ class AudioStorage(CloudFilesStorage, StorageMixin):
     def makedirs(self, name):
         return self._save(name, CloudStorageDirectory(name))
 
+    #method_cache(30)
     def url(self, name):
-        return '%s/%s' % (STATIC_URL, name)
+        return '%s%s' % (STATIC_URL, name)
