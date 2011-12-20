@@ -30,7 +30,7 @@
   <div class='buton'><img class='tikla' src='{{ STATIC_URL }}resim/geri.png' onClick="getDocViewer().prevPage()"/></div>
   <div class='centered dokuman'>
    <div id='ust_bar'>
-    <img style='float:left;' src='{{ STATIC_URL }}resim/logo_ufak.jpg'/>
+    <img style='float:left;' width='156px' height='40px' src='{{ STATIC_URL }}resim/logo_ufak.jpg'/>
     <div style='float:right;text-align:right;width:156px;'> 
      <p><a href='/'>Anasayfa</a></p> 
      <p><a href='#' onClick="history.go(-1);return false;">Geri</a></p>
@@ -42,7 +42,7 @@
    </div>
    <a id="viewerPlaceHolder" style="display:block;"></a>
   </div>
- {% compress js inline %}
+{% compress js inline %}
   <script type="text/javascript">
    var viewportwidth;
    var viewportheight;
@@ -60,21 +60,22 @@
        viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
        viewportheight = document.getElementsByTagName('body')[0].clientHeight
    }
-   document.getElementById('viewerPlaceHolder').style.width = viewportwidth - 286;
-   document.getElementById('viewerPlaceHolder').style.height = viewportheight - 70;
-   document.getElementById('container').style.width = viewportwidth - 20
-   document.getElementById('container').style.height = viewportheight - 20
-   document.getElementById('ust_bar').style.width = viewportwidth - 286;
- 
+  
+   document.getElementById('viewerPlaceHolder').style.width = viewportwidth - 256;
+   document.getElementById('viewerPlaceHolder').style.height = viewportheight - 40;
+   document.getElementById('container').style.width = viewportwidth
+   document.getElementById('container').style.height = viewportheight
+   document.getElementById('ust_bar').style.width = viewportwidth - 256;
+   
    var fp = new FlexPaperViewer(   
        '/statik/FlexPaperViewer',
        'viewerPlaceHolder', { config : {
        SwfFile : "{% templatetag openbrace %}{{ swfUrl }}/[*,0].swf,{{ sayfa }}{% templatetag closebrace %}",
-       Scale : 0.8, 
+       Scale : 0.6, 
        ZoomTransition : 'easeOut',
        ZoomTime : 0.5,
        ZoomInterval : 0.2,
-       FitPageOnLoad : true,
+       FitPageOnLoad : false,
        FitWidthOnLoad : false,
        PrintEnabled : true,
        FullScreenAsMaxWindow : false,
@@ -90,8 +91,10 @@
        SearchToolsVisible : false,
        localeChain: 'tr_TR'
    }});
+  onDocumentLoaded = function(){ getDocViewer().fitHeight(); }
+  onCurrentPageChanged = function(num){ getDocViewer().fitHeight(); }
+{% endcompress %}
   </script>
- {% endcompress %}
   <div class='buton'><img class='tikla' src='{{ STATIC_URL }}resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
   </div>
  </body>

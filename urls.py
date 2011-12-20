@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
-from audio.settings import STATIC_URL
 from filebrowser.sites import site
 admin.autodiscover()
 
@@ -11,7 +10,6 @@ sitemaps = {
 
 urlpatterns = patterns('',
     url(r'^admin/filebrowser/', include(site.urls)),
-    (r'^favicon.ico$', 'django.views.generic.simple.redirect_to', {'url': STATIC_URL + 'resim/favicon.ico'}),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     (r'^grappelli/', include('grappelli.urls')),
     (r'^urun', include('audio.urun.urls')),

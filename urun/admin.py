@@ -28,7 +28,7 @@ class UrunAdmin(admin.ModelAdmin):
     )
     class Media:
         js = [
-            STATIC_URL + 'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            '/statik/tinymce/jscripts/tiny_mce/tiny_mce.js',
             STATIC_URL + 'js/tinymce_setup.js',
         ]
 
