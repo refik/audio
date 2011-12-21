@@ -42,7 +42,7 @@ class TipListView(ListView):
                 else:
                     bilgiler = tip.bilgi_set.all().filter(sorumlu=user)
                 bilgiler = bilgiler.filter(**query)
-                paginator = Paginator(bilgiler,20)
+                paginator = Paginator(bilgiler,10)
                 try:
                     bilgiler = paginator.page(page)
                 except EmptyPage:
