@@ -1,55 +1,67 @@
 {% load compress %}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-"http://www.w3.org/TR/html4/strict.dtd">
-</html>
-<head>
- <meta charset="utf-8" />
- <title>AUDIO Elektronik</title>
- <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/960a.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css" />
- <link rel="stylesheet" href="{{ STATIC_URL }}css/takip.css" />
- <link type="text/css" href="{{ STATIC_URL }}css/blitzer/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
- <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.js"></script>
- <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
- <script type="text/javascript" src="{{ STATIC_URL }}js/takip.js"></script>
-</head>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>AUDIO Elektronik</title>
+        {% compress css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/960a.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/taban.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/takip.css" />
+        <link type="text/css" href="{{ STATIC_URL }}css/blitzer/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+        {% endcompress %}
+        {% compress js %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/takip.js"></script>
+        {% endcompress %}
+    </head>
 
-<body>
-<div id='bkground'>
- <div class='container_56'>
-  <div class='grid_56'>
-   <div class='grid_10 alpha'><a href='/'><img src='{{ STATIC_URL }}resim/logo_ufak.jpg'/></a></div>
-   <div class='grid_36 centered'>
-    <a class='sade_link' href='/takip/'><h2 style='margin:0;'>Audio Müşteri İstek Takip Sayfasi</h2></a>
-   </div>
-   <div class='grid_10' style='text-align:right;'>
-    <div class='grid_10'><strong>Kullanici: </strong>{{ user }}</div>
-    <div class='grid_10'><a href='#' onClick="history.go(-1);return false;">Geri</a></div>
-   </div>
-  </div>
-  <div class='clear'></div>
-  <div class='grid_56'>
-   {% block icerik %}
-   <div id='tabler'>
-    <ul>
-     {% for tip in tipler %}
-     <li><a href="#tabler-{% cycle 1 2 3 4 5 6 %}">{{ tip.0 }}</a></li>
-     {% endfor %}
-    </ul>
-
-    {% for tip in tipler %}
-    <div id='tabler-{% cycle 1 2 3 4 5 6 %}'> 
-     {% include 'istekler.html' with tip_isim=tip.0 bilgiler=tip.1 %}
-    </div>
-    {% endfor %}
-   </div>
-   {% endblock icerik %}
-  </div>
-  <div class='clear'></div>
- </div>
- <img src="{{ STATIC_URL }}resim/bottom.jpg" />
-</div>
-</body>
+    <body>
+        <div id='bkground'>
+            <div class='container_56'>
+                <div class='grid_56'>
+                    <div class='grid_10 alpha'>
+                        <a href='/'>
+                            <img src='{{ STATIC_URL }}resim/logo_ufak.jpg'/>
+                        </a>
+                    </div>
+                    <div class='grid_36 centered'>
+                        <a class='sade_link' href='/takip/'>
+                            <h2 style='margin:0;'>Audio Müşteri İstek Takip Sayfasi</h2>
+                        </a>
+                    </div>
+                    <div class='grid_10' style='text-align:right;'>
+                        <div class='grid_10'>
+                            <strong>Kullanici: </strong>{{ user }}
+                        </div>
+                        <div class='grid_10'>
+                            <a href='#' onClick="history.go(-1);return false;">Geri</a>
+                        </div>
+                    </div>
+                </div>
+                <div class='clear'></div>
+                <div class='grid_56'>
+                {% block icerik %}
+                <div id='tabler'>
+                    <ul>
+                    {% for tip in tipler %}
+                        <li><a href="#tabler-{% cycle 1 2 3 4 5 6 %}">{{ tip.0 }}</a></li>
+                    {% endfor %}
+                    </ul>
+                    {% for tip in tipler %}
+                        <div id='tabler-{% cycle 1 2 3 4 5 6 %}'> 
+                        {% include 'istekler.html' with tip_isim=tip.0 bilgiler=tip.1 %}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endblock icerik %}
+                </div>
+                <div class='clear'></div>
+            </div>
+            <img src="{{ STATIC_URL }}resim/bottom.jpg" />
+        </div>
+    </body>
 </html>
