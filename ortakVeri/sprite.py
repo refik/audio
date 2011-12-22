@@ -1,8 +1,8 @@
 from django.core.files.storage import default_storage
 from django.core.files import File
 from media_bundler.bundler import PngSpriteBundle
-from compressor.cache import get_hexdigest
 from audio.settings import STATIC_ROOT, STATIC_URL
+from audio.ortakVeri.randomstr import random_string
 import time
 import os
 import re
@@ -10,12 +10,12 @@ import re
 class PngSpriteCustom(PngSpriteBundle):
     def __init__(self, *args, **kwargs):
         super(PngSpriteCustom, self).__init__(*args, **kwargs)
-        stamp = get_hexdigest(time.time(),12)
+        stamp = random_string(6)
         self.name += stamp
 
     def css_class_name(self, rule_name):
         versioned_name = self.name
-        noversion_name = versioned_name[:-12]
+        noversion_name = versioned_name[:-6]
         self.name = noversion_name
         css_name = super(PngSpriteCustom, self).css_class_name(rule_name)
         self.name = versioned_name

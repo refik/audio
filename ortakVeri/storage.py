@@ -1,3 +1,4 @@
+from django.core.files.base import ContentFile
 from storages.backends.mosso import CloudFilesStorage
 from storages.backends.mosso import CloudStorageDirectory
 from filebrowser.storage import StorageMixin
@@ -49,7 +50,7 @@ class AudioStorage(CloudFilesStorage, StorageMixin):
             name = name[:-1]
         return super(AudioStorage, self)._get_cloud_obj(name)
 
-    @method_cache(30)
+    #@method_cache(30)
     def isdir(self, name):
         if self.exists(name) and self.size(name) == 0:
             return True
@@ -80,3 +81,17 @@ class AudioStorage(CloudFilesStorage, StorageMixin):
     #method_cache(30)
     def url(self, name):
         return '%s%s' % (STATIC_URL, name)
+
+    def move(self, old_file_name, new_file_name, allow_overwrite=False):
+        if self.exists(new_file_name) and allow_overwrite == False:
+            raise Exception
+        new_file = ContentFile(self._open(old_file_name).file.read())
+        self._save(new_file_name, new_file)
+
+    def rmtree(self, name):
+        sub_dirs, files = self.full_listdir(name)
+        for dir in sub_dirs:
+            self.rmtree(name + '/' + dir)
+        for file in files:
+            self.delete(name + '/' + file)
+        self.delete(name)

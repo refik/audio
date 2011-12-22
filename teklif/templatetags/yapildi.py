@@ -7,7 +7,7 @@ register = template.Library()
 @register.inclusion_tag('yapildi_liste.html')
 def yapildi_listesi(teklif):
     yapilanlar = teklif.yapildi_set.all()
-    return {'yapilanlar': yapilanlar, 'teklif': teklif}
+    return {'yapilanlar': yapilanlar, 'teklif': teklif, 'count': yapilanlar.count()}
 
 @register.simple_tag(takes_context=True)
 def yapildi_formu(context,instance):

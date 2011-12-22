@@ -1,3 +1,6 @@
+{% if count != 0 %}
+    <strong>Yapilanlar</strong>
+{% endif %}
 <dl id="yapilanlar">
   {% for yapilan in yapilanlar %}
     <dt id="y{{ yapilan.id }}">

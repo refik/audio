@@ -56,7 +56,10 @@ def handle_file_upload(path, file, site):
     except Exception, inst:
         raise inst
     return uploadedfile
-**django.core.files base.py de cString i comment out ettim tipki mosso daki gibi - BUNU Django-Cumulus a gecerek duzeltebilirsin. yap bunu
+  BUNA SLUGIFY I DA EKLE
+**django.core.files base.py de cString i comment out ettim tipki mosso daki gibi - BUNU Django-Cumulus a gecerek duzeltebilirsin. yap bunu olay da content_type atamayla ilgili cString custom attirubte atamaya izin vermiyor mosso da oyle birseyler yapiyor
 **collectstatic i bir dry run ile test etmek lazim dosya adlarinin sonuna 1 koyuyor sanki 
 **cok cirkin bir hack, yanliz bazi versiyonlar 1 pixel kucuk cikiyor, floating point arithmetic ile ilgili. cozum functions da su: int(y*r) -> int(float(str(y*r))) 
 **Burada statikTasinmaz diye bir klasor var, icinde tinymce, flexpaper in son versiyonu var. birde /statik/logo.jpg icin bir de logo.jpg var. /statik linki bu klasorden sorulur 
+**filebrowser functions.py ye from django.template.defaultfilters slugify geldi
+**filebrowser functions.py ye from audio.ortakVerio.randomstr import random_string geldi

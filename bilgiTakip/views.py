@@ -197,8 +197,11 @@ class TemsilciDetailView(DetailView):
         context['kapali_is'] = teklifler.filter(durum__kapali=True).count()
         context['acik_is'] = teklifler.filter(durum__kapali=False).count()
         context['grafikler'] = grafikler
-        context['reaksiyon'] = datetime.timedelta(
-            seconds=sum([tarih[1] for tarih in veri])/len(veri)*3600).__str__().split('.')[0]
+        try:
+            context['reaksiyon'] = datetime.timedelta(
+                seconds=sum([tarih[1] for tarih in veri])/len(veri)*3600).__str__().split('.')[0]
+        except:
+            context['reaksiyon'] = 0
 
         return context
 

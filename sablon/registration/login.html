@@ -2,9 +2,12 @@
 {% load url from future %}
 
 {% block icerik %}
+{% include 'tekli_ac.html' %}
+<div class='grid_30 prefix_2 suffix_18'>
 
+<h1>Kullanici Girisi</h1>
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Kullanici adi veya sifreniz yanlis. Tekrar deneyin.</p>
 {% endif %}
 
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
@@ -20,8 +23,11 @@
 </tr>
 </table>
 
-<input type="submit" value="login" />
+<input type="submit" value="Giris" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
+</div>
+<div class='clear'></div>
+{% include 'tekli_kapat.html' %}
 
 {% endblock %}

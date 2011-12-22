@@ -83,14 +83,15 @@
     </ol>
   </div>
   {% if bilgi.teklif %}
-  <strong>Yapilanlar</strong>
   <ol>
   {% yapildi_listesi bilgi.teklif %}
   </ol>
+  {% if yorum_formu_goster == 'Evet' %}
   <p onClick='$(this).next().toggle("slow");' style='cursor:pointer;text-decoration:underline;'>Yapildi formu aç/kapa</p>
-  <div {% if yorum_formu_goster == 'Hayir' %}style='display:none;'{% endif %}>
+  <div>
    {% yapildi_formu bilgi.teklif %}
   </div>
+  {% endif %}
   {% endif %}
  </div>
 </div>

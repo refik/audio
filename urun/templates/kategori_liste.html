@@ -17,7 +17,7 @@
     <div class="grid_13">
      <a href='/urun/{{ urun.slug }}'><img src="{% version urun.resim.path 'urun_ufak' %}"/></a>
     </div>
-    <div class="grid_13"><a href='/urun/{{ urun.slug }}' style='text-decoration:none;color:black;'>{{ urun.isim }}</a></div>
+    <div class="grid_13" style='margin-top:10px;'><a href='/urun/{{ urun.slug }}' style='text-decoration:none;color:black;'>{{ urun.isim }}</a></div>
    </div> 
    {% if sira == 2%}
    {% cycle '' '</div>' %}

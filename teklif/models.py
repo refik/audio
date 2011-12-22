@@ -50,6 +50,6 @@ class Yapildi(models.Model):
     mesaj = models.TextField()
     tarih = models.DateTimeField(auto_now_add=True)
     durum = models.ForeignKey(Durum,null=True,blank=True)
-    dosya = models.FileField(upload_to='teklif',null=True,blank=True)
+    dosya = models.FileField(upload_to='yukleme/teklif',null=True,blank=True)
 
 
