@@ -9,7 +9,7 @@ def audiomail(kimden,kime,konu,mesaj):
     if GELISTIRME:
         return None
 
-    server = smtplib.SMTP("mail.audio.com.tr")
+    server = smtplib.SMTP("mail.audio.com.tr", port=587)
     server.ehlo()
     ntlm_authenticate(server, DOMAIN, PASSWORD)
     fromaddr = kimden
