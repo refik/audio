@@ -29,7 +29,7 @@
    {% cycle '' '' '' '</div>' %}
    {% endif %}
    {% endfor %}
-   {% if not urun_listesi.count|divisibleby:'2' or not urun_listesi.count|divisibleby:'4' %}</div>{% endif %}
+   {% if not urun_listesi.count|divisibleby:'2' or sira != 2 and urun_listesi.count == 2 %}</div>{% endif %}
   </div>
  </div>
  <div class="grid_{{ sira_grid }} sprites sprites-{% if sira == 2 %}yarim{% else %}tam{% endif %}_alt-png"></div>
