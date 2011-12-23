@@ -4,7 +4,9 @@
 {% block icerik %}
 {% include 'tekli_ac.html' %}
  <div class="grid_53 push_2">
+  {% if urun.seri %}
   <img style="float:left;" src="{{ STATIC_URL }}resim/{{ urun.seri }}.jpg" />
+  {% endif %}
   <h2 style='margin-bottom:0px;'>{{ urun.isim }}</h3>
  </div>
  <div class="grid_27 push_1 alpha">
