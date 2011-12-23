@@ -9,7 +9,7 @@
  </div>
  <div class="grid_27 push_1 alpha">
   <div class="grid_27 centered">
-   <a href={{ urun.resim.url }} class="tek_resim"><img src="{% version urun.resim.path 'urun' %}"/></a>
+   <a href={% version urun.resim.path 'limit' %} class="tek_resim"><img src="{% version urun.resim.path 'urun' %}"/></a>
   </div>
   <div class='grid_26' style='text-align:right'>
    {{ urun.resim_yazi }}
@@ -21,7 +21,7 @@
    <div class='grid_9'>
    <div class='grid_9 topd'></div>
     <div class='grid_9 centered'>
-     <a href={{ u.resim.url }} class="tek_resim"><img src='{% version u.resim.path 'diger_model' %}'/></a>
+     <a href={% version u.resim.path 'limit' %} class="tek_resim"><img src='{% version u.resim.path 'diger_model' %}'/></a>
     </div>
     <div class='grid_8' style='text-align:right;'>
      {{ u.aciklama }}
@@ -41,7 +41,7 @@
    <div class="grid_23">- {{ ozellik.isim }}</div>
    {% endfor %}
   </div>
-  <div class="grid_22">
+  <div class="grid_22" style='margin-top:10px;'>
    <div class="grid_22 topd"></div>
     {% autoescape off %}
     {{ urun.tanitim }}
