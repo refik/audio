@@ -70,7 +70,7 @@
    var fp = new FlexPaperViewer(   
        '/statik/FlexPaperViewer',
        'viewerPlaceHolder', { config : {
-       SwfFile : "{% templatetag openbrace %}{{ swfUrl }}/[*,0].swf,{{ sayfa }}{% templatetag closebrace %}",
+       SwfFile : "{% templatetag openbrace %}/statik/swf/[*,0].swf,{{ sayfa }}{% templatetag closebrace %}",
        Scale : 0.6, 
        ZoomTransition : 'easeOut',
        ZoomTime : 0.5,
