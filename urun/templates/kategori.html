@@ -28,7 +28,7 @@
 
 <!--ORTAK-->
 {% if ortak %}
-{% if basic and konsept %}
+{% if basic and konsept or not konsept and not basic %}
 {% include "kategori_liste.html" with sira=1 sira_grid=56 sira_grid_inner=52 sira_grid_push=2 seri='ortak' urun_listesi=ortak %}
 {% else %}
 {% include "kategori_liste.html" with sira=2 sira_grid=28 sira_grid_inner=26 sira_grid_push=1 seri='ortak' urun_listesi=ortak %}
