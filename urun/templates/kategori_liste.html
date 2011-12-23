@@ -4,7 +4,11 @@
  <div class="grid_{{ sira_grid }} {% if sira == 1 %}one{% else %}two{% endif %}">
   <div class="grid_{{ sira_grid_inner }} push_{{ sira_grid_push }}">
    <div class="grid_{{ sira_grid_inner }} centered">
-    <img src="{{ STATIC_URL }}resim/{{ seri }}.jpg"/>
+    {% if seri == 'ortak' %}
+        <div class='topd'></div>
+    {% else %}
+        <img src="{{ STATIC_URL }}resim/{{ seri }}.jpg"/>
+    {% endif %}
    </div>
    {% for urun in urun_listesi %}
    {% if sira == 2 %}

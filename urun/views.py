@@ -23,5 +23,5 @@ def urunler(request,kategori):
     istenenKategori = Kategori.objects.get(slug=kategori).UrunKategori.all()
     konsept = istenenKategori.filter(seri='konsept')
     basic = istenenKategori.filter(seri='basic')
-    ortak = istenenKategori.filter(seri='')
+    ortak = istenenKategori.filter(seri=None)
     return render_to_response('kategori.html',{'konsept':konsept, 'basic':basic, 'ortak':ortak},context_instance=RequestContext(request))
