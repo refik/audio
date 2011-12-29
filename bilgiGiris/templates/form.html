@@ -1,5 +1,5 @@
 <div class="grid_{{ grid }} push_{{ push }} {{ class }}">
- {% if mesaj %}<strong id='mesaj'>{{ mesaj}}</strong>{% endif %}
+ {% if mesaj %}<h5 id='mesaj' style='color:#FF0000;'>{{ mesaj}}</h3>{% endif %}
  <form action="/{{ tip }}-formu/" method="post">{% csrf_token %}
   <ol>
    {{ form.as_ul }}

@@ -63,17 +63,17 @@ def yapildi_yolla(request):
                 durum_mesaji += u"\n[Kaybetme sebepleri: %s]" \
                                 % ', '.join([v.isim for v in list(value)])
         teklif.save()
-        audiomail(
-            "audioweb@audio.com.tr",
-            [sorumlu.email for sorumlu in teklif.bilgi.sorumlu.all()] + \
-            ['refik.rfk@gmail.com'],
-            str(teklif.bilgi.tip) + u'\' na Yorum Yapıldı',
-            u'%d nolu müşteri isteğine yapılan yorum\n\nMesaj: %s\n' \
-            u'%s\n\nhttp://www.audio.com.tr/takip/%d adresinden ' \
-            u'detaylı inceleyebilirsiniz' % (teklif.bilgi.pk, 
-                                            yapilan.mesaj, 
-                                            durum_mesaji,
-                                            teklif.bilgi.pk))
+        #audiomail(
+        #    "audioweb@audio.com.tr",
+        #    [sorumlu.email for sorumlu in teklif.bilgi.sorumlu.all()] + \
+        #    ['refik.rfk@gmail.com'],
+        #    str(teklif.bilgi.tip) + u'\' na Yorum Yapıldı',
+        #    u'%d nolu müşteri isteğine yapılan yorum\n\nMesaj: %s\n' \
+        #    u'%s\n\nhttp://www.audio.com.tr/takip/%d adresinden ' \
+        #    u'detaylı inceleyebilirsiniz' % (teklif.bilgi.pk, 
+        #                                    yapilan.mesaj, 
+        #                                    durum_mesaji,
+        #                                    teklif.bilgi.pk))
         return redirect('/takip/%d' % yapilan.teklif.bilgi.pk)
     else:
         return render_to_response('onizleme.html', 
