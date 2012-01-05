@@ -107,10 +107,12 @@ class IstatistikView(TemplateView):
     template_name = 'istatistik.html'
 
     def get_context_data(self,**kwargs):
+        user = self.request.user
         grafikler = []
         bugun = datetime.date.today()
         on_gun = datetime.timedelta(5)
         context = super(IstatistikView, self).get_context_data(**kwargs)
+        ilgili_isler = Teklif.objects.all()
         durumlar = Durum.objects.all()
         teklifler = Teklif.objects.all()
         alinan_isler = Durum.objects.get(isim__contains='Aldık'). \
@@ -159,6 +161,24 @@ class IstatistikView(TemplateView):
         grafikler += [
             (json, 'Tarihe Gore Alip Kaybettigimiz Isler', 
             (800,400), 'ColumnChart')]
+
+        # Dorduncu Grafik
+        #tanim = [("No", "string"), ("Temsilci", "string"),("Tarih", "string"),
+        #         ("Musteri","string"), ("Durum","string"),
+        #         ("Daire","number"),("Tutar", "number")]
+        #veri = [["<a href='http://www.audio.com.tr/takip/%d'>%d</a>" % (teklif.bilgi.id, teklif.bilgi.id), \
+        #         list(teklif.bilgi.sorumlu.filter(profile__gorev__isim__contains='Temsilci'))[-1].get_full_name(), \
+        #         teklif.bilgi.tarih.strftime('%d/%m'), \
+        #         teklif.bilgi.isim, \
+        #         teklif.durum.isim, \
+        #         teklif.daire, \
+        #         teklif.tutar] for teklif in ilgili_isler]
+        #data_table = gviz_api.DataTable(tanim)
+        #data_table.LoadData(veri)
+        #json = data_table.ToJSon()
+        #grafikler += [
+        #    (json, 'Genel Gorunum', 
+        #    (900,400), 'Table')]
 
         context['grafikler'] = grafikler
         return context

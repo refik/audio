@@ -1,20 +1,19 @@
 {% load compress %}
-{% compress js inline %}
 <script type='text/javascript'>
-    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.load('visualization', '1.0', {'packages':['corechart', 'table']});
     google.setOnLoadCallback(grafikCiz);
     function grafikCiz() {
         {% for grafik in grafikler %}
         var data = new google.visualization.DataTable({{ grafik.0|safe }})
         var options = {'title':'{{ grafik.1 }}',
                        'width': {{ grafik.2.0 }},
-                       'height': {{ grafik.2.1 }}};
+                       'height': {{ grafik.2.1 }},
+                       'allowHtml': true};
         var chart = new google.visualization.{{ grafik.3 }}(document.getElementById('{{ grafik.1|slugify }}'));
         chart.draw(data, options);
         {% endfor %}
     }
 </script> 
-{% endcompress %}
 {% for grafik in grafikler %}
 <div id='{{ grafik.1|slugify }}'></div> 
 {% endfor %}
