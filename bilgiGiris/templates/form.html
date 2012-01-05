@@ -1,9 +1,15 @@
 <div class="grid_{{ grid }} push_{{ push }} {{ class }}">
- {% if mesaj %}<h5 id='mesaj' style='color:#FF0000;'>{{ mesaj}}</h3>{% endif %}
- <form action="/{{ tip }}-formu/" method="post">{% csrf_token %}
-  <ol>
-   {{ form.as_ul }}
-   <li><label></label><input type="submit" value="Gonder" /></li>
-  </ol>
- </form>
+    {% if mesaj %}<h5 id='mesaj' style='color:#FF0000;'>{{ mesaj}}</h3>{% endif %}
+     <form id="bilgiform" action="/{{ tip }}-formu/" method="post">{% csrf_token %}
+         <ol>
+             {{ form.as_ul }}
+             <li><label></label><input id="submitbutton" type="submit" value="Gonder" /></li>
+         </ol>
+     </form>
+    <script>
+        var form = $("bilgiform")
+        form.submit(function() {
+            $("#submitbutton").attr('disabled', true);
+        }
+    </script>
 </div>
