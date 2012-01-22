@@ -6,17 +6,6 @@ from django.contrib.comments.models import Comment
 from django.contrib.auth.models import User
 from audio.bilgiGiris.models import Bilgi
 
-@receiver(post_save,sender=Bilgi)
-def teklif_yarat(sender,**kwargs):
-    try:
-        kwargs['instance'].teklif
-    except:
-        if kwargs['created'] == False:
-            if 'Teklif' in kwargs['instance'].tip.isim:
-                t = Teklif(bilgi=kwargs['instance'])
-                t.durum = Durum.objects.get(pk=1)
-                t.kapali = False
-                t.save()
 
 class Sebep(models.Model):
     isim = models.CharField('Sebep', max_length=200)
@@ -39,8 +28,10 @@ class Teklif(models.Model):
     durum = models.ForeignKey(Durum,null=True,blank=True)
     daire = models.IntegerField(null=True,blank=True)
     tutar = models.IntegerField(null=True,blank=True)
-    rakip = models.ForeignKey(Rakip,blank=True,null=True)
-    sebep = models.ManyToManyField(Sebep,blank=True,null=True)
+    dosya = models.FileField(upload_to='yukleme/teklif', null=True, blank=True)
+    temsilci = models.ForeignKey(User, null=True, blank=True)
+    class Meta:
+        ordering = ['-bilgi__tarih']
     def __unicode__(self):
         return self.bilgi.tip.isim
 
@@ -49,7 +40,41 @@ class Yapildi(models.Model):
     teklif = models.ForeignKey(Teklif)
     mesaj = models.TextField()
     tarih = models.DateTimeField(auto_now_add=True)
-    durum = models.ForeignKey(Durum,null=True,blank=True)
-    dosya = models.FileField(upload_to='yukleme/teklif',null=True,blank=True)
+    durum = models.ForeignKey(Durum, blank=True, null=True)
+    dosya = models.FileField(upload_to='yukleme/teklif')
+    rakip = models.ForeignKey(Rakip)
+    sebep = models.ManyToManyField(Sebep)
+    daire = models.IntegerField(null=True)
+    tutar = models.IntegerField(null=True)
+    delege = models.ForeignKey(User, related_name='delege_set')
+ 
 
+@receiver(post_save,sender=Bilgi)
+def teklif_yarat(sender,**kwargs):
+    try:
+        kwargs['instance'].teklif
+    except:
+        if kwargs['created'] == False:
+            if 'Teklif' in kwargs['instance'].tip.isim:
+                t = Teklif(bilgi=kwargs['instance'])
+                t.durum = Durum.objects.get(pk=1)
+                t.kapali = False
+                t.save()
 
+@receiver(pre_save,sender=Yapildi)
+def update_teklif(sender,**kwargs):
+    yapildi = kwargs['instance']
+    teklif = yapildi.teklif
+    if yapildi.durum:
+        teklif.durum = yapildi.durum
+    if yapildi.dosya:
+        teklif.dosya = yapildi.dosya
+    if yapildi.daire:
+        teklif.daire = yapildi.daire
+    if yapildi.tutar:
+        teklif.tutar = yapildi.tutar
+    try:
+        teklif.temsilci = yapildi.delege
+    except:
+        pass
+    teklif.save()

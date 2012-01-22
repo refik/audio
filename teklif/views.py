@@ -8,9 +8,78 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import RequestContext
+from django.views.generic import ListView, CreateView, DetailView
 from audio.ortakVeri.mail import audiomail
-from audio.teklif.models import Durum
-from audio.teklif.forms import TeklifYapildiForm
+from audio.teklif.models import Durum, Teklif
+from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm
+
+class NewView(DetailView):
+    template_name = 'offer.html'
+    context_object_name = 'offer'
+    
+    def get_object(self):
+        try:
+            new = Teklif.objects.filter(pk__gt=self.kwargs['pk']).reverse()[0]
+        except:
+            new = None
+        return new
+
+    def get_template_names(self):
+        templates = super(NewView,self).get_template_names()
+        if self.object == None:
+            # This is an empty template
+            templates.insert(0, 'success.html')
+        return templates
+
+class DoneView(CreateView):
+    template_name = 'done_form.html'
+    success_url = '/teklif/success/'
+    what_to_use = {'iletisim':[MesajForm, 3],
+                   'iptal':[MesajForm, 8],
+                   'sebep':[SebepForm, 7],
+                   'delege':[DelegeForm, 2],
+                   'dosya':[DosyaForm,5],
+                   'aldik':[MesajForm,6],
+                   'yonlendi':[MesajForm,4],
+                   'tutar':[TutarForm],
+                   'daire':[DaireForm],
+                   'genel':[MesajForm]}
+
+    def get_form_kwargs(self, *args, **kwargs):
+        if self.request.method == 'GET':
+            form_type = self.request.GET.get('form_type','')
+            offer_pk = self.request.GET.get('pk','')
+            user = self.request.user
+            initial = {'kullanici': user.pk, 'teklif': offer_pk}
+            try:
+                initial.update({'durum': self.what_to_use[form_type][1]})
+            except:
+                pass
+        else:
+            initial = {}
+        arguments = super(DoneView, self).get_form_kwargs(*args, **kwargs)
+        arguments['initial'].update(initial)
+        return arguments
+
+    def get_form_class(self, *args, **kwargs):
+        print self.request.POST, self.request.FILES
+        if self.request.method == 'GET':
+            form_type = self.request.GET.get('form_type','')
+        else:
+            form_type = self.request.POST.get('form_type','')
+        return self.what_to_use[form_type][0]
+
+
+class OfferView(ListView):
+    template_name = 'offers.html'
+    context_object_name = 'offers'
+    model = Teklif
+
+    def get_context_data(self, **kwargs):
+        context = super(OfferView, self).get_context_data(**kwargs)
+        context['pk'] = self.kwargs.get('pk',0)
+        return context
+
 
 @require_POST
 @csrf_exempt

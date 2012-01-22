@@ -1,0 +1,87 @@
+{% spaceless %}
+{% load truncate %}
+{% load humanize %}
+{% if offer %}
+<tr data-pk='{{ offer.pk }}'>
+	<th>
+		<a>{{ offer.pk }}</a>
+		<div class='isim-mesaj' style='display:none;'>{{ offer.bilgi.isim }} {{ offer.bilgi.mesaj }}</div>
+	</th>
+	<td>
+		<span rel='twipsy' class='static'  data-original-title='{{ offer.bilgi.tarih|date:"l" }} - 
+																{{ offer.bilgi.tarih|timesince }} 
+																once'>
+		{{ offer.bilgi.tarih|date:'d M.' }}
+		</span>
+	</td>
+	<td>
+		<span rel='twipsy' class='static'  data-original-title='<ul class="unstyled"><li>
+																<span class="twipsy-label">Isim:</span>
+																<span class="twipsy-text">
+																{{ offer.bilgi.isim }}</span></li><li>
+																<span class="twipsy-label">E-Posta:
+																</span><span class="twipsy-text">
+																{{ offer.bilgi.email }}</span></li><li>
+																<span class="twipsy-label">Telefon:
+																</span><span class="twipsy-text">
+																{{ offer.bilgi.telefon }}</span></li>
+																</ul>'>
+		{{ offer.bilgi.isim|chars:10 }}
+		</span>
+	</td>
+	<td>
+		<span rel='twipsy' class='static'  data-original-title='<span class="twipsy-label">Mesaj:
+																</span><span class="twipsy-text">
+																{{ offer.bilgi.mesaj }}</span>'>
+		{{ offer.bilgi.mesaj|chars:33 }}
+		</span>
+	</td>
+	<td>
+		<span rel='twipsy' class='static sehir' data-original-title='{{ offer.bilgi.sehir }}'>
+		{{ offer.bilgi.sehir.isim|chars:15 }}
+		</span>
+	</td>
+	<td>
+		<span class='dynamic' rel='twipsy' data-url='sorumlu'>
+		<span class='edit' rel='popover' data-form='delege' data-original-title='Delege'>
+			{{ offer.temsilci.first_name }}
+			</span>
+		</span>
+	</td>
+	<td>
+		<span rel='popover' class='durum-dialog' data-form='durum' data-original-title='Islem girisi'>
+			<span rel='twipsy' data-url='yapildi' class='dynamic label {{ offer.durum.isim|slugify }}'>
+			{{ offer.durum }}
+			</span>
+		</span>
+	</td>
+	<td>
+		{% if offer.dosya %}
+		<span rel='popover' class='dosya-dialog' data-form='dosya' data-original-title='Tutar'>
+			<span rel='twipsy' class='static' 
+				data-original-title='{{ offer.dosya.name|cut:'yukleme/teklif/' }}' 
+				target="_blank" href='{{ offer.dosya.url }}'>
+				<img src='http://icons.iconarchive.com/icons/gakuseisean/radium/16/file-icon.png' />
+			</span>
+		</span>
+		{% else %}
+		<span rel='popover' class='edit' data-form='dosya' data-original-title='Teklif'>x</span>
+		{% endif %}
+	</td>
+	<td
+		{% if offer.daire %} 
+		class='daire'>{{ offer.daire }}
+		{% else %}
+		><span rel='popover' class='edit' data-original-title='Daire' data-form='daire'>x</a>
+		{% endif %}
+	</td>
+	<td
+		{% if offer.tutar %} 
+		class='tutar'>{{ offer.tutar|intcomma }}
+		{% else %}
+		><span rel='popover' class='edit' data-form='tutar' data-original-title='Tutar'>x</a>
+		{% endif %}
+	</td>
+</tr>
+{% endif %}
+{% endspaceless %}

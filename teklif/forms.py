@@ -35,3 +35,68 @@ class TeklifYapildiForm(ModelForm):
                 required=False)
     class Meta:
         model = Yapildi
+
+class TutarForm(ModelForm):
+    class Meta:
+        model = Yapildi
+        fields = ('tutar', 'kullanici', 'teklif')
+        widgets = {
+            'tutar': forms.TextInput(attrs={'class': 'span3'}),
+        }
+
+class DaireForm(ModelForm):
+    class Meta:
+        model = Yapildi
+        fields = ('daire', 'kullanici', 'teklif')
+        widgets = {
+            'daire': forms.TextInput(attrs={'class': 'span3'}),
+        }
+
+
+class DosyaForm(ModelForm):
+    class Meta:
+        model = Yapildi
+        fields = ('dosya', 'kullanici', 'teklif', 'durum')
+        widgets = {
+            'dosya': forms.FileInput(attrs={'class': 'span3'}),
+        }
+
+
+class DelegeForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(DelegeForm, self).__init__(*args, **kwargs)
+        try:
+            teklif_sehir = Teklif.objects.get(pk=kwargs['initial']['teklif']).bilgi.sehir
+            new_queryset = self.fields['delege'].queryset.filter(profile__sorumluSehir=teklif_sehir, profile__birincil=True)
+            self.fields['delege'].queryset = new_queryset
+        except:
+            # Form doesnt receive initial args
+            # When it is initialized for validation
+            pass
+    class Meta:
+        model = Yapildi
+        fields = ('delege', 'kullanici', 'teklif', 'durum')
+        widgets = {
+            'delege': forms.Select(attrs={'class': 'span3'}),
+        }
+
+
+class SebepForm(ModelForm):
+    class Meta:
+        model = Yapildi
+        fields = ('rakip', 'sebep', 'kullanici', 'teklif', 'durum')
+        widgets = {
+            'rakip': forms.Select(attrs={'class': 'span3'}),
+            'sebep': forms.SelectMultiple(attrs={'class': 'span3'}),
+        }
+
+
+class MesajForm(ModelForm):
+    class Meta:
+        model = Yapildi
+        fields = ('mesaj', 'kullanici', 'teklif', 'durum')
+        widgets = {
+            'mesaj': forms.Textarea(attrs={'class': 'span3', 'rows': '4'}),
+        }
+
+

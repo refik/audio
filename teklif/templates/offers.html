@@ -1,0 +1,420 @@
+{% load truncate %}
+{% load humanize %}
+{% load compress %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Audio Elektronik</title>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel='stylesheet' href='{{ STATIC_URL }}css/bootstrap.css'>
+	<style type='text/css'>
+			
+		ul.unstyled {
+			margin: 0;
+		}
+		.twipsy-inner {
+			text-align: left;
+			max-width: 300px;
+		}
+		.twipsy-inner dl{
+			margin-bottom: 0;
+		}
+		.twipsy-label {
+			color: #ffc40d;
+			font-weight: bold;
+		}
+		.twipsy-text {
+			color: #ffffff;
+		}
+		.yapildi-label {
+			font-weight: bold;
+		}
+		.popover form {
+			margin-bottom: 0px;
+		}
+		.edit, .close, .dosya-dialog, .durum-dialog {
+			cursor: pointer;
+		}
+		.eylem-yaplmad {
+			background-color: #000000;
+		}
+		.teklif-verildi, .yonlendirildi{
+			background-color: #62cffc;
+		}
+		.delege-edildi {
+			background-color: #f89406;
+		}
+		.iptal, .isi-aldk {
+			background-color: #46a546;
+		}
+		.isi-kaybettik {
+			background-color: #c43c25;
+		}
+		.iletisime-gecildi {
+			background-color: #87afc7;
+		}
+		#loading {
+			position: absolute;
+		}
+		form .clearfix {
+			margin-bottom: 4px;
+		}
+		body {
+			padding-top: 60px;
+		}
+	</style>
+	{% compress js %}
+	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery-1.7.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/bootstrap-twipsy.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/bootstrap-popover.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/bootstrap-alerts.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery.quicksearch.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery.tablesorter.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery.form.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery.color.js'></script>
+	{% endcompress %}
+	<script type='text/javascript'>
+
+		var search_isim_mesaj;
+		var search_dosya;	
+
+		//General functions
+		function blink(row_pk){
+			var row = $('tr[data-pk="' + row_pk + '"]');
+			if(row.length){
+				var current = $('tr[data-pk="' + row_pk + '"]').css('background-color');
+				row.css('background-color', '#46a546');
+				row.animate({'background-color': current}, 1500);
+			}
+		}
+
+		function attention(row_pk){
+			var row = $('tr[data-pk="' + row_pk + '"]');
+			if(row.length){
+				$('html, body').animate({
+					scrollTop: row.offset().top - 110
+				}, 500);
+				blink(row_pk);
+			}
+		}
+
+		function loading(element){
+			element.children().each(function(){$(this).css('opacity',0.2);});
+			element.prepend('<img id="loading" src="http://s.aucdn.net/resim/ajax-loader.gif" />');
+		}
+
+		function pop_close(pk, type){
+			$('tr[data-pk="' + pk + '"] [rel="popover"][data-form="' + type + '"]').popover('hide');
+		}
+
+		//Utility functions
+		var sum = function(items) {
+			var result = 0;
+			items.each(function() {
+				result += Number($(this).html().replace(',',''));
+			});
+			return result
+		};
+
+		function number_with_commas(num) {
+			return num.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
+		}
+
+		function update_sum() {
+			$('#sum-tutar').html('Tutar: ' + number_with_commas(sum($('.tutar').not('tr.hide .tutar'))) + ' TL');
+			$('#sum-daire').html('Daire: ' + number_with_commas(sum($('.daire').not('tr.hide .daire'))));
+			$('#sum-sayi').html('Sayi: ' + ($('#main tr').not('tr.hide').length - 1));
+		}
+
+		function update_stripe() {
+			$('#main tbody tr').css('background-color', '#ffffff');
+			$('#main tbody tr').not($('tr.hide')).filter(':odd').css('background-color', '#f5f5f5');
+		}	
+
+		function get_form(form, offer_pk){
+			var result = null;
+			$.ajax({
+						url: '/teklif/form/',
+						data: {form_type: form, pk: offer_pk},
+						type: 'get',
+						dataType: 'html',
+						async: false,
+						success: function(data) { result = data; }
+					});
+			return result
+		}
+
+		function position_pop(old_height){
+			var popover = $('.popover');
+			var current_height = popover.height();
+			var current_top = parseInt(popover.css('top'));
+			var height_dif = current_height - old_height;
+			var new_top = current_top - height_dif
+			popover.css('top', new_top);
+		}
+
+		function update_row(pk){
+			$('tr[data-pk="' + pk + '"]').load('/teklif/yenile/' + pk + '/ th, td', function(){update_sum();});
+		}
+
+		function init_form(type){
+			var pop_height = $('.popover').height();
+			var pk;
+			$('form').ajaxForm({data: { form_type: type}, beforeSubmit: function(arr, $form, options){
+				loading($('.content p'));
+				pk = arr.filter(function(elem){
+					if(elem.name == 'teklif'){return true}
+					else{return false}
+				})[0].value
+			}, success: function(data){
+				if(data == ''){
+					update_row(pk);
+					$('.close').click();
+					blink(pk);
+				} else {
+					$('.content p').html(data);
+					init_form(type);
+					position_pop(pop_height);	
+				}
+			}});
+		}
+
+		function update_form(pk){
+			var form_to_get = $('.content select option:selected').val();
+			if(form_to_get){
+				$('.content p form').remove();
+				$('.content p').append(get_form(form_to_get, pk));
+				init_form(form_to_get);
+			}
+		}
+
+		function show_alert() {
+			var current_count = Number($('#new-count').html())
+			$('.alert-message').show('slow')
+			$('#new-count').html(current_count + 1);
+		}
+
+		var ascending = function(first, last){ return $(first).data('pk') - $(last).data('pk') }
+
+		function get_new_loop(){
+			var latest = $('tbody tr, #new-stack tr').sort(ascending).filter(':last');
+			$.get('/teklif/yeni/' + latest.data('pk') + '/', function(data){
+				if (data) {
+					$('#new-stack').prepend(data)
+					show_alert();
+				}
+				setTimeout(function(){get_new_loop();}, 20000);
+			})
+		}
+
+		function unleash(){
+			var new_rows = $('#new-stack').html();
+			$('#search').val('').change();
+			$('.alert-message').hide('slow');
+			$('tbody').prepend(new_rows);
+			$('#new-stack').html('');
+			$('#new-count').html(0);
+			$(new_rows).each(function(){blink($(this).data('pk'))});
+			search_isim_mesaj.cache();
+		}
+
+		$(function() {
+
+			//Helper functions
+			function get_title(element) {
+				return  $(element).data('original-title') + '<span class="close" onclick="pop_close(' + 
+						$(element).parents('tr').data('pk') + ',' + '\u0027' + $(element).data('form') + 
+						'\u0027' + ')">x</span>'
+			}
+
+			//Twipsy initializations
+			$('.static').twipsy({html: true, placement: 'below'});
+			$('.dynamic').twipsy({ html: true, placement: 'below', title: function(){ 
+				var result = null;
+				$.ajax({
+							url: ('/teklif/' + $(this).data('url') + '/' + $(this).parents('tr').data('pk') + '/'),
+							type: 'get',
+							dataType: 'html',
+							async: false,
+							success: function(data) { result = data; }
+						});
+				return result
+			}, delayIn: 1000, delayOut: 1000});
+
+
+			//Popover intializations
+			$('.edit').click(function(){ 
+				$('.close').click();
+				$(this).popover('show'); 
+				init_form($(this).data('form'));
+			});
+			$('.edit').popover({trigger: 'manual', html: true, placement: 'above', content: function(){
+				return get_form($(this).data('form'), $(this).parents('tr').data('pk'))
+			}, title: function(){ 
+				return get_title(this)
+			}});
+			$('.dosya-dialog, .durum-dialog, #filter-dosya').click(function(){
+				$(this).popover('hide')
+				$(this).popover('show')
+			});
+			$('.dosya-dialog').popover({html: true, placement: 'above', title: function(){ 
+				return get_title(this)
+			}, trigger: 'manual', content: function(){
+				return 	'<a class="btn primary">Dosyayi Ac</a> <a class="btn" onclick="' +
+						'$(\u0027.content p\u0027).html(get_form(' + '\u0027' + $(this).data('form') + 
+						'\u0027,' + $(this).parents('tr').data('pk') + '));init_form(\u0027' + 
+						$(this).data('form') + '\u0027);">Yeni Ekle</a>'			
+			}});
+			$('#filter-dosya').popover({html: true, placement: 'below', title: function(){ 
+				return  $(this).data('original-title') + '<span class="close" ' + 
+						'onclick="$(\u0027#filter-dosya\u0027).popover(\u0027hide\u0027)">x</span>'
+			}, trigger: 'manual', content: function(){
+				return $('#search-dosya').html()
+			}});
+
+			$('.durum-dialog').popover({html: true, placement: 'above', title: function(){ 
+				return get_title(this)
+			}, trigger: 'manual', content: function(){
+				return 	'<select style="margin-bottom:10px"class="span3" ' + 
+						'onchange="var pop_height = $(\u0027.popover\u0027).height();update_form(' + 
+						$(this).parents('tr').data('pk') + ');position_pop(pop_height);">' +  
+						'<option value="" selected="selected">Islem secin</option>' + 
+						'<option value="genel">Genel guncelleme</option>' + 
+						'<option value="iletisim">Iletisime gectim</option>' + 
+						'<option value="yonlendi">Yonlendirdim</option>' + 
+						'<option value="aldik">Isi aldik</option>' + 
+						'<option value="sebep">Isi kaybettik</option>' + 
+						'<option value="iptal">Iptal ediyorum</option>' + 
+						'</select>'
+			}});
+			//Style initializations
+			//$('#main').tablesorter();
+			search_isim_mesaj = $('#search').quicksearch('#main tbody tr', 
+				{
+					onAfter: function(){update_sum();update_stripe();}, 
+					hide: function(){$(this).prop('class','hide')}, 
+					show: function(){$(this).prop('class','')},
+					selector: 'div.isim-mesaj',
+					loader: 'img.loading',
+					bind: 'keyup change',
+					delay: 300,
+					testQuery: function (query, txt, _row) {
+						for (var i = 0; i < query.length; i += 1) {
+							console.log(query,txt,_row);
+							if (txt.indexOf(query[i]) === -1) {
+								//console.log(query,txt,_row,'false');
+								return false;
+							}
+						}
+						//console.log(query,txt,_row);
+						return true;
+					}
+				});
+			search_dosya = $().quicksearch('#main tbody tr', 
+				{
+					onAfter: function(){update_sum();update_stripe();}, 
+					hide: function(){$(this).prop('class','hide')}, 
+					show: function(){$(this).prop('class','')},
+					selector: '[data-form="dosya"]',
+					testQuery: function (query, txt, _row) {
+						query = query[0];
+						if(query){
+							if(query == 'true' && txt != 'x'){
+								return true
+							} else if(query == 'true' && txt == 'x'){
+								return false
+							} else if(query == 'false' && txt != 'x'){
+								return false
+							} else if(query == 'false' && txt == 'x'){
+								return true
+							}
+						}
+						else{
+							return true;
+						}
+					}
+				});
+			get_new_loop();
+			update_stripe();
+			update_sum();
+			{% if pk %}
+			attention({{ pk }});
+			{% endif %}
+		});
+	</script>
+</head>
+<body>
+<div class="topbar">
+	<div class="fill">
+		<div class="container">
+			<a class="brand" href="#">Audio Elektronik</a>
+			<ul class="nav">
+				<li class="active"><a href="http://www.audio.com.tr/teklif">Teklif</a></li>
+				<li><a href="http://www.audio.com.tr">Audio</a></li>
+			</ul>
+			<form class="pull-left" action="">
+				<input id="search" type="text" placeholder="Arama">
+				<img class='loading' src='http://s.aucdn.net/resim/ajax-small.gif'>
+			</form>
+			<ul class="secondary-nav">
+				<li><a id='sum-sayi'></a></li>
+				<li><a id='sum-daire'></a></li>
+				<li><a id='sum-tutar'></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class='container'>
+
+	<div class='alert-message block-message success' style='display:none;text-align:right'>
+		<div style='float:left; margin-top:0px;'>
+			<strong><span id='new-count'>0</span> tane yeni teklif var!</strong> 
+			Assagidaki butona basarak goruntuleyebilirsiniz.
+		</div>
+    	<span class="btn primary small" onclick="unleash()">Goruntule</span>
+	</div>
+
+	<div id='new-stack' class='hide'></div>
+
+	<div id='search-dosya' class='hide'>
+		<select style='margin-bottom:10px' class='span3' 
+				onchange='var select = $(this).children(":selected").val();
+				$("#search-dosya select option[value=\u0027 + select + \u0027").prop("selected","selected");
+				search_dosya.search(select);$(".close").click();' >
+				<option value="" selected="selected">Hepsi</option>
+				<option value="true">Var</option>
+				<option value="false">Yok</option>
+		</select>
+	</div>
+
+	<table id='main' class="bordered-table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Tarih</th>
+				<th>Musteri</th>
+				<th>Mesaj</th>
+				<th>Sehir</th>
+				<th>Sorumlu</th>
+				<th>Durum</th>
+				<th>
+					<span rel='popover' data-original-title='Teklif Filtresi' id='filter-dosya'>Teklif</span>
+				</th>
+				<th>Daire</th>
+				<th>Tutar</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for offer in offers %}
+				{% include 'offer.html' with offer=offer %}
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+</body>
+</html>	

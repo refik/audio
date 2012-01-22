@@ -10,7 +10,7 @@ class ProfilAdmin(admin.ModelAdmin):
         }),
         ('Kullanici Bilgileri', {
             'classes': ('collapse open',),
-            'fields' : ('gorev', 'telefon',),
+            'fields' : ('gorev', 'birincil', 'ikincil','telefon',),
         }),
         ('Kullanicinin Sorumluluklari', {
             'classes': ('collapse open',),

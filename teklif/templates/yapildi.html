@@ -1,0 +1,55 @@
+<dl>
+		{% for yapildi in teklif.yapildi_set.all %}
+		<dt class='twipsy-label'>
+		{{ yapildi.kullanici.get_full_name }} - {{ yapildi.tarih|timesince }} once
+		</dt> 
+		<dd>
+			<ul class='unstyled'>
+				{% if yapildi.mesaj %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Mesaj: </span>
+					<span class='twipsy-text'>{{ yapildi.mesaj }}</span>
+				</li>
+				{% endif %}
+				{% if yapildi.dosya %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Dosya: </span>
+					<span class='twipsy-text'>
+						<a href='{{ target.dosya.url }}' target='_blank'>
+						{{ yapildi.dosya.name|cut:'yukleme/teklif/' }}
+						</a>
+					</span>
+				</li>
+				{% endif %}
+				{% if yapildi.rakip and yapildi.sebep %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Rakip: </span>
+					<span class='twipsy-text'>{{ yapildi.rakip }}</span>
+				</li>
+				<li>
+					<span class='twipsy-text yapildi-label'>Sebep: </span>
+					<span class='twipsy-text'>{{ yapildi.sebep }}</span>
+				</li>
+				{% endif %}
+				{% if yapildi.daire %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Daire: </span>
+					<span class='twipsy-text'>{{ yapildi.daire }}</span>
+				</li>
+				{% endif %}
+				{% if yapildi.tutar %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Tutar: </span>
+					<span class='twipsy-text'>{{ yapildi.tutar }}</span>
+				</li>
+				{% endif %}
+				{% if yapildi.durum %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Durum: </span>
+					<span class='twipsy-text'>{{ yapildi.durum }}</span>
+				</li>
+				{% endif %}
+			</ul>
+		</dd>
+		{% endfor %}
+</dl>

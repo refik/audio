@@ -17,6 +17,8 @@ class CalisanProfil(models.Model):
     sorumluTip = models.ManyToManyField(Tip,help_text='Bu kullanicinin sorumlu oldugu form tipleri',null=True,blank=True)
     telefon = models.CharField('Telefon Numarasi',max_length=200,help_text='(xxxx) xxx xx xx formunda girin')
     gorev = models.ForeignKey(CalisanGorev)
+    birincil = models.BooleanField()
+    ikincil = models.BooleanField()
     class Meta:
         verbose_name_plural = "Calisan Profilleri"
     def __unicode__(self):

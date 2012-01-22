@@ -1,0 +1,8 @@
+<ul class='unstyled'>
+		{% for sorumlu in teklif.bilgi.sorumlu.all %}
+		<li>
+			<span class='twipsy-label'>{{ sorumlu.get_full_name }}</span> - 
+			<span class='twipsy-text'>{{ sorumlu.profile.gorev }}</span>
+		</li>
+		{% endfor %}
+</ul>
