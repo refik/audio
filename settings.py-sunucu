@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 
 # Audiomail function uses this to determine whether it will actually
 # send the mail or not
-GELISTIRME = False
+GELISTIRME = True
 
 DATABASES = {
     'default': {
@@ -31,7 +31,7 @@ DATABASES = {
 
 DEFAULT_FILE_STORAGE = 'audio.ortakVeri.storage.AudioStorage'
 
-# STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
+#STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -94,9 +94,10 @@ CLOUDFILES_CONNECTION_KWARGS = {'authurl': cloudfiles.uk_authurl, 'servicenet': 
 # Memcache
 CACHES = {
     'default': {
-        # 'BACKEND' : 'django.core.cache.backends.dummy.DummyCache',
+        #'BACKEND' : 'django.core.cache.backends.dummy.DummyCache',
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 14400,
     }
 }
 
@@ -143,7 +144,7 @@ FILEBROWSER_VERSIONS = {
     'orta' : {'verbose_name': 'Orta', 'width': 200, 'height': 200, 'opts': ''},
     'buyuk' : {'verbose_name': 'Buyuk', 'width': 300, 'height': 300, 'opts': ''},
     'tam' : {'verbose_name': 'Tam', 'width': 400, 'height': 400, 'opts': ''},
-
+    'limit' : {'verbose_name': 'Limit', 'width': 952, 'height': 622, 'opts': 'upscale'}
 }
 
 GRAPPELLI_INDEX_DASHBOARD = 'audio.dashboard.CustomIndexDashboard'
@@ -189,14 +190,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    # 'django.middleware.cache.UpdateCacheMiddleware',
+    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'audio.urls'
@@ -224,6 +225,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.humanize',
     'audio.ozelSayfa',
     'audio.ortakVeri',
     'audio.haber',
