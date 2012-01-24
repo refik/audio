@@ -360,33 +360,33 @@
 			}});
 			//Document initializations
 			//$('#main').tablesorter();
-			search_isim_mesaj = $('#search').quicksearch('#main tbody tr', $.merge(def_search_opts, {
+			search_isim_mesaj = $('#search').quicksearch('#main tbody tr', $.extend({} ,def_search_opts, {
 				selector: 'div.isim-mesaj'
 			}));
 
-			search_dosya = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+			search_dosya = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
 				selector: '[data-form="dosya"]',
 				testQuery: bool_test 		
 			}));
 
-			search_durum = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+			search_durum = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
 				selector: '[data-form="durum"]'
 			}));
 
-			search_daire = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+			search_daire = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
 				selector: '[data-form="daire"]',
 				testQuery: number_bool_test
 			}));
 
-			search_tutar = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+			search_tutar = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
 				selector: '[data-form="tutar"]',
 				testQuery: number_bool_test
-			});
+			}));
 
-			search_tarih = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+			search_tarih = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
 				selector: 'div.tarih',
 				testQuery: number_bool_test
-			});
+			}));
 
 			get_new_loop();
 			update_stripe();

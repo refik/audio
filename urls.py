@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
+from django.conf import settings
+from django.views.generic.simple import redirect_to
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from filebrowser.sites import site
 admin.autodiscover()
@@ -24,3 +26,12 @@ urlpatterns = patterns('',
     (r'^', include('audio.bilgiGiris.urls')), 
     (r'^', include('audio.ozelSayfa.urls')),
 )
+
+if settings.LOCAL:
+    urlpatterns += patterns('',
+        
+        url(r'^statik/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.PROJECT_PATH + '/statikTasinmaz',
+        }),
+        ('^favicon.ico/$', redirect_to, {'url': 'http://s.aucdn.net/resim/favicon.ico'}),
+   )
