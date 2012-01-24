@@ -6,6 +6,7 @@
 	<th>
 		<a>{{ offer.pk }}</a>
 		<div class='isim-mesaj' style='display:none;'>{{ offer.bilgi.isim }} {{ offer.bilgi.mesaj }}</div>
+		<div class='tarih' style='display:none;'>{{ offer.bilgi.tarih.toordinal }}</div>
 	</th>
 	<td>
 		<span rel='twipsy' class='static'  data-original-title='{{ offer.bilgi.tarih|date:"l" }} - 
@@ -61,7 +62,7 @@
 			<span rel='twipsy' class='static' 
 				data-original-title='{{ offer.dosya.name|cut:'yukleme/teklif/' }}' 
 				target="_blank" href='{{ offer.dosya.url }}'>
-				<img src='http://icons.iconarchive.com/icons/gakuseisean/radium/16/file-icon.png' />
+				<img src='http://icons.iconarchive.com/icons/gakuseisean/radium/16/file-icon.png' /> 
 			</span>
 		</span>
 		{% else %}
@@ -70,7 +71,7 @@
 	</td>
 	<td
 		{% if offer.daire %} 
-		class='daire'>{{ offer.daire }}
+		class='daire' data-form='daire'>{{ offer.daire }}
 		{% else %}
 		><span rel='popover' class='edit' data-original-title='Daire' data-form='daire'>x</a>
 		{% endif %}

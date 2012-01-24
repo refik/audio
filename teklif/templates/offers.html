@@ -80,9 +80,68 @@
 	<script type='text/javascript'>
 
 		var search_isim_mesaj;
-		var search_dosya;	
+		var search_dosya;
+		var search_durum;
+		var search_daire;
+		var search_tutar;
+		var search_tarih;
 
 		//General functions
+		function number_bool_test(query, txt, _row) {
+			query = query[0];
+			if(query == 'true' && txt != 'x'){
+				return true
+			} else if(query == 'true' && txt == 'x'){
+				return false
+			} else if(query == 'false' && txt != 'x'){
+				return false
+			} else if(query == 'false' && txt == 'x'){
+				return true
+			}
+			var operation = query[0];
+			var compare = Number(query.replace(query[0],''));
+			var value = Number(txt.replace(',',''));
+			if(query){
+				if(operation == '<' && value < compare){
+					return true;
+				} else if(operation == '>' && value > compare){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return true;
+			}
+		}	
+	
+		function bool_test(query, txt, _row) {
+			query = query[0];
+			if(query){
+				if(query == 'true' && txt != 'x'){
+					return true
+				} else if(query == 'true' && txt == 'x'){
+					return false
+				} else if(query == 'false' && txt != 'x'){
+					return false
+				} else if(query == 'false' && txt == 'x'){
+					return true
+				}
+			}
+			else{
+				return true;
+			}
+		}
+
+		var def_search_opts = {
+			onAfter: function(){update_sum();update_stripe();}, 
+			hide: function(){$(this).prop('class','hide')}, 
+			show: function(){$(this).prop('class','')},
+			loader: 'img.loading',
+			bind: 'keyup change',
+			delay: 300,
+		}
+
+
 		function blink(row_pk){
 			var row = $('tr[data-pk="' + row_pk + '"]');
 			if(row.length){
@@ -222,6 +281,14 @@
 			search_isim_mesaj.cache();
 		}
 
+		function update_filter(on_dom, current, search_item){
+			var select = $(current).children(':selected').val();
+			$(on_dom + ' option:selected').removeAttr('selected');
+			$(on_dom + ' option[value="' + select + '"]').attr('selected','selected');
+			search_item.search(select);
+			$('.close').click();
+		}
+
 		$(function() {
 
 			//Helper functions
@@ -257,7 +324,7 @@
 			}, title: function(){ 
 				return get_title(this)
 			}});
-			$('.dosya-dialog, .durum-dialog, #filter-dosya').click(function(){
+			$('.dosya-dialog, .durum-dialog, .filter').click(function(){
 				$(this).popover('hide')
 				$(this).popover('show')
 			});
@@ -269,14 +336,14 @@
 						'\u0027,' + $(this).parents('tr').data('pk') + '));init_form(\u0027' + 
 						$(this).data('form') + '\u0027);">Yeni Ekle</a>'			
 			}});
-			$('#filter-dosya').popover({html: true, placement: 'below', title: function(){ 
+			$('.filter').popover({html: true, placement: 'below', title: function(){ 
 				return  $(this).data('original-title') + '<span class="close" ' + 
-						'onclick="$(\u0027#filter-dosya\u0027).popover(\u0027hide\u0027)">x</span>'
+						'onclick="$(\u0027.filter\u0027).each(function(){$(this).popover(\u0027hide\u0027)})">x</span>'
 			}, trigger: 'manual', content: function(){
-				return $('#search-dosya').html()
+				return $($(this).data('search')).html()
 			}});
 
-			$('.durum-dialog').popover({html: true, placement: 'above', title: function(){ 
+			$('.durum-dialog').popover({html: true, placement: 'below', title: function(){ 
 				return get_title(this)
 			}, trigger: 'manual', content: function(){
 				return 	'<select style="margin-bottom:10px"class="span3" ' + 
@@ -291,53 +358,36 @@
 						'<option value="iptal">Iptal ediyorum</option>' + 
 						'</select>'
 			}});
-			//Style initializations
+			//Document initializations
 			//$('#main').tablesorter();
-			search_isim_mesaj = $('#search').quicksearch('#main tbody tr', 
-				{
-					onAfter: function(){update_sum();update_stripe();}, 
-					hide: function(){$(this).prop('class','hide')}, 
-					show: function(){$(this).prop('class','')},
-					selector: 'div.isim-mesaj',
-					loader: 'img.loading',
-					bind: 'keyup change',
-					delay: 300,
-					testQuery: function (query, txt, _row) {
-						for (var i = 0; i < query.length; i += 1) {
-							console.log(query,txt,_row);
-							if (txt.indexOf(query[i]) === -1) {
-								//console.log(query,txt,_row,'false');
-								return false;
-							}
-						}
-						//console.log(query,txt,_row);
-						return true;
-					}
-				});
-			search_dosya = $().quicksearch('#main tbody tr', 
-				{
-					onAfter: function(){update_sum();update_stripe();}, 
-					hide: function(){$(this).prop('class','hide')}, 
-					show: function(){$(this).prop('class','')},
-					selector: '[data-form="dosya"]',
-					testQuery: function (query, txt, _row) {
-						query = query[0];
-						if(query){
-							if(query == 'true' && txt != 'x'){
-								return true
-							} else if(query == 'true' && txt == 'x'){
-								return false
-							} else if(query == 'false' && txt != 'x'){
-								return false
-							} else if(query == 'false' && txt == 'x'){
-								return true
-							}
-						}
-						else{
-							return true;
-						}
-					}
-				});
+			search_isim_mesaj = $('#search').quicksearch('#main tbody tr', $.merge(def_search_opts, {
+				selector: 'div.isim-mesaj'
+			}));
+
+			search_dosya = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+				selector: '[data-form="dosya"]',
+				testQuery: bool_test 		
+			}));
+
+			search_durum = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+				selector: '[data-form="durum"]'
+			}));
+
+			search_daire = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+				selector: '[data-form="daire"]',
+				testQuery: number_bool_test
+			}));
+
+			search_tutar = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+				selector: '[data-form="tutar"]',
+				testQuery: number_bool_test
+			});
+
+			search_tarih = $().quicksearch('#main tbody tr', $.merge(def_search_opts, {
+				selector: 'div.tarih',
+				testQuery: number_bool_test
+			});
+
 			get_new_loop();
 			update_stripe();
 			update_sum();
@@ -351,16 +401,18 @@
 <div class="topbar">
 	<div class="fill">
 		<div class="container">
-			<a class="brand" href="#">Audio Elektronik</a>
+			<a class="brand" href="#">Audio</a>
 			<ul class="nav">
 				<li class="active"><a href="http://www.audio.com.tr/teklif">Teklif</a></li>
-				<li><a href="http://www.audio.com.tr">Audio</a></li>
+				<li><a href="http://www.audio.com.tr">Grafik</a></li>
 			</ul>
 			<form class="pull-left" action="">
-				<input id="search" type="text" placeholder="Arama">
+				<input id="search" type="text" placeholder="Arama" class='span3'>
 				<img class='loading' src='http://s.aucdn.net/resim/ajax-small.gif'>
+
 			</form>
 			<ul class="secondary-nav">
+				<li><a style="color:#0069D6">{{ user.first_name|lower }}</a></li>
 				<li><a id='sum-sayi'></a></li>
 				<li><a id='sum-daire'></a></li>
 				<li><a id='sum-tutar'></a></li>
@@ -371,7 +423,7 @@
 
 <div class='container'>
 
-	<div class='alert-message block-message success' style='display:none;text-align:right'>
+	<div class='alert-message success' style='display:none;text-align:right'>
 		<div style='float:left; margin-top:0px;'>
 			<strong><span id='new-count'>0</span> tane yeni teklif var!</strong> 
 			Assagidaki butona basarak goruntuleyebilirsiniz.
@@ -383,14 +435,91 @@
 
 	<div id='search-dosya' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
-				onchange='var select = $(this).children(":selected").val();
-				$("#search-dosya select option[value=\u0027 + select + \u0027").prop("selected","selected");
-				search_dosya.search(select);$(".close").click();' >
+				onchange='update_filter("#search-dosya select", this, search_dosya);'>
 				<option value="" selected="selected">Hepsi</option>
 				<option value="true">Var</option>
 				<option value="false">Yok</option>
 		</select>
 	</div>
+
+	<div id='search-durum' class='hide'>
+		<select style='margin-bottom:10px' class='span3' 
+				onclick='update_filter("#search-durum select", this, search_durum);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value="Eylem Yapılmadı">Eylem Yapilmadi</option>
+				<option value="İletişime Geçildi">İletişime Geçildi</option>
+				<option value="Delege Edildi">Delege Edildi</option>
+				<option value="Teklif Verildi">Teklif Verildi</option>
+				<option value="Yönlendirildi">Yönlendirildi</option>
+				<option value="İşi Aldık">İşi Aldık</option>
+				<option value="İşi Kaybettik">İşi Kaybettik</option>
+				<option value="İptal">İptal</option>
+		</select>
+	</div>
+
+	<div id='search-daire' class='hide'>
+		<select style='margin-bottom:10px' class='span3' id='exists'
+				onchange='update_filter("#search-daire select#exists", this, search_daire);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value="true">Var</option>
+				<option value="false">Yok</option>
+		</select>
+		<select style='margin-bottom:10px' class='span3' id='bigger'
+				onchange='update_filter("#search-daire select#bigger", this, search_daire);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value=">10">10</option>
+				<option value=">50">50</option>
+				<option value=">100">100</option>
+		</select> den buyuk
+		<select style='margin-bottom:10px' class='span3' id='smaller'
+				onchange='update_filter("#search-daire select#smaller", this, search_daire);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value="<500">500</option>
+				<option value="<250">250</option>
+				<option value="<100">100</option>
+		</select> den kucuk
+	</div>
+
+	<div id='search-tutar' class='hide'>
+		<select style='margin-bottom:10px' class='span3' id='exists'
+				onchange='update_filter("#search-daire select#exists", this, search_tutar);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value="true">Var</option>
+				<option value="false">Yok</option>
+		</select>
+		<select style='margin-bottom:10px' class='span3' id='bigger'
+				onchange='update_filter("#search-daire select#bigger", this, search_tutar);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value=">1000">1,000</option>
+				<option value=">25000">25,000</option>
+				<option value=">50000">50,000</option>
+		</select> den buyuk
+		<select style='margin-bottom:10px' class='span3' id='smaller'
+				onchange='update_filter("#search-daire select#smaller", this, search_tutar);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value="<50000">50,000</option>
+				<option value="<10000">10,000</option>
+				<option value="<1000">1,000</option>
+		</select> den kucuk
+	</div>
+
+	<div id='search-tarih' class='hide'>
+		<select style='margin-bottom:10px' class='span3' id='exists'
+				onchange='update_filter("#search-tarih select#exists", this, search_tarih);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value=">1000">1,000</option>
+				<option value=">25000">25,000</option>
+				<option value=">50000">50,000</option>
+		</select> den sonra
+		<select style='margin-bottom:10px' class='span3' id='bigger'
+				onchange='update_filter("#search-tarih select#bigger", this, search_tarih);'>
+				<option value="" selected="selected">Hepsi</option>
+				<option value=">1000">1,000</option>
+				<option value=">25000">25,000</option>
+				<option value=">50000">50,000</option>
+		</select> den once
+	</div>
+
 
 	<table id='main' class="bordered-table">
 		<thead>
@@ -401,12 +530,23 @@
 				<th>Mesaj</th>
 				<th>Sehir</th>
 				<th>Sorumlu</th>
-				<th>Durum</th>
 				<th>
-					<span rel='popover' data-original-title='Teklif Filtresi' id='filter-dosya'>Teklif</span>
+					<span   rel='popover' data-search='#search-durum' 
+							data-original-title='Durum Filtresi' class='filter'>Durum</span>
 				</th>
-				<th>Daire</th>
-				<th>Tutar</th>
+				<th>
+					<span   rel='popover' data-search='#search-dosya'
+							data-original-title='Teklif Filtresi' class='filter'>Teklif</span>
+				</th>
+				<th>
+					<span   rel='popover' data-search='#search-daire'
+							data-original-title='Daire Filtresi' class='filter'>Daire</span>
+				</th>
+				<th>
+					<span   rel='popover' data-search='#search-daire'
+							data-original-title='Tutar Filtresi' class='filter'>Tutar</span>
+				</th>
+
 			</tr>
 		</thead>
 		<tbody>
