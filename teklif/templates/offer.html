@@ -7,6 +7,7 @@
 		<a>{{ offer.pk }}</a>
 		<div class='isim-mesaj' style='display:none;'>{{ offer.bilgi.isim }} {{ offer.bilgi.mesaj }}</div>
 		<div class='tarih' style='display:none;'>{{ offer.bilgi.tarih.toordinal }}</div>
+		<div class='sehir' style='display:none;'>{{ offer.bilgi.sehir }}</div>
 	</th>
 	<td>
 		<span rel='twipsy' class='static'  data-original-title='{{ offer.bilgi.tarih|date:"l" }} - 

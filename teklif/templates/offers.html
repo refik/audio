@@ -85,6 +85,7 @@
 		var search_daire;
 		var search_tutar;
 		var search_tarih;
+		var search_sehir;
 
 		//General functions
 		function number_bool_test(query, txt, _row) {
@@ -324,18 +325,18 @@
 			}, title: function(){ 
 				return get_title(this)
 			}});
-			$('.dosya-dialog, .durum-dialog, .filter').click(function(){
+			$('.durum-dialog, .filter').click(function(){
 				$(this).popover('hide')
 				$(this).popover('show')
 			});
-			$('.dosya-dialog').popover({html: true, placement: 'above', title: function(){ 
-				return get_title(this)
-			}, trigger: 'manual', content: function(){
-				return 	'<a class="btn primary">Dosyayi Ac</a> <a class="btn" onclick="' +
-						'$(\u0027.content p\u0027).html(get_form(' + '\u0027' + $(this).data('form') + 
-						'\u0027,' + $(this).parents('tr').data('pk') + '));init_form(\u0027' + 
-						$(this).data('form') + '\u0027);">Yeni Ekle</a>'			
-			}});
+			//$('.dosya-dialog').popover({html: true, placement: 'above', title: function(){ 
+			//	return get_title(this)
+			//}, trigger: 'manual', content: function(){
+			//	return 	'<a class="btn primary">Dosyayi Ac</a> <a class="btn" onclick="' +
+			//			'$(\u0027.content p\u0027).html(get_form(' + '\u0027' + $(this).data('form') + 
+			//			'\u0027,' + $(this).parents('tr').data('pk') + '));init_form(\u0027' + 
+			//			$(this).data('form') + '\u0027);">Yeni Ekle</a>'			
+			//}});
 			$('.filter').popover({html: true, placement: 'below', title: function(){ 
 				return  $(this).data('original-title') + '<span class="close" ' + 
 						'onclick="$(\u0027.filter\u0027).each(function(){$(this).popover(\u0027hide\u0027)})">x</span>'
@@ -388,6 +389,14 @@
 				testQuery: number_bool_test
 			}));
 
+			search_sehir = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+				selector: 'div.sehir'
+			}));
+
+			search_sorumlu = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+				selector: '[data-form="delege"]'
+			}));
+
 			get_new_loop();
 			update_stripe();
 			update_sum();
@@ -436,100 +445,240 @@
 	<div id='search-dosya' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
 				onchange='update_filter("#search-dosya select", this, search_dosya);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value="true">Var</option>
-				<option value="false">Yok</option>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="true">Var</option>
+			<option value="false">Yok</option>
 		</select>
 	</div>
 
 	<div id='search-durum' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
 				onclick='update_filter("#search-durum select", this, search_durum);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value="Eylem Yapılmadı">Eylem Yapilmadi</option>
-				<option value="İletişime Geçildi">İletişime Geçildi</option>
-				<option value="Delege Edildi">Delege Edildi</option>
-				<option value="Teklif Verildi">Teklif Verildi</option>
-				<option value="Yönlendirildi">Yönlendirildi</option>
-				<option value="İşi Aldık">İşi Aldık</option>
-				<option value="İşi Kaybettik">İşi Kaybettik</option>
-				<option value="İptal">İptal</option>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="Eylem Yapılmadı">Eylem Yapilmadi</option>
+			<option value="İletişime Geçildi">İletişime Geçildi</option>
+			<option value="Delege Edildi">Delege Edildi</option>
+			<option value="Teklif Verildi">Teklif Verildi</option>
+			<option value="Yönlendirildi">Yönlendirildi</option>
+			<option value="İşi Aldık">İşi Aldık</option>
+			<option value="İşi Kaybettik">İşi Kaybettik</option>
+			<option value="İptal">İptal</option>
 		</select>
 	</div>
 
 	<div id='search-daire' class='hide'>
 		<select style='margin-bottom:10px' class='span3' id='exists'
 				onchange='update_filter("#search-daire select#exists", this, search_daire);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value="true">Var</option>
-				<option value="false">Yok</option>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="true">Var</option>
+			<option value="false">Yok</option>
 		</select>
 		<select style='margin-bottom:10px' class='span3' id='bigger'
 				onchange='update_filter("#search-daire select#bigger", this, search_daire);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value=">10">10</option>
-				<option value=">50">50</option>
-				<option value=">100">100</option>
+			<option value="" selected="selected">Hepsi</option>
+			<option value=">10">10</option>
+			<option value=">50">50</option>
+			<option value=">100">100</option>
 		</select> den buyuk
 		<select style='margin-bottom:10px' class='span3' id='smaller'
 				onchange='update_filter("#search-daire select#smaller", this, search_daire);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value="<500">500</option>
-				<option value="<250">250</option>
-				<option value="<100">100</option>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="<500">500</option>
+			<option value="<250">250</option>
+			<option value="<100">100</option>
 		</select> den kucuk
 	</div>
 
 	<div id='search-tutar' class='hide'>
 		<select style='margin-bottom:10px' class='span3' id='exists'
-				onchange='update_filter("#search-daire select#exists", this, search_tutar);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value="true">Var</option>
-				<option value="false">Yok</option>
+				onchange='update_filter("#search-tutar select#exists", this, search_tutar);'>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="true">Var</option>
+			<option value="false">Yok</option>
 		</select>
 		<select style='margin-bottom:10px' class='span3' id='bigger'
-				onchange='update_filter("#search-daire select#bigger", this, search_tutar);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value=">1000">1,000</option>
-				<option value=">25000">25,000</option>
-				<option value=">50000">50,000</option>
+				onchange='update_filter("#search-tutar select#bigger", this, search_tutar);'>
+			<option value="" selected="selected">Hepsi</option>
+			<option value=">1000">1,000</option>
+			<option value=">25000">25,000</option>
+			<option value=">50000">50,000</option>
 		</select> den buyuk
 		<select style='margin-bottom:10px' class='span3' id='smaller'
-				onchange='update_filter("#search-daire select#smaller", this, search_tutar);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value="<50000">50,000</option>
-				<option value="<10000">10,000</option>
-				<option value="<1000">1,000</option>
+				onchange='update_filter("#search-tutar select#smaller", this, search_tutar);'>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="<50000">50,000</option>
+			<option value="<10000">10,000</option>
+			<option value="<1000">1,000</option>
 		</select> den kucuk
 	</div>
 
 	<div id='search-tarih' class='hide'>
 		<select style='margin-bottom:10px' class='span3' id='exists'
 				onchange='update_filter("#search-tarih select#exists", this, search_tarih);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value=">1000">1,000</option>
-				<option value=">25000">25,000</option>
-				<option value=">50000">50,000</option>
+			<option value="" selected="selected">Hepsi</option>
+			<option value=">734451">10 Kasim 2011</option>
+			<option value=">734481">10 Aralik 2011</option>
+			<option value=">734512">10 Ocak 2012</option>
 		</select> den sonra
 		<select style='margin-bottom:10px' class='span3' id='bigger'
 				onchange='update_filter("#search-tarih select#bigger", this, search_tarih);'>
-				<option value="" selected="selected">Hepsi</option>
-				<option value=">1000">1,000</option>
-				<option value=">25000">25,000</option>
-				<option value=">50000">50,000</option>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="<734451">10 Kasim 2011</option>
+			<option value="<734481">10 Aralik 2011</option>
+			<option value="<734512">10 Ocak 2012</option>
 		</select> den once
 	</div>
+
+	<div id='search-sehir' class='hide'>
+		<select style='margin-bottom:10px' class='span3' 
+				onclick='update_filter("#search-sehir select", this, search_sehir);'>
+			<option value="" selected="selected">Hepsi</option>
+			<option value="Adana">Adana</option>
+			<option value="Adıyaman">Adıyaman</option>
+			<option value="Afyonkarahisar">Afyonkarahisar</option>
+			<option value="Ağrı">Ağrı</option>
+			<option value="Aksaray">Aksaray</option>
+			<option value="Amasya">Amasya</option>
+			<option value="Ankara">Ankara</option>
+			<option value="Antalya">Antalya</option>
+			<option value="Ardahan">Ardahan</option>
+			<option value="Artvin">Artvin</option>
+			<option value="Aydın">Aydın</option>
+			<option value="Balıkesir">Balıkesir</option>
+			<option value="Bartın">Bartın</option>
+			<option value="Batman">Batman</option>
+			<option value="Bayburt">Bayburt</option>
+			<option value="Bilecik">Bilecik</option>
+			<option value="Bingöl">Bingöl</option>
+			<option value="Bitlis">Bitlis</option>
+			<option value="Bolu">Bolu</option>
+			<option value="Burdur">Burdur</option>
+			<option value="Bursa">Bursa</option>
+			<option value="Çanakkale">Çanakkale</option>
+			<option value="Çankırı">Çankırı</option>
+			<option value="Çorum">Çorum</option>
+			<option value="Denizli">Denizli</option>
+			<option value="Diyarbakır">Diyarbakır</option>
+			<option value="Düzce">Düzce</option>
+			<option value="Edirne">Edirne</option>
+			<option value="Elazığ">Elazığ</option>
+			<option value="Erzincan">Erzincan</option>
+			<option value="Erzurum">Erzurum</option>
+			<option value="Eskişehir">Eskişehir</option>
+			<option value="Gaziantep">Gaziantep</option>
+			<option value="Giresun">Giresun</option>
+			<option value="Gümüşhane">Gümüşhane</option>
+			<option value="Hakkari">Hakkari</option>
+			<option value="Hatay">Hatay</option>
+			<option value="Iğdır">Iğdır</option>
+			<option value="Isparta">Isparta</option>
+			<option value="Mersin">Mersin</option>
+			<option value="İstanbul (Anadolu)">İstanbul (Anadolu)</option>
+			<option value="İstanbul (Avrupa)">İstanbul (Avrupa)</option>
+			<option value="İzmir">İzmir</option>
+			<option value="Karabük">Karabük</option>
+			<option value="Kars">Kars</option>
+			<option value="Kastamonu">Kastamonu</option>
+			<option value="Kayseri">Kayseri</option>
+			<option value="Kırklareli">Kırklareli</option>
+			<option value="Kırşehir">Kırşehir</option>
+			<option value="Kocaeli">Kocaeli</option>
+			<option value="Konya">Konya</option>
+			<option value="Kütahya">Kütahya</option>
+			<option value="Malatya">Malatya</option>
+			<option value="Manisa">Manisa</option>
+			<option value="Kahramanmaraş">Kahramanmaraş</option>
+			<option value="Karaman">Karaman</option>
+			<option value="Kırıkkale">Kırıkkale</option>
+			<option value="Kilis">Kilis</option>
+			<option value="Mardin">Mardin</option>
+			<option value="Muğla">Muğla</option>
+			<option value="Muş">Muş</option>
+			<option value="Nevşehir">Nevşehir</option>
+			<option value="Niğde">Niğde</option>
+			<option value="Ordu">Ordu</option>
+			<option value="Osmaniye">Osmaniye</option>
+			<option value="Rize">Rize</option>
+			<option value="Sakarya">Sakarya</option>
+			<option value="Samsun">Samsun</option>
+			<option value="Siirt">Siirt</option>
+			<option value="Sinop">Sinop</option>
+			<option value="Sivas">Sivas</option>
+			<option value="Şırnak">Şırnak</option>
+			<option value="Tekirdağ">Tekirdağ</option>
+			<option value="Tokat">Tokat</option>
+			<option value="Trabzon">Trabzon</option>
+			<option value="Tunceli">Tunceli</option>
+			<option value="Şanlıurfa">Şanlıurfa</option>
+			<option value="Uşak">Uşak</option>
+			<option value="Van">Van</option>
+			<option value="Yalova">Yalova</option>
+			<option value="Yozgat">Yozgat</option>
+			<option value="Zonguldak">Zonguldak</option>
+		</select>
+	</div>
+
+	<div id='search-sorumlu' class='hide'>
+		<select style='margin-bottom:10px' class='span3' 
+				onclick='update_filter("#search-durum select", this, search_sorumlu);'>
+			<option value="Ahmet">Ahmet Bulucu</option>
+			<option value="Ahmet Serkan">Ahmet Serkan Güntaç</option>
+			<option value="Burak">Burak Tokmak</option>
+			<option value="Murat">Murat Nazli</option>
+			<option value="Fatih">Fatih Şentürk</option>
+			<option value="Mehmet Akif">Mehmet Akif Türkan</option>
+			<option value="Sinan">Sinan Güngör</option>
+			<option value="Recai">Recai Çıtak</option>
+			<option value="Cem">Cem Çelik</option>
+			<option value="Necmettin">Necmettin Adsay</option>
+			<option value="Deniz">Deniz Falcıoğlu</option>
+			<option value="Hüseyin">Hüseyin Hüsmenoğlu</option>
+			<option value="Yakup">Yakup Özel</option>
+			<option value="Cem">Cem Malkoç</option>
+			<option value="İsmail">İsmail Pekdoğan</option>
+			<option value="Erdem">Erdem Çil</option>
+			<option value="Murat">Murat Tekin</option>
+			<option value="Murat">Murat Şahin</option>
+			<option value="Hande">Hande Yerebakan</option>
+			<option value="Semra">Semra Gürbüzoğlu</option>
+			<option value="Hülya">Hülya Muslu</option>
+			<option value="Timur">Timur Taymis</option>
+			<option value="Ergün">Ergün Aydın</option>
+			<option value="Ertan">Ertan Aydın</option>
+			<option value="Özkan">Özkan Aykut</option>
+			<option value="Birkan">Birkan Kösedağ</option>
+			<option value="Halit">Halit Dere</option>
+			<option value="İlhan">İlhan Yetişkin</option>
+			<option value="Hakan">Hakan Güçlü</option>
+			<option value="Gökhan">Gökhan Durak</option>
+			<option value="Metin">Metin Tezel</option>
+			<option value="Turgay">Turgay Töngel</option>
+			<option value="Erkan">Erkan Emir</option>
+			<option value="Burhanettin">Burhanettin Fidan</option>
+			<option value="Abdullah">Abdullah Erkan</option>
+		</select>
+	</div>
+
 
 
 	<table id='main' class="bordered-table">
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Tarih</th>
+				<th>
+					<span   rel='popover' data-search='#search-tarih' 
+							data-original-title='Tarih Filtresi' class='filter'>Tarih</span>
+				</th>
 				<th>Musteri</th>
 				<th>Mesaj</th>
-				<th>Sehir</th>
-				<th>Sorumlu</th>
+				<th>
+					<span   rel='popover' data-search='#search-sehir' 
+							data-original-title='Sehir Filtresi' class='filter'>Sehir</span>
+				</th>
+				<th>
+					<span   rel='popover' data-search='#search-sorumlu' 
+							data-original-title='Sorumlu Filtresi' class='filter'>Sorumlu</span>
+				</th>
 				<th>
 					<span   rel='popover' data-search='#search-durum' 
 							data-original-title='Durum Filtresi' class='filter'>Durum</span>
@@ -543,7 +692,7 @@
 							data-original-title='Daire Filtresi' class='filter'>Daire</span>
 				</th>
 				<th>
-					<span   rel='popover' data-search='#search-daire'
+					<span   rel='popover' data-search='#search-tutar'
 							data-original-title='Tutar Filtresi' class='filter'>Tutar</span>
 				</th>
 
