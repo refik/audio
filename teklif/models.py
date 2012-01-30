@@ -30,8 +30,9 @@ class Teklif(models.Model):
     tutar = models.IntegerField(null=True,blank=True)
     dosya = models.FileField(upload_to='yukleme/teklif', null=True, blank=True)
     temsilci = models.ForeignKey(User, null=True, blank=True)
+    son_eylem = models.DateTimeField(blank=True, null=True)
     class Meta:
-        ordering = ['-bilgi__tarih']
+        ordering = ['son_eylem']
     def __unicode__(self):
         return self.bilgi.tip.isim
 
@@ -47,6 +48,8 @@ class Yapildi(models.Model):
     daire = models.IntegerField(null=True)
     tutar = models.IntegerField(null=True)
     delege = models.ForeignKey(User, related_name='delege_set')
+    class Meta:
+        ordering = ['-tarih']
  
 
 @receiver(post_save,sender=Bilgi)
@@ -75,6 +78,12 @@ def update_teklif(sender,**kwargs):
         teklif.tutar = yapildi.tutar
     try:
         teklif.temsilci = yapildi.delege
+        audiomail('audioweb@audio.com.tr', [yapildi.delege.email], 'Audio Takip Sistemi', 
+                  'Size %s bir teklif delege etti, numarasi: %d.\n\nBu adresten bilgilere erisebilirsiniz:' \
+                  'http://www.audio.com.tr/teklif/%d' % 
+                  (yapildi.kullanici.get_full_name(), teklif.pk, teklif.pk))
     except:
         pass
+    if not yapildi.durum and not teklif.durum:
+        teklif.durum = Durum.objects.get(pk=3)
     teklif.save()

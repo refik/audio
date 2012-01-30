@@ -9,38 +9,4 @@
 		<span class='help-block'>{{ field.errors.0 }}</span>
 	</div>
 	{% endfor %}
-<!--
-    <div class='clearfix {% if form.sender.errors %}error{% endif %}'>
-        <label for='id_sender'>Sender:</label>
-        <div class='input'>
-            <input class='xlarge {% if form.sender.errors %}error{% endif %}' type='text' name='sender' id='id_sender' {% if form.sender.value %}value='{{ form.sender.value }}'{% endif %} />
-            <span class='help-inline'>{{ form.sender.errors.0 }}</span>
-        </div>
-    </div>
-    <div class='clearfix {% if form.receipent.errors %}error{% endif %}'>
-        <label for='id_receipent'>Receipent:</label>
-        <div class='input'>
-            <input class='xlarge {% if form.receipent.errors %}error{% endif %}' type='text' name='receipent' id='id_receipent' {% if form.receipent.value %}value='{{ form.receipent.value }}'{% endif %} />
-            <span class='help-inline'>{{ form.receipent.errors.0 }}</span>
-        </div>
-    </div>
-    <div class='clearfix {% if form.subject.errors %}error{% endif %}'>
-        <label for='id_subject'>Subject:</label>
-        <div class='input'>
-            <input class='xlarge {% if form.subject.errors %}error{% endif %}' type='text' name='subject' id='id_subject' {% if form.subject.value %}value='{{ form.subject.value }}'{% endif %} />
-            <span class='help-inline'>{{ form.subject.errors.0 }}</span>
-        </div>
-    </div>
-    <div class='clearfix {% if form.body.errors %}error{% endif %}'>
-        <label for='id_body'>Body:</label>
-        <div class='input'>
-            <textarea class='xxlarge {% if form.body.errors %}error{% endif %}' id='id_body' class='xxlarge' rows='10' name='body' >{% if form.body.value %}{{ form.body.value }}{% endif %}</textarea>
-            <span class='help-inline'>{{ form.body.errors.0 }}</span>
-        </div>
-    </div>
-    <div class='actions'>
-        <input type='submit' value='Send' id='sendbutton' class='btn primary' />
-        <span class='help-inline'>You will be shown a captcha input to prove you are human</span>
-    </div>
--->
 </form>

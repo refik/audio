@@ -1,8 +1,10 @@
 # Django settings for audio project.
-import os
 from sifre import KEY, RACK_KEY
+import cloudfiles
+import os
 
 DEBUG = True
+LOCAL = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -27,6 +29,10 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+DEFAULT_FILE_STORAGE = 'audio.ortakVeri.storage.AudioStorage'
+
+#STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -60,22 +66,17 @@ AUTH_PROFILE_MODULE = 'calisanProfil.CalisanProfil'
 
 # django_compressor settings
 COMPRESS_ENABLED = True
-
-COMPRESS_URL = 'http://c415788.r88.cf3.rackcdn.com/'
-
-COMPRESS_STORAGE = 'audio.ortakVeri.storage.AudioStorage'
-
+COMPRESS_URL = 'http://s.aucdn.net/'
+COMPRESS_STORAGE = DEFAULT_FILE_STORAGE
 COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
-
 COMPRESS_CLOSURE_COMPILER_BINARY = '/home/refik/code/closure/compiler.jar'
-
 COMPRESS_CSS_FILTERS = ['compressor.filters.yui.YUICSSFilter']
-
 COMPRESS_YUI_BINARY = '/home/refik/code/yuicompressor-2.4.7/build/yuicompressor-2.4.7.jar'
+COMPRESS_OUTPUT_DIR = 'compress'
+COMPRESS_ROOT = PROJECT_PATH + '/statik'
 
-STATIC_URL = COMPRESS_URL#'/statik/'
-
-STATIC_ROOT = PROJECT_PATH + '/statikSunucu'
+STATIC_URL = COMPRESS_URL
+STATIC_ROOT = PROJECT_PATH + '/statik' # media_bundler uses this
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -83,19 +84,21 @@ MEDIA_ROOT = PROJECT_PATH + '/statik/yukleme'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://127.0.0.1:8000' + STATIC_URL + 'yukleme/'
+MEDIA_URL = STATIC_URL + 'yukleme/'
 
 # CDN settings (django-storages)
 CLOUDFILES_USERNAME = 'refik'
 CLOUDFILES_API_KEY = RACK_KEY
 CLOUDFILES_CONTAINER = 'audio'
-DEFAULT_FILE_STORAGE = 'audio.ortakVeri.storage.AudioStorage'
+CLOUDFILES_CONNECTION_KWARGS = {'authurl': cloudfiles.uk_authurl, 'timeout': 50}
 
 # Memcache
 CACHES = {
     'default': {
+        #'BACKEND' : 'django.core.cache.backends.dummy.DummyCache',
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 14400,
     }
 }
 
@@ -120,14 +123,11 @@ MEDIA_BUNDLES = ({'type': 'png-sprite',
                       'bottom.jpg',)},) 
 
 FILEBROWSER_MEDIA_ROOT = PROJECT_PATH + '/statik/'
-
 FILEBROWSER_MEDIA_URL = '/statik/'
-
 FILEBROWSER_DIRECTORY = 'yukleme/'
-
 FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser/'
-
-FILEBROWSER_PATH_FILEBROWSER_MEDIA = '/home/refik/code/pythonenv/audio/lib/python2.7/site-packages/filebrowser/static/filebrowser'
+FILEBROWSER_MAX_UPLOAD_SIZE = 10000000000000000000
+FILEBROWSER_ADMIN_VERSIONS = ['kucuk', 'orta', 'buyuk', 'tam']
 
 FILEBROWSER_VERSIONS = {
     'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'upscale'},
@@ -135,7 +135,7 @@ FILEBROWSER_VERSIONS = {
     'urun_ufak': {'verbose_name': 'Urun Ufak', 'width': 190, 'height': 190, 'opts': 'upscale'},
     'panel_ufak': {'verbose_name': 'Panel Ufak', 'width': '', 'height': '110', 'opts': 'upscale'},
     'urun': {'verbose_name': 'Urun', 'width': 430, 'height': 430, 'opts': 'upscale'},
-    'haber_ufak': {'verbose_name': 'Haber Ufak', 'width': 60, 'height': 60, 'opts': 'upscale'},
+    'haber_ufak': {'verbose_name': 'Haber Ufak', 'width': 65, 'height': 55, 'opts': 'upscale'},
     'yeni_ufak': {'verbose_name': 'Yeni Ufak', 'width': 90, 'height': 75, 'opts': 'upscale'},
     'dokuman_ufak': {'verbose_name': 'Dokuman Ufak', 'width': 60, 'height': 60, 'opts': 'upscale'},
     'diger_model': {'verbose_name': 'Diger Model', 'width': 145, 'height': 145, 'opts': 'upscale'},
@@ -145,18 +145,14 @@ FILEBROWSER_VERSIONS = {
     'orta' : {'verbose_name': 'Orta', 'width': 200, 'height': 200, 'opts': ''},
     'buyuk' : {'verbose_name': 'Buyuk', 'width': 300, 'height': 300, 'opts': ''},
     'tam' : {'verbose_name': 'Tam', 'width': 400, 'height': 400, 'opts': ''},
-
+    'limit' : {'verbose_name': 'Limit', 'width': 952, 'height': 622, 'opts': 'upscale'}
 }
 
-FILEBROWSER_MAX_UPLOAD_SIZE = 10000000000000000000
-
-FILEBROWSER_ADMIN_VERSIONS = ['kucuk', 'orta', 'buyuk', 'tam']
-
 GRAPPELLI_INDEX_DASHBOARD = 'audio.dashboard.CustomIndexDashboard'
-
 GRAPPELLI_ADMIN_TITLE = 'Audio Elektronik Web Sitesi Kontrol Paneli'
 
 FEINCMS_ADMIN_MEDIA = '/statik/feincms/'
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -169,7 +165,7 @@ STATICFILES_FINDERS = (
 )
 
 STATICFILES_DIRS = (
-    PROJECT_PATH + '/statik',
+    # PROJECT_PATH + '/statik',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -195,12 +191,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'audio.urls'
@@ -228,6 +226,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.humanize',
     'audio.ozelSayfa',
     'audio.ortakVeri',
     'audio.haber',

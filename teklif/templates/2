@@ -213,7 +213,7 @@
             if(row.length){
                 var current = $('tr[data-pk="' + row_pk + '"]').css('background-color');
                 row.css('background-color', '#46a546');
-                row.animate({'background-color': current}, 3000);
+                row.animate({'background-color': current}, 1500);
             }
         }
 
@@ -661,7 +661,7 @@
 	<div class='alert-message success' style='display:none;text-align:right'>
 		<div style='float:left; margin-top:0px;'>
 			<strong><span id='new-count'>0</span> tane yeni teklif var!</strong> 
-			Yandaki butona basarak goruntuleyebilirsiniz.
+			Assagidaki butona basarak goruntuleyebilirsiniz.
 		</div>
     	<span class="btn primary small" onclick="unleash()">Goruntule</span>
 	</div>

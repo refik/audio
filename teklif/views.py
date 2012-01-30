@@ -75,6 +75,14 @@ class OfferView(ListView):
     context_object_name = 'offers'
     model = Teklif
 
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super(OfferView, self).get_queryset()
+        if user.is_staff:
+            return queryset
+        else:
+            return queryset.filter(bilgi__sorumlu=user)
+
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)
         context['pk'] = self.kwargs.get('pk',0)

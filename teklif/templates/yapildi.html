@@ -1,7 +1,8 @@
+{% if teklif.yapildi_set.all %}
 <dl>
 		{% for yapildi in teklif.yapildi_set.all %}
 		<dt class='twipsy-label'>
-		{{ yapildi.kullanici.get_full_name }} - {{ yapildi.tarih|timesince }} once
+		{{ yapildi.kullanici.get_full_name }} - {{ yapildi.teklif.bilgi.tarih|timesince:yapildi.tarih }} sonra
 		</dt> 
 		<dd>
 			<ul class='unstyled'>
@@ -15,9 +16,7 @@
 				<li>
 					<span class='twipsy-text yapildi-label'>Dosya: </span>
 					<span class='twipsy-text'>
-						<a href='{{ target.dosya.url }}' target='_blank'>
-						{{ yapildi.dosya.name|cut:'yukleme/teklif/' }}
-						</a>
+					{{ yapildi.dosya.name|cut:'yukleme/teklif/' }}
 					</span>
 				</li>
 				{% endif %}
@@ -53,3 +52,6 @@
 		</dd>
 		{% endfor %}
 </dl>
+{% else %}
+Islem yapilmamis
+{% endif %}
