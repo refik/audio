@@ -8,6 +8,7 @@ from django.views.generic import DetailView, ListView, TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage
+from django.http import HttpResponseRedirect
 import datetime
 import unicodedata
 import gviz_api
@@ -56,7 +57,7 @@ class TipListView(ListView):
         filtreler = []
         context = super(TipListView, self).get_context_data(**kwargs)
         gorevliler = User.objects.filter(
-            profile__gorev__isim='Musteri Temsilcisi')
+            profile__ikincil=True)
         sehirler = Sehir.objects.all()
         durumlar = Durum.objects.all()
         bugun = datetime.date.today() 
@@ -88,6 +89,12 @@ class TipListView(ListView):
                                            None)} for filtre in filtreler]
         return context
 
+def to_new_site(request, primary_key):
+    try:
+        bilgi = Bilgi.objects.get(pk=primary_key)
+        return HttpResponseRedirect('/teklif/%d' %  bilgi.teklif.pk)
+    except:
+        return HttpResponseRedirect('/teklif')
 
 class BilgiDetailView(DetailView):
     model = Bilgi
@@ -188,14 +195,6 @@ class TemsilciDetailView(DetailView):
     template_name = 'profil.html'
     context_object_name = 'calisan' 
 
-    def get_object(self):
-        object = super(TemsilciDetailView,self).get_object()
-        gorev = CalisanGorev.objects.get(isim='Musteri Temsilcisi')
-        if object.profile.gorev == gorev:
-            return object
-        else:
-            return None
-
     def get_context_data(self,**kwargs):
         context =super(TemsilciDetailView, self).get_context_data(**kwargs)
         temsilci = self.get_object()
@@ -230,6 +229,5 @@ class TemsilciListView(ListView):
     context_object_name = 'temsilciler'
 
     def get_queryset(self):
-        temsilci_gorev= CalisanGorev.objects.get(isim='Musteri Temsilcisi')
-        temsilciler = User.objects.filter(profile__gorev=temsilci_gorev) 
+        temsilciler = User.objects.filter(profile__ikicil=True) 
         return temsilciler.order_by('first_name')

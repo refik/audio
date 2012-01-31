@@ -3,10 +3,11 @@ from audio.bilgiTakip.views import BilgiDetailView, TipListView, IstatistikView,
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+from django.views.generic.simple import redirect_to
 
 urlpatterns = patterns('',
-    (r'^$', never_cache(login_required(TipListView.as_view()))),
-    (r'^(?P<pk>\d+)/$', never_cache(login_required(BilgiDetailView.as_view()))),
+    (r'^$', redirect_to, {'url': '/teklif'}),
+    (r'^(?P<primary_key>\d+)/$', 'audio.bilgiTakip.views.to_new_site'),
     (r'^istatistikler/$', login_required(IstatistikView.as_view())),
     (r'^temsilciler/$', login_required(TemsilciListView.as_view())),
     (r'^temsilci/(?P<pk>\d+)/$', login_required(TemsilciDetailView.as_view())),

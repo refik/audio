@@ -9,7 +9,7 @@
 													{{ offer.son_eylem|timesince }}</span>'>
 		{{ offer.pk }}
 		</span>
-		<div class='last-action' style='display:none;' >{{offer.son_eylem|date:'Y-m-d-H'}}</div>
+		<div class='last-action' style='display:none;' >{%if offer.durum.kapali%}{%now "Y-m-d-H"%}{%else%}{{offer.son_eylem|date:'Y-m-d-H'}}{%endif%}</div>
 	</td>
 	<td>
 		<span  class='static'  data-original-title='{{ offer.bilgi.tarih|date:"l" }} - 
@@ -51,8 +51,8 @@
 	</td>
 	<td>
 		<span class='dynamic' data-url='sorumlu'>
-			<span class='edit' data-form='delege' data-original-title='Delege'>
-			{{ offer.temsilci.first_name }}
+			<span {% if offer.temsilci.profile.ikincil and "İstanbul" in offer.bilgi.sehir.isim %}class="edit"{% endif %} data-form='delege' data-original-title='Delege'>
+			{{ offer.temsilci.first_name|chars:14|title }}
 			</span>
 		</span>
 	</td>

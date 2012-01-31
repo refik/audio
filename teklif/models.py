@@ -32,7 +32,7 @@ class Teklif(models.Model):
     temsilci = models.ForeignKey(User, null=True, blank=True)
     son_eylem = models.DateTimeField(blank=True, null=True)
     class Meta:
-        ordering = ['son_eylem']
+        ordering = ['-bilgi__tarih']
     def __unicode__(self):
         return self.bilgi.tip.isim
 
@@ -54,14 +54,18 @@ class Yapildi(models.Model):
 
 @receiver(post_save,sender=Bilgi)
 def teklif_yarat(sender,**kwargs):
+    created_bilgi = kwargs['instance']
     try:
-        kwargs['instance'].teklif
+        created_bilgi.teklif
     except:
         if kwargs['created'] == False:
-            if 'Teklif' in kwargs['instance'].tip.isim:
+            if 'Teklif' in created_bilgi.tip.isim:
                 t = Teklif(bilgi=kwargs['instance'])
                 t.durum = Durum.objects.get(pk=1)
-                t.kapali = False
+                kisi = User.objects.get(profile__ikincil=True,
+                       profile__sorumluSehir__isim__contains = created_bilgi.sehir.isim)
+                t.temsilci = kisi
+                t.son_eylem = created_bilgi.tarih
                 t.save()
 
 @receiver(post_save,sender=Yapildi)
@@ -85,9 +89,6 @@ def update_teklif(sender,**kwargs):
                   (yapildi.kullanici.get_full_name(), teklif.pk, teklif.pk))
     except:
         pass
-
-    if not yapildi.durum and not teklif.durum:
-        teklif.durum = Durum.objects.get(pk=3)
 
     teklif.son_eylem = yapildi.tarih
     teklif.save()
