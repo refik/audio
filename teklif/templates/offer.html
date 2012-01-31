@@ -40,8 +40,8 @@
 														{{ offer.bilgi.mesaj }}</div>
 		<span  class='static'  data-original-title='<span class="twipsy-label">Mesaj:
 													</span><span class="twipsy-text">
-													{{ offer.bilgi.mesaj }}</span>'>
-		{{ offer.bilgi.mesaj|chars:33 }}
+													{{ offer.bilgi.mesaj|default:'Mesaj girilmemis' }}</span>'>
+		{{ offer.bilgi.mesaj|chars:31|default:'Mesaj girilmemis' }}
 		</span>
 	</td>
 	<td>

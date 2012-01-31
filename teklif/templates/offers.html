@@ -364,6 +364,7 @@
             $(on_dom + ' option:selected').removeAttr('selected');
             $(on_dom + ' option[value="' + select + '"]').attr('selected','selected');
             search_item.search(select);
+			$('.dropdown:last').removeClass('open');	
             $('.close').click();
         }
 
@@ -416,7 +417,7 @@
         function init_interaction(elements){
 
             //Twipsy initializations
-            elements.find('.static').twipsy({html: true, placement: 'below', trigger:'hover'});
+            elements.find('.static').twipsy({html: true, placement: 'below', trigger:'hover', delayIn:250});
             elements.find('.dynamic').twipsy({ html: true, placement: 'below', title: function(){ 
                 var result = null;
                 $.ajax({
@@ -465,6 +466,8 @@
 
 		function sifirla(){
 			search_tutar.search('');
+			$('.dropdown:last').removeClass('open');
+			$('tbody tr').removeAttr('data-hiders');
 			$('select').each(function(){
 				$(this).children('option:selected').removeAttr('selected');
 				$(this).children('option:first').attr('selected','selected');
@@ -589,11 +592,7 @@
             });
 
             //Initialize twipsy and popovers for all rows
-            $('tbody tr').each(function(){
-                $(this).one('hover', function(){
-                    init_interaction($(this));
-                });
-            })
+            $('tbody tr').one('hover', function(){init_interaction($(this));});
 
             //Update last action
             update_last_action($('tbody tr'));
@@ -784,7 +783,7 @@
 
 	<div id='search-sehir' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
-				onclick='update_filter("#search-sehir select", this, search_sehir);'>
+				onchange='update_filter("#search-sehir select", this, search_sehir);'>
 			<option value="-" selected="selected">Hepsi</option>
 			<option value="Adana Osmaniye Hatay">Adana Bolge</option>
 			<option value="Ankara Bolu Çankırı Kırşehir Çorum Yozgat Kırıkkale">Ankara Bolge</option>
@@ -891,7 +890,7 @@
 
 	<div id='search-sorumlu' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
-				onclick='update_filter("#search-durum select", this, search_sorumlu);'>
+				onchange='update_filter("#search-durum select", this, search_sorumlu);'>
 			<option value="-" selected="selected">Hepsi</option>
 			<option value="Abdullah">Abdullah Erkan</option>
 			<option value="Ahmet Serkan">Ahmet Serkan Güntaç</option>
