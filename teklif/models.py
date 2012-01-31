@@ -1,6 +1,6 @@
 # coding: utf-8
 from django.db import models
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.comments.models import Comment
 from django.contrib.auth.models import User
@@ -64,7 +64,7 @@ def teklif_yarat(sender,**kwargs):
                 t.kapali = False
                 t.save()
 
-@receiver(pre_save,sender=Yapildi)
+@receiver(post_save,sender=Yapildi)
 def update_teklif(sender,**kwargs):
     yapildi = kwargs['instance']
     teklif = yapildi.teklif
@@ -78,12 +78,16 @@ def update_teklif(sender,**kwargs):
         teklif.tutar = yapildi.tutar
     try:
         teklif.temsilci = yapildi.delege
+        teklif.bilgi.sorumlu.add(yapildi.delege)
         audiomail('audioweb@audio.com.tr', [yapildi.delege.email], 'Audio Takip Sistemi', 
                   'Size %s bir teklif delege etti, numarasi: %d.\n\nBu adresten bilgilere erisebilirsiniz:' \
                   'http://www.audio.com.tr/teklif/%d' % 
                   (yapildi.kullanici.get_full_name(), teklif.pk, teklif.pk))
     except:
         pass
+
     if not yapildi.durum and not teklif.durum:
         teklif.durum = Durum.objects.get(pk=3)
+
+    teklif.son_eylem = yapildi.tarih
     teklif.save()

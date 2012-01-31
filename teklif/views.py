@@ -18,8 +18,9 @@ class NewView(DetailView):
     context_object_name = 'offer'
     
     def get_object(self):
+        user = self.request.user
         try:
-            new = Teklif.objects.filter(pk__gt=self.kwargs['pk']).reverse()[0]
+            new = Teklif.objects.filter(pk__gt=self.kwargs['pk'], bilgi__sorumlu=user).reverse()[0]
         except:
             new = None
         return new
