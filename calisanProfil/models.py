@@ -19,6 +19,7 @@ class CalisanProfil(models.Model):
     gorev = models.ForeignKey(CalisanGorev)
     birincil = models.BooleanField()
     ikincil = models.BooleanField()
+    ucuncul = models.BooleanField()
     class Meta:
         verbose_name_plural = "Calisan Profilleri"
     def __unicode__(self):

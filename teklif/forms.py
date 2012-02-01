@@ -72,6 +72,7 @@ class DelegeForm(ModelForm):
         except:
             # Form doesnt receive initial args
             # When it is initialized for validation
+            # So I need this fucking try block
             pass
     class Meta:
         model = Yapildi

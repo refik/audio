@@ -54,7 +54,7 @@
 			background-color: #46a546;
 		}
 		.isi-kaybettik {
-			background-color: #c43c25;
+			background-color: #c43c35;
 		}
 		.iletisime-gecildi {
 			background-color: #87afc7;
@@ -212,8 +212,11 @@
             var row = $('tr[data-pk="' + row_pk + '"]');
             if(row.length){
                 var current = $('tr[data-pk="' + row_pk + '"]').css('background-color');
-                row.css('background-color', '#46a546');
-                row.animate({'background-color': current}, 3000);
+                row.css('background-color', '#82ff82');
+                row.animate({'background-color': current}, 1500, function(){ 
+					row.css('background-color', '#82ff82');
+					row.animate({'background-color':current}, 1500);
+				});
             }
         }
 
@@ -361,6 +364,7 @@
             $(on_dom + ' option:selected').removeAttr('selected');
             $(on_dom + ' option[value="' + select + '"]').attr('selected','selected');
             search_item.search(select);
+			$('.dropdown:last').removeClass('open');	
             $('.close').click();
         }
 
@@ -380,6 +384,20 @@
         //    });
         //}
 
+		function adjust_urgency_color(element){
+			hour = element.html()
+			if(hour >= 100){
+            	red = 255;
+				green = hour > 200 ? 130 : Math.floor(390 - (hour * 1.35));
+				blue = green;
+			} else {
+				red = hour < 1 ? 130 : Math.floor(130 + (hour * 1.25));
+				green = 255;
+				blue = red;
+			}
+            element.parents('td').css('background-color', 'rgb(' + red + ',' + green + ',' + blue + ')');
+		}
+
         function update_last_action(elements){
             var now = new Date().getTime();
             elements.find('.last-action').each(function(){
@@ -392,16 +410,14 @@
                 difference = now - action;
                 dif_hour = Math.floor(difference / 3600000);
                 $(this).html(dif_hour);
-                red = 255;
-                green_blue = dif_hour > 510 ? 123 : Math.floor(255 - (dif_hour/4));
-                $(this).parents('td').css('background-color', 'rgb('+red+','+green_blue+','+green_blue+')');
+				adjust_urgency_color($(this));
             })
         }
 
         function init_interaction(elements){
 
             //Twipsy initializations
-            elements.find('.static').twipsy({html: true, placement: 'below', trigger:'hover'});
+            elements.find('.static').twipsy({html: true, placement: 'below', trigger:'hover', delayIn:250});
             elements.find('.dynamic').twipsy({ html: true, placement: 'below', title: function(){ 
                 var result = null;
                 $.ajax({
@@ -447,6 +463,17 @@
                 $(this).popover('show')
             });
         }
+
+		function sifirla(){
+			search_tutar.search('');
+			$('.dropdown:last').removeClass('open');
+			$('tbody tr').removeAttr('data-hiders');
+			$('select').each(function(){
+				$(this).children('option:selected').removeAttr('selected');
+				$(this).children('option:first').attr('selected','selected');
+			});
+		}
+
 
         $(function() {
 
@@ -565,11 +592,7 @@
             });
 
             //Initialize twipsy and popovers for all rows
-            $('tbody tr').each(function(){
-                $(this).one('hover', function(){
-                    init_interaction($(this));
-                });
-            })
+            $('tbody tr').one('hover', function(){init_interaction($(this));});
 
             //Update last action
             update_last_action($('tbody tr'));
@@ -609,7 +632,7 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle">Filtre</a>
 					<ul class="dropdown-menu">
-						<li><a href='#' onclick='search_tutar.search("");'>Sifirla</a></li>
+						<li><a href='#' onclick='sifirla();'>Sifirla</a></li>
 						<li class='divider'></li>
 						<li>
 							<a  href='#' rel='popover' data-search='#search-tarih' 
@@ -648,6 +671,7 @@
 				<img class='loading' style='display:none;'src='http://s.aucdn.net/resim/ajax-small.gif'>
 			</form>
 			<ul class="secondary-nav">
+				<li><a href='/logout'>[{{ request.user.first_name }}]</a></li>
 				<li><a id='sum-sayi'></a></li>
 				<li><a id='sum-daire'></a></li>
 				<li><a id='sum-tutar'></a></li>
@@ -681,6 +705,8 @@
 		<select style='margin-bottom:10px' class='span3' 
 				onchange='update_filter("#search-durum select", this, search_durum);'>
 			<option value="-" selected="selected">Hepsi</option>
+			<option value="Eylem İletişime Delege Teklif Yönlendirildi">Acik Isler</option>
+			<option value="Aldık Kaybettik İptal">Kapali Isler</option>
 			<option value="Eylem Yapılmadı">Eylem Yapilmadi</option>
 			<option value="İletişime Geçildi">İletişime Geçildi</option>
 			<option value="Delege Edildi">Delege Edildi</option>
@@ -757,8 +783,26 @@
 
 	<div id='search-sehir' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
-				onclick='update_filter("#search-sehir select", this, search_sehir);'>
+				onchange='update_filter("#search-sehir select", this, search_sehir);'>
 			<option value="-" selected="selected">Hepsi</option>
+			<option value="Adana Osmaniye Hatay">Adana Bolge</option>
+			<option value="Ankara Bolu Çankırı Kırşehir Çorum Yozgat Kırıkkale">Ankara Bolge</option>
+			<option value="Antalya Burdur Isparta">Antalya Bolge</option>
+			<option value="Bursa Balıkesir Çanakkale Yalova">Bursa Bolge</option>
+			<option value="Diyarbakır Elazığ Tunceli Bingöl Mardin Batman Muş Bitlis Siirt Şırnak Hakkari Van Ağrı Iğdır">Diyarbakir Bolge</option>
+			<option value="Eskişehir Afyon Kütahya Bilecik">Eskisehir Bolge</option>
+			<option value="Gaziantep Şanlıurfa Kilis">Gaziantep Bolge</option>
+			<option value="İstanbul (Avrupa)">Istanbul Anadolu Bolge</option>
+			<option value="İstanbul (Anadolu)">Istanbul Rumeli Bolge</option>
+			<option value="İzmir Manisa Uşak Denizli Aydın Muğla">Izmir Bolge</option>
+			<option value="Kayseri Nevşehir Sivas">Kayseri Bolge</option>
+			<option value="Kocaeli Sakarya Düzce Zonguldak Bartın Karabük">Kocaeli Bolge</option>
+			<option value="Konya Karaman Aksaray Niğde">Konya Bolge</option>
+			<option value="Malatya Kahramanmaraş Adıyaman">Malatya Bolge</option>
+			<option value="Mersin">Mersin Bolge</option>
+			<option value="Samsun Sinop Kastamonu Amasya Tokat Ordu">Samsun Bolge</option>
+			<option value="Trabzon Giresun Gümüşhane Bayburt Rize Erzurum Artvin Ardahan Erzincan Kars">Trabzon Bolge</option>
+			<option value="Tekirdağ Edirne Kırklareli">Trakya Bolge</option>
 			<option value="Adana">Adana</option>
 			<option value="Adıyaman">Adıyaman</option>
 			<option value="Afyonkarahisar">Afyonkarahisar</option>
@@ -846,43 +890,42 @@
 
 	<div id='search-sorumlu' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
-				onclick='update_filter("#search-durum select", this, search_sorumlu);'>
+				onchange='update_filter("#search-durum select", this, search_sorumlu);'>
 			<option value="-" selected="selected">Hepsi</option>
-			<option value="Ahmet">Ahmet Bulucu</option>
-			<option value="Ahmet Serkan">Ahmet Serkan Güntaç</option>
-			<option value="Burak">Burak Tokmak</option>
-			<option value="Murat">Murat Nazli</option>
-			<option value="Fatih">Fatih Şentürk</option>
-			<option value="Mehmet Akif">Mehmet Akif Türkan</option>
-			<option value="Sinan">Sinan Güngör</option>
-			<option value="Recai">Recai Çıtak</option>
-			<option value="Cem">Cem Çelik</option>
-			<option value="Necmettin">Necmettin Adsay</option>
-			<option value="Deniz">Deniz Falcıoğlu</option>
-			<option value="Hüseyin">Hüseyin Hüsmenoğlu</option>
-			<option value="Yakup">Yakup Özel</option>
-			<option value="Cem">Cem Malkoç</option>
-			<option value="İsmail">İsmail Pekdoğan</option>
-			<option value="Erdem">Erdem Çil</option>
-			<option value="Murat">Murat Tekin</option>
-			<option value="Murat">Murat Şahin</option>
-			<option value="Hande">Hande Yerebakan</option>
-			<option value="Semra">Semra Gürbüzoğlu</option>
-			<option value="Hülya">Hülya Muslu</option>
-			<option value="Timur">Timur Taymis</option>
-			<option value="Ergün">Ergün Aydın</option>
-			<option value="Ertan">Ertan Aydın</option>
-			<option value="Özkan">Özkan Aykut</option>
-			<option value="Birkan">Birkan Kösedağ</option>
-			<option value="Halit">Halit Dere</option>
-			<option value="İlhan">İlhan Yetişkin</option>
-			<option value="Hakan">Hakan Güçlü</option>
-			<option value="Gökhan">Gökhan Durak</option>
-			<option value="Metin">Metin Tezel</option>
-			<option value="Turgay">Turgay Töngel</option>
-			<option value="Erkan">Erkan Emir</option>
-			<option value="Burhanettin">Burhanettin Fidan</option>
 			<option value="Abdullah">Abdullah Erkan</option>
+			<option value="Ahmet Serkan">Ahmet Serkan Güntaç</option>
+			<option value="Ahmet">Ahmet Bulucu</option>
+			<option value="Birkan">Birkan Kösedağ</option>
+			<option value="Burak">Burak Tokmak</option>
+			<option value="Burhanettin">Burhanettin Fidan</option>
+			<option value="Cem">Cem Çelik</option>
+			<option value="Cem">Cem Malkoç</option>
+			<option value="Deniz">Deniz Falcıoğlu</option>
+			<option value="Erdem">Erdem Çil</option>
+			<option value="Ergün">Ergün Aydın</option>
+			<option value="Erkan">Erkan Emir</option>
+			<option value="Ertan">Ertan Aydın</option>
+			<option value="Fatih">Fatih Şentürk</option>
+			<option value="Gökhan">Gökhan Durak</option>
+			<option value="Hakan">Hakan Güçlü</option>
+			<option value="Halit">Halit Dere</option>
+			<option value="Hande">Hande Yerebakan</option>
+			<option value="Hülya">Hülya Muslu</option>
+			<option value="Hüseyin">Hüseyin Hüsmenoğlu</option>
+			<option value="İlhan">İlhan Yetişkin</option>
+			<option value="İsmail">İsmail Pekdoğan</option>
+			<option value="Metin">Metin Tezel</option>
+			<option value="Murat">Murat Nazli</option>
+			<option value="Murat">Murat Şahin</option>
+			<option value="Murat">Murat Tekin</option>
+			<option value="Necmettin">Necmettin Adsay</option>
+			<option value="Özkan">Özkan Aykut</option>
+			<option value="Recai">Recai Çıtak</option>
+			<option value="Semra">Semra Gürbüzoğlu</option>
+			<option value="Sinan">Sinan Güngör</option>
+			<option value="Timur">Timur Taymis</option>
+			<option value="Turgay">Turgay Töngel</option>
+			<option value="Yakup">Yakup Özel</option>
 		</select>
 	</div>
 

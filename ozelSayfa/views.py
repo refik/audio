@@ -3,6 +3,13 @@ from audio.haber.models import Haber
 from audio.urun.models import Urun
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
+
+def logout_view(request):
+    print 'ahmet'
+    logout(request)
+    return HttpResponseRedirect('http://www.audio.com.tr')
 
 def medyaAl(sayfa_ismi):
     try:

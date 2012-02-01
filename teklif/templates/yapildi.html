@@ -27,7 +27,7 @@
 				</li>
 				<li>
 					<span class='twipsy-text yapildi-label'>Sebep: </span>
-					<span class='twipsy-text'>{{ yapildi.sebep }}</span>
+					<span class='twipsy-text'>{% for sebep in yapildi.sebep %}{{ sebep }}, {% endfor %}</span>
 				</li>
 				{% endif %}
 				{% if yapildi.daire %}
