@@ -63,3 +63,4 @@ def handle_file_upload(path, file, site):
 **Burada statikTasinmaz diye bir klasor var, icinde tinymce, flexpaper in son versiyonu var. birde /statik/logo.jpg icin bir de logo.jpg var. /statik linki bu klasorden sorulur 
 **filebrowser functions.py ye from django.template.defaultfilters slugify geldi
 **filebrowser functions.py ye from audio.ortakVerio.randomstr import random_string geldi
+**filebrowser in base.py si de degisik
