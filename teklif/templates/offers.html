@@ -234,7 +234,7 @@
         //Loading animation for a given element
         function loading(element){
             element.children().each(function(){$(this).css('opacity',0.2);});
-            element.prepend('<img id="loading" src="http://s.aucdn.net/resim/ajax-loader.gif" />');
+            element.prepend('<img alt="yukleniyor" id="loading" src="http://s.aucdn.net/resim/ajax-loader.gif" />');
         }
 
         var sum = function(items) {
@@ -290,6 +290,7 @@
                 update_sum(); 
                 init_interaction($(this));
                 update_last_action($(this));
+				blink(pk);
             });
         }
 
@@ -306,7 +307,6 @@
                 if(data == ''){
                     update_row(pk);
                     $('.close').click();
-                    blink(pk);
                 } else {
                     $('.content p').html(data);
                     init_form(type);
@@ -352,10 +352,14 @@
             $('#search').val('').change();
             $('.alert-message').hide('slow');
             $('tbody').prepend(new_rows);
+			update_stripe();
+			update_sum();
             $('#new-stack').html('');
             $('#new-count').html(0);
-            $(new_rows).each(function(){blink($(this).data('pk'))});
-            search_isim_mesaj.cache();
+            $(new_rows).each(function(){
+				pk = $(this).data('pk')
+				update_row(pk);
+			});
         }
 
         //Saving filters selected value to dom
@@ -408,7 +412,7 @@
                 date.setHours(Number(date_args[3]));
                 action = date.getTime();
                 difference = now - action;
-                dif_hour = Math.floor(difference / 3600000);
+                dif_hour = difference > 0 ? Math.floor(difference / 3600000) : 0;
                 $(this).html(dif_hour);
 				adjust_urgency_color($(this));
             })
@@ -468,8 +472,8 @@
 			search_tutar.search('');
 			$('.dropdown:last').removeClass('open');
 			$('tbody tr').removeAttr('data-hiders');
+			$('select').children('option[selected="selected"]').removeAttr('selected')
 			$('select').each(function(){
-				$(this).children('option:selected').removeAttr('selected');
 				$(this).children('option:first').attr('selected','selected');
 			});
 		}
@@ -504,27 +508,48 @@
                     return false;
                 },
                 format: function(s){
-                    s = s.replace(',','');
-                    if(parseInt(s))
-                        return parseInt(s);
-                    else
-                        return 0;
+    				number = $(s).html().replace(/[\t\n\s\,]/g,'');
+					if(number == 'x'){
+						return 0
+					} else {
+                    	return parseInt(number);
+					}
                 },
                 type: 'numeric'
             });
             $.tablesorter.addParser({
-                id: 'split-nums',
+                id: 'last-action',
                 is: function(s){
                     return false;
                 },
                 format: function(s){
-                    text = s.split(/[\t\n]/)
-                    action = text[text.length-1]
+					action = $(s).filter('.last-action').html().replace(/[\t\n\s\,]/g,'');
                     return parseInt(action);
                 },
                 type: 'numeric'
             });
-
+            $.tablesorter.addParser({
+                id: 'date',
+                is: function(s){
+                    return false;
+                },
+                format: function(s){
+					action = $(s).filter('.tarih').html().replace(/[\t\n\s\,]/g,'');
+                    return parseInt(action);
+                },
+                type: 'numeric'
+            });
+            $.tablesorter.addParser({
+                id: 'special-text',
+                is: function(s){
+                    return false;
+                },
+                format: function(s){
+					text = s.replace(new RegExp('<[^<]+\>', 'g'), "")
+                    return text;
+                },
+                type: 'text'
+            });
             $('thead tr').one('hover', function(){
                 if(!sort_table){
                     sort_table = $('#main').tablesorter(
@@ -538,15 +563,31 @@
                                     sorter: 'comma-number'
                                 },
                                 0: {
-                                    sorter: 'split-nums'
+                                    sorter: 'last-action'
                                 },
                                 1: {
-                                    sorter: 'split-nums'
+                                    sorter: 'date'
                                 },
                                 3: {
                                     sorter: false
+                                },
+                                4: {
+                                    sorter: 'special-text'
+                                },
+                                5: {
+                                    sorter: 'special-text'
+                                },
+                                6: {
+                                    sorter: 'special-text'
+                                },
+                                7: {
+                                    sorter: 'special-text'
+                                },
+                                2: {
+                                    sorter: 'special-text'
                                 }
-                            }
+                            },
+							textExtraction: function(node){return node.innerHTML;}
                     });
                 }
             });
@@ -590,6 +631,25 @@
                         testQuery: text_test
                     }));
             });
+
+			//Twipsy to get iscilik
+            //$('#sum-tutar').twipsy({ html: true, placement: 'below', title: function(){ 
+            //    var result = null;
+			//	var pk_list = ''
+			//	var offers = $('tbody tr').not('.hide').each(function(i,v){
+			//		comma = i > 0 ? '-' : '';
+			//		pk_list += comma + $(this).data('pk');
+			//	});
+            //    $.ajax({
+            //                url: ('/teklif/iscilik-tutar/'),
+            //                type: 'get',
+			//				data: {pks: pk_list},
+            //                dataType: 'html',
+            //                async: false,
+            //                success: function(data) { result = data; }
+            //            });
+            //   return result
+            //}, delayIn:1000});
 
             //Initialize twipsy and popovers for all rows
             $('tbody tr').one('hover', function(){init_interaction($(this));});
@@ -666,9 +726,9 @@
 					</ul>
             	</li>
 			</ul>
-			<form class="pull-left" action="">
+			<form class="pull-left">
 				<input id="search" type="text" placeholder="Arama" class='span3'>
-				<img class='loading' style='display:none;'src='http://s.aucdn.net/resim/ajax-small.gif'>
+				<img class='loading' alt='ajax yukleniyor' style='display:none;' src='http://s.aucdn.net/resim/ajax-small.gif'>
 			</form>
 			<ul class="secondary-nav">
 				<li><a href='/logout'>[{{ request.user.first_name }}]</a></li>
@@ -719,65 +779,131 @@
 	</div>
 
 	<div id='search-daire' class='hide'>
-		<select style='margin-bottom:10px' class='span3' id='exists'
-				onchange='update_filter("#search-daire select#exists", this, search_daire);'>
+		<select style='margin-bottom:10px' class='span3 exists'
+				onchange='update_filter("#search-daire select.exists", this, search_daire);'>
 			<option value="-" selected="selected">Hepsi</option>
 			<option value="true">Var</option>
 			<option value="false">Yok</option>
 		</select>
-		<select style='margin-bottom:10px' class='span3' id='bigger'
-				onchange='update_filter("#search-daire select#bigger", this, search_daire);'>
+		<select style='margin-bottom:10px' class='span3 bigger'
+				onchange='update_filter("#search-daire select.bigger", this, search_daire);'>
 			<option value="-" selected="selected">Hepsi</option>
+			<option value=">5">5</option>
 			<option value=">10">10</option>
 			<option value=">50">50</option>
 			<option value=">100">100</option>
+			<option value=">150">150</option>
+			<option value=">200">200</option>
+			<option value=">250">250</option>
+			<option value=">300">300</option>
+			<option value=">350">350</option>
+			<option value=">400">400</option>
+			<option value=">450">450</option>
+			<option value=">500">500</option>
+			<option value=">1000">1000</option>
+			<option value=">1500">1500</option>
+			<option value=">2000">2000</option>
 		</select> den buyuk
-		<select style='margin-bottom:10px' class='span3' id='smaller'
-				onchange='update_filter("#search-daire select#smaller", this, search_daire);'>
+		<select style='margin-bottom:10px' class='span3 smaller'
+				onchange='update_filter("#search-daire select.smaller", this, search_daire);'>
 			<option value="-" selected="selected">Hepsi</option>
-			<option value="<500">500</option>
-			<option value="<250">250</option>
+			<option value="<5">5</option>
+			<option value="<10">10</option>
+			<option value="<50">50</option>
 			<option value="<100">100</option>
+			<option value="<150">150</option>
+			<option value="<200">200</option>
+			<option value="<250">250</option>
+			<option value="<300">300</option>
+			<option value="<350">350</option>
+			<option value="<400">400</option>
+			<option value="<450">450</option>
+			<option value="<500">500</option>
+			<option value="<1000">1000</option>
+			<option value="<1500">1500</option>
+			<option value="<2000">2000</option>
 		</select> den kucuk
 	</div>
 
 	<div id='search-tutar' class='hide'>
-		<select style='margin-bottom:10px' class='span3' id='exists'
-				onchange='update_filter("#search-tutar select#exists", this, search_tutar);'>
+		<select style='margin-bottom:10px' class='span3 exists'
+				onchange='update_filter("#search-tutar select.exists", this, search_tutar);'>
 			<option value="-" selected="selected">Hepsi</option>
 			<option value="true">Var</option>
 			<option value="false">Yok</option>
 		</select>
-		<select style='margin-bottom:10px' class='span3' id='bigger'
-				onchange='update_filter("#search-tutar select#bigger", this, search_tutar);'>
+		<select style='margin-bottom:10px' class='span3 bigger'
+				onchange='update_filter("#search-tutar select.bigger", this, search_tutar);'>
 			<option value="-" selected="selected">Hepsi</option>
+			<option value=">500">500</option>
 			<option value=">1000">1,000</option>
-			<option value=">25000">25,000</option>
+			<option value=">5000">5,000</option>
+			<option value=">10000">10,000</option>
 			<option value=">50000">50,000</option>
+			<option value=">100000">100,000</option>
 		</select> den buyuk
-		<select style='margin-bottom:10px' class='span3' id='smaller'
-				onchange='update_filter("#search-tutar select#smaller", this, search_tutar);'>
+		<select style='margin-bottom:10px' class='span3 smaller'
+				onchange='update_filter("#search-tutar select.smaller", this, search_tutar);'>
 			<option value="-" selected="selected">Hepsi</option>
-			<option value="<50000">50,000</option>
-			<option value="<10000">10,000</option>
+			<option value="<500">500</option>
 			<option value="<1000">1,000</option>
+			<option value="<5000">5,000</option>
+			<option value="<10000">10,000</option>
+			<option value="<50000">50,000</option>
+			<option value="<100000">100,000</option>
 		</select> den kucuk
 	</div>
 
 	<div id='search-tarih' class='hide'>
-		<select style='margin-bottom:10px' class='span3' id='exists'
-				onchange='update_filter("#search-tarih select#exists", this, search_tarih);'>
+		<select style='margin-bottom:10px' class='span3 exists'
+				onchange='update_filter("#search-tarih select.exists", this, search_tarih);'>
 			<option value="-" selected="selected">Hepsi</option>
-			<option value=">734451">10 Kasim 2011</option>
-			<option value=">734481">10 Aralik 2011</option>
-			<option value=">734512">10 Ocak 2012</option>
+			<option value=">734451">5 Kasim 2011</option>
+			<option value=">734456">10 Kasim 2011</option>
+			<option value=">734461">15 Kasim 2011</option>
+			<option value=">734466">20 Kasim 2011</option>
+			<option value=">734471">25 Kasim 2011</option>
+			<option value=">734476">30 Kasim 2011</option>
+			<option value=">734482">5 Aralik 2011</option>
+			<option value=">734487">10 Aralik 2011</option>
+			<option value=">734492">15 Aralik 2011</option>
+			<option value=">734497">20 Aralik 2011</option>
+			<option value=">734502">25 Aralik 2011</option>
+			<option value=">734507">30 Aralik 2011</option>
+			<option value=">734512">5 Ocak 2012</option>
+			<option value=">734517">10 Ocak 2012</option>
+			<option value=">734522">15 Ocak 2012</option>
+			<option value=">734527">20 Ocak 2012</option>
+			<option value=">734532">25 Ocak 2012</option>
+			<option value=">734537">30 Ocak 2012</option>
+			<option value=">734542">5 Subat 2012</option>
+			<option value=">734547">10 Subat 2012</option>
+			<option value=">734552">15 Subat 2012</option>
 		</select> den sonra
-		<select style='margin-bottom:10px' class='span3' id='bigger'
-				onchange='update_filter("#search-tarih select#bigger", this, search_tarih);'>
+		<select style='margin-bottom:10px' class='span3 bigger'
+				onchange='update_filter("#search-tarih select.bigger", this, search_tarih);'>
 			<option value="-" selected="selected">Hepsi</option>
-			<option value="<734451">10 Kasim 2011</option>
-			<option value="<734481">10 Aralik 2011</option>
-			<option value="<734512">10 Ocak 2012</option>
+			<option value="<734451">5 Kasim 2011</option>
+			<option value="<734456">10 Kasim 2011</option>
+			<option value="<734461">15 Kasim 2011</option>
+			<option value="<734466">20 Kasim 2011</option>
+			<option value="<734471">25 Kasim 2011</option>
+			<option value="<734476">30 Kasim 2011</option>
+			<option value="<734482">5 Aralik 2011</option>
+			<option value="<734487">10 Aralik 2011</option>
+			<option value="<734492">15 Aralik 2011</option>
+			<option value="<734497">20 Aralik 2011</option>
+			<option value="<734502">25 Aralik 2011</option>
+			<option value="<734507">30 Aralik 2011</option>
+			<option value="<734512">5 Ocak 2012</option>
+			<option value="<734517">10 Ocak 2012</option>
+			<option value="<734522">15 Ocak 2012</option>
+			<option value="<734527">20 Ocak 2012</option>
+			<option value="<734532">25 Ocak 2012</option>
+			<option value="<734537">30 Ocak 2012</option>
+			<option value="<734542">5 Subat 2012</option>
+			<option value="<734547">10 Subat 2012</option>
+			<option value="<734552">15 Subat 2012</option>
 		</select> den once
 	</div>
 
@@ -792,9 +918,9 @@
 			<option value="Diyarbakır Elazığ Tunceli Bingöl Mardin Batman Muş Bitlis Siirt Şırnak Hakkari Van Ağrı Iğdır">Diyarbakir Bolge</option>
 			<option value="Eskişehir Afyon Kütahya Bilecik">Eskisehir Bolge</option>
 			<option value="Gaziantep Şanlıurfa Kilis">Gaziantep Bolge</option>
-			<option value="İstanbul (Avrupa)">Istanbul Anadolu Bolge</option>
-			<option value="İstanbul (Anadolu)">Istanbul Rumeli Bolge</option>
-			<option value="İzmir Manisa Uşak Denizli Aydın Muğla">Izmir Bolge</option>
+			<option value="Istanbul (An...">Istanbul Anadolu Bolge</option>
+			<option value="Istanbul (Av...">Istanbul Rumeli Bolge</option>
+			<option value="Izmir Manisa Uşak Denizli Aydın Muğla">Izmir Bolge</option>
 			<option value="Kayseri Nevşehir Sivas">Kayseri Bolge</option>
 			<option value="Kocaeli Sakarya Düzce Zonguldak Bartın Karabük">Kocaeli Bolge</option>
 			<option value="Konya Karaman Aksaray Niğde">Konya Bolge</option>
@@ -843,9 +969,9 @@
 			<option value="Iğdır">Iğdır</option>
 			<option value="Isparta">Isparta</option>
 			<option value="Mersin">Mersin</option>
-			<option value="İstanbul (Anadolu)">İstanbul (Anadolu)</option>
-			<option value="İstanbul (Avrupa)">İstanbul (Avrupa)</option>
-			<option value="İzmir">İzmir</option>
+			<option value="Istanbul (An...">İstanbul (Anadolu)</option>
+			<option value="Istanbul (Av...">İstanbul (Avrupa)</option>
+			<option value="Izmir">İzmir</option>
 			<option value="Karabük">Karabük</option>
 			<option value="Kars">Kars</option>
 			<option value="Kastamonu">Kastamonu</option>
@@ -890,7 +1016,7 @@
 
 	<div id='search-sorumlu' class='hide'>
 		<select style='margin-bottom:10px' class='span3' 
-				onchange='update_filter("#search-durum select", this, search_sorumlu);'>
+				onchange='update_filter("#search-sorumlu select", this, search_sorumlu);'>
 			<option value="-" selected="selected">Hepsi</option>
 			<option value="Abdullah">Abdullah Erkan</option>
 			<option value="Ahmet Serkan">Ahmet Serkan Güntaç</option>

@@ -65,9 +65,9 @@
 	</td>
 	<td>
 		{% if offer.dosya %}
-		<a class='static' href='{{ offer.dosya.url }}' target='_blank'
+		<a class='dynamic' data-url='iscilik' href='{{ offer.dosya.url }}' target='_blank'
 			data-original-title='{{ offer.dosya.name|cut:'yukleme/teklif/' }}' data-form='dosya'>
-			<img src='http://icons.iconarchive.com/icons/gakuseisean/radium/16/file-icon.png' /> 
+			<img alt='teklif dosyasi' src='http://s.aucdn.net/resim/file.png' /> 
 		</a>
 		{% else %}
 		<span class='edit' data-form='dosya' data-original-title='Teklif'>x</span>

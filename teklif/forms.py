@@ -56,9 +56,11 @@ class DaireForm(ModelForm):
 class DosyaForm(ModelForm):
     class Meta:
         model = Yapildi
-        fields = ('dosya', 'kullanici', 'teklif', 'durum')
+        fields = ('dosya', 'iscilik', 'baglanti','kullanici', 'teklif', 'durum')
         widgets = {
             'dosya': forms.FileInput(attrs={'class': 'span3'}),
+            'iscilik': forms.TextInput(attrs={'class':'span3'}),
+            'baglanti': forms.Textarea(attrs={'class': 'span3', 'rows': 4}),
         }
 
 

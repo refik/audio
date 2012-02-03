@@ -1,3 +1,4 @@
+{{ teklif.yapildi_set.all }}
 {% if teklif.yapildi_set.all %}
 <dl>
 		{% for yapildi in teklif.yapildi_set.all %}
@@ -18,6 +19,18 @@
 					<span class='twipsy-text'>
 					{{ yapildi.dosya.name|cut:'yukleme/teklif/' }}
 					</span>
+				</li>
+				{% endif %}
+				{% if yapildi.iscilik %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Iscilik: </span>
+					<span class='twipsy-text'>{{ yapildi.iscilik }}</span>
+				</li>
+				{% endif %}
+				{% if yapildi.baglanti %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Baglanti: </span>
+					<span class='twipsy-text'>{{ yapildi.baglanti }}</span>
 				</li>
 				{% endif %}
 
@@ -41,6 +54,12 @@
 				<li>
 					<span class='twipsy-text yapildi-label'>Tutar: </span>
 					<span class='twipsy-text'>{{ yapildi.tutar }}</span>
+				</li>
+				{% endif %}
+				{% if yapildi.delege %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Delege: </span>
+					<span class='twipsy-text'>{{ yapildi.delege.get_full_name }}</span>
 				</li>
 				{% endif %}
 				{% if yapildi.durum %}
