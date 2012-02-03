@@ -48,6 +48,8 @@ class Yapildi(models.Model):
     daire = models.IntegerField(null=True)
     tutar = models.IntegerField(null=True)
     delege = models.ForeignKey(User, related_name='delege_set')
+    iscilik = models.IntegerField(null=True)
+    baglanti = models.TextField()
     class Meta:
         ordering = ['-tarih']
  

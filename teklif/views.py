@@ -20,7 +20,13 @@ class NewView(DetailView):
     def get_object(self):
         user = self.request.user
         try:
-            new = Teklif.objects.filter(pk__gt=self.kwargs['pk'], bilgi__sorumlu=user).reverse()[0]
+            new_list = Teklif.objects.filter(pk__gt=self.kwargs['pk'])
+            print new_list
+            if not user.is_staff:
+                new_list.filter(bilgi__sorumlu=user)
+                print new_list, 'test'
+            print 'cikltim'
+            new = new_list.reverse()[0]
         except:
             new = None
         return new
