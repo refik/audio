@@ -1,13 +1,7 @@
 {% extends 'taban.html' %}
-{% block head %}
-<title>{{ flatpage.title }}</title>
-<style type="text/css">
- table {
-     padding:inherit;
- }
-</style>
-{% endblock %}
-
+{% load truncate %}
+{% block baslik %}{{ flatpage.title }} - Audio Elektronik</title>{% endblock %}
+{% block aciklama %}{{ flatpage.content|striptags|chars:158 }}{% endblock %}
 {% block icerik %}
 {% include 'tekli_ac.html' %}
  <div class="grid_52 push_2">

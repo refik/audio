@@ -2,6 +2,9 @@
 {% load fb_versions %}
 {% load ortakVeri %}
 
+{% block baslik %}Audio Elektronik - Görüntülü Diafon, Telefon, Bina İletişim Sistemleri{% endblock %}
+{% block aciklama %}Audio Elektronik, ürün gamındaki diafon ve telefon sistemlerinin, görüntülü ve sesli seçenekleri ile konutların dahili iletişim ihtiyaçlarını karşılamaktadır.{% endblock %}
+
 {% block icerik %}
 <div class="grid_14" style='z-index:1;'>
  <div class="grid_14 sprites sprites-ceyrek_yarim-png alpha omega">
@@ -36,9 +39,7 @@
    <div class="grid_12" style='height:90px;'>
     <div class="grid_6 alpha centered" style='margin-top:0px;'><a style='text-decoration:none;color:black;background-color:white;' href="/urun/{{ urun.slug }}">{{ urun.isim }}</a></div>
     <div class="grid_6 omega centered">
-     <a href="/urun/{{ urun.slug }}" class="centeted">
-      <div class="products products-{{ urun.resim.filename_root }}_yeni_ufak-{{ urun.resim.extension|cut:'.' }}" style="margin: 0 auto;"></div>
-     </a>
+      <div onclick="location.href='/urun/{{ urun.slug }}'" class="products products-{{ urun.resim.filename_root }}_yeni_ufak-{{ urun.resim.extension|cut:'.' }}" style="margin: 0 auto; cursor:pointer;"></div>
     </div>
    </div>
    {% endfor %}

@@ -2,8 +2,8 @@
 {% spaceless %}
 <html>
  <head>
-  <title>Audio Elektronik</title>
-
+  <title>{{ dokuman.isim|title }} - Audio Elektronik</title>
+  <meta name="description" content="{{ dokuman.isim|title }} dokümanını inceleme sayfası">
 {% compress css %}
   <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
   <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />

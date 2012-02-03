@@ -1,8 +1,7 @@
 {% extends 'taban.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css" />
-{% endblock %}
 
+{% block baslik %}{{ baslik|title }} - Audio Elektronik{% endblock %}
+{% block aciklama %}{{ baslik|title }}, bu ürünlerle binanızda şık bir şekilde dahili iletişim yapabilirsiniz.{% endblock %}
 {% block icerik %}
 <!--KONSEPT-->
 {% if konsept %}

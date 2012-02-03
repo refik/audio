@@ -1,5 +1,9 @@
 {% extends 'taban.html' %}
 {% load fb_versions %}
+{% load truncate %}
+
+{% block baslik %}{{ urun.isim }}, {{ urun.kategori.isim|title}} - Audio Elektronik{% endblock %}
+{% block aciklama %}{{ urun.isim|title }}, {{ urun.kategori.isim|title }}. {{ urun.ozellik.all|join:', '|chars:120 }}{% endblock %}
 
 {% block icerik %}
 {% include 'tekli_ac.html' %}

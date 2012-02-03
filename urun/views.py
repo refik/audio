@@ -20,8 +20,9 @@ def urun(request,urun):
     return render_to_response('urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
 
 def urunler(request,kategori):
-    istenenKategori = Kategori.objects.get(slug=kategori).UrunKategori.all()
+    kategori_db = Kategori.objects.get(slug=kategori)
+    istenenKategori = kategori_db.UrunKategori.all()
     konsept = istenenKategori.filter(seri='konsept')
     basic = istenenKategori.filter(seri='basic')
     ortak = istenenKategori.filter(seri=None)
-    return render_to_response('kategori.html',{'konsept':konsept, 'basic':basic, 'ortak':ortak},context_instance=RequestContext(request))
+    return render_to_response('kategori.html',{'baslik': kategori_db.isim,'konsept':konsept, 'basic':basic, 'ortak':ortak},context_instance=RequestContext(request))

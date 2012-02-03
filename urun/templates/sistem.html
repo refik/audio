@@ -1,8 +1,7 @@
 {% extends 'taban.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/varsayilan.css" />
-<title>Audio Elektronik | Sistemler</title>
-{% endblock %}
+
+{% block baslik %}Sesli ve Görüntülü Sistemler - Audio Elektronik{% endblock %}
+{% block aciklama %}Sistemler görüntülü yada görüntüsüz ünitelerinizin kabiliyetlerini ve kurulum için gerekli altyapıyı belirler. Audio' nun her türlü ihtiyaç için sistemi vardir.{% endblock %}
 
 {% block icerik %}
 {% include 'tekli_ac.html' %}

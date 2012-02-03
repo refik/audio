@@ -4,10 +4,29 @@ from django.conf import settings
 from django.views.generic.simple import redirect_to
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from filebrowser.sites import site
+from audio.dokuman.models import Dokuman
+from audio.urun.models import Urun, Kategori
+from audio.ortakVeri.sitemap import EkstraSitemap
 admin.autodiscover()
+
+urun_dict = {
+    'queryset': Urun.objects.all()
+}
+
+dokuman_dict = {
+    'queryset': Dokuman.objects.all()
+}    
+
+kategori_dict = {
+    'queryset': Kategori.objects.all()
+}
 
 sitemaps = {
     'duzsayfa': FlatPageSitemap,
+    'kategori': GenericSitemap(kategori_dict),
+    'urun': GenericSitemap(urun_dict),
+    'dokuman': GenericSitemap(dokuman_dict),
+    'diger': EkstraSitemap
 }
 
 urlpatterns = patterns('',

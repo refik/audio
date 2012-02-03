@@ -42,6 +42,8 @@ class Kategori(models.Model):
         verbose_name_plural = "Kategoriler"
     def __unicode__(self):
         return unicode(self.isim)
+    def get_absolute_url(self):
+        return '/urunler/' + self.slug
 
 class Urun(models.Model):
     isim = models.CharField("Isim", max_length=50)
@@ -59,7 +61,8 @@ class Urun(models.Model):
         verbose_name_plural = "Urunler"
     def __unicode__(self):
         return self.isim
-
+    def get_absolute_url(self):
+        return '/urun/' + self.slug
 
 class DigerModel(models.Model):
     urun = models.ForeignKey(Urun)

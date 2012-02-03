@@ -65,3 +65,5 @@ def handle_file_upload(path, file, site):
 **filebrowser functions.py ye from audio.ortakVerio.randomstr import random_string geldi
 **compressor/templates/compressor/css_file.html deleted the '/' from the end of the tag. W3C validation
 **filebrowser in base.py si de degisik
+**mptt models.py de is_lead_node u degistirdim. siralamayi duzgun yapamiyor yeni eklenince menu bozuluyor daha iyi cozuym lazim
+

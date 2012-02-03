@@ -19,6 +19,8 @@ class Dokuman(models.Model):
         verbose_name_plural = "Dokumanlar"
     def __unicode__(self):
         return u"%s" % (self.isim)
+    def get_absolute_url(self):
+        return '/dokuman/' + self.slug
 
 @receiver(post_save, sender=Dokuman)
 def dokuman_convert(sender, **kwargs):
