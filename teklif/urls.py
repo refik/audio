@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.views.generic import DetailView, TemplateView
-from audio.teklif.views import OfferView, DoneView, NewView
+from audio.teklif.views import OfferView, DoneView, NewView, TeklifDosyaView #, IscilikTutarView
 from audio.teklif.models import Teklif
 
 urlpatterns = patterns('audio.teklif.views',
@@ -18,6 +18,8 @@ urlpatterns = patterns('audio.teklif.views',
                                                                               context_object_name = 'offer',
                                                                               model = Teklif)))),
     (r'^yeni/(?P<pk>\d+)/$', never_cache(login_required(NewView.as_view()))),
+    (r'^iscilik/(?P<pk>\d+)/$', never_cache(login_required(TeklifDosyaView.as_view()))),
+    #(r'^iscilik-tutar/$', never_cache(login_required(IscilikTutarView.as_view()))),
     (r'^form/$', never_cache(login_required(DoneView.as_view()))),
     (r'^success/$', TemplateView.as_view(template_name='success.html')),
     (r'^yapildi/$', 'yapildi_yolla'),

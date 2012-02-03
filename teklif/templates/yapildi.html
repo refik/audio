@@ -2,7 +2,7 @@
 <dl>
 		{% for yapildi in teklif.yapildi_set.all %}
 		<dt class='twipsy-label'>
-		{{ yapildi.kullanici.get_full_name }} - {{ yapildi.teklif.bilgi.tarih|timesince:yapildi.tarih }} sonra
+		{{ yapildi.kullanici.get_full_name }} - {{ yapildi.tarih|timesince }} once
 		</dt> 
 		<dd>
 			<ul class='unstyled'>
@@ -20,6 +20,7 @@
 					</span>
 				</li>
 				{% endif %}
+
 				{% if yapildi.rakip and yapildi.sebep %}
 				<li>
 					<span class='twipsy-text yapildi-label'>Rakip: </span>

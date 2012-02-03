@@ -8,10 +8,20 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import RequestContext
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, TemplateView
 from audio.ortakVeri.mail import audiomail
-from audio.teklif.models import Durum, Teklif
+from audio.teklif.models import Durum, Teklif, Yapildi
 from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm
+
+class TeklifDosyaView(DetailView):
+    template_name = 'iscilik.html'
+    context_object_name = 'yapildi'
+    model = Teklif
+
+    def get_object(self):
+        teklif = super(TeklifDosyaView, self).get_object()
+        done = teklif.yapildi_set.exclude(dosya='')[0]
+        return done
 
 class NewView(DetailView):
     template_name = 'offer.html'
@@ -20,12 +30,10 @@ class NewView(DetailView):
     def get_object(self):
         user = self.request.user
         try:
-            new_list = Teklif.objects.filter(pk__gt=self.kwargs['pk'])
-            print new_list
-            if not user.is_staff:
-                new_list.filter(bilgi__sorumlu=user)
-                print new_list, 'test'
-            print 'cikltim'
+            if user.is_staff:
+                new_list =  Teklif.objects.filter(pk__gt=self.kwargs['pk'])
+            else:
+                new_list = Teklif.objects.filter(pk__gt=self.kwargs['pk'], bilgi__sorumlu=user)
             new = new_list.reverse()[0]
         except:
             new = None
@@ -37,6 +45,23 @@ class NewView(DetailView):
             # This is an empty template
             templates.insert(0, 'success.html')
         return templates
+
+#class IscilikTutarView(TemplateView):
+#    template_name = 'iscilik_tutar.html'
+#
+#    def get_context_data(self, **kwargs):
+#        context = super(IscilikTutarView, self).get_context_data(**kwargs)
+#        iscilikli = Yapildi.objects.exclude(iscilik=None)
+#        list_pk = self.request.GET.get('pks','')
+#        if not list_pk:
+#            return context
+#        pk_numbers = [int(pk_string) for pk_string in list_pk.split('-')]
+#        for pk_num in pk_numbers:
+#            iscilikli = iscilikli.exclude(pk=pk_num)
+#        iscilikler = [yapilan.iscilik for yapilan in iscilikli]
+#        context['sayi'] = len(iscilikler)
+#        context['toplam'] = sum(iscilikler)
+#        return context
 
 class DoneView(CreateView):
     template_name = 'done_form.html'
@@ -69,7 +94,6 @@ class DoneView(CreateView):
         return arguments
 
     def get_form_class(self, *args, **kwargs):
-        print self.request.POST, self.request.FILES
         if self.request.method == 'GET':
             form_type = self.request.GET.get('form_type','')
         else:
@@ -92,6 +116,7 @@ class OfferView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)
+        self.get_queryset
         context['pk'] = self.kwargs.get('pk',0)
         return context
 

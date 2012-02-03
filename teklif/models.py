@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.contrib.comments.models import Comment
 from django.contrib.auth.models import User
 from audio.bilgiGiris.models import Bilgi
-
+from audio.ortakVeri.mail import audiomail
 
 class Sebep(models.Model):
     isim = models.CharField('Sebep', max_length=200)
@@ -48,8 +48,8 @@ class Yapildi(models.Model):
     daire = models.IntegerField(null=True)
     tutar = models.IntegerField(null=True)
     delege = models.ForeignKey(User, related_name='delege_set')
-    iscilik = models.IntegerField(null=True)
-    baglanti = models.TextField()
+    iscilik = models.IntegerField(null=True, blank=True)
+    baglanti = models.TextField(blank=True)
     class Meta:
         ordering = ['-tarih']
  
@@ -86,7 +86,7 @@ def update_teklif(sender,**kwargs):
         teklif.temsilci = yapildi.delege
         teklif.bilgi.sorumlu.add(yapildi.delege)
         audiomail('audioweb@audio.com.tr', [yapildi.delege.email], 'Audio Takip Sistemi', 
-                  'Size %s bir teklif delege etti, numarasi: %d.\n\nBu adresten bilgilere erisebilirsiniz:' \
+                  'Size %s bir teklif delege etti, numarasi: %d.\n\nBu adresten bilgilere erisebilirsiniz: ' \
                   'http://www.audio.com.tr/teklif/%d' % 
                   (yapildi.kullanici.get_full_name(), teklif.pk, teklif.pk))
     except:
