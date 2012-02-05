@@ -1,6 +1,8 @@
 {% extends 'taban.html' %}
+
+{% block baslik %}Teklif İstek Formu - Audio Elektronik{% endblock %}
+{% block aciklama %}Teklif formu ile isteginizi bize bildirebilirsiniz.{% endblock %}
 {% block icerik %}
-{% block baslik %}Teklif İstek Formu - Audio Elektronik{% %}
 {% include 'ikili_ac.html' %}
  <div class="grid_28 centered capitalize"><h2>{{ tip }} Formu</h2></div>
  {% include 'form.html' with grid=26 push=1 class='form' %}
