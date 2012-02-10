@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
 	<title>Audio Elektronik</title>
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
 	<!--[if lt IE 9]>
@@ -627,7 +628,7 @@
                         testQuery: text_test
                     }));
                     search_sorumlu = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-                        selector: "[data-form='delege']",
+                        selector: ".sorumlu",
                         testQuery: text_test
                     }));
             });
@@ -772,8 +773,8 @@
 			<option value="Delege Edildi">Delege Edildi</option>
 			<option value="Teklif Verildi">Teklif Verildi</option>
 			<option value="Yönlendirildi">Yönlendirildi</option>
-			<option value="İşi Aldık">İşi Aldık</option>
-			<option value="İşi Kaybettik">İşi Kaybettik</option>
+			<option value="Aldık">İşi Aldık</option>
+			<option value="Kaybettik">İşi Kaybettik</option>
 			<option value="İptal">İptal</option>
 		</select>
 	</div>
@@ -1018,40 +1019,37 @@
 		<select style='margin-bottom:10px' class='span3' 
 				onchange='update_filter("#search-sorumlu select", this, search_sorumlu);'>
 			<option value="-" selected="selected">Hepsi</option>
-			<option value="Abdullah">Abdullah Erkan</option>
-			<option value="Ahmet Serkan">Ahmet Serkan Güntaç</option>
-			<option value="Ahmet">Ahmet Bulucu</option>
-			<option value="Birkan">Birkan Kösedağ</option>
-			<option value="Burak">Burak Tokmak</option>
-			<option value="Burhanettin">Burhanettin Fidan</option>
-			<option value="Cem">Cem Çelik</option>
-			<option value="Cem">Cem Malkoç</option>
-			<option value="Deniz">Deniz Falcıoğlu</option>
-			<option value="Erdem">Erdem Çil</option>
-			<option value="Ergün">Ergün Aydın</option>
-			<option value="Erkan">Erkan Emir</option>
-			<option value="Ertan">Ertan Aydın</option>
-			<option value="Fatih">Fatih Şentürk</option>
-			<option value="Gökhan">Gökhan Durak</option>
-			<option value="Hakan">Hakan Güçlü</option>
-			<option value="Halit">Halit Dere</option>
-			<option value="Hande">Hande Yerebakan</option>
-			<option value="Hülya">Hülya Muslu</option>
-			<option value="Hüseyin">Hüseyin Hüsmenoğlu</option>
-			<option value="İlhan">İlhan Yetişkin</option>
-			<option value="İsmail">İsmail Pekdoğan</option>
-			<option value="Metin">Metin Tezel</option>
-			<option value="Murat">Murat Nazli</option>
-			<option value="Murat">Murat Şahin</option>
-			<option value="Murat">Murat Tekin</option>
-			<option value="Necmettin">Necmettin Adsay</option>
-			<option value="Özkan">Özkan Aykut</option>
-			<option value="Recai">Recai Çıtak</option>
-			<option value="Semra">Semra Gürbüzoğlu</option>
-			<option value="Sinan">Sinan Güngör</option>
-			<option value="Timur">Timur Taymis</option>
-			<option value="Turgay">Turgay Töngel</option>
-			<option value="Yakup">Yakup Özel</option>
+			<option value="AbdullahErkan">Abdullah Erkan</option>
+			<option value="Ahmet SerkanGüntaç">Ahmet Serkan Güntaç</option>
+			<option value="AhmetBulucu">Ahmet Bulucu</option>
+			<option value="BirkanKösedağ">Birkan Kösedağ</option>
+			<option value="BurakTokmak">Burak Tokmak</option>
+			<option value="BurhanettinFidan">Burhanettin Fidan</option>
+			<option value="CemÇelik">Cem Çelik</option>
+			<option value="CemMalkoç">Cem Malkoç</option>
+			<option value="DenizFalcıoğlu">Deniz Falcıoğlu</option>
+			<option value="ErdemÇil">Erdem Çil</option>
+			<option value="ErgünAydın">Ergün Aydın</option>
+			<option value="ErkanEmir">Erkan Emir</option>
+			<option value="ErtanAydın">Ertan Aydın</option>
+			<option value="FatihŞentürk">Fatih Şentürk</option>
+			<option value="GökhanDurak">Gökhan Durak</option>
+			<option value="HakanGüçlü">Hakan Güçlü</option>
+			<option value="HalitDere">Halit Dere</option>
+			<option value="HüseyinHüsmenoğlu">Hüseyin Hüsmenoğlu</option>
+			<option value="İlhanYetişkin">İlhan Yetişkin</option>
+			<option value="İsmailPekdoğan">İsmail Pekdoğan</option>
+			<option value="MetinTezel">Metin Tezel</option>
+			<option value="MuratNazli">Murat Nazli</option>
+			<option value="MuratŞahin">Murat Şahin</option>
+			<option value="MuratTekin">Murat Tekin</option>
+			<option value="NecmettinAdsay">Necmettin Adsay</option>
+			<option value="ÖzkanAykut">Özkan Aykut</option>
+			<option value="RecaiÇıtak">Recai Çıtak</option>
+			<option value="SinanGüngör">Sinan Güngör</option>
+			<option value="TimurTaymis">Timur Taymis</option>
+			<option value="TurgayTöngel">Turgay Töngel</option>
+			<option value="YakupÖzel">Yakup Özel</option>
 		</select>
 	</div>
 

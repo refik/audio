@@ -51,10 +51,11 @@
 	</td>
 	<td>
 		<span class='dynamic' data-url='sorumlu'>
-			<span {% if offer.temsilci.profile.ikincil and "İstanbul" in offer.bilgi.sehir.isim %}class="edit"{% endif %} data-form='delege' data-original-title='Delege'>
+			<span {% if request.user.profile.ucuncul %}class="edit"{% endif %} data-form='delege' data-original-title='Delege'>
 			{{ offer.temsilci.first_name|chars:14|title }}
 			</span>
 		</span>
+		<div class='sorumlu' style='display:none;'>{{offer.temsilci.first_name}}{{offer.temsilci.last_name}}</div>
 	</td>
 	<td>
 		<span class='durum-dialog' data-form='durum' data-original-title='Islem girisi'>

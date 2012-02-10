@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404
+from django.db.models import Q
 SIRA = ['isim','email','sehir','firma','telefon','mesaj']
 
 def mesajOlustur(sozluk):
@@ -40,7 +41,7 @@ def formIslem(request,tip):
             bilgi_db.save()
             sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
             if tip == 'teklif':
-                sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir']).exclude(profile__birincil=True)
+                sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir']).exclude(Q(profile__birincil=True) | Q(profile__ikincil=True))
             gonderilecek = []
             for sorumlu in sorumlular:
                 gonderilecek += [sorumlu.email]

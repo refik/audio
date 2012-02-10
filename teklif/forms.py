@@ -1,9 +1,10 @@
 # coding: utf-8
 from django import forms
 from django.forms import ModelForm
+from django.db.models import Q
 from django.contrib.comments.forms import CommentForm
 from django.contrib.auth.models import User
-from audio.teklif.models import Teklif, Durum, Rakip, Sebep, Yapildi
+from audio.teklif.models import Teklif, Durum, Rakip, Sebep, Yapildi, UserProxy
 
 class TeklifYapildiForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -65,12 +66,15 @@ class DosyaForm(ModelForm):
 
 
 class DelegeForm(ModelForm):
+    delege = forms.ModelChoiceField(queryset=UserProxy.objects.all(), required=True)
     def __init__(self, *args, **kwargs):
         super(DelegeForm, self).__init__(*args, **kwargs)
         try:
             teklif_sehir = Teklif.objects.get(pk=kwargs['initial']['teklif']).bilgi.sehir
-            new_queryset = self.fields['delege'].queryset.filter(profile__sorumluSehir=teklif_sehir, profile__birincil=True)
+            new_queryset = self.fields['delege'].queryset.filter(Q(profile__sorumluSehir=teklif_sehir), 
+                                                                 Q(profile__birincil=True) | Q(profile__ikincil=True))
             self.fields['delege'].queryset = new_queryset
+            self.fields['delege'].attrs = {'class':'span3'}
         except:
             # Form doesnt receive initial args
             # When it is initialized for validation
@@ -78,11 +82,7 @@ class DelegeForm(ModelForm):
             pass
     class Meta:
         model = Yapildi
-        fields = ('delege', 'kullanici', 'teklif', 'durum')
-        widgets = {
-            'delege': forms.Select(attrs={'class': 'span3'}),
-        }
-
+        fields = ('kullanici', 'teklif', 'durum')
 
 class SebepForm(ModelForm):
     class Meta:

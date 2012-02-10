@@ -30,11 +30,11 @@ class NewView(DetailView):
     def get_object(self):
         user = self.request.user
         try:
-            if user.is_staff:
-                new_list =  Teklif.objects.filter(pk__gt=self.kwargs['pk'])
-            else:
-                new_list = Teklif.objects.filter(pk__gt=self.kwargs['pk'], bilgi__sorumlu=user)
-            new = new_list.reverse()[0]
+            new_list = Teklif.objects.all()
+            if not self.request.user.pk == 1:
+                new_list = new_list.filter(pk__gt=self.kwargs['pk'], bilgi__sorumlu=user)
+            new_list.reverse()
+            new = new_list[0]
         except:
             new = None
         return new
@@ -75,7 +75,7 @@ class DoneView(CreateView):
                    'yonlendi':[MesajForm,4],
                    'tutar':[TutarForm],
                    'daire':[DaireForm],
-                   'genel':[MesajForm]}
+                   'genel':[MesajForm,0]}
 
     def get_form_kwargs(self, *args, **kwargs):
         if self.request.method == 'GET':
@@ -109,10 +109,9 @@ class OfferView(ListView):
     def get_queryset(self):
         user = self.request.user
         queryset = super(OfferView, self).get_queryset()
-        if user.is_staff:
-            return queryset
-        else:
-            return queryset.filter(bilgi__sorumlu=user)
+        if not self.request.user.pk == 1:
+            queryset = queryset.filter(bilgi__sorumlu=user)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)

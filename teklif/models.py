@@ -53,6 +53,12 @@ class Yapildi(models.Model):
     class Meta:
         ordering = ['-tarih']
  
+class UserProxy(User):
+    class Meta:
+        proxy = True
+
+    def __unicode__(self):
+        return u'%s, %d' % (self.get_full_name(), Teklif.objects.filter(durum__kapali=False, bilgi__sorumlu=self).count())
 
 @receiver(post_save,sender=Bilgi)
 def teklif_yarat(sender,**kwargs):
@@ -64,8 +70,7 @@ def teklif_yarat(sender,**kwargs):
             if 'Teklif' in created_bilgi.tip.isim:
                 t = Teklif(bilgi=kwargs['instance'])
                 t.durum = Durum.objects.get(pk=1)
-                kisi = User.objects.get(profile__ikincil=True,
-                       profile__sorumluSehir__isim__contains = created_bilgi.sehir.isim)
+                kisi = User.objects.get(profile__ucuncul=True)
                 t.temsilci = kisi
                 t.son_eylem = created_bilgi.tarih
                 t.save()
@@ -83,9 +88,10 @@ def update_teklif(sender,**kwargs):
     if yapildi.tutar:
         teklif.tutar = yapildi.tutar
     try:
-        teklif.temsilci = yapildi.delege
-        teklif.bilgi.sorumlu.add(yapildi.delege)
-        audiomail('audioweb@audio.com.tr', [yapildi.delege.email], 'Audio Takip Sistemi', 
+        delege = User.objects.get(pk=yapildi.delege.pk)
+        teklif.temsilci = delege
+        teklif.bilgi.sorumlu.add(delege)
+        audiomail('audioweb@audio.com.tr', [delege.email], 'Audio Takip Sistemi', 
                   'Size %s bir teklif delege etti, numarasi: %d.\n\nBu adresten bilgilere erisebilirsiniz: ' \
                   'http://www.audio.com.tr/teklif/%d' % 
                   (yapildi.kullanici.get_full_name(), teklif.pk, teklif.pk))
