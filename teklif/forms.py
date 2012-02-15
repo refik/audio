@@ -66,7 +66,7 @@ class DosyaForm(ModelForm):
 
 
 class DelegeForm(ModelForm):
-    delege = forms.ModelChoiceField(queryset=UserProxy.objects.all(), required=True)
+    delege = forms.ModelChoiceField(queryset=UserProxy.objects.all(), required=True, widget=forms.Select(attrs={'class': 'span3'}))
     def __init__(self, *args, **kwargs):
         super(DelegeForm, self).__init__(*args, **kwargs)
         try:
@@ -74,7 +74,6 @@ class DelegeForm(ModelForm):
             new_queryset = self.fields['delege'].queryset.filter(Q(profile__sorumluSehir=teklif_sehir), 
                                                                  Q(profile__birincil=True) | Q(profile__ikincil=True))
             self.fields['delege'].queryset = new_queryset
-            self.fields['delege'].attrs = {'class':'span3'}
         except:
             # Form doesnt receive initial args
             # When it is initialized for validation
@@ -83,9 +82,6 @@ class DelegeForm(ModelForm):
     class Meta:
         model = Yapildi
         fields = ('delege','kullanici', 'teklif', 'durum')
-        widgets = {
-            'delege': forms.Select(attrs={'class': 'span3'}),
-        }
 
 class SebepForm(ModelForm):
     class Meta:
