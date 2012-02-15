@@ -82,7 +82,10 @@ class DelegeForm(ModelForm):
             pass
     class Meta:
         model = Yapildi
-        fields = ('kullanici', 'teklif', 'durum')
+        fields = ('delege','kullanici', 'teklif', 'durum')
+        widgets = {
+            'delege': forms.Select(attrs={'class': 'span3'}),
+        }
 
 class SebepForm(ModelForm):
     class Meta:

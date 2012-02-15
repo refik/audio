@@ -88,9 +88,8 @@ def update_teklif(sender,**kwargs):
     if yapildi.tutar:
         teklif.tutar = yapildi.tutar
     try:
-        delege = User.objects.get(pk=yapildi.delege.pk)
-        teklif.temsilci = delege
-        teklif.bilgi.sorumlu.add(delege)
+        teklif.temsilci = yapildi.delege
+        teklif.bilgi.sorumlu.add(yapildi.delege)
         audiomail('audioweb@audio.com.tr', [delege.email], 'Audio Takip Sistemi', 
                   'Size %s bir teklif delege etti, numarasi: %d.\n\nBu adresten bilgilere erisebilirsiniz: ' \
                   'http://www.audio.com.tr/teklif/%d' % 
