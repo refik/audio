@@ -7,7 +7,6 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 
 def logout_view(request):
-    print 'ahmet'
     logout(request)
     return HttpResponseRedirect('http://www.audio.com.tr')
 
