@@ -111,7 +111,7 @@ class OfferView(ListView):
         user = self.request.user
         queryset = super(OfferView, self).get_queryset()
         if not self.request.user.pk == 1:
-            queryset = queryset.filter(bilgi__sorumlu=user)
+            queryset = queryset.filter(bilgi__sehir__in=user.profile.sorumluSehir.all)
         return queryset
 
     def get_context_data(self, **kwargs):
