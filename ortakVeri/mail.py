@@ -7,6 +7,7 @@ import smtplib
 def audiomail(kimden,kime,konu,mesaj):
     # Mail function shouldn't work on development machine.
     if GELISTIRME:
+        print kimden, kime, konu, mesaj
         return None
 
     server = smtplib.SMTP("mail.audio.com.tr", port=587)

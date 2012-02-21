@@ -66,10 +66,10 @@
 	</td>
 	<td>
 		{% if offer.dosya %}
-		<a class='dynamic' data-url='iscilik' href='{{ offer.dosya.url }}' target='_blank'
-			data-original-title='{{ offer.dosya.name|cut:'yukleme/teklif/' }}' data-form='dosya'>
+		<span class='dynamic dosya-dialog' data-url='iscilik'
+			data-original-title='Teklif' data-form='dosya' data-href='{{ offer.dosya.url }}'>
 			<img alt='teklif dosyasi' src='http://s.aucdn.net/resim/file.png' /> 
-		</a>
+		</span>
 		{% else %}
 		<span class='edit' data-form='dosya' data-original-title='Teklif'>x</span>
 		{% endif %}

@@ -6,7 +6,7 @@
 				{% if field.label == 'Kullanici' or field.label == 'Durum' or field.label == 'Teklif' %}
 				hide{% endif %}'>
 		{{ field }}
-		<span class='help-block'>{{ field.label }}{{ field.errors.0 }}</span>
+		<span class='help-block'>{{ field.label }} {{ field.errors.0 }}</span>
 	</div>
 	{% endfor %}
 </form>

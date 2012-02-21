@@ -12,6 +12,7 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link rel='stylesheet' href='{{ STATIC_URL }}css/bootstrap.css'>
+	<link rel='stylesheet' href='{{ STATIC_URL }}css/redmond/jquery-ui-1.8.17.custom.css'>
 	<style type='text/css'>
 			
 		ul.unstyled {
@@ -42,7 +43,7 @@
 		.edit, .close, .dosya-dialog, .durum-dialog {
 			cursor: pointer;
 		}
-		.eylem-yaplmad {
+		.donduruldu {
 			background-color: #000000;
 		}
 		.teklif-verildi, .yonlendirildi{
@@ -51,10 +52,10 @@
 		.delege-edildi {
 			background-color: #f89406;
 		}
-		.iptal, .isi-aldk {
+		.iptal, .isi-aldk, .isi-kaybettik{
 			background-color: #46a546;
 		}
-		.isi-kaybettik {
+		.eylem-yaplmad {
 			background-color: #c43c35;
 		}
 		.iletisime-gecildi {
@@ -98,6 +99,8 @@
 	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery.tablesorter.js'></script>
 	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery.form.js'></script>
 	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery.color.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}js/jquery-ui-1.8.17.custom.min.js'></script>
+	<script type='text/javascript' src='http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/jquery.ui.datepicker-tr.js'></script>
 	<script type='text/javascript'>
         var search_isim_mesaj;
         var search_dosya;
@@ -299,6 +302,11 @@
         function init_form(type){
             var pop_height = $('.popover').height();
             var pk;
+
+			// This is how django gets it
+			$.datepicker.regional['tr'].dateFormat = 'dd/mm/yy'
+
+			$('form .datepicker').datepicker($.datepicker.regional['tr']);
             $('form').ajaxForm({data: { form_type: type}, beforeSubmit: function(arr, $form, options){
                 loading($('.content p'));
                 $.each(arr,function(i,v){
@@ -433,7 +441,7 @@
                             success: function(data) { result = data; }
                         });
                 return result
-            }, delayIn:1000});
+            }, delayIn:1000, delayOut:1500});
 
             //Popover intializations
             elements.find('.edit').click(function(){ 
@@ -447,6 +455,20 @@
                 $(this).popover('show'); 
                 init_form($(this).data('form'));
             });
+            elements.find('.dosya-dialog').click(function(){
+				$('.twipsy').fadeOut();
+				$(this).popover({html: true, placement: 'below', title: function(){ 
+            		return get_title(this)
+            	}, trigger: 'manual', content: function(){
+            		return  '<a target="_blank" href="' + $(this).data('href') + '" ' + 
+							'onclick="$(\u0027.close\u0027).click()" class="btn primary">Dosyayi Ac</a>' + 
+							' <a class="btn" onclick="' +
+            				'$(\u0027.content p\u0027).html(get_form(' + '\u0027' + $(this).data('form') + 
+                      		'\u0027,' + $(this).parents('tr').data('pk') + '));init_form(\u0027' + 
+                      		$(this).data('form') + '\u0027);">Yeni Ekle</a>'            
+            	}})
+				$(this).popover('show')
+			});
             elements.find('.durum-dialog').click(function(){
                 $('.twipsy').fadeOut();
                 //$('.close').click();
@@ -463,6 +485,7 @@
                             '<option value="aldik">Isi aldik</option>' + 
                             '<option value="sebep">Isi kaybettik</option>' + 
                             '<option value="iptal">Iptal ediyorum</option>' + 
+                            '<option value="dondur">Donduruyorum</option>' + 
                             '</select>'
                 }});
                 $(this).popover('show')
@@ -492,15 +515,6 @@
                 $(this).popover('show');
                 $('.popover').css('position','fixed');
             });
-
-            //$('.dosya-dialog').popover({html: true, placement: 'above', title: function(){ 
-            //  return get_title(this)
-            //}, trigger: 'manual', content: function(){
-            //  return  '<a class="btn primary">Dosyayi Ac</a> <a class="btn" onclick="' +
-            //          '$(\u0027.content p\u0027).html(get_form(' + '\u0027' + $(this).data('form') + 
-            //          '\u0027,' + $(this).parents('tr').data('pk') + '));init_form(\u0027' + 
-            //          $(this).data('form') + '\u0027);">Yeni Ekle</a>'            
-            //}});
 
             //Table sort initializations
             $.tablesorter.addParser({

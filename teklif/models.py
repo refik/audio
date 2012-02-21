@@ -35,6 +35,8 @@ class Teklif(models.Model):
         ordering = ['-bilgi__tarih']
     def __unicode__(self):
         return self.bilgi.tip.isim
+    def get_absolute_url(self):
+        return 'http://www.audio.com.tr/teklif/%d' % (self.pk,)
 
 class Yapildi(models.Model):
     kullanici = models.ForeignKey(User)
@@ -50,6 +52,7 @@ class Yapildi(models.Model):
     delege = models.ForeignKey(User, related_name='delege_set')
     iscilik = models.IntegerField(null=True, blank=True)
     baglanti = models.TextField(blank=True)
+    dondur = models.DateField(null=True)
     class Meta:
         ordering = ['-tarih']
  

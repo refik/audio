@@ -2,7 +2,7 @@
 <dl>
 		{% for yapildi in teklif.yapildi_set.all %}
 		<dt class='twipsy-label'>
-		{{ yapildi.kullanici.get_full_name }} - {{ yapildi.tarih|timesince }} once
+		{{ yapildi.kullanici.get_full_name }} - {{ yapildi.tarih|date:'d F H:i' }}
 		</dt> 
 		<dd>
 			<ul class='unstyled'>
@@ -28,7 +28,7 @@
 				</li>
 				<li>
 					<span class='twipsy-text yapildi-label'>Sebep: </span>
-					<span class='twipsy-text'>{% for sebep in yapildi.sebep %}{{ sebep }}, {% endfor %}</span>
+					<span class='twipsy-text'>{{ yapildi.sebep.all|join:', ' }}</span>
 				</li>
 				{% endif %}
 				{% if yapildi.daire %}
@@ -41,6 +41,12 @@
 				<li>
 					<span class='twipsy-text yapildi-label'>Tutar: </span>
 					<span class='twipsy-text'>{{ yapildi.tutar }}</span>
+				</li>
+				{% endif %}
+				{% if yapildi.dondur %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Donduruldu: </span>
+					<span class='twipsy-text'>{{ yapildi.dondur|date:'d F' }}' a kadar</span>
 				</li>
 				{% endif %}
 				{% if yapildi.durum %}

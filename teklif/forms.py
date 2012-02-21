@@ -66,7 +66,8 @@ class DosyaForm(ModelForm):
 
 
 class DelegeForm(ModelForm):
-    delege = forms.ModelChoiceField(queryset=UserProxy.objects.all(), required=True, widget=forms.Select(attrs={'class': 'span3'}))
+    delege = forms.ModelChoiceField(queryset=UserProxy.objects.all(), required=True, 
+                                    widget=forms.Select(attrs={'class': 'span3'}))
     def __init__(self, *args, **kwargs):
         super(DelegeForm, self).__init__(*args, **kwargs)
         try:
@@ -86,12 +87,21 @@ class DelegeForm(ModelForm):
 class SebepForm(ModelForm):
     class Meta:
         model = Yapildi
-        fields = ('rakip', 'sebep', 'kullanici', 'teklif', 'durum')
+        fields = ('rakip', 'sebep', 'mesaj', 'kullanici', 'teklif', 'durum')
         widgets = {
             'rakip': forms.Select(attrs={'class': 'span3'}),
             'sebep': forms.SelectMultiple(attrs={'class': 'span3'}),
+            'mesaj': forms.Textarea(attrs={'class': 'span3', 'rows': '4'}),
         }
 
+class DondurForm(ModelForm):
+    class Meta:
+        model = Yapildi
+        fields = ('dondur', 'mesaj', 'kullanici', 'teklif', 'durum')
+        widgets = {
+            'mesaj': forms.Textarea(attrs={'class': 'span3', 'rows': '4'}),
+            'dondur': forms.DateInput(attrs={'class': 'span3 datepicker'})
+        }
 
 class MesajForm(ModelForm):
     class Meta:
