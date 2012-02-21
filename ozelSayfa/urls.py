@@ -3,7 +3,8 @@ from django.contrib.auth.views import logout, password_change, password_change_d
 
 urlpatterns = patterns('audio.ozelSayfa.views',
     (r'^$', 'anasayfa'),
-    (r'^logout/',logout),
-    (r'^password_change/', password_change),
-    (r'password/done/$', password_change_done) 
-) 
+    (r'^logout/','logout_view'),
+    (r'^sifre-degistir/', password_change),
+    (r'^password/done/$', password_change_done),
+#    (r'^kalite-belgelerimiz/','kaliteBelgelerimiz'),
+)
