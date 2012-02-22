@@ -59,7 +59,7 @@ class DosyaForm(ModelForm):
         model = Yapildi
         fields = ('dosya', 'iscilik', 'baglanti','kullanici', 'teklif', 'durum')
         widgets = {
-            'dosya': forms.FileInput(attrs={'class': 'span3'}),
+            'dosya': forms.FileInput(attrs={'class': 'span3', 'size': '4'}),
             'iscilik': forms.TextInput(attrs={'class':'span3'}),
             'baglanti': forms.Textarea(attrs={'class': 'span3', 'rows': 4}),
         }

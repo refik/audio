@@ -51,7 +51,7 @@
 	</td>
 	<td>
 		<span class='dynamic' data-url='sorumlu'>
-			<span {% if request.user.profile.ucuncul %}class="edit"{% endif %} data-form='delege' data-original-title='Delege'>
+			<span {% if request.user.profile.ucuncul or request.user.pk == 1 %}class="edit"{% endif %} data-form='delege' data-original-title='Delege'>
 			{{ offer.temsilci.first_name|chars:14|title }}
 			</span>
 		</span>
