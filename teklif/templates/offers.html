@@ -169,10 +169,12 @@ function text_test(query, txt, _row){
 function number_bool_test(query, txt, _row) {  
     var to_return;
     query = query[0];
-    if(query == 'true' || query == 'false'){
+    if(query == 'true' || query == 'false' || query == '-'){
         if(query == 'true' && txt != 'x'){
             to_return = true;
         } else if(query == 'false' && txt == 'x'){
+            to_return = true;
+        } else if(query == '-'){
             to_return = true;
         } else {
             to_return = false;
@@ -183,7 +185,7 @@ function number_bool_test(query, txt, _row) {
     var operation = query[0];
     var compare = Number(query.replace(query[0],''));
     var value = Number(txt.replace(',',''));
-    if(query != '-'){
+    if(value != '-'){
         if(operation == '<' && value < compare){
             to_return = true;
         } else if(operation == '>' && value > compare){
@@ -932,7 +934,7 @@ $(function() {
 		</select>
 		<select style='margin-bottom:10px' class='span3 bigger'
 				onchange='update_filter("#search-daire select.bigger", this, search_daire);'>
-			<option value="-" selected="selected">Hepsi</option>
+			<option value=">-" selected="selected">Hepsi</option>
 			<option value=">5">5</option>
 			<option value=">10">10</option>
 			<option value=">50">50</option>
@@ -951,7 +953,7 @@ $(function() {
 		</select> den buyuk
 		<select style='margin-bottom:10px' class='span3 smaller'
 				onchange='update_filter("#search-daire select.smaller", this, search_daire);'>
-			<option value="-" selected="selected">Hepsi</option>
+			<option value="<-" selected="selected">Hepsi</option>
 			<option value="<5">5</option>
 			<option value="<10">10</option>
 			<option value="<50">50</option>
@@ -979,7 +981,7 @@ $(function() {
 		</select>
 		<select style='margin-bottom:10px' class='span3 bigger'
 				onchange='update_filter("#search-tutar select.bigger", this, search_tutar);'>
-			<option value="-" selected="selected">Hepsi</option>
+			<option value=">-" selected="selected">Hepsi</option>
 			<option value=">500">500</option>
 			<option value=">1000">1,000</option>
 			<option value=">5000">5,000</option>
@@ -989,7 +991,7 @@ $(function() {
 		</select> den buyuk
 		<select style='margin-bottom:10px' class='span3 smaller'
 				onchange='update_filter("#search-tutar select.smaller", this, search_tutar);'>
-			<option value="-" selected="selected">Hepsi</option>
+			<option value="<-" selected="selected">Hepsi</option>
 			<option value="<500">500</option>
 			<option value="<1000">1,000</option>
 			<option value="<5000">5,000</option>
@@ -1002,7 +1004,7 @@ $(function() {
 	<div id='search-tarih' class='hide'>
 		<select style='margin-bottom:10px' class='span3 bigger'
 				onchange='update_filter("#search-tarih select.bigger", this, search_tarih);'>
-			<option value="-" selected="selected">Hepsi</option>
+			<option value=">-" selected="selected">Hepsi</option>
 			<option value=">734451">5 Kasim 2011</option>
 			<option value=">734456">10 Kasim 2011</option>
 			<option value=">734461">15 Kasim 2011</option>
@@ -1027,7 +1029,7 @@ $(function() {
 		</select> den sonra
 		<select style='margin-bottom:10px' class='span3 smaller'
 				onchange='update_filter("#search-tarih select.smaller", this, search_tarih);'>
-			<option value="-" selected="selected">Hepsi</option>
+			<option value="<-" selected="selected">Hepsi</option>
 			<option value="<734451">5 Kasim 2011</option>
 			<option value="<734456">10 Kasim 2011</option>
 			<option value="<734461">15 Kasim 2011</option>
