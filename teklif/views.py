@@ -12,6 +12,60 @@ from django.views.generic import ListView, CreateView, DetailView, TemplateView
 from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum, Teklif, Yapildi
 from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm
+from django.utils import simplejson
+from django.utils.timesince import timesince
+import time
+
+def offers_json(request):
+    data = {}
+    truncate = lambda s, l: s[:l] + '...'
+    for offer in Teklif.objects.all():
+        offer_data = {
+                'pk': {
+                    'html': offer.pk,
+                    'tooltip': timesince(offer.son_eylem) + ' once',
+                    'data': time.mktime(offer.son_eylem.timetuple())
+                },
+                'date': {
+                    'html': offer.bilgi.tarih.strftime('%d/%M'),
+                    'tooltip': offer.bilgi.tarih.strftime('%d %M %l'),
+                    'data': time.mktime(offer.bilgi.tarih.timetuple())
+                },
+                'customer': {
+                    'html': truncate(offer.bilgi.isim.lower(),10),
+                    'tooltip': {
+                        'Isim': offer.bilgi.isim,
+                        'E-posta': offer.bilgi.email,
+                        'Telefon': offer.bilgi.telefon
+                    },
+                    'data': offer.bilgi.isim
+                },
+                'request': {
+                    'html': truncate(offer.bilgi.mesaj.lower(),10),
+                    'tooltip': offer.bilgi.mesaj.lower()
+                },
+                'city': {
+                    'html': truncate(offer.bilgi.sehir.isim,8),
+                    'tooltip': offer.bilgi.sehir.isim,
+                    'data': offer.bilgi.sehir.isim
+                },
+                'responsible': {
+                    'html': offer.temsilci.first_name,
+                    'data': offer.temsilci.first_name + offer.temsilci.last_name,
+                },
+                'status': {
+                    'html': offer.durum.isim,
+                    'data': offer.durum.isim
+                },
+                'file': {
+                    'html': offer.
+                    'data': false
+
+                
+            }
+        data[offer.pk] = offer_data
+    json = simplejson.dumps(data)
+    return HttpResponse(json, content_type='application/json') 
 
 class TeklifDosyaView(DetailView):
     template_name = 'iscilik.html'
