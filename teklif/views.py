@@ -58,10 +58,9 @@ def offers_json(request):
                     'data': offer.durum.isim
                 },
                 'file': {
-                    'html': offer.
-                    'data': false
-
-                
+                    'html': False,
+                    'data': False
+                }
             }
         data[offer.pk] = offer_data
     json = simplejson.dumps(data)
