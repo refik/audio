@@ -9,28 +9,28 @@ var sort_table;
 
 
 //testQuery smart return to remember who hid the element (to chain filter)
-function smart_return(search, value, row){
+function smart_return(search, value, row, uid){
     var hiders = row.attr('data-hiders') ? row.attr('data-hiders') : '';
-    var is_hider = hiders.indexOf(search.selector) != -1 ? true : false;
-    var same = hiders == search.selector ? true : false;
+	var selector = uid ? search.selector + uid : search.selector
+    var is_hider = hiders.indexOf(selector) != -1 ? true : false;
+    var same = hiders == selector ? true : false;
     if(value){
         if(hiders.length){
             if(!same){
                 value = false
             }
             if(is_hider){
-                hiders = hiders.replace(search.selector,'')
+                hiders = hiders.replace(selector,'')
                 row.attr('data-hiders', hiders);
             }
         }
     } else {
         if(!is_hider){
-            row.attr('data-hiders', hiders + search.selector);
+            row.attr('data-hiders', hiders + selector);
         }
     }
     return value;
 }
-
 
 //Text testQuery with chain support and '||' based
 function text_test(query, txt, _row){
@@ -50,10 +50,12 @@ function text_test(query, txt, _row){
 function number_bool_test(query, txt, _row) {  
     var to_return;
     query = query[0];
-    if(query == 'true' || query == 'false'){
+    if(query == 'true' || query == 'false' || query == '-'){
         if(query == 'true' && txt != 'x'){
             to_return = true;
         } else if(query == 'false' && txt == 'x'){
+            to_return = true;
+        } else if(query == '-'){
             to_return = true;
         } else {
             to_return = false;
@@ -64,7 +66,7 @@ function number_bool_test(query, txt, _row) {
     var operation = query[0];
     var compare = Number(query.replace(query[0],''));
     var value = Number(txt.replace(',',''));
-    if(query != '-'){
+    if(value != '-'){
         if(operation == '<' && value < compare){
             to_return = true;
         } else if(operation == '>' && value > compare){
@@ -75,7 +77,7 @@ function number_bool_test(query, txt, _row) {
     } else {
         to_return = true;
     }
-    return smart_return(this, to_return, $(_row));
+    return smart_return(this, to_return, $(_row), operation);
 }   
 
 //Boolean testQuery for quicksearch 
@@ -139,9 +141,11 @@ function loading(element){
 
 var sum = function(items) {
     var result = 0;
-    items.each(function() {
-        result += Number($(this).html().replace(',',''));
-    });
+	if(items.length){
+    	items.each(function() {
+        	result += Number($(this).html().replace(',',''));
+    	});
+	}
     return result
 };
 
@@ -272,13 +276,21 @@ var ascending = function(first, last){ return $(first).data('pk') - $(last).data
 function update_filter(on_dom, current, search_item){
     var select = $(current).children(':selected');
     var name = on_dom.split(' ')[0].replace('#search-', '');
-    var indicator = '<li class="indicator"><span>' + name + ': ' + select.html() + '</span> <span class="divider">/</span></li>'
+	var type = on_dom.split(' ')[1].replace(/select.|select/g, '');
+	var className = name + '-' + type;
+	if (type=='') var info = name
+	if (type=='exists') var info = name
+	if (type=='bigger') var info = name + ' buyuk'
+	if (type=='smaller') var info = name + ' kucuk'
+    var indicator = '<li class="indicator ' + className + '"><span>' + info + ': ' + select.html() + '</span> <span class="divider">/</span></li>'
     $(on_dom + ' option:selected').removeAttr('selected');
-    $(on_dom + ' option[value="' + select + '"]').attr('selected','selected');
+    $(on_dom + ' option[value="' + select.val() + '"]').attr('selected','selected');
     search_item.search(select.val());
     $('.dropdown:last').removeClass('open');    
     $('.close').click();
-    $('#filter-indicator').append(indicator).show('slow')
+    $('#filter-indicator').find('.' + className).remove()
+	if(select.val()!='-') $('#filter-indicator').append(indicator).show('slow')
+    if(!$('.indicator').length) $('#filter-indicator').hide('slow')
 }
 
 //Preparing special title for closing popovers
@@ -437,17 +449,6 @@ function sifirla(){
 
 
 function initSort(){
-    $('.filter').click(function(){
-        $('.close').click();
-        $(this).removeData('popover')
-        $(this).popover({html: true, placement: 'right', title: function(){ 
-            return get_title(this); 
-        }, trigger: 'manual', content: function(){
-            return $($(this).data('search')).html()
-        }}).popover('show');
-        $('.popover').css('position','fixed');
-    });
-
     //Table sort initializations
     $.tablesorter.addParser({
         id: 'comma-number',
@@ -548,39 +549,52 @@ function initSearch(){
     }
 }
 function initFilters1(){
-        search_dosya = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-            selector: "[data-form='dosya']",
-            testQuery: bool_test    
-        }));
-        search_durum = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-            selector: "[data-form='durum']",
-            testQuery: text_test
-        }));
-        search_daire = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-            selector: "[data-form='daire']",
-            testQuery: number_bool_test
-        }));
-        search_tutar = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-            selector: "[data-form='tutar']",
-            testQuery: number_bool_test
-        }));
+    search_dosya = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+        selector: "[data-form='dosya']",
+        testQuery: bool_test    
+    }));
+    search_durum = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+        selector: "[data-form='durum']",
+        testQuery: text_test
+    }));
 }
-
 function initFilters2(){
-        search_tarih = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-            selector: "div.tarih",
-            testQuery: number_bool_test
-        }));
-        search_sehir = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-            selector: ".sehir",
-            testQuery: text_test
-        }));
-        search_sorumlu = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
-            selector: ".sorumlu",
-            testQuery: text_test
-        }));
+    search_daire = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+        selector: "[data-form='daire']",
+        testQuery: number_bool_test
+    }));
+    $('.filter').click(function(){
+        $('.close').click();
+        $(this).removeData('popover')
+        $(this).popover({html: true, placement: 'right', title: function(){ 
+            return get_title(this); 
+        }, trigger: 'manual', content: function(){
+            return $($(this).data('search')).html()
+        }}).popover('show');
+        $('.popover').css('position','fixed');
+    });
+}
+function initFilters3(){
+    search_tutar = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+        selector: "[data-form='tutar']",
+        testQuery: number_bool_test
+    }));
+    search_tarih = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+        selector: "div.tarih",
+        testQuery: number_bool_test
+    }));
 }
 
+function initFilters4(){
+    search_sehir = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+        selector: ".sehir",
+        testQuery: text_test
+    }));
+    search_sorumlu = $().quicksearch('#main tbody tr', $.extend({}, def_search_opts, {
+        selector: ".sorumlu",
+        testQuery: text_test
+    }));
+}
 //Twipsy to get iscilik
 //$('#sum-tutar').twipsy({ html: true, placement: 'below', title: function(){ 
 //    var result = null;
@@ -620,29 +634,36 @@ $(function() {
     var process = {
         steps: [
             function(){
-                // Add progress bar to page
-                $('body').prepend('<div id="progress" style="position:absolute; margin-left:40px;"><div style="border-style:solid;height:20px; width:500px"><div id="bar" style="height:100%; width: 0%; background:#F89406"></div></div><p><span id="load-info">Alanlar yukleniyor</span>, lutfen bekleyin...</p></div>')
-            },
-            function(){
                 init_interaction()
                 $('#load-info').html('Arama yukleniyor')
-                $('#bar').css('width', '20%')
+                $('#bar').css('width', '15%')
             },
             function(){
                 initSearch()
                 $('#load-info').html('Filtrelerin ilk kismi yukleniyor')
-                $('#bar').css('width', '40%')
+                $('#bar').css('width', '25%')
             },
             function(){
                 initFilters1()
                 $('#load-info').html('Filtrelerin ikinci kismi yukleniyor')
-                $('#bar').css('width', '60%')
+                $('#bar').css('width', '50%')
             },
             function(){
                 initFilters2()
+                $('#search-durum select').change() //only show active jobs at launch
+                $('#load-info').html('Filtrelerin ucuncu kismi yukleniyor')
+                $('#bar').css('width', '60%')
+            },
+            function(){
+                initFilters3()
+                $('#load-info').html('Filtrelerin dorduncu kismi yukleniyor')
+                $('#bar').css('width', '75%')
+            },
+            function(){
+                initFilters4()
                 initStyle()
                 $('#load-info').html('Siralama yukleniyor')
-                $('#bar').css('width', '80%')
+                $('#bar').css('width', '90%')
             },
             function(){
                 initSort()
@@ -652,7 +673,6 @@ $(function() {
                 // Delete progress bar from the page
                 // Show transparent page items
                 $('#progress').remove()
-                $('#search-durum select').change() //only show active jobs at launch
                 $('.container, .topbar').css('opacity', 1)
                 $('.container, .topbar').css('filter', '')
                 if(focusOn) attention(focusOn)
@@ -665,7 +685,7 @@ $(function() {
                 var me = this;
                 window.setTimeout(function(){
                     me.nextStep();
-                }, 10);
+                }, 100);
             }
         }
     };

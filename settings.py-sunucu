@@ -4,6 +4,7 @@ import cloudfiles
 import os
 
 DEBUG = True
+LOCAL = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -64,7 +65,7 @@ USE_L10N = True
 AUTH_PROFILE_MODULE = 'calisanProfil.CalisanProfil'
 
 # django_compressor settings
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_URL = 'http://s.aucdn.net/'
 COMPRESS_STORAGE = DEFAULT_FILE_STORAGE
 COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
@@ -75,6 +76,11 @@ COMPRESS_OUTPUT_DIR = 'compress'
 COMPRESS_ROOT = PROJECT_PATH + '/statik'
 
 STATIC_URL = COMPRESS_URL
+if GELISTIRME:
+    STATIC_CODE = '/static-development/'
+else:
+    STATIC_CODE = STATIC_URL
+
 STATIC_ROOT = PROJECT_PATH + '/statik' # media_bundler uses this
 
 # Absolute path to the directory that holds media.
@@ -94,8 +100,8 @@ CLOUDFILES_CONNECTION_KWARGS = {'authurl': cloudfiles.uk_authurl, 'servicenet': 
 # Memcache
 CACHES = {
     'default': {
-        #'BACKEND' : 'django.core.cache.backends.dummy.DummyCache',
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'BACKEND' : 'django.core.cache.backends.dummy.DummyCache',
+        #'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
         'TIMEOUT': 14400,
     }
@@ -187,6 +193,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'audio.ortakVeri.icerik_islemci.afis.afis',
     'audio.ortakVeri.icerik_islemci.menu.menu',
+    'audio.ortakVeri.icerik_islemci.static_code.static_code_url'
 )
 
 MIDDLEWARE_CLASSES = (
