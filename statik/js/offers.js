@@ -11,16 +11,16 @@ var sort_table;
 //testQuery smart return to remember who hid the element (to chain filter)
 function smart_return(search, value, row, uid){
     var hiders = row.attr('data-hiders') ? row.attr('data-hiders') : '';
-	var selector = uid ? search.selector + uid : search.selector
+	var selector = uid ? search.selector + uid : search.selector;
     var is_hider = hiders.indexOf(selector) != -1 ? true : false;
     var same = hiders == selector ? true : false;
     if(value){
         if(hiders.length){
             if(!same){
-                value = false
+                value = false;
             }
             if(is_hider){
-                hiders = hiders.replace(selector,'')
+                hiders = hiders.replace(selector,'');
                 row.attr('data-hiders', hiders);
             }
         }
@@ -34,13 +34,13 @@ function smart_return(search, value, row, uid){
 
 //Text testQuery with chain support and '||' based
 function text_test(query, txt, _row){
-    var check_first = query[0]
+    var check_first = query[0];
     if(check_first == '-'){
-        return smart_return(this, true, $(_row))
+        return smart_return(this, true, $(_row));
     }
     for (var i = 0; i < query.length; i += 1) {
         if (txt.indexOf(query[i]) != -1) {
-            return smart_return(this, true, $(_row))
+            return smart_return(this, true, $(_row));
         }
     }
     return smart_return(this, false, $(_row))
@@ -106,7 +106,7 @@ var def_search_opts = {
     show: function(){$(this).prop('class','')},
     loader: 'img.loading',
     bind: 'keyup change',
-    delay: 500,
+    delay: 500
 }
 
 //Flashes a given row
@@ -637,36 +637,36 @@ $(function() {
     var process = {
         steps: [
             function(){
-                init_interaction()
-                $('#load-info').html('Arama yukleniyor')
-                $('#bar').css('width', '15%')
+                init_interaction();
+                $('#load-info').html('Arama yukleniyor');
+                $('#bar').css('width', '15%');
             },
             function(){
-                initSearch()
-                $('#load-info').html('Filtrelerin ilk kismi yukleniyor')
-                $('#bar').css('width', '25%')
+                initSearch();
+                $('#load-info').html('Filtrelerin ilk kismi yukleniyor');
+                $('#bar').css('width', '25%');
             },
             function(){
-                initFilters1()
-                $('#load-info').html('Filtrelerin ikinci kismi yukleniyor')
-                $('#bar').css('width', '50%')
+                initFilters1();
+                $('#load-info').html('Filtreler/in ikinci kismi yukleniyor');
+                $('#bar').css('width', '50%');
             },
             function(){
                 initFilters2()
-                $('#search-durum select').change() //only show active jobs at launch
-                $('#load-info').html('Filtrelerin ucuncu kismi yukleniyor')
-                $('#bar').css('width', '60%')
+                $('#search-durum select').change(); //only show active jobs at launch
+                $('#load-info').html('Filtrelerin ucuncu kismi yukleniyor');
+                $('#bar').css('width', '60%');
             },
             function(){
                 initFilters3()
                 $('#load-info').html('Filtrelerin dorduncu kismi yukleniyor')
-                $('#bar').css('width', '75%')
+                $('#bar').css('width', '75%');
             },
             function(){
-                initFilters4()
-                initStyle()
-                $('#load-info').html('Siralama yukleniyor')
-                $('#bar').css('width', '90%')
+                initFilters4();
+                initStyle();
+                $('#load-info').html('Siralama yukleniyor');
+                $('#bar').css('width', '90%');
             },
             function(){
                 initSort()
@@ -675,10 +675,10 @@ $(function() {
             function(){
                 // Delete progress bar from the page
                 // Show transparent page items
-                $('#progress').remove()
-                $('.container, .topbar').css('opacity', 1)
-                $('.container, .topbar').css('filter', '')
-                if(focusOn) attention(focusOn)
+                $('#progress').remove();
+                $('.container, .topbar').css('opacity', 1);
+                $('.container, .topbar').css('filter', '');
+                if(focusOn) attention(focusOn);
             }
         ],
         index: 0,
