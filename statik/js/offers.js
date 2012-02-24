@@ -349,13 +349,13 @@ function init_interaction(){
         if(e.type == 'mouseenter'){
             $element.data('timer', setTimeout(function(){
                 $element.twipsy({html: true, placement: 'below', trigger:'live'}).twipsy('show');
-            }, 1000))
+            }, 500))
         } else {
             clearTimeout($element.data('timer'))
             setTimeout(function(){
                 $element.twipsy('hide')
                 $element.removeData('twipsy')
-            }, 1000)
+            }, 500)
         }
     })
     $('#main').on('mouseenter mouseleave', '.dynamic', function(e){
