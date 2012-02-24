@@ -11,7 +11,7 @@ from django.template import RequestContext
 from django.views.generic import ListView, CreateView, DetailView, TemplateView
 from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum, Teklif, Yapildi
-from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm
+from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm, AxaptaForm
 
 class TeklifDosyaView(DetailView):
     template_name = 'iscilik.html'
@@ -76,7 +76,8 @@ class DoneView(CreateView):
                    'tutar':[TutarForm],
                    'daire':[DaireForm],
                    'genel':[MesajForm,0],
-                   'dondur':[DondurForm,9]}
+                   'dondur':[DondurForm,9],
+                   'axapta':[AxaptaForm]}
 
     def get_form_kwargs(self, *args, **kwargs):
         if self.request.method == 'GET':

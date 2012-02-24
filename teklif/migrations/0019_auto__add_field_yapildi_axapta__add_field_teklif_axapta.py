@@ -8,12 +8,18 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Adding field 'Yapildi.axapta'
+        db.add_column('teklif_yapildi', 'axapta', self.gf('django.db.models.fields.CharField')(default='', max_length=40), keep_default=False)
+
         # Adding field 'Teklif.axapta'
-        db.add_column('teklif_teklif', 'axapta', self.gf('django.db.models.fields.CharField')(default='', max_length=50), keep_default=False)
+        db.add_column('teklif_teklif', 'axapta', self.gf('django.db.models.fields.CharField')(default='', max_length=40), keep_default=False)
 
 
     def backwards(self, orm):
         
+        # Deleting field 'Yapildi.axapta'
+        db.delete_column('teklif_yapildi', 'axapta')
+
         # Deleting field 'Teklif.axapta'
         db.delete_column('teklif_teklif', 'axapta')
 
@@ -96,7 +102,7 @@ class Migration(SchemaMigration):
         },
         'teklif.teklif': {
             'Meta': {'ordering': "['-bilgi__tarih']", 'object_name': 'Teklif'},
-            'axapta': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'axapta': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
             'bilgi': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['bilgiGiris.Bilgi']", 'unique': 'True'}),
             'daire': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'dosya': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
@@ -108,6 +114,7 @@ class Migration(SchemaMigration):
         },
         'teklif.yapildi': {
             'Meta': {'ordering': "['-tarih']", 'object_name': 'Yapildi'},
+            'axapta': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
             'baglanti': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'daire': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
             'delege': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'delege_set'", 'to': "orm['auth.User']"}),

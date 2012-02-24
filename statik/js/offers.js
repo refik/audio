@@ -503,23 +503,23 @@ function initSort(){
         {
             cssHeader: 'new-header',
             headers: {
-                8: {
-                    sorter: 'comma-number'
+                1: {
+                    sorter: 'special-text'
                 },  
                 9: {
+                    sorter: 'comma-number'
+                },  
+                10: {
                     sorter: 'comma-number'
                 },
                 0: {
                     sorter: 'last-action'
                 },
-                1: {
+                2: {
                     sorter: 'date'
                 },
-                3: {
-                    sorter: false
-                },
                 4: {
-                    sorter: 'special-text'
+                    sorter: false
                 },
                 5: {
                     sorter: 'special-text'
@@ -530,7 +530,10 @@ function initSort(){
                 7: {
                     sorter: 'special-text'
                 },
-                2: {
+                8: {
+                    sorter: 'special-text'
+                },
+                3: {
                     sorter: 'special-text'
                 }
             },
