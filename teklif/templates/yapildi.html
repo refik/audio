@@ -37,6 +37,12 @@
 					<span class='twipsy-text'>{{ yapildi.daire }}</span>
 				</li>
 				{% endif %}
+				{% if yapildi.daire %}
+				<li>
+					<span class='twipsy-text yapildi-label'>Is Iliskisi No: </span>
+					<span class='twipsy-text'>{{ yapildi.axapta }}</span>
+				</li>
+				{% endif %}
 				{% if yapildi.tutar %}
 				<li>
 					<span class='twipsy-text yapildi-label'>Tutar: </span>
