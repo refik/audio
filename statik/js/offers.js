@@ -648,17 +648,17 @@ $(function() {
             },
             function(){
                 initFilters1();
-                $('#load-info').html('Filtreler/in ikinci kismi yukleniyor');
+                $('#load-info').html('Filtrelerin ikinci kismi yukleniyor');
                 $('#bar').css('width', '50%');
             },
             function(){
                 initFilters2()
-                $('#search-durum select').change(); //only show active jobs at launch
                 $('#load-info').html('Filtrelerin ucuncu kismi yukleniyor');
                 $('#bar').css('width', '60%');
             },
             function(){
                 initFilters3()
+                $('#search-durum select').change(); //only show active jobs at launch
                 $('#load-info').html('Filtrelerin dorduncu kismi yukleniyor')
                 $('#bar').css('width', '75%');
             },
