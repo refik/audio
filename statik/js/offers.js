@@ -637,39 +637,44 @@ $(function() {
     var process = {
         steps: [
             function(){
-                init_interaction();
-                $('#load-info').html('Arama yukleniyor');
+                initFilters1();
+                $('#load-info').html('Filtrelerin ilk kismi yukleniyor');
                 $('#bar').css('width', '15%');
             },
             function(){
-                initSearch();
-                $('#load-info').html('Filtrelerin ilk kismi yukleniyor');
+                initFilters2();
+                $('#load-info').html('Filtrelerin ikinci kismi yukleniyor');
                 $('#bar').css('width', '25%');
             },
             function(){
-                initFilters1();
-                $('#load-info').html('Filtrelerin ikinci kismi yukleniyor');
+                initFilters3();
+                $('#load-info').html('Filtrelerin ucuncu kismi yukleniyor');
                 $('#bar').css('width', '50%');
             },
             function(){
-                initFilters2()
-                $('#load-info').html('Filtrelerin ucuncu kismi yukleniyor');
+                initFilters4()
+                $('#load-info').html('Filtrelerin dorduncu kismi yukleniyor');
                 $('#bar').css('width', '60%');
             },
-            function(){
-                initFilters3()
-                $('#search-durum select').change(); //only show active jobs at launch
-                $('#load-info').html('Filtrelerin dorduncu kismi yukleniyor')
+             function(){
+                initSearch();
+                $('#load-info').html('Arama yukleniyor')
                 $('#bar').css('width', '75%');
             },
             function(){
-                initFilters4();
+                $('#search-durum select').change(); //only show active jobs at launch
+                $('#load-info').html('Ilk filtreleme yapiliyor');
+                $('#bar').css('width', '85%');
+            },
+            function(){
+                init_interaction();
                 initStyle();
-                $('#load-info').html('Siralama yukleniyor');
+                $('#load-info').html('Sayfa gorunumu ayarlaniyor');
                 $('#bar').css('width', '90%');
             },
             function(){
                 initSort()
+                $('#load-info').html('Siralama yukleniyor');
                 $('#bar').css('width', '100%')
             },
             function(){
