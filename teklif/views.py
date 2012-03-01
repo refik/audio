@@ -23,16 +23,22 @@ def offers_json(request):
         offer_data = {
                 'pk': {
                     'html': offer.pk,
-                    'tooltip': timesince(offer.son_eylem) + ' once',
+                    'tooltip': {
+                        'Son eylem': timesince(offer.son_eylem) + ' once'
+                    },
                     'data': time.mktime(offer.son_eylem.timetuple())
+                },
+                'axapta': {
+                    'data': offer.axapta
                 },
                 'date': {
                     'html': offer.bilgi.tarih.strftime('%d/%M'),
-                    'tooltip': offer.bilgi.tarih.strftime('%d %M %l'),
+                    'tooltip': {
+                        'Tarih': offer.bilgi.tarih.strftime('%d %M %l')
+                    },
                     'data': time.mktime(offer.bilgi.tarih.timetuple())
                 },
                 'customer': {
-                    'html': truncate(offer.bilgi.isim.lower(),10),
                     'tooltip': {
                         'Isim': offer.bilgi.isim,
                         'E-posta': offer.bilgi.email,
@@ -41,25 +47,31 @@ def offers_json(request):
                     'data': offer.bilgi.isim
                 },
                 'request': {
-                    'html': truncate(offer.bilgi.mesaj.lower(),10),
-                    'tooltip': offer.bilgi.mesaj.lower()
+                    'tooltip': {
+                        offer.bilgi.mesaj.lower().lower()
+                    },
+                    'data': offer.bilgi.mesaj.lower()
                 },
                 'city': {
-                    'html': truncate(offer.bilgi.sehir.isim,8),
-                    'tooltip': offer.bilgi.sehir.isim,
+                    'tooltip': {
+                        'Sehir': offer.bilgi.sehir.isim
+                    },
                     'data': offer.bilgi.sehir.isim
                 },
                 'responsible': {
-                    'html': offer.temsilci.first_name,
-                    'data': offer.temsilci.first_name + offer.temsilci.last_name,
+                    'data': offer.temsilci.get_full_name(),
                 },
                 'status': {
-                    'html': offer.durum.isim,
                     'data': offer.durum.isim
                 },
                 'file': {
-                    'html': False,
-                    'data': False
+                    'data': offer.dosya.url
+                },
+                'apartment': {
+                    'data': offer.daire
+                },
+                'cost': {
+                    'data': offer.tutar
                 }
             }
         data[offer.pk] = offer_data
