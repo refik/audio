@@ -5,12 +5,12 @@
   <title>{{ dokuman.isim|title }} - Audio Elektronik</title>
   <meta name="description" content="{{ dokuman.isim|title }} dokümanını inceleme sayfası">
 {% compress css %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/text.css" />
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/dokuman.css" />
+  <link rel="stylesheet" href="{{ STATIC_CODE }}css/reset.css" />
+  <link rel="stylesheet" href="{{ STATIC_CODE }}css/text.css" />
+  <link rel="stylesheet" href="{{ STATIC_CODE }}css/dokuman.css" />
 {% endcompress %}
 {% compress js %}
- <script type="text/javascript" src="{{ STATIC_URL }}js/flexpaper_flash.js"></script>
+ <script type="text/javascript" src="{{ STATIC_CODE }}js/flexpaper_flash.js"></script>
 {% endcompress %}
 {% compress js inline %}
   <script type="text/javascript">
@@ -27,10 +27,10 @@
  </head>
  <body>
   <div id='container'>
-  <div class='buton'><img class='tikla' src='{{ STATIC_URL }}resim/geri.png' onClick="getDocViewer().prevPage()"/></div>
+  <div class='buton'><img class='tikla' src='{{ STATIC_CODE }}resim/geri.png' onClick="getDocViewer().prevPage()"/></div>
   <div class='centered dokuman'>
    <div id='ust_bar'>
-    <img style='float:left;' width='156px' height='40px' src='{{ STATIC_URL }}resim/logo_ufak.jpg'/>
+    <img style='float:left;' width='156px' height='40px' src='{{ STATIC_CODE }}resim/logo_ufak.jpg'/>
     <div style='float:right;text-align:right;width:156px;'> 
      <p><a href='/'>Anasayfa</a></p> 
      <p><a href='#' onClick="history.go(-1);return false;">Geri</a></p>
@@ -95,7 +95,7 @@
   onCurrentPageChanged = function(num){ getDocViewer().fitHeight(); }
 {% endcompress %}
   </script>
-  <div class='buton'><img class='tikla' src='{{ STATIC_URL }}resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
+  <div class='buton'><img class='tikla' src='{{ STATIC_CODE }}resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
   </div>
  </body>
 </html>

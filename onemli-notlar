@@ -66,4 +66,6 @@ def handle_file_upload(path, file, site):
 **compressor/templates/compressor/css_file.html deleted the '/' from the end of the tag. W3C validation
 **filebrowser in base.py si de degisik
 **mptt models.py de is_lead_node u degistirdim. siralamayi duzgun yapamiyor yeni eklenince menu bozuluyor daha iyi cozuym lazim
-
+**grappelliden change_password_form u turkcfelestirdim. translation calismiyor diye simdilik bir cozumdu. Daha iyisii yapilmali o sayfa da eski haline getirilmeli
+**django_compressor in base.py sinde refik commentli degisiklikler. calismadigi zaman karismasin diye
+**filebrowser base.py sine su commit uygulanda cache icin - https://github.com/sehmaschine/django-filebrowser/commit/5c3e033c46b744ca70eba65a66cd6dfd05c56dd1

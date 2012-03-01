@@ -31,6 +31,7 @@ class Teklif(models.Model):
     dosya = models.FileField(upload_to='yukleme/teklif', null=True, blank=True)
     temsilci = models.ForeignKey(User, null=True, blank=True)
     son_eylem = models.DateTimeField(blank=True, null=True)
+    axapta = models.CharField(max_length=40)
     class Meta:
         ordering = ['-bilgi__tarih']
     def __unicode__(self):
@@ -53,6 +54,7 @@ class Yapildi(models.Model):
     iscilik = models.IntegerField(null=True, blank=True)
     baglanti = models.TextField(blank=True)
     dondur = models.DateField(null=True)
+    axapta = models.CharField(max_length=40)
     class Meta:
         ordering = ['-tarih']
  
@@ -90,6 +92,8 @@ def update_teklif(sender,**kwargs):
         teklif.daire = yapildi.daire
     if yapildi.tutar:
         teklif.tutar = yapildi.tutar
+    if yapildi.axapta:
+        teklif.axapta = yapildi.axapta
     try:
         teklif.temsilci = yapildi.delege
         teklif.bilgi.sorumlu.add(yapildi.delege)

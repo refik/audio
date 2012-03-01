@@ -12,6 +12,38 @@
 		<div class='last-action' style='display:none;' >{%if offer.durum.kapali%}{%now "Y-m-d-H"%}{%else%}{{offer.son_eylem|date:'Y-m-d-H'}}{%endif%}</div>
 	</td>
 	<td>
+		{% if offer.axapta %}
+	<div class='static copy' data-original-title='<ul class="unstyled"><li><span class="twipsy-label">Is iliskisi no: </span><span class="twipsy-text">{{ offer.axapta }}</span></li><li>Kopyalamak icin tiklayin</li></ul>'>
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+            width="110"
+            height="14"
+            id="clippy" >
+    <param name="movie" value="/statik/clippy.swf"/>
+    <param name="allowScriptAccess" value="always" />
+    <param name="quality" value="high" />
+    <param name="scale" value="noscale" />
+	<param name="wmode" value="opaque" />
+    <param NAME="FlashVars" value="text={{offer.axapta}}">
+    <param name="bgcolor" value="#FFFFFF">
+    <embed src="/statik/clippy.swf"
+           width="110"
+           height="14"
+           name="clippy"
+           wmode="opaque" 	
+           quality="high"
+           allowScriptAccess="always"
+           type="application/x-shockwave-flash"
+           pluginspage="http://www.macromedia.com/go/getflashplayer"
+           FlashVars="text={{offer.axapta}}"
+           bgcolor="#FFFFFF"
+    />
+    </object></div>
+		{% else %}
+		<span class='edit' data-form='axapta' data-original-title='Axapta Is Iliskisi No'>x</span>
+		{% endif %}
+	</td>
+
+	<td>
 		<span  class='static'  data-original-title='{{ offer.bilgi.tarih|date:"l" }} - 
 													{{ offer.bilgi.tarih|timesince }} 
 													once'>
@@ -41,7 +73,7 @@
 		<span  class='static'  data-original-title='<span class="twipsy-label">Mesaj:
 													</span><span class="twipsy-text">
 													{{ offer.bilgi.mesaj|default:'Mesaj girilmemis' }}</span>'>
-		{{ offer.bilgi.mesaj|chars:31|default:'Mesaj girilmemis' }}
+		{{ offer.bilgi.mesaj|chars:27|default:'Mesaj girilmemis' }}
 		</span>
 	</td>
 	<td>

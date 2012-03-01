@@ -48,7 +48,7 @@
   }
 
   $(function () {
-    $('html').bind("click", clearMenus)
+    $('.container:last').bind("click", clearMenus)
     $('body').dropdown( '[data-dropdown] a.menu, [data-dropdown] .dropdown-toggle' )
   })
 

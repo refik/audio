@@ -103,6 +103,14 @@ class DondurForm(ModelForm):
             'dondur': forms.DateInput(attrs={'class': 'span3 datepicker'})
         }
 
+class AxaptaForm(ModelForm):
+    class Meta:
+        model = Yapildi
+        fields = ('axapta', 'kullanici', 'teklif')
+        widgets = {
+            'axapta': forms.TextInput(attrs={'class': 'span3'}),
+        }
+
 class MesajForm(ModelForm):
     class Meta:
         model = Yapildi
