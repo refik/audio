@@ -24,11 +24,11 @@
   </div>
  </div>
  <div class="grid_14 sprites sprites sprites-ceyrek_yarim-png alpha omega">
-  <a href='{{ sol_alt_resim|linkUrl }}' {% ifequal sol_alt_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ sol_alt_resim.gorunum.url }}" alt=""></a>
+  <a href='{{ sol_alt_resim|linkUrl }}' {% ifequal sol_alt_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ sol_alt_resim.gorunum.url }}" alt="{{ sol_alt_resim.yazi }}"></a>
  </div>
 </div>
-<div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sol_resim|linkUrl }}' {% ifequal orta_sol_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sol_resim.gorunum.url }}" alt=''></a></div>
-<div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sag_resim|linkUrl }}' {% ifequal orta_sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sag_resim.gorunum.url }}" alt=''></a></div>
+<div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sol_resim|linkUrl }}' {% ifequal orta_sol_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sol_resim.gorunum.url }}" alt='{{ orta_sol_resim.yazi }}'></a></div>
+<div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sag_resim|linkUrl }}' {% ifequal orta_sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sag_resim.gorunum.url }}" alt='{{ orta_sag_resim.yazi }}'></a></div>
 <div class="grid_14">
  <div class="grid_14 sprites sprites-ceyrek_yarim-png">
   <div class="grid_14 topd"></div>
