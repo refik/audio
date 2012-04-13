@@ -6,7 +6,7 @@ from audio.teklif.views import OfferView, DoneView, NewView, TeklifDosyaView
 from audio.teklif.models import Teklif
 
 urlpatterns = patterns('audio.teklif.views',
-    (r'^$', never_cache(login_required(OfferView.as_view()))),
+    (r'^$', never_cache(TemplateView.as_view(template_name='offers.html'))),
     (r'^(?P<pk>\d+)/$', never_cache(login_required(OfferView.as_view()))),
     (r'^sorumlu/(?P<pk>\d+)/$', never_cache(login_required(DetailView.as_view(template_name = 'sorumlu.html',
                                                                               context_object_name = 'teklif',
@@ -22,6 +22,7 @@ urlpatterns = patterns('audio.teklif.views',
     #(r'^iscilik-tutar/$', never_cache(login_required(IscilikTutarView.as_view()))),
     (r'^form/$', never_cache(login_required(DoneView.as_view()))),
     (r'^offers-data/$', 'offers_json'),
+    (r'^offer-data/(?P<pk>\d+)/$', 'offer_json'),
     (r'^success/$', TemplateView.as_view(template_name='success.html')),
     (r'^yapildi/$', 'yapildi_yolla'),
 )

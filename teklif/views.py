@@ -16,65 +16,79 @@ from django.utils import simplejson
 from django.utils.timesince import timesince
 import time
 
+def get_url(dosya):
+    try:
+        return dosya.url
+    except:
+        return None
+
+def offer_to_dict(offer):
+    offer_data = {
+        'pk': {
+            'html': offer.pk,
+            'tooltip': {
+                'Son eylem': timesince(offer.son_eylem) + ' once'
+            },
+            'data': time.mktime(offer.son_eylem.timetuple())
+        },
+        'axapta': {
+            'data': offer.axapta or None
+        },
+        'date': {
+            'html': offer.bilgi.tarih.strftime('%d/%M'),
+            'tooltip': {
+                'Tarih': offer.bilgi.tarih.strftime('%d %M %l')
+            },
+            'data': time.mktime(offer.bilgi.tarih.timetuple())
+        },
+        'customer': {
+            'tooltip': {
+                'Isim': offer.bilgi.isim,
+                'E-posta': offer.bilgi.email,
+                'Telefon': offer.bilgi.telefon
+            },
+            'data': offer.bilgi.isim
+        },
+        'request': {
+            'tooltip': {
+                'Mesaj': offer.bilgi.mesaj
+            },
+            'data': offer.bilgi.mesaj
+        },
+        'city': {
+            'tooltip': {
+                'Sehir': offer.bilgi.sehir.isim
+            },
+            'data': offer.bilgi.sehir.isim
+        },
+        'responsible': {
+            'data': offer.temsilci.get_full_name()
+        },
+        'status': {
+            'data': offer.durum.isim
+        },
+        'file': {
+            'data': get_url(offer.dosya)
+        },
+        'apartment': {
+            'data': offer.daire
+        },
+        'cost': {
+            'data': offer.tutar
+        }
+    }
+    return offer_data
+
+
+def offer_json(request, pk):
+    data = offer_to_dict(Teklif.objects.get(pk=pk))
+    json = simplejson.dumps(data)
+    return HttpResponse(json, content_type='application/json')
+
 def offers_json(request):
     data = {}
-    truncate = lambda s, l: s[:l] + '...'
     for offer in Teklif.objects.all():
-        offer_data = {
-                'pk': {
-                    'html': offer.pk,
-                    'tooltip': {
-                        'Son eylem': timesince(offer.son_eylem) + ' once'
-                    },
-                    'data': time.mktime(offer.son_eylem.timetuple())
-                },
-                'axapta': {
-                    'data': offer.axapta
-                },
-                'date': {
-                    'html': offer.bilgi.tarih.strftime('%d/%M'),
-                    'tooltip': {
-                        'Tarih': offer.bilgi.tarih.strftime('%d %M %l')
-                    },
-                    'data': time.mktime(offer.bilgi.tarih.timetuple())
-                },
-                'customer': {
-                    'tooltip': {
-                        'Isim': offer.bilgi.isim,
-                        'E-posta': offer.bilgi.email,
-                        'Telefon': offer.bilgi.telefon
-                    },
-                    'data': offer.bilgi.isim
-                },
-                'request': {
-                    'tooltip': {
-                        offer.bilgi.mesaj.lower().lower()
-                    },
-                    'data': offer.bilgi.mesaj.lower()
-                },
-                'city': {
-                    'tooltip': {
-                        'Sehir': offer.bilgi.sehir.isim
-                    },
-                    'data': offer.bilgi.sehir.isim
-                },
-                'responsible': {
-                    'data': offer.temsilci.get_full_name(),
-                },
-                'status': {
-                    'data': offer.durum.isim
-                },
-                'file': {
-                    'data': offer.dosya.url
-                },
-                'apartment': {
-                    'data': offer.daire
-                },
-                'cost': {
-                    'data': offer.tutar
-                }
-            }
-        data[offer.pk] = offer_data
+        data[offer.pk] = offer_to_dict(offer)
     json = simplejson.dumps(data)
     return HttpResponse(json, content_type='application/json') 
 
