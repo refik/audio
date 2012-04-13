@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from audio.urun.models import Urun, Kategori, Sistem
 from audio.dokuman.models import Dokuman
 from django.template import RequestContext
@@ -10,7 +10,7 @@ def sistem(request):
     return render_to_response('sistem.html',{'goruntulu':goruntulu,'sesli':sesli},context_instance=RequestContext(request)) 
 
 def urun(request,urun):
-    istenenUrun = Urun.objects.get(slug=urun)
+    istenenUrun = get_object_or_404(Urun, slug=urun)
     dokuman = Dokuman.objects.filter(urun_sayfa=True)
     if not 'panel' in istenenUrun.kategori.isim:
         panelKonsept = istenenUrun.panel.filter(seri='konsept')
@@ -20,7 +20,7 @@ def urun(request,urun):
     return render_to_response('urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
 
 def urunler(request,kategori):
-    kategori_db = Kategori.objects.get(slug=kategori)
+    kategori_db = get_object_or_404(Kategori, slug=kategori)
     istenenKategori = kategori_db.UrunKategori.all()
     konsept = istenenKategori.filter(seri='konsept')
     basic = istenenKategori.filter(seri='basic')

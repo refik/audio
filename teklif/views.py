@@ -111,8 +111,11 @@ class OfferView(ListView):
     def get_queryset(self):
         user = self.request.user
         queryset = super(OfferView, self).get_queryset()
-        if not self.request.user.pk == 1:
+
+        # Needs a better distinction for top management
+        if not(self.request.user.pk == 1 or self.request.user.pk == 54):
             queryset = queryset.filter(bilgi__sorumlu=user)
+
         return queryset
 
     def get_context_data(self, **kwargs):
