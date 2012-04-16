@@ -20,7 +20,7 @@ def medyaAl(sayfa_ismi):
 def anasayfa(request):
     medya = medyaAl('Anasayfa')
     try:
-        haber = Haber.objects.all()
+        haber = Haber.objects.filter(anasayfa=True)
         yeni_urun = Urun.objects.filter(yeni=True)
     except:
         haber = []

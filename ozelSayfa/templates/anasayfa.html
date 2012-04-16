@@ -15,7 +15,7 @@
    {% for h in haber %}
    <div class="grid_12">       
     <div class="grid_12" style='background-color:white;' ><strong>{{ h.baslik }}</strong></div>
-    <div class="grid_8 alpha">{{ h.icerik }}</div>
+    <div class="grid_8 alpha">{{ h.icerik }} {% if h.detay %}<a href="{{ h.get_absolute_url }}">Devamı</a>{% endif %}</div>
     <div class="grid_4 omega centered">
      <div class="news news-{{ h.resim.filename_root }}_haber_ufak-{{ h.resim.extension|cut:'.' }}" style="margin: 0 auto;"></div>
     </div>
@@ -33,7 +33,7 @@
  <div class="grid_14 sprites sprites-ceyrek_yarim-png">
   <div class="grid_14 topd"></div>
   <div class="grid_1 alpha topd"></div>
-  <div class="grid_12" style='color:red;'><strong>Yeni Urunler</strong></div>
+  <div class="grid_12" style='color:red;'><strong>Ürünlerimiz</strong></div>
   <div class="grid_12 push_1" id='yeni_urunler'>
    {% for urun in yeni_urun %}
    <div class="grid_12" style='height:90px;'>

@@ -1,0 +1,33 @@
+{% extends 'taban.html' %}
+{% load fb_versions %}
+{% load truncate %}
+{% block baslik %}{{ haber.baslik }} - Audio Elektronik{% endblock %}
+{% block aciklama %}{{ haber.icerik }}{% endblock %}
+{% block icerik %}
+
+{% include 'ikili_ac.html' %}
+<div class="grid_28 push_2">
+ <h2 class="capitalize">{{ haber.baslik }}</h2>
+ {% if haber.detay %}
+  {% autoescape off %}
+   {{ haber.detay }}
+  {% endautoescape %}
+ {% else %}
+  <p>{{ haber.icerik }}</p>
+  <img src="{% version haber.resim.path 'tam' %}" alt="{{ haber.icerik }}">
+ {% endif %}
+</div>
+{% include 'ikili_kapat.html' %}
+
+{% include 'ikili_ac.html' %}
+<div class="grid_28 push_2">
+    <h2>Bütün Haberler</h2>
+    <ul style="list-style: none;">
+        {% for haber in butun_haberler %} 
+        <li>{{ haber.tarih|date:'d.m.y' }} | {{ haber.baslik }} <a href="{{ haber.get_absolute_url }}">Devamı</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% include 'ikili_kapat.html' with clear='true' %}
+
+{% endblock %}

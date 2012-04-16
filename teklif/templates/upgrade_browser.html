@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+        }
+        #preview {
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+        }
+        #container { 
+            width: 980px;
+            position: relative;
+            margin: 0 auto;
+        }
+        #notice {
+            position: absolute;
+            width: 400px;
+            height: 250px;
+            left: 290px;
+            top: 170px;
+            border: 3px solid #000000;
+            background-color: #FFFFFF;
+        }
+            #notice p {
+                text-align: justify;
+                width: 350px;
+                margin: 25px;
+            }
+        #browsers {
+            text-align: center;
+        }
+            #browsers img {
+                border: none;
+            }
+            #browsers a {
+                text-decoration: none;
+            }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="notice">
+            <p>
+            Merhaba! Sizin için hazırladığımız bu sayfa, kullandığınız tarayıcının daha üst bir versiyonunu gerektiriyor.
+            Tarayıcınızı aşşağıdaki resimlerden seçtiğiniz birine tıklayarak güncelleyebilirsiniz.
+            </p>
+            <div id="browsers">
+                <a href="http://www.google.com/chrome">
+                    <img src="{{ STATIC_CODE }}resim/auto_offer/br/browser_chrome.gif" alt="" />
+                </a>
+                <a href="http://www.mozilla.com/firefox/">
+                    <img src="{{ STATIC_CODE }}resim/auto_offer/br/browser_firefox.gif" alt="" />
+                </a>
+                <a href="http://www.microsoft.com/windows/Internet-explorer/default.aspx">
+                    <img src="{{ STATIC_CODE }}resim/auto_offer/br/browser_ie.gif" alt="" />
+                </a>
+            </div>
+        </div>
+        <img id="preview" src="{{ STATIC_CODE }}resim/auto_offer/se/preview.png" alt="">
+    </div>
+</body>
+</html>

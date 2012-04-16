@@ -1,0 +1,1063 @@
+{% load compress %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Metas -->
+    <title>Audio Teklif Yaratma</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Dünyanin en kolay interkom tekliflendirme sitesi">
+    <meta name="author" content="Refik Türkeli">
+    {% if 'MSIE' in request.META.HTTP_USER_AGENT %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% endif %}
+
+    <!-- Styles -->
+    <link href='http://fonts.googleapis.com/css?family=Armata&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    {% compress css %}
+    <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/jquery.scrollpane.css" type="text/css">
+    <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/auto_offer.css" type="text/css">
+    <style type="text/css">
+        #buildings-information-box {
+            background-image: url('{{ STATIC_CODE }}resim/auto_offer/se/info.png')
+        }
+        [class^="icon-"],[class*=" icon-"] {
+            background-image: url('{{ STATIC_CODE }}resim/auto_offer/tbs/glyphicons-halflings.png')
+        }
+    </style>
+    {% endcompress %}
+
+    <!-- Scripts -->
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    {% compress js %}
+    <script src="{{ STATIC_CODE }}js/auto_offer/jquery-1.7.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/orbimot.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/jquery.mousewheel.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/jquery.mwheelintent.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/jquery.scrollpane.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/bootstrap-tooltip.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/bootstrap-popover.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/costs.js" type="text/javascript"></script>
+    <script src="{{ STATIC_CODE }}js/auto_offer/auto_offer.js" type="text/javascript"></script>
+    {% endcompress %}
+
+</head>
+<body>
+    <!-- Curtain for smooth entrace -->
+    <div class="curtain"><img src="{{ STATIC_CODE }}resim/auto_offer/se/load.gif" alt=""></div>
+
+    <!-- Vertically centering the page -->
+    <div class="vertical"></div>
+
+    <div class="container">
+
+        <!-- Title Area -->
+        <div class="page-header">
+            <h4 id="header-price-container" data-placement="bottom" data-title="Fiyat" data-info="price">
+                Daire başı: 
+                <span id="header-price">0</span> 
+                TL
+            </h4>
+            <a href="/">
+                <img id="header-logo" src="{{ STATIC_CODE }}resim/auto_offer/se/logo_temel.png" alt="Audio Elektronik Logo" />
+            </a>
+            <h1 id="header-description">
+                <span>Binanız</span> 
+                <small>yaşadığınız ortamı seçin</small>
+            </h1>
+        </div> 
+
+        <!-- Slide Area -->
+        <div id="slide-container">
+            
+            <!-- Buildings -->
+            <div id="buildings" data-title="Binanız" data-help="yaşadigınız ortamı seçin" class="slide">
+                <div class="inner-navigation">
+                    <a href="#" data-direction="right" class="btn btn-large">&lt;</a>
+                </div>
+                <div class="orbimot">
+                    <img data-type="single" src="{{ STATIC_CODE }}resim/auto_offer/b/single.png" alt="" />
+                    <img data-type="multiple" src="{{ STATIC_CODE }}resim/auto_offer/b/multiple.png" alt="" />
+                    <img data-type="villa" src="{{ STATIC_CODE }}resim/auto_offer/b/villa.png" alt="" /> 
+                    <div id="buildings-information-box">
+                        <div id="buildings-information">Apartman</div>
+                    </div>
+                </div>
+                <div class="inner-navigation">
+                    <a href="#" data-direction="left" class="btn btn-large">&gt;</a>
+                </div>
+            </div>
+
+            <!-- Apartments -->
+            <div id="apartments" data-title="Daire" data-help="binanizin özelliklerini seçin" class="slide">
+                <div id="apartments-input-container">
+                    <div class="apartments-input control-group" data-type="single multiple">
+                    	<input type="text" class="input-xlarge" data-state="apartment"/>
+                    	<label>Toplam Daire</label>
+                    </div>
+                    <div class="apartments-input control-group" style="display: none;" data-type="multiple">
+                    	<input type="text" class="input-xlarge" data-state="block"/>
+                    	<label>Blok Sayısı</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences -->
+            <div id="preferences" data-title="Tercihiniz" data-help="görüntülü mü, görüntüsüz mü?" class="slide">
+                <div id="preferences-input-container">
+                    <a href="#" class="btn btn-large btn-success preferences-input" data-preference="video">
+                        Görüntülü
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/se/camera.png" alt="" />
+                    </a>
+                    <a href="#" class="btn btn-large preferences-input" data-preference="sound">
+                        Görüntüsüz
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/se/speaker.png" alt="" />
+                    </a>
+                </div>
+            </div>
+
+            <!-- Monitors -->
+            <div id="monitors" data-title="Şubeler" data-help="beğendiğiniz şubeyi seçin" class="slide">
+
+                <!-- Panel info pane -->
+                <div data-direction="right" id="monitors-panel-info">
+                    <strong>Panel seçenekleri</strong>
+                    <div data-title="Panel Seçenekleri" data-placement="left" data-info="panel-info" class="images"></div>
+                </div>
+
+                <!-- Monitör Sets -->
+                <div class="monitors set" data-preference="video">
+                    <div class="inner-navigation">
+                        <a href="#" data-direction="right" class="btn btn-large">&lt;</a>
+                    </div>
+                    <div class="monitors-body">
+                        <div class="orbimot">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/gdm/35kpn.png" data-mold="gdm" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/slim/kpn.png" data-mold="slim" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/eko/ckp.png" data-mold="eko" alt="">
+                        </div>
+
+                        <!-- Monitör Set Features -->
+                        <div class="features" data-mold="gdm" data-scroll>
+                            <h3>Gdm</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <ul class="unstyled">
+                                <li>
+                                    Ekran 
+                                    <span class='right'>
+                                        <input type="radio" value="2,5" name="sg">2,5" — 
+                                        <input type="radio" value="3,5" name="sg" data-default>3,5"
+                                    </span>
+                                </li>
+                                <li data-info="easy-install">
+                                    Kolay kurulum
+                                    <span class="right"><input type="checkbox" value="easy-install" data-default></span>
+                                </li>
+                                <li data-info="flash">
+                                    Flash led ile uyarı
+                                    <span class="right"><input type="checkbox" value="flash"></span>
+                                </li>                               
+                                <li data-info="memory">
+                                    Fotoğraf hafızası
+                                    <span class="right"><input type="checkbox" value="memory"></span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        <input type="radio" value="white" name="cg">Beyaz — 
+                                        <input type="radio" value="gold" name="cg">Altın
+                                    </span>
+                                </li>
+                                <li>
+                                    Daireler arası görüşme
+                                    <span class="right"><input type="checkbox" value="intercom"></span>
+                                </li>
+                                <li>
+                                    Ekstra güvenlik kamerası
+                                    <span class="right"><input type="checkbox" value="extra-camera" data-extra></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi 
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                                <li>
+                                    Market ile konuşma
+                                    <span class="right"><input type="checkbox" value="market" data-extra></span>
+                                </li>
+                                <li>
+                                    Kapıcı ile konuşma
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li>
+                                    Güvenlik ile görüşme
+                                    <span class="right"><input type="checkbox" value="security" data-extra></span>
+                                </li>
+                                <li>Kapıyı görerek konuşma <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>Monitör ışık, konstrast ayarı <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>İki farkli zil sesi <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>Zil ses seviyesi ayarı <span class='right'><i class="icon-ok"></i></span></li>
+                            </ul>
+                        </div>
+
+                        <div class="features" data-mold="slim" data-scroll>
+                            <h3>Slim</h3>
+                            <div class='features-title'>
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <ul class="unstyled">
+                                 <li>
+                                    Ekran 
+                                    <span class='right'>
+                                        5,6"
+                                    </span>
+                                </li>
+                                <li data-info="easy-install">
+                                    Kolay kurulum
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                 <li data-info="flash">
+                                    Flash led ile uyarı
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>  
+                                <li data-info="memory">
+                                    Fotoğraf hafızası
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>                             
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        Gri
+                                    </span>
+                                </li>
+                                <li>
+                                    Daireler arası görüşme
+                                    <span class="right"><input type="checkbox" value="intercom"></span>
+                                </li>
+                                <li>
+                                    Ekstra güvenlik kamerası
+                                    <span class="right"><input type="checkbox" value="security-camera" data-extra></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi 
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                                <li>
+                                    Market ile konuşma
+                                    <span class="right"><input type="checkbox" value="market" data-extra></span>
+                                </li>
+                                <li>
+                                    Kapıcı ile konuşma
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li>
+                                    Güvenlik ile görüşme
+                                    <span class="right"><input type="checkbox" value="security" data-extra></span>
+                                </li>
+                                <li>Kapıyı görerek konuşma <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>Monitör ışık, konstrast ayarı <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>İki farkli zil sesi <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>Zil ses seviyesi ayarı <span class='right'><i class="icon-ok"></i></span></li>
+                            </ul>
+                        </div>
+
+                        <div class="features" data-mold="eko" data-scroll>
+                            <h3>Eko</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <ul class="unstyled">
+                                <li>
+                                    Ekran 
+                                    <span class='right'>
+                                        <input type="radio" value="bw" name="ee">Siyah/Beyaz — 
+                                        <input type="radio" value="color" name="ee" data-default>Renkli
+                                    </span>
+                                </li>
+                                <li data-info="easy-install">
+                                    Kolay kurulum
+                                    <span class="right"><input type="checkbox" value="easy-install" data-default></span>
+                                </li>
+                                <li data-info="flash">
+                                    Flash led ile uyarı
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>                               
+                                <li data-info="memory">
+                                    Fotoğraf hafızası
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        Beyaz
+                                    </span>
+                                </li>
+                                <li>
+                                    Daireler arası görüşme
+                                    <span class="right"><input type="checkbox" value="intercom"></span>
+                                </li>
+                                <li>
+                                    Ekstra güvenlik kamerası
+                                    <span class="right"><input type="checkbox" value="extra-camera" data-extra></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi 
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                                <li>
+                                    Market ile konuşma
+                                    <span class="right"><input type="checkbox" value="market" data-extra></span>
+                                </li>
+                                <li>
+                                    Kapıcı ile konuşma
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li>
+                                    Güvenlik ile görüşme
+                                    <span class="right"><input type="checkbox" value="security" data-extra></span>
+                                </li>
+                                <li>Kapıyı görerek konuşma <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>Monitör ışık, konstrast ayarı <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>İki farkli zil sesi <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>Zil ses seviyesi ayarı <span class='right'><i class="icon-ok"></i></span></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="inner-navigation">
+                        <a href="#" data-direction="left" class="btn btn-large">&gt;</a>
+                    </div>                   
+                </div>
+
+                <div class="monitors set" data-preference="sound">
+                     <div class="inner-navigation">
+                        <a href="#" data-direction="right" class="btn btn-large">&lt;</a>
+                    </div>
+                    
+                    <div class="monitors-body">
+                        <div class="orbimot">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/fnk/gkpn.png" data-mold="fnk" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/sa/d.png" data-mold="sa" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/kd/g.png" data-mold="kd" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/t/l.jpg" data-mold="telefon" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer/e/w.png" data-mold="e" alt="">
+                        </div>
+
+                        <div class="features" data-mold="fnk" data-scroll>
+                            <h3>Fnk</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <ul class="unstyled">
+                                <li>
+                                    Kapı otomatiği
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        <input type="radio" value="white" name="cg" data-default>Beyaz — 
+                                        <input type="radio" value="gold" name="cg">Altın —
+                                        <input type="radio" value="chrome" name="cg">Krom
+                                    </span>
+                                </li>
+                                <li>
+                                    Kapıcı ile görüşme
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li data-info="better-melody">
+                                    Gelişmiş zil sesi
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li data-info="flash">
+                                    Flaş led ile uyarı
+                                    <span class="right"><input type="checkbox" value="flash"></span>
+                                </li>
+                                <li>
+                                    Gizlilik
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li>
+                                    Zil ses seviyesi ayarı
+                                    <span class="right"><input type="checkbox" value="adjust-sound"></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="features" data-mold="sa" data-scroll>
+                            <h3>Sa</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <ul class="unstyled">
+                                <li>
+                                    Kapı otomatiği
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        Beyaz
+                                    </span>
+                                </li>
+                                <li>
+                                    Kapıcı ile görüşme
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li data-info="better-melody">
+                                    Gelişmiş zil sesi
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li data-info="flash">
+                                    Flaş led ile uyarı
+                                    <span class="right"><input type="checkbox" value="flash"></span>
+                                </li>
+                                <li>
+                                    Gizlilik
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li>
+                                    Zil ses seviyesi ayarı
+                                    <span class="right"><input type="checkbox" value="adjust-sound"></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="features" data-mold="kd" data-scroll>
+                            <h3>Kd</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <ul class="unstyled">
+                                <li>
+                                    Kapı otomatiği
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        Beyaz
+                                    </span>
+                                </li>
+                                <li>
+                                    Kapıcı ile görüşme
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li data-info="better-melody">
+                                    Gelişmiş zil sesi
+                                    <span class="right"><input type="checkbox" value="better-melody" data-extra></span>
+                                </li>
+                                <li>
+                                    Flaş led ile uyarı
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li data-info="private">
+                                    Gizlilik
+                                    <span class="right"><input type="checkbox" value="private"></span>
+                                </li>
+                                <li>
+                                    Zil ses seviyesi ayarı
+                                    <span class="right"><input type="checkbox" value="adjust-sound"></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="features" data-mold="e" data-scroll>
+                            <h3>E 12</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <!-- An input element has to exist --><input style="display: none;">
+                            <ul class="unstyled">
+                                <li>
+                                    Kapı otomatiği
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        Beyaz
+                                    </span>
+                                </li>
+                                <li>
+                                    Kapıcı ile görüşme
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li data-info="better-melody">
+                                    Gelişmiş zil sesi
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li>
+                                    Flaş led ile uyarı
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li>
+                                    Gizlilik
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li>
+                                    Zil ses seviyesi ayarı
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="features" data-mold="telefon" data-scroll>
+                            <h3>Telefon</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <!-- An input element has to exist --><input style="display: none;">
+                            <ul class="unstyled">
+                                <li>
+                                    Kapı otomatiği
+                                    <span class="right"><i class="icon-ok"></i></span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        Beyaz
+                                    </span>
+                                </li>
+                                <li>
+                                    Kapıcı ile görüşme
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li data-info="better-melody">
+                                    Gelişmiş zil sesi
+                                    <span class="right"><input type="checkbox" value="better-melody" data-extra></span>
+                                </li>
+                                <li>
+                                    Flaş led ile uyarı
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li data-info="private">
+                                    Gizlilik
+                                    <span class="right"><input type="checkbox" value="private" data-extra></span>
+                                </li>
+                                <li>
+                                    Zil ses seviyesi ayarı
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="inner-navigation">
+                        <a href="#" data-direction="left" class="btn btn-large">&gt;</a>
+                    </div>                
+                </div>
+
+            </div>
+
+            <!-- Panels -->
+            <div id="panels" class="slide" data-title="Paneller" data-help="panel seçiminiz">
+
+                <div class="panels set" data-system="plus">
+
+                    <div class="inner-navigation">
+                        <a href="#" class="btn btn-large" data-direction="right">&lt;</a>
+                    </div>
+
+                    <div class="orbimot">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/lightp/gb.png" data-focused data-mold="light-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/toughp/bd.png" data-mold="tough-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/luksp/pc.png" data-mold="luks" alt="">
+                    </div>
+
+                    <div class="inner-navigation">
+                        <a href="#" class="btn btn-large" data-direction="left">&gt;</a>
+                    </div>
+
+                    <div class="features" data-mold="light-panel">
+                        <h3>Dinamik</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <ul class="unstyled">
+                            <li>
+                                Tuşlar
+                                <span class='right'>
+                                    <input type="radio" value="button" name="blp" data-default>Buton — 
+                                    <input type="radio" value="digital" name="blp">Dijital
+                                </span>
+                            </li>
+                            <li data-info="name-search">
+                                İsim arama
+                                <span class="right"><input type="checkbox" value="name-search"></span>
+                            </li>
+                            <li>
+                                Şifre ile kapı açma
+                                <span class="right"><input type="checkbox" value="password"></span>
+                            </li>
+                            <li data-info="light-base">
+                                Işıklı panel altlığı
+                                <span class="right"><input type="checkbox" value="light-base" data-extra></span>
+                            </li>
+                            <li>
+                                Kart ile kapı açma
+                                <span class="right"><i class="icon-remove"></i></span>
+                            </li>
+                            <li>Renkli kamera <span class='right'><i class="icon-ok"></i></span></li>
+                            <li data-info="camera-angle">Açısı ayarlanabilir kamera <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="features" data-mold="tough-panel">
+                        <h3>Güçlü</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist--><input style='display:none'>
+                        <ul class="unstyled">
+                            <li>
+                                Tuşlar
+                                <span class='right'>
+                                    Dijital
+                                </span>
+                            </li>
+                            <li data-info="name-search">
+                                İsim arama
+                                <span class="right"><i class="icon-ok"></i></span>
+                            </li>
+                            <li>
+                                Şifre ile kapı açma
+                                <span class="right"><i class="icon-ok"></i></span>
+                            </li>
+                            <li data-info="light-base">
+                                Işıklı panel altlığı
+                                <span class="right"><input type="checkbox" value="light-base" data-extra></span>
+                            </li>
+                            <li>
+                                Kart ile kapı açma
+                                <span class="right"><i class="icon-remove"></i></span>
+                            </li>
+                            <li>Renkli kamera <span class='right'><i class="icon-ok"></i></span></li>
+                            <li data-info="camera-angle">Açısı ayarlanabilir kamera <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="features" data-mold="luks">
+                        <h3>Luks</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!--An input element has to exist--><input style="display:none">
+                        <ul class="unstyled">
+                            <li>
+                                Tuşlar
+                                <span class='right'>
+                                    Dijital
+                                </span>
+                            </li>
+                            <li data-info="name-search">
+                                İsim arama
+                                <span class="right"><i class="icon-ok"></i></span>
+                            </li>
+                            <li>
+                                Şifre ile kapı açma
+                                <span class="right"><i class="icon-ok"></i></span>
+                            </li>
+                            <li data-info="light-base">
+                                Işıklı panel altlığı
+                                <span class="right"><i class="icon-remove"></i></span>
+                            </li>
+                            <li>
+                                Kart ile kapı açma
+                                <span class="right"><i class="icon-ok"></i></span>
+                            </li>
+                            <li>Renkli kamera <span class='right'><i class="icon-ok"></i></span></li>
+                            <li data-info="camera-angle">Açısı ayarlanabilir kamera <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="panels set" data-system="plus+n">
+                    <div class="undos">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/lightp/gb.png" data-focused data-mold="light-panel" alt="">
+                    </div>
+                    <div class="features" data-mold="light-panel">
+                        <h3>Dinamik</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <ul class="unstyled">
+                            <li>
+                                Tuşlar
+                                <span class='right'>
+                                    Buton
+                                </span>
+                            </li>
+                            <li data-info="name-search">
+                                İsim arama
+                                <span class="right"><i class="icon-remove"></i></span>
+                            </li>
+                            <li>
+                                Şifre ile kapı açma
+                                <span class="right"><input type="checkbox" value="password"></span>
+                            </li>
+                            <li data-info="light-base">
+                                Işıklı panel altlığı
+                                <span class="right"><input type="checkbox" value="light-base" data-extra></span>
+                            </li>
+                            <li>Renkli kamera <span class='right'><i class="icon-ok"></i></span></li>
+                            <li data-info="camera-angle">Açısı ayarlanabilir kamera <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panels set" data-system="8+n">
+                    <div class="inner-navigation">
+                        <a href="#" class="btn btn-large" data-direction="right">&lt;</a>
+                    </div>
+
+                    <div class="undos">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/toughp/gb.png" data-focused data-mold="tough-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/lightp/sg.png" data-mold="light-panel" alt="">
+                    </div>
+
+                    <div class="features" data-mold="tough-panel">
+                        <h3>Güçlü</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">        
+                        <ul class="unstyled">
+                            <li>
+                                Buton
+                                <span class='right'>
+                                    Tek sıra
+                                </span>
+                            </li>
+                            <li>Karanlıkta yanan buton ışıkları <span class="right"><i class="icon-ok"></i></span></li>
+                            <li>Sıva üstü montaj <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="features" data-mold="light-panel">
+                        <h3>Dinamik</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">        
+                        <ul class="unstyled">
+                            <li>
+                                Buton
+                                <span class='right'>
+                                    Çift sıra
+                                </span>
+                            </li>
+                            <li>Karanlıkta yanan buton ışıkları <span class="right"><i class="icon-ok"></i></span></li>
+                            <li>Sıva üstü montaj <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panels set" data-system="4+n">
+                    <div class="inner-navigation">
+                        <a href="#" class="btn btn-large" data-direction="right">&lt;</a>
+                    </div>
+
+                    <div class="undos">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/toughp/gb.png" data-focused data-mold="tough-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/lightp/sg.png" data-mold="light-panel" alt="">
+                    </div>
+
+                    <div class="features" data-mold="tough-panel">
+                        <h3>Güçlü</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">        
+                        <ul class="unstyled">
+                            <li>
+                                Buton
+                                <span class='right'>
+                                    Tek sıra
+                                </span>
+                            </li>
+                            <li>Karanlıkta yanan buton ışıkları <span class="right"><i class="icon-ok"></i></span></li>
+                            <li>Sıva üstü montaj <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="features" data-mold="light-panel">
+                        <h3>Dinamik</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">        
+                        <ul class="unstyled">
+                            <li>
+                                Buton
+                                <span class='right'>
+                                    Çift sıra
+                                </span>
+                            </li>
+                            <li>Karanlıkta yanan buton ışıkları <span class="right"><i class="icon-ok"></i></span></li>
+                            <li>Sıva üstü montaj <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panels set" data-system="ft">
+                    <div class="undos">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/toughp/gb.png" data-focused data-mold="tough-panel" alt="">
+                    </div>
+                    <div class="features" data-mold="tough-panel">
+                        <h3>Dinamik</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">        
+                        <ul class="unstyled">
+                            <li>
+                                Buton
+                                <span class='right'>
+                                    Tek sıra
+                                </span>
+                            </li>
+                            <li>Karanlıkta yanan buton ışıkları <span class="right"><i class="icon-ok"></i></span></li>
+                            <li>Sıva üstü montaj <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>                       
+                    </div>
+                </div>
+
+                <div class="panels set" data-system="et">
+                    <div class="undos">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/lightp/sg.png" data-focused data-mold="light-panel" alt="">
+                    </div>
+                    <div class="features" data-mold="light-panel">
+                        <h3>Dinamik</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">        
+                        <ul class="unstyled">
+                            <li>
+                                Buton
+                                <span class='right'>
+                                    Çift sıra
+                                </span>
+                            </li>
+                            <li>Karanlıkta yanan buton ışıkları <span class="right"><i class="icon-ok"></i></span></li>
+                            <li>Sıva üstü montaj <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>                       
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Offer -->
+            <div id="offer" class="slide" data-title="Teklifiniz" data-help="teklifinizin toplam tutarı">
+
+                <!-- Offer Form -->
+                <form action="/teklif-formu/" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">İsim Soyisim <strong>*</strong></label>
+                        <div class="controls">
+                            <input type="text" name="isim" class="input-xlarge" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Şehir <strong>*</strong></label>
+                        <div class="controls">
+<select name="sehir" class="input-xlarge"><option value="" selected="selected"></option><option value="1">Adana</option><option value="2">Adıyaman</option><option value="3">Afyonkarahisar</option><option value="4">Ağrı</option><option value="5">Aksaray</option><option value="6">Amasya</option><option value="7">Ankara</option><option value="8">Antalya</option><option value="9">Ardahan</option><option value="10">Artvin</option><option value="11">Aydın</option><option value="12">Balıkesir</option><option value="13">Bartın</option><option value="14">Batman</option><option value="15">Bayburt</option><option value="16">Bilecik</option><option value="17">Bingöl</option><option value="18">Bitlis</option><option value="19">Bolu</option><option value="20">Burdur</option><option value="21">Bursa</option><option value="22">Çanakkale</option><option value="23">Çankırı</option><option value="24">Çorum</option><option value="25">Denizli</option><option value="26">Diyarbakır</option><option value="27">Düzce</option><option value="28">Edirne</option><option value="29">Elazığ</option><option value="30">Erzincan</option><option value="31">Erzurum</option><option value="32">Eskişehir</option><option value="33">Gaziantep</option><option value="34">Giresun</option><option value="35">Gümüşhane</option><option value="36">Hakkari</option><option value="37">Hatay</option><option value="38">Iğdır</option><option value="39">Isparta</option><option value="40">Mersin</option><option value="41">İstanbul (Anadolu)</option><option value="42">İstanbul (Avrupa)</option><option value="43">İzmir</option><option value="44">Karabük</option><option value="45">Kars</option><option value="46">Kastamonu</option><option value="47">Kayseri</option><option value="48">Kırklareli</option><option value="49">Kırşehir</option><option value="50">Kocaeli</option><option value="51">Konya</option><option value="52">Kütahya</option><option value="53">Malatya</option><option value="54">Manisa</option><option value="55">Kahramanmaraş</option><option value="56">Karaman</option><option value="57">Kırıkkale</option><option value="58">Kilis</option><option value="59">Mardin</option><option value="60">Muğla</option><option value="61">Muş</option><option value="62">Nevşehir</option><option value="63">Niğde</option><option value="64">Ordu</option><option value="65">Osmaniye</option><option value="66">Rize</option><option value="67">Sakarya</option><option value="68">Samsun</option><option value="69">Siirt</option><option value="70">Sinop</option><option value="71">Sivas</option><option value="72">Şırnak</option><option value="73">Tekirdağ</option><option value="74">Tokat</option><option value="75">Trabzon</option><option value="76">Tunceli</option><option value="77">Şanlıurfa</option><option value="78">Uşak</option><option value="79">Van</option><option value="80">Yalova</option><option value="81">Yozgat</option><option value="82">Zonguldak</option></select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon <strong>*</strong></label>
+                        <div class="controls">
+                            <input type="text" name="telefon" class="input-xlarge" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email <strong>*</strong></label>
+                        <div class="controls">
+                            <input type="text" name="email" class="input-xlarge" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Ek olarak? <strong>*</strong></label>
+                        <div class="controls">
+                            <textarea class="input-xlarge" name="mesaj"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Offer Information -->
+                <div id="offer-information">
+                    <div id="offer-price-container">
+                        <span id="offer-price"></span> TL
+                    </div>
+                    <ol>
+                        <li>
+                            Bu fiyata işçilik ve KDV <strong>dahildir</strong>
+                        </li>
+                        <li>
+                            Bu fiyatı <strong>%90</strong> doğru olarak düşünebilirsiniz.
+                            Binanızın yapısına ve ihtiyaçlarınıza göre maliyet değişebilir. 
+                        </li>
+                        <li>
+                            Referans olarak kullanabileceğiniz bir teklif icin lütfen yandaki formu kullanın. 
+                            Seçimleriniz bize gelir ve sizinle hemen irtibata geçeriz.
+                        </li>
+                    </ol>
+                    <div id="offer-feedback" class="well"></div>
+                </div>
+            </div>
+
+            <!-- Sent -->
+            <div id="sent" class="slide" data-title="Başarılı" data-help="isteğiniz bize ulaştı">
+                <div>
+                    <span>Bizi seçtiğiniz için teşekkür ederiz!</span>
+                </div>
+            </div>
+
+            <!-- Villa Sets -->
+            <div id="villa" class="slide" data-title="Villa" data-help="beğendiğiniz villa setini seçin">
+                <div class="inner-navigation">
+                    <a href="#" data-direction="right" class="btn btn-large">&lt;</a>
+                </div>
+                <div class="villa-body">
+                    <div class="orbimot">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/evk/c.png" data-mold="eko-villa" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/fvk/x.png" data-mold="x-villa" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer/etv/t.png" data-mold="telefon-villa" alt="">
+                    </div>
+
+                    <!-- Villa Set Features -->
+                    <div class="features" data-mold="eko-villa">
+                        <h3>Eko</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">
+                        <ul class="unstyled">
+                            <li>
+                                Tip
+                                <span class='right'>
+                                    Görüntülü
+                                </span>
+                            </li>
+                            <li>
+                                Ekran
+                                <span class='right'>
+                                    <input type="radio" value="bw" name="vs">Siyah/Beyaz — 
+                                    <input type="radio" value="c" name="vs" data-default>Renkli
+                                </span>
+                            </li>
+                            <li>Ek şube <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>Şubeler arası görüşme <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>İkinci kapı <span class='right'><i class="icon-remove"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="features" data-mold="x-villa">
+                        <h3>Fonksiyonel</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">
+                        <ul class="unstyled">
+                            <li>
+                                Tip
+                                <span class='right'>
+                                    Görüntülü
+                                </span>
+                            </li>
+                            <li>
+                                Ekran
+                                <span class='right'>
+                                    5,6"
+                                </span>
+                            </li>
+                            <li>Ek şube <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>Şubeler arası görüşme <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>İkinci kapı <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="features" data-mold="telefon-villa">
+                        <h3>Telefon</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">
+                        <ul class="unstyled">
+                            <li>
+                                Tip
+                                <span class='right'>
+                                    Görüntüsüz
+                                </span>
+                            </li>
+                            <li>Ekran <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>Ek şube <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>Şubeler arası görüşme <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>İkinci kapı <span class='right'><i class="icon-remove"></i></span></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="inner-navigation">
+                    <a href="#" data-direction="left" class="btn btn-large">&gt;</a>
+                </div>                   
+            </div>
+        </div>
+
+        <!-- Navigation Area -->
+        <div id="navigation">
+            <a id="navigation-back" data-direction="back" href="#" class="btn btn-large">Geri</a> 
+            <a id="navigation-continue" data-direction="continue" href="#" class="btn btn-large">Devam</a> 
+        </div>
+
+    </div> 
+</body>
+</html>

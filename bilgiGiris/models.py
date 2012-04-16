@@ -31,4 +31,3 @@ class Bilgi(models.Model):
 
     def __unicode__(self):
         return self.isim
-

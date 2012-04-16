@@ -58,6 +58,12 @@ class Yapildi(models.Model):
     class Meta:
         ordering = ['-tarih']
  
+class OtomatikTeklif(models.Model):
+    tarih = models.DateTimeField('Gelis Tarihi', auto_now_add=True)
+    musteri = models.TextField('Musteri Ozellikleri')
+    durum = models.TextField('Istek ve eylemler')
+    teklif = models.OneToOneField(Teklif)
+
 class UserProxy(User):
     class Meta:
         proxy = True
