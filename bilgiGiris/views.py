@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.db.models import Q
 import json
 SIRA = ['isim','email','sehir','firma','telefon','mesaj']
@@ -63,7 +63,6 @@ def formIslem(request,tip):
         if post_dict.get('type','') == 'offer': # Check if it came from offer site
             message = post_dict.get('mesaj') # Original message
             state = post_dict.get('state') # State object to better inform
-            print json.loads(state)
             request_info = state_to_message(json.loads(state), message) # Addition to original message
             post_dict.setlist('mesaj', [request_info]) # Update with new message
             sub_meta = sub_dict(request.META, ['REMOTE_ADDR', 'HTTP_USER_AGENT', 'HTTP_REFERER']) # Get customer info
@@ -75,12 +74,6 @@ def formIslem(request,tip):
             tip_db = Tip.objects.get(isim__contains = tip)
             bilgi_db.tip = tip_db 
             bilgi_db.save()
-
-            # Save the record for auto offer
-            if record: 
-                record.teklif = bilgi_db.teklif
-                record.save()
-
             sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
             if tip == 'teklif':
                 sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir']).exclude(Q(profile__birincil=True) | Q(profile__ikincil=True))
@@ -101,5 +94,14 @@ def formIslem(request,tip):
     else:
         yollaForm = form()
         geri_donus = ''
-    return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm, 'tip':tip,'mesaj':geri_donus},context_instance=RequestContext(request))
+    
+    # Save the record for auto offer, assume input is correct
+    if record: 
+        record.teklif = bilgi_db.teklif
+        record.save()
+        return HttpResponse('success')
+    # Give user feedback if there is a mistake
+    else:
+        return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm, 'tip':tip,'mesaj':geri_donus},
+                                  context_instance=RequestContext(request))
 

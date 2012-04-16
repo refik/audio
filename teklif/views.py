@@ -12,6 +12,21 @@ from django.views.generic import ListView, CreateView, DetailView, TemplateView
 from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum, Teklif, Yapildi
 from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm, AxaptaForm
+import re
+
+class OtomatikTeklif(TemplateView):
+    template_name = 'auto_offer.html'
+
+    def get_template_names(self):
+        templates = super(OtomatikTeklif, self).get_template_names()
+        agent_string = self.request.META['HTTP_USER_AGENT']
+        if 'MSIE' in agent_string:
+            agent_list = agent_string.split(' ')
+            msie_version = float(re.sub(r'[a-zA-Z;]','',agent_list[agent_list.index('MSIE') + 1]))
+            if msie_version < 8 and not 'Trident' in agent_string:
+                templates.insert(0, 'upgrade_browser.html')
+        return templates
+    
 
 class TeklifDosyaView(DetailView):
     template_name = 'iscilik.html'
