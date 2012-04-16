@@ -8,8 +8,8 @@ from audio.ortakVeri.sprite import sprite_generator
 import os
 
 class Haber(models.Model):
-    baslik = models.CharField('Baslik',max_length=22)
-    icerik = models.CharField('Icerik Yazisi', max_length=60)
+    baslik = models.CharField('Baslik',max_length=32)
+    icerik = models.CharField('Icerik Yazisi', max_length=55)
     resim = FileBrowseField('Resim',max_length=200)
     detay = models.TextField('Haberin Detaylari', blank=True, null=True)
     anasayfa = models.BooleanField('Anasayfada gosterilsin')
@@ -18,7 +18,7 @@ class Haber(models.Model):
 
     class Meta:
         verbose_name_plural = "Haberler"
-        ordering = ['tarih']
+        ordering = ['-tarih']
 
     def __unicode__(self):
         return unicode(self.baslik)

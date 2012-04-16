@@ -1,5 +1,3 @@
-var state
-
 window.onload = function(){
     /*
      * Parameters
@@ -10,7 +8,7 @@ window.onload = function(){
 
     // For ease of development
     var sampleUrl = $('.orbimot img').prop('src')
-      , urlBase = sampleUrl.slice(0, sampleUrl.search('auto_offer') + 11)
+      , urlBase = sampleUrl.slice(0, sampleUrl.search('auto_offer') + 10)
 
     // State of the users choices
     state = {
