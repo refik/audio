@@ -42,8 +42,8 @@ var products = [
 
     /* Ft telefon */
     {
-        features: ['private', 'better-melody', 'doormen', 'telefon'],
-        src: '/t/l.png',
+        features: ['private', 'two-doors', 'better-melody', 'doormen', 'telefon'],
+        src: '/t/l.jpg',
         system: 'ft',
         id: '001061',
         price: 43
@@ -421,7 +421,7 @@ var systems = {
     },
     '8+n': function(state) {
         var apartment = state.apartment / state.block
-          , cable = state.apartment * 7 * 2
+          , cable = state.apartment * 7 * 2 * 2.1
           , cu
         if($.inArray('two-doors', state.extra.monitors) != -1)
             cu = 250
@@ -472,10 +472,13 @@ var work = {
         else return 200
     },
     '8+n': function(state) {
-        return state.price * 0.3+ state.apartment * 15 
+        return state.price * 0.3 + state.apartment * 15 
     },
     '4+n': function(state) {
         return state.price * 0.3 + state.apartment * 15 
+    },
+    'ft': function(state) {
+        return state.price * 0.25 + state.apartment * 15 
     },
     'et': function(state) {
         return state.price * 0.25 + state.apartment * 15 
@@ -513,7 +516,7 @@ var extras = {
             return 45
     },
     'light-base': function(state) { 
-        var basePrice
+        var basePrice = 0
         if(state.panel.id == "008312") basePrice = 270
         else if(state.panel.id == "003480") basePrice = 250
         else if(state.panel.id == "008317") {

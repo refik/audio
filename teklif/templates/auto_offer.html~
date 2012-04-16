@@ -414,7 +414,7 @@
                                 </li>
                                 <li>
                                     Kapıcı ile görüşme
-                                    <span class="right"><input type="checkbox" value="doormen" data-extra data-default></span>
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
                                 </li>
                                 <li data-info="better-melody">
                                     Gelişmiş zil sesi

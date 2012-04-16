@@ -38,3 +38,7 @@
 #mesaj{
     margin-left: 100px;
 }
+#teklif-istiyorum {
+    display: block;
+    margin: 0 auto;
+}

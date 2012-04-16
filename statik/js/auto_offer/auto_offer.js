@@ -63,6 +63,10 @@ window.onload = function(){
             $('#header-price-container').hide(time)
 
             $('#navigation-continue').unbind('click')
+
+            $('#apartments input:visible').each(function(){
+                state[$(this).data('state')] = parseInt($(this).val())
+            })
         },
         monitors: function() {
             // Button state
@@ -182,7 +186,13 @@ window.onload = function(){
         'camera-angle': 'Kameranın döndürülerek, panelin tam karşısında durmayan misafirlerinizi de görmenizi sağlar',
         'panel-info': 'Devam butonuna tıklarsanız daha ayrıntılı inceleyebilirsiniz',
         'flash': '<img style="float: right;" src="' + urlBase + '/se/l.gif"> Cihazınız çaldığında ses çıkmasını istemiyorsanız'+                 ' ya da evinizde duyma güçlüğü çeken sakin varsa, parlak ışıkla uyari sağlar',
-        'price': 'Bu fiyata KDV ve işçilik dahildir'
+        'name-search': 'Dijital ekran üzerinde bina sakinlerinin isimleri ile arama yapılmasını sağlar',
+        'price': 'Bu fiyata KDV ve işçilik dahildir',
+        'better-melody': 'Zil sesinin tonu kulağa daha hoş gelecek şekilde geliştirilmiştir. Zile kısa basılma durumunda ' + 
+                         'kaçırılmaması için belli bir süre çalmaya devam eder',
+        'private': 'Kapıdaki misafirinizle konuşurken, aynı zamanda diafonunu açan başka bina sakinlerinin konuşmalarınızı ' +
+                   'dinlemesini engeller',
+        'memory': 'Kapıya gelen misafirlerinizin fotoğrafını çekip, hafızasında saklama imkanı sunar'
     }
 
     /*
@@ -250,28 +260,46 @@ window.onload = function(){
     // Update the price according to state
     function updatePrice() {
         var currentPriceText = $('#header-price').html()
+          , extraCost = 0
         state.price = 0
         if(state.building == 'villa') {
             state.price += state.monitor.price
         } else {
             state.price += state.monitor.price * state.apartment 
-            for(var i=0; i<state.block; i++) {
-                state.price += state.panel.price(state.apartment/state.block) 
-            }
+            state.price += state.panel.price(state.apartment/state.block) * state.block
         }
-        state.price += systems[state.monitor.system](state)
-        state.price += work[state.monitor.system](state) 
+        
         $.each(state.extra.monitors.concat(state.extra.panels), function(index, element) {
             if(extras[element]) { 
-                state.price += extras[element](state) 
+                extraCost = extras[element](state) 
+                state.price += extraCost
             }
         })
-        state.price += systems[state.monitor.system](state)
-        state.price *= 0.767
-        state.price += work[state.monitor.system](state) 
 
-        if (state.building != 'villa') var newPriceText = numberWithCommas((state.price / state.apartment).toFixed())
-        else var newPriceText = numberWithCommas(state.price.toFixed())
+        state.price += systems[state.monitor.system](state)
+
+        var workCost = work[state.monitor.system](state) 
+
+        state.price *= 0.767
+        state.price += workCost
+
+        // Debugging calculation
+        console.log(
+            '*******', state, '********',
+            '\nMonitor: ', state.monitor.price * state.apartment, 
+            '\nPanel: ',  state.panel.price(state.apartment/state.block) * state.block,
+            '\nSystem: ', systems[state.monitor.system](state),
+            '\nWork: ', workCost,
+            '\nExtra: ', extraCost,
+            '\n**************************'
+        )
+
+        if (state.building != 'villa') {
+            var newPriceText = numberWithCommas((state.price / state.apartment).toFixed())
+        }
+        else {
+            var newPriceText = numberWithCommas(state.price.toFixed())
+        }
         if(newPriceText != currentPriceText)
             $('#header-price').fadeOut(time/2, function(){$(this).html(newPriceText)}).fadeIn(time/2)
     }
@@ -473,12 +501,6 @@ window.onload = function(){
         }
     })
 
-    // When apartments change, adjust the state
-    $("#apartments").on("change", "input", function(event) {
-        if(!$(this).parents('.control-group').hasClass('error'))
-            state[$(this).data('state')] = parseInt($(this).val())
-    })
-
     // When preference changed, adjust the state
     $("#preferences").on("click", ".btn", function(event) {
         if (!$(this).hasClass('btn-success')) {
@@ -570,6 +592,7 @@ window.onload = function(){
         if (type=='monitors') {
             state.monitor = product
             if(state.building == 'villa') {
+                state.extra.panels = []
                 updatePrice()
             } else {
                 var panelContainer = $('.panels.set[data-system="' + product.system + '"]').find('.orbimot, .undos')
