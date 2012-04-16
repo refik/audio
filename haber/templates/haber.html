@@ -4,8 +4,9 @@
 {% block baslik %}{{ haber.baslik }} - Audio Elektronik{% endblock %}
 {% block aciklama %}{{ haber.icerik }}{% endblock %}
 {% block icerik %}
-{% include 'tekli_ac.html' %}
-<div class="grid_34 push_2">
+
+{% include 'ikili_ac.html' %}
+<div class="grid_28 push_2">
  <h2 class="capitalize">{{ haber.baslik }}</h2>
  {% if haber.detay %}
   {% autoescape off %}
@@ -16,7 +17,10 @@
   <img src="{% version haber.resim.path 'tam' %}" alt="{{ haber.icerik }}">
  {% endif %}
 </div>
-<div class="grid_18">
+{% include 'ikili_kapat.html' %}
+
+{% include 'ikili_ac.html' %}
+<div class="grid_28 push_2">
     <h2>Bütün Haberler</h2>
     <ul style="list-style: none;">
         {% for haber in butun_haberler %} 
@@ -24,5 +28,6 @@
         {% endfor %}
     </ul>
 </div>
-{% include 'tekli_kapat.html' %}
+{% include 'ikili_kapat.html' with clear='true' %}
+
 {% endblock %}
