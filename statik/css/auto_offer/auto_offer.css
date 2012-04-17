@@ -1,7 +1,4 @@
 /* General Style */
-* {
-    filter: inherit;
-}
 html {
     height: 100%;
     margin: 0px;
@@ -137,11 +134,12 @@ p {
     display: none;
     float: right;
     font-size: 29px;
-    margin-top: 5px;
     margin-left: 5px;
+    line-height: 32px;;
 }
 #header-price {
     color: #5BB75B;
+    display: inline-block;
 }
 #header-logo {
     float: right;
@@ -179,7 +177,9 @@ p {
 }
 #buildings-information {
     font-size: 28px;
-    padding-top: 20px;
+    margin-top: 15px;
+    line-height: 1;
+    display: inline-block;
 }
     #buildings .inner-navigation .btn { 
         margin-top: 167px;
@@ -408,6 +408,7 @@ p {
     #sent span {
         font-size: 40px;
         color: #5BB75B;
+        line-height: 1;
     }
 
 /* Villa */

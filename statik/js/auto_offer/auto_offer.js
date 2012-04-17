@@ -4,7 +4,7 @@ window.onload = function(){
      */
 
     // Duration of animations
-    var time = 500
+    var time = 1200
 
     // For ease of development
     var sampleUrl = $('.orbimot img').prop('src')
