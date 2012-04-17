@@ -29,9 +29,7 @@ window.onload = function(){
     var callbacks = {
         buildings: function() {
             // Hide back button at navigation
-            $('#navigation-back').animate({opacity: 0}, time, function(){
-                $(this).css("visibility", "hidden")
-            })
+            $('#navigation-back').fadeOut(time)
 
             $('#navigation-continue').html('Devam')
             
@@ -42,7 +40,7 @@ window.onload = function(){
         },
         apartments: function() {
             // Show back button at navigation
-            $('#navigation-back').css("visibility", "visible").animate({opacity: 1}, time)
+            $('#navigation-back').fadeIn(time)
             $('.apartments-input').hide().filter('[data-type*="' + state.building + '"]').show()
             setTimeout(function() {$('#apartments input:visible:first').focus()}, time)
 
@@ -143,9 +141,7 @@ window.onload = function(){
             })
 
             // Hide back button at navigation
-            // $('#navigation-back').animate({opacity: 0}time, function(){
-            //     $(this).css("visibility", "hidden")
-            // })
+            $('#navigation-back').fadeOut(time)
 
             //Hide price at header
             $('#header-price-container').hide(time)
@@ -153,7 +149,7 @@ window.onload = function(){
         villa: function() {
             // Showing price at top
             $('#header-price-container').show(time) 
-            $('#navigation-back').css("visibility", "visible").animate({opacity: 1}, time)
+            $('#navigation-back').fadeIn(time)
             
             // Navigation button text
             $('#navigation-continue').html('Bitir')
@@ -215,7 +211,7 @@ window.onload = function(){
         inputList.each(function(){
             var controlGroup = $(this).parents('.control-group')
               , value = $(this).val()
-            if(value == "" || ($(this).prop('name') == 'email' && validateEmail(value) != true) || 
+            if((value == "" && $(this).prop('name') != 'mesaj') || ($(this).prop('name') == 'email' && validateEmail(value) != true) || 
                ($(this).parents('#apartments').length && !onlyNumbers(value))) {
                 controlGroup.addClass('error')
                 flag = false
@@ -282,15 +278,15 @@ window.onload = function(){
         state.price += workCost
 
         // Debugging calculation
-        console.log(
-            '*******', state, '********',
-            '\nMonitor: ', state.monitor.price * state.apartment, 
-            '\nPanel: ',  state.panel.price(state.apartment/state.block) * state.block,
-            '\nSystem: ', systems[state.monitor.system](state),
-            '\nWork: ', workCost,
-            '\nExtra: ', extraCost,
-            '\n**************************'
-        )
+        // console.log(
+        //     '*******', state, '********',
+        //     '\nMonitor: ', state.monitor.price * state.apartment, 
+        //     '\nPanel: ',  state.panel.price(state.apartment/state.block) * state.block,
+        //     '\nSystem: ', systems[state.monitor.system](state),
+        //     '\nWork: ', workCost,
+        //     '\nExtra: ', extraCost,
+        //     '\n**************************'
+        // )
 
         if (state.building != 'villa') {
             var newPriceText = numberWithCommas((state.price / state.apartment).toFixed())

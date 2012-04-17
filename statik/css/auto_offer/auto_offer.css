@@ -445,15 +445,12 @@ p {
     }
 #navigation-continue {
     position: relative;
-    margin-left: -133px;
     width: 910px;
     z-index: 3;
 }
 #navigation-back {
-    position: relative;
-    visibility: hidden;
-    opacity: 0;
-    filter: alpha(opacity=0);
+    position: absolute;
+    display: none;
     width: 100px;
     z-index: 4;
 }
