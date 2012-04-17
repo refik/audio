@@ -142,6 +142,7 @@ p {
 }
 #header-price {
     color: #5BB75B;
+    display: inline-block;
 }
 #header-logo {
     float: right;
