@@ -13,7 +13,14 @@
     {% endif %}
 
     <!-- Styles -->
-    <!--[if IE 8]><style type="text/css">.orbimot img{background-color:#FFFFFF;}</style><![endif]-->
+    <!--[if IE 8]>
+    <style type="text/css">
+        #buildings-information-box *, .undos *, .orbimot *, .features *, .page-header *{
+            filter:inherit;
+            background-color:#FFFFFF;
+        }
+    </style>
+    <![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Armata&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     {% compress css %}
     <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/bootstrap.css" type="text/css">
