@@ -151,8 +151,39 @@
         },
 
         turnTo: function(image){
-            var plugin = this
-            while(!plugin.focused().is(image[0])) plugin.turn('right')
+            var plugin = this,
+                wouldTakeLeft = 0,
+                wouldTakeRight = 0,
+                originalOrder = plugin.order
+
+            for(var i=0; i<plugin.order.length; i++) {
+                plugin.order = plugin.order.slice(1).concat(plugin.order.slice(0,1))
+                wouldTakeRight++
+                if(plugin.focused().is(image[0])){
+                    plugin.order = originalOrder
+                    break
+                }
+            }
+
+            for(var i=0; i<plugin.order.length; i++) {
+                plugin.order = plugin.order.slice(-1).concat(plugin.order.slice(0,-1))
+                wouldTakeLeft++
+                if(plugin.focused().is(image[0])){
+                    plugin.order = originalOrder
+                    break
+                }
+            }
+
+            if(wouldTakeLeft < wouldTakeRight) {
+                for(var i=0; i<wouldTakeLeft; i++) { 
+                    plugin.turn('left') 
+                }
+            }
+            else if(!(wouldTakeRight == wouldTakeLeft && wouldTakeRight == plugin.order.length)) {
+                for(var i=0; i<wouldTakeRight; i++){
+                    plugin.turn('right') 
+                }
+            }
         },
         
         // Return the focused image
