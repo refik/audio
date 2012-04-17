@@ -400,12 +400,13 @@ window.onload = function(){
 
     /* Event bindings */
 
+    console.log('annenlere soyle yarin gelsinler')
     // Interrupt tab key, it with layout
-    $(window).keydown(function(event) {
+    $(document).keydown(function(event) {
         if(event.keyCode == 9) event.preventDefault()
     })
 
-    $(window).scroll(function(event) {
+    $(document).scroll(function(event) {
         if($('.popover').length != 0) $('.popover').remove()
     })
 
