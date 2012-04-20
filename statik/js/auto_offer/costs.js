@@ -85,21 +85,21 @@ var products = [
 
     /* 8 + n Fnk */
     {
-        features: ['white', 'fnk'],
+        features: ['two-doors', 'white', 'fnk'],
         src: '/fnk/wkpn.png',
         system: '8+n',
         id: '001430',
         price: 25
     },
     {
-        features: ['gold', 'doormen','adjust-sound', 'fnk'],
+        features: ['two-doors', 'gold', 'doormen','adjust-sound', 'fnk'],
         src: '/fnk/gkpn.png',
         system: '8+n',
         id: '001435',
         price: 27
     },
     {
-        features: ['chrome', 'doormen', 'adjust-sound', 'flash', 'fnk'],
+        features: ['two-doors', 'chrome', 'doormen', 'adjust-sound', 'flash', 'fnk'],
         src: '/fnk/mkpn.png',
         system: '8+n',
         id: '001437',
@@ -423,7 +423,7 @@ var systems = {
         var apartment = state.apartment / state.block
           , cable = state.apartment * 7 * 2 * 2.1
           , cu
-        if($.inArray('two-doors', state.extra.monitors) != -1)
+        if($.inArray('two-doors', state.extra.monitors) != -1 || $.inArray('doormen', state.extra.monitors) != -1)
             cu = 250
         else if(apartment > 25)
             cu = 190
