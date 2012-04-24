@@ -278,15 +278,15 @@ window.onload = function(){
         state.price += workCost
 
         // Debugging calculation
-        console.log(
-             '*******', state, '********',
-             '\nMonitor: ', state.monitor.price * state.apartment, 
-             '\nPanel: ',  state.panel.price(state.apartment/state.block) * state.block,
-             '\nSystem: ', systems[state.monitor.system](state),
-             '\nWork: ', workCost,
-             '\nExtra: ', extraCost,
-             '\n**************************'
-        )
+        // console.log(
+        //      '*******', state, '********',
+        //      '\nMonitor: ', state.monitor.price * state.apartment, 
+        //      '\nPanel: ',  state.panel.price(state.apartment/state.block) * state.block,
+        //      '\nSystem: ', systems[state.monitor.system](state),
+        //      '\nWork: ', workCost,
+        //      '\nExtra: ', extraCost,
+        //      '\n**************************'
+        // )
 
         if (state.building != 'villa') {
             var newPriceText = numberWithCommas((state.price / state.apartment).toFixed())
