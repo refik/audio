@@ -400,7 +400,6 @@ window.onload = function(){
 
     /* Event bindings */
 
-    console.log('annenlere soyle yarin gelsinler')
     // Interrupt tab key, it with layout
     $(document).keydown(function(event) {
         if(event.keyCode == 9) event.preventDefault()
