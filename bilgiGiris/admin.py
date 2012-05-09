@@ -1,4 +1,4 @@
-from audio.bilgiGiris.models import Bilgi, Tip, Sehir
+from audio.bilgiGiris.models import Bilgi, Tip, Sehir, Ilce
 from django.contrib import admin
 
 class BilgiAdmin(admin.ModelAdmin):
@@ -21,3 +21,5 @@ class BilgiAdmin(admin.ModelAdmin):
     filter_horizontal = ['sorumlu']
 
 admin.site.register(Bilgi, BilgiAdmin)
+admin.site.register(Ilce)
+admin.site.register(Sehir)

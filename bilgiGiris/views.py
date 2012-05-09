@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponse
 from django.db.models import Q
 import json
-SIRA = ['isim','email','sehir','firma','telefon','mesaj']
+SIRA = ['isim','email','sehir', 'ilce', 'firma','telefon','mesaj']
 
 def mesajOlustur(sozluk):
     mesaj = ''

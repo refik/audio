@@ -22,8 +22,8 @@ window.onload = function(){
         'price': 0
     }
 
-    // A list of costs are imported through costs.js - include:
-    // products, systems, extras
+    // A list of costs are imported through costs.js - include: products, systems, extras
+    // A list of counties imoprted through county.js - include: county
 
     // Required functions to prepare each slide 
     var callbacks = {
@@ -626,6 +626,22 @@ window.onload = function(){
             }
         }
     })
+
+    // Change the set of county based on city
+    allOptions = $('select[name="ilce"] option').clone()
+    $('select[name="sehir"]').on('change', function() {
+        if($(this).find('option:selected').val()) {
+            city = $(this).find('option:selected').html();
+            $('select[name="ilce"] option').remove()
+            allOptions.filter(function() {
+                if($.inArray($(this).html(), county[city]) == -1 && $(this).val() != '') {
+                    return false
+                } else {
+                    return true
+                }
+            }).appendTo($('select[name="ilce"]'));
+        }
+    });
 
     /* Popovers */
     
