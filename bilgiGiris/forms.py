@@ -11,16 +11,16 @@ class AkademiForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('mesaj','sorumlu','tip')
+        exclude = ('mesaj','sorumlu','tip','ilce')
 
 class BultenForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('firma','mesaj','sorumlu','tip')
+        exclude = ('firma','mesaj','sorumlu','tip','ilce')
 
 class IletisimForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('sehir','firma','sorumlu','tip')
+        exclude = ('sehir','ilce','firma','sorumlu','tip')
