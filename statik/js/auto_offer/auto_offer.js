@@ -631,7 +631,7 @@ window.onload = function(){
     allOptions = $('select[name="ilce"] option').clone()
     $('select[name="sehir"]').on('change', function() {
         if($(this).find('option:selected').val()) {
-            city = $(this).find('option:selected').html();
+            var city = $(this).find('option:selected').html();
             $('select[name="ilce"] option').remove()
             allOptions.filter(function() {
                 if($.inArray($(this).html(), county[city]) == -1 && $(this).val() != '') {

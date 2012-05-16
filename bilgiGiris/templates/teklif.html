@@ -12,7 +12,7 @@
         allOptions = $('#id_ilce option').clone()
         $('#id_sehir').on('change', function() {
             if($(this).find('option:selected').val()) {
-                sehir = $(this).find('option:selected').html();
+                var sehir = $(this).find('option:selected').html();
                 $('#id_ilce option').remove()
                 allOptions.filter(function() {
                     if($.inArray($(this).html(), ilceler[sehir]) == -1 && $(this).val() != "") {
