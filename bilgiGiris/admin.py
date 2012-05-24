@@ -7,7 +7,7 @@ class BilgiAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Gonderenin Bilgileri', {
             'classes': ('collapse open',),
-            'fields': ('isim', 'telefon', 'firma', 'email','sehir',),
+            'fields': ('isim', 'telefon', 'firma', 'email','sehir','ilce',),
         }),
         ('Istek', {
             'classes': ('collapse open',),

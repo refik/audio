@@ -85,7 +85,7 @@ def formIslem(request,tip):
             mesaj = mesajOlustur(bilgi.cleaned_data)
             mesaj += u'http://www.audio.com.tr/takip/%d adresinden detayli inceleyebilirsiniz' % bilgi_db.pk
             audiomail('audioweb@audio.com.tr',gonderilecek + ['refik.rfk@gmail.com'],konu,mesaj)
-            audiomail('audioweb@audio.com.tr', [bilgi.cleaned_data['email']],konu,'Isteginiz elimize ulasti, size en kisa zamanda cevap verecegiz.\n\nIstek kodunuz: #%d\n\nAudio Elektronik\nwww.audio.com.tr - 444 11 58\n\nnot: lutfen bu adrese cevap atmayin, kontrol edilmiyor.' % bilgi_db.id )
+            audiomail('audioweb@audio.com.tr', [bilgi.cleaned_data['email']],konu,'İsteğiniz elimize ulaştı, size en kısa zamanda cevap vereceğiz.\n\nİstek kodunuz: #%d\n\nAudio Elektronik\nwww.audio.com.tr - 444 11 58\n\nnot: lütfen bu adrese cevap atmayın, kontrol edilmiyor.' % bilgi_db.id )
             yollaForm = form()
             geri_donus = 'İsteğiniz Elimize Ulaşmıştır'
         else:
