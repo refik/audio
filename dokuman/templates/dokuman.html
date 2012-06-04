@@ -46,27 +46,35 @@
   <script type="text/javascript">
    var viewportwidth;
    var viewportheight;
-   if (typeof window.innerWidth != 'undefined'){
-       viewportwidth = window.innerWidth,
-       viewportheight = window.innerHeight
-   } 
-   else if (typeof document.documentElement != 'undefined'
-            && typeof document.documentElement.clientWidth !=
-            'undefined' && document.documentElement.clientWidth != 0){
-       viewportwidth = document.documentElement.clientWidth,
-       viewportheight = document.documentElement.clientHeight
-   } 
-   else{
-       viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
-       viewportheight = document.getElementsByTagName('body')[0].clientHeight
+
+   function drawPdfArea() {
+       if (typeof window.innerWidth != 'undefined'){
+           viewportwidth = window.innerWidth,
+           viewportheight = window.innerHeight
+       } 
+       else if (typeof document.documentElement != 'undefined'
+                && typeof document.documentElement.clientWidth !=
+                'undefined' && document.documentElement.clientWidth != 0){
+           viewportwidth = document.documentElement.clientWidth,
+           viewportheight = document.documentElement.clientHeight
+       } 
+       else{
+           viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
+           viewportheight = document.getElementsByTagName('body')[0].clientHeight
+       }
+	   document.getElementById('viewerPlaceHolder').style.width = viewportwidth - 256;
+  	   document.getElementById('viewerPlaceHolder').style.height = viewportheight - 40;
+  	   document.getElementById('container').style.width = viewportwidth;
+   	   document.getElementById('container').style.height = viewportheight;
+       document.getElementById('ust_bar').style.width = viewportwidth - 256;
    }
-  
-   document.getElementById('viewerPlaceHolder').style.width = viewportwidth - 256;
-   document.getElementById('viewerPlaceHolder').style.height = viewportheight - 40;
-   document.getElementById('container').style.width = viewportwidth
-   document.getElementById('container').style.height = viewportheight
-   document.getElementById('ust_bar').style.width = viewportwidth - 256;
-   
+
+ 
+   drawPdfArea();
+   window.onresize = function(event) {
+       drawPdfArea();       
+   }
+
    var fp = new FlexPaperViewer(   
        '/statik/FlexPaperViewer',
        'viewerPlaceHolder', { config : {
