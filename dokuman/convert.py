@@ -1,6 +1,3 @@
-from django.db import models
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.contrib.staticfiles import finders
@@ -9,23 +6,8 @@ from pyPdf import PdfFileReader, PdfFileWriter
 import subprocess
 import os
 
-class Dokuman(models.Model):
-    isim = models.CharField('Isim',max_length=40)
-    resim = FileBrowseField('Resim',max_length=200,blank=True,null=True,help_text='Urun sayfasinda gosterilmesini istiyorsaniz yukleyeceginiz dosyanin ilk sayfasinin resmini mutlaka ekleyin')
-    dosya = FileBrowseField('Dosya', max_length=200, null=True)
-    slug = models.SlugField('Duzlestirilmis Isim', help_text='Otomatik olarak yaratilir. Eger isimde sonradan bir degisiklik yaparsaniz bunu da ayni formatta degistirin.')
-    urun_sayfa = models.BooleanField('Urun Sayfasinda Gosterilsin')
-    class Meta:
-        verbose_name_plural = "Dokumanlar"
-    def __unicode__(self):
-        return u"%s" % (self.isim)
-    def get_absolute_url(self):
-        return '/dokuman/' + self.slug
-
-#@receiver(post_save, sender=Dokuman)
-def dokuman_convert(sender, **kwargs):
-    if kwargs['created'] is True:
-        instance = kwargs['instance']
+def dokuman_convert(instance):
+    if True:
         dosya = instance.dosya
         klasor = dosya.filename_root + '-katalog-gorunumu-dosyalari'
         swfKlasor = os.path.dirname(dosya.path) + '/' + klasor
@@ -61,11 +43,12 @@ def dokuman_convert(sender, **kwargs):
             elif i == 1:
                 args[3] = '/tmp/1.swf'
                 i = 0
-            p = subprocess.Popen(args, stdout=subprocess.PIPE)
-            for line in iter(p.stdout.readline, ''):
-                if line[:5] == 'ERROR':
-                    args += ['-s', 'poly2bitmap']
-                    p = subprocess.Popen(args)
+            # p = subprocess.Popen(args, stdout=subprocess.PIPE)
+            # for line in iter(p.stdout.readline, ''):
+            #     print line
+            #     if line[:5] == 'ERROR' or line[:5] == 'FATAL':
+            args += ['-s', 'poly2bitmap']
+            p = subprocess.Popen(args)
             p.wait()
             name = swfKlasor + '/' + '%d.swf' % (i + 1,)
             swf_file = open('/tmp/%d.swf' % (i + 1,), 'rb')

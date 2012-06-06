@@ -1,7 +1,7 @@
 /* Generated classes for django-media-bundler sprites.  Don't edit! */
 
 .systems {
-     background-image: url('http://s.aucdn.net/resim/systems42fcee47494b.png');
+     background-image: url('http://s.aucdn.net/resim/systemsr2nko3.png');
 }
 
 .systems-bus_plus_sistem_ufak-jpg {
@@ -34,8 +34,14 @@
      height: 37px;
 }
 
-.systems-bus_plus_n_sistem_ufak-jpg {
+.systems-gts_sistem_ufak-jpg {
      width: 110px;
      background-position: 0px -185px;
+     height: 37px;
+}
+
+.systems-bus_plus_n_sistem_ufak-jpg {
+     width: 110px;
+     background-position: 0px -222px;
      height: 31px;
 }

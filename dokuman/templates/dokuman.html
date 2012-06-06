@@ -73,6 +73,7 @@
    drawPdfArea();
    window.onresize = function(event) {
        drawPdfArea();       
+	   getDocViewer().fitHeight();
    }
 
    var fp = new FlexPaperViewer(   
