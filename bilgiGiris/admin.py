@@ -7,7 +7,7 @@ class BilgiAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Gonderenin Bilgileri', {
             'classes': ('collapse open',),
-            'fields': ('isim', 'telefon', 'firma', 'email','sehir','ilce',),
+            'fields': ('isim', 'telefon', 'firma', 'email','sehir','ilce','adres','no'),
         }),
         ('Istek', {
             'classes': ('collapse open',),
@@ -23,3 +23,4 @@ class BilgiAdmin(admin.ModelAdmin):
 admin.site.register(Bilgi, BilgiAdmin)
 admin.site.register(Ilce)
 admin.site.register(Sehir)
+admin.site.register(Tip)

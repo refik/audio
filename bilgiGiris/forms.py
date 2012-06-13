@@ -5,22 +5,28 @@ class TeklifForm(ModelForm):
     TEMPLATE = 'teklif.html'
     class Meta:
         model = Bilgi
-        exclude = ('firma','sorumlu','tip')
+        fields = ('isim', 'sehir', 'ilce', 'telefon', 'email', 'mesaj')
 
 class AkademiForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('mesaj','sorumlu','tip','ilce')
+        fields = ('isim', 'sehir', 'telefon', 'email', 'firma')
 
 class BultenForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('firma','mesaj','sorumlu','tip','ilce')
+        fields = ('isim', 'sehir', 'telefon', 'email')
 
 class IletisimForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
     class Meta:
         model = Bilgi
-        exclude = ('sehir','ilce','firma','sorumlu','tip')
+        fields = ('isim', 'sehir', 'telefon', 'email', 'mesaj')
+
+class StandForm(ModelForm):
+    TEMPLATE = 'stand.html'
+    class Meta:
+        model = Bilgi
+        fields = ('isim', 'sehir', 'ilce', 'firma', 'adres', 'no', 'telefon', 'email')

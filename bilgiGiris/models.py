@@ -24,10 +24,12 @@ class Ilce(models.Model):
 class Bilgi(models.Model):
     isim = models.CharField('İsim Soyisim', max_length = 50)
     sehir = models.ForeignKey(Sehir)
-    ilce = models.ForeignKey(Ilce)
+    ilce = models.ForeignKey(Ilce, null=True, blank=True)
     telefon = models.CharField('Telefon', max_length = 50)
     email = models.EmailField('Email')
     firma = models.CharField('Firma', max_length = 200)
+    adres = models.CharField('Adres', max_length = 200)
+    no = models.CharField('TC, Vergi No', max_length = 200)
     mesaj = models.TextField('Mesaj')
     tip = models.ForeignKey(Tip)
     tarih = models.DateTimeField("Geliş Tarihi", auto_now_add=True)

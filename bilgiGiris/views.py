@@ -1,5 +1,5 @@
 # coding: utf-8
-from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm
+from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm, StandForm
 from audio.bilgiGiris.models import Tip
 from audio.teklif.models import OtomatikTeklif
 from audio.ortakVeri.mail import audiomail
@@ -9,8 +9,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponse
 from django.db.models import Q
+from django.views.decorators.cache import never_cache
 import json
-SIRA = ['isim','email','sehir', 'ilce', 'firma','telefon','mesaj']
+SIRA = ['isim','email','sehir', 'ilce', 'adres', 'firma', 'no', 'telefon','mesaj']
 
 def mesajOlustur(sozluk):
     mesaj = ''
@@ -30,6 +31,8 @@ def formSec(tip):
         return  AkademiForm
     elif tip == 'iletisim':
         return IletisimForm
+    elif tip == 'stand':
+        return StandForm
     else:
         raise Http404
 
@@ -52,6 +55,7 @@ def state_to_message(state, message):
 [Fiyat: %iTL]""" % info_tuple
     return formatted_message
 
+@never_cache
 @csrf_exempt
 def formIslem(request,tip):
     form = formSec(tip)
