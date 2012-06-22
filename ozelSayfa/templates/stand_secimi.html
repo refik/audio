@@ -1,0 +1,75 @@
+{% extends 'taban.html' %}
+
+{% block baslik %}Stand Secimi - Audio Elektronik{% endblock %}
+
+{% block aciklama %}Bilgi almak istediginiz standi secin {% endblock %}
+
+{% block icerik %}
+
+{% include 'tekli_ac.html' %}
+<div class="grid_52 push_2 centered">
+    <h1 id="stand-baslik">Bilgi almak istediğiniz ürüne tıklayın</h1>
+</div>
+{% include 'tekli_kapat.html' with clear='true' %}
+
+<div class="grid_56">
+    <p id="ucretsiz-genis">ÜCRETSİZ</p>
+</div>
+<div class="clear"></div>
+
+<div class="grid_18 alpa uclu">
+    <div class="grid_18 topd"></div>
+    <div class="grid_16 push_1">
+        <p class="red-number centered">1</p>
+        <p class="big-text centered">Dükkan Standı</p>
+        <a href="/stand-formu/"><img class="centered-image" src="http://s.aucdn.net/resim/standlar/65x95/on_162x250.jpg"></a>
+        <p class="big-text centered">Ebatları 65 x 95 cm</p>
+    </div>
+</div>
+<div class="grid_18 push_1 uclu">
+    <div class="grid_18 topd"></div>
+    <div class="grid_16 push_1">
+        <p class="red-number centered">2</p>
+        <p class="big-text centered">Taşınabilir Numune Panosu</p>
+        <a href="/numune-panosu/">
+            <img class="centered-image" src="http://s.aucdn.net/resim/standlar/60x75/tasiniyor_104x250.png">
+        </a>
+        <p class="big-text centered">Ebatları 60 x 75 cm</p>
+    </div>
+</div>
+<div class="grid_18 push_2 omega uclu">
+    <div class="grid_18 topd"></div>
+    <div class="grid_16 push_1">
+        <p class="red-number centered">3</p>
+        <p class="big-text centered">Sunum Kiti</p>
+        <a href="/sunum-kiti-formu/"><img class="centered-image" src="http://s.aucdn.net/resim/standlar/sunum_kiti/acik_220x73.jpg"></a>
+        <a href="/sunum-kiti-formu/"><img class="centered-image" style="margin-top: 7px" src="http://s.aucdn.net/resim/standlar/sunum_kiti/kapali_145x170.jpg"></a>
+        <p class="big-text centered">Şık Kutulu ve Taşınabilir</p>
+    </div>
+</div>
+<div class="clear"></div>
+
+
+
+<!--
+{% include 'ikili_ac.html' %}
+<div class="grid_24 push_2 centered">
+    <h3>Dükkan Standı</h1>
+    <a href="/stand-formu/">
+        <img style="display:block; margin-bottom: 10px; margin-left:auto; margin-right:auto;" src="http://s.aucdn.net/yukleme/ortak-resimler/65x95_tam.jpg">
+    </a>
+
+</div>
+{% include 'ikili_kapat.html' %}
+
+{% include 'ikili_ac.html' %}
+<div class="grid_26 push_2 centered">
+    <h3>Taşınabilir Numune Panosu</h1>
+    <a href="/numune-panosu/">
+        <img style="display:block; margin-bottom: 10px; margin-left:auto; margin-right:auto;" src="http://s.aucdn.net/yukleme/ortak-resimler/pano_tasima_0t4.jpg">
+    </a>
+</div>
+{% include 'ikili_kapat.html' with clear='true' %}
+-->
+
+{% endblock %}

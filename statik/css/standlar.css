@@ -1,0 +1,67 @@
+#stand-baslik {
+    margin-bottom: -30px;
+    position:relative;
+    z-index: 1;
+}
+
+#ucretsiz-genis {
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.red-number {
+    font-size: 24px;
+    color: red;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.big-text, ul.stand li{
+    font-size: 16px;
+    margin: 0px;
+}
+
+.centered-image {
+    display: block;
+    margin: 0 auto;
+}
+
+.huge-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ucretsiz {
+    color: red;
+    text-decoration: underline;
+}
+
+.red-dot {
+    margin-bottom:20px;
+    position: absolute; 
+}
+
+.red-dot-text {
+    font-size: 55px;
+    color: white;
+    z-index:1;
+    position: relative;
+    text-align: center;
+}
+
+.big-space {
+    margin-top: 40px;
+}
+
+ul.bold li {
+    font-weight: bold;
+}
+
+.framed {
+    background-color: red;
+    color: white;
+}

@@ -6,5 +6,6 @@ urlpatterns = patterns('audio.ozelSayfa.views',
     (r'^logout/','logout_view'),
     (r'^sifre-degistir/', password_change),
     (r'^password/done/$', password_change_done),
-#    (r'^kalite-belgelerimiz/','kaliteBelgelerimiz'),
+    (r'^stand-secimi/','stand_secimi'),
+    (r'^numune-panosu/','numune_panosu'),
 )
