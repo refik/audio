@@ -1,7 +1,7 @@
 /* Generated classes for django-media-bundler sprites.  Don't edit! */
 
 .products {
-     background-image: url('http://s.aucdn.net/resim/productshienuy.png');
+     background-image: url('http://s.aucdn.net/resim/productsv1dn23.png');
 }
 
 .products-basic_gt_kapali_yeni_ufak-jpg {
@@ -12,18 +12,24 @@
 
 .products-konsept_gdl_antrasit_tuslu_yeni_ufak-jpg {
      width: 90px;
-     background-position: 0px -75px;
+     background-position: -72px 0px;
      height: 74px;
 }
 
 .products-bronz_tussuz_35_yeni_ufak-jpg {
      width: 90px;
-     background-position: 0px -149px;
+     background-position: 0px -75px;
      height: 53px;
 }
 
 .products-antrasit_tuslu_35_yeni_ufak-jpg {
      width: 90px;
-     background-position: 0px -202px;
+     background-position: 0px -128px;
      height: 53px;
+}
+
+.products-gdl_villa_kit_yeni_ufak-jpg {
+     width: 90px;
+     background-position: 0px -181px;
+     height: 51px;
 }
