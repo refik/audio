@@ -1,0 +1,121 @@
+{% extends 'taban.html' %}
+
+{% block baslik %}Stand İstek Formu - Audio Elektronik{% endblock %}
+{% block aciklama %}Stand formu ile isteginizi bize bildirebilirsiniz.{% endblock %}
+{% block icerik %}
+{% include 'tekli_ac.html' %}
+ <div class="grid_50 push_2">
+    <div class="grid_50">
+        <p class="huge-text centered">TAŞINABİLİR ÇALIŞIR NUMUNE PANOSUNU <span class="ucretsiz">ÜCRETSİZ</span> ÖDÜNÇ ALABİLMEK İÇİN AŞAĞIDAKI BİLGİLERİ OKUYUN</p>
+    </div>
+
+
+    <div class="grid_14 alpha">
+        <img class="centered-image" src="http://s.aucdn.net/resim/standlar/60x75/tasiniyor_166x400.png">
+    </div>
+    <div class="grid_18">
+        <img class="centered-image" style="margin-top:70px" src="http://s.aucdn.net/resim/standlar/60x75/on_223x300.jpg">
+        <p class="big-text centered" >Ebatları 60 x 75 cm</p>
+    </div>
+    <div class="grid_18 omega">
+        <img class="centered-image" style="margin-top:70px" src="http://s.aucdn.net/resim/standlar/60x75/arka_223x300.png">
+        <p class="big-text centered" >Ayakları sayesinde her alanda kullanılabilir.</p>
+    </div>
+
+    <div class="grid_50" style="margin:40px 20px;">
+        <p class="big-text" style="color:red; font-weight:bold">Özellikleri Nelerdir?</p>
+        <ul class="stand">
+            <li>Üzerindeki ürünler çalışır durumdadır (resim gösterir, zil çalar)</li>
+            <li>Hafiftir, kulbuyla kolayca taşınır</li>
+            <li>Koruma kılıfıyla darbelerden korunur</li>
+        </ul>
+    </div>
+
+    <div class="grid_50">
+        <p class="huge-text centered" style="color:red">TAŞINABİLİR ÇALIŞIR NUMUNE PANOSUNU NERELERDE KULLANABİLİRSİNİZ?</p>
+    </div>
+
+    <div style="margin-top:120px;" class="grid_5 alpha">
+        <img class="centered-image red-dot" src="http://s.aucdn.net/resim/standlar/kirmizi_yuvarlak_85x85.jpg">
+        <p class="red-dot-text">1</p>
+        <img class="centered-image" src="http://s.aucdn.net/resim/standlar/ok_85x111.jpg">
+    </div>
+    <div class="grid_35">
+        <img class="centered-image" src="http://s.aucdn.net/resim/standlar/60x75/tasiniyor_208x500.png">
+    </div>
+    <div class="grid_10 omega">
+        <p style="margin-top:120px;" class="big-text centered" >Taşınabilir numune panosu hafif ve seyyardır</p>
+    </div>
+    <div class="clear"></div>
+
+    <div class="grid_50 big-space"></div>
+
+    <div style="margin-top:90px;" class="grid_5 alpha">
+        <img class="centered-image red-dot" src="http://s.aucdn.net/resim/standlar/kirmizi_yuvarlak_85x85.jpg">
+        <p class="red-dot-text">2</p>
+        <img class="centered-image" src="http://s.aucdn.net/resim/standlar/ok_85x111.jpg">
+    </div>
+    <div class="grid_35">
+        <img class="centered-image" src="http://s.aucdn.net/resim/standlar/60x75/acik_500x402.jpg">
+    </div>
+    <div class="grid_10 omega">
+        <p style="margin-top:120px;" class="big-text centered" >Müteahhit ve apartman yöneticilerine götürebilir, tanıtım yapabilirsiniz</p>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="grid_50 big-space"></div>
+
+    <div style="margin-top:90px;" class="grid_5 alpha">
+        <img class="centered-image red-dot" src="http://s.aucdn.net/resim/standlar/kirmizi_yuvarlak_85x85.jpg">
+        <p class="red-dot-text">3</p>
+        <img class="centered-image" src="http://s.aucdn.net/resim/standlar/ok_85x111.jpg">
+    </div>
+    <div class="grid_35">
+        <img class="centered-image" src="http://s.aucdn.net/resim/standlar/60x75/demo_500x375.jpg">
+    </div>
+    <div class="grid_10 omega">
+        <p style="margin-top:120px;" class="big-text centered" >Pano üzerindeki çalışır ürünlerle müşterilerinize sunum yaparak, onları ikna edersiniz ve satışı gerçekleştirirsiniz</p>
+    </div>
+
+    <div class="clear"></div>
+
+
+    <div class="grid_40 alpha" style="margin-top:40px;" >
+        <p class="big-text" style="color:red; font-weight:bold">TAŞINABİLİR ÇALIŞIR NUMUNE PANOSUNU ÖDÜNÇ ALABİLECEĞİNİZ YERLER</p>
+        <ul class="stand bold" style="margin-left: 20px;">
+            <li>Bayilerimizden,</li>
+            <li>Bölgenize bakan Audio satış elemanlarından (<a href="#" onclick="$('#telefon').show(); return false">telefon icin tıklayın</a>)</li>
+            <li>Audio servis noktalarından (<a href="/yetkili-servisler/">telefon icin tıklayın</a>)</li>
+        </ul>
+    </div>
+    <div class="grid_10 omega" style="margin-top: 40px; display: none" id="telefon">
+    {% include "temsilci.html" with push=1 grid=8 %}
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="grid_50" style="margin-left: 20px; margin-top: 20px;">
+        <ul class="stand">
+            <li>Yukarıdaki yerlerden çalışır numune panosunu ödünç alarak müşteriye götürür, sunum yapar ve müşteriyi ikna ederek satış yaparsınız</li>
+            <li>Ödünç aldığınız panoyu geri teslim edersiniz</li>
+            <li>Çalışır pano; her ilde ve büyük ilçelerde ödünç alabilmeniz için tüm Türkiye' ye dağıtılmıştır</li>
+        </ul>
+    </div>
+
+    <div class="grid_50">
+        <p class="huge-text">Arzu ederseniz çalışır panoyu satın alabilirsiniz. Tamamı çalışır ürünlerden oluşan bu panonun fiyatı <span class="ucretsiz">350 TL + KDV</span> dir </p>
+
+        <p class="big-text" >Fiyat nakit ve nettir. Iskonto yapılmayacaktır.</p>
+
+        <p></p>
+
+        <p class="big-text" >NOT: Pano üzerindeki ürünler demodur. Ürünlerin zili çalar ve sürekli görüntü verecek şekilde tasarlanmıştır. Hiçbir şekilde bina montajında kullanılmaz</p>
+    </div>
+
+
+</div>
+
+{% include 'tekli_kapat.html' with clear='true' %}
+
+{% endblock %}

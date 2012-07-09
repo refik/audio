@@ -28,6 +28,9 @@ def anasayfa(request):
     dataDict = dict([(m.isim, m)for m in medya] + [('haber',haber)] + [('yeni_urun',yeni_urun)] )
     return render_to_response('anasayfa.html', dataDict, context_instance=RequestContext(request))    
 
-def kaliteBelgelerimiz(request):
-    medya = medyaAl('Kalite Belgelerimiz')
-    return render_to_response('kalite_belgelerimiz.html', {'medya':medya}, context_instance=RequestContext(request)) 
+def stand_secimi(request):
+    return render_to_response('stand_secimi.html', context_instance=RequestContext(request)) 
+
+def numune_panosu(request):
+    return render_to_response('numune_panosu.html', context_instance=RequestContext(request)) 
+

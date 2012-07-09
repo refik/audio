@@ -1,5 +1,5 @@
 # coding: utf-8
-from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm, StandForm
+from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm, StandForm, SunumKitForm
 from audio.bilgiGiris.models import Tip
 from audio.teklif.models import OtomatikTeklif
 from audio.ortakVeri.mail import audiomail
@@ -33,6 +33,9 @@ def formSec(tip):
         return IletisimForm
     elif tip == 'stand':
         return StandForm
+    elif tip == 'sunum-kiti':
+        return SunumKitForm
+
     else:
         raise Http404
 

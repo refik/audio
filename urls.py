@@ -2,7 +2,6 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.conf import settings
 from django.views.generic.simple import redirect_to
-from django.views.decorators.cache import never_cache
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from filebrowser.sites import site
 from audio.teklif.views import OtomatikTeklif
@@ -44,7 +43,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^takip/', include('audio.bilgiTakip.urls')),
     (r'^teklif/', include('audio.teklif.urls')),
-    (r'^teklif-istiyorum/', never_cache(OtomatikTeklif.as_view())),
+    (r'^teklif-istiyorum/', OtomatikTeklif.as_view()),
     (r'^dokuman/', include('audio.dokuman.urls')),
     (r'^accounts/login/$','django.contrib.auth.views.login'),
     (r'^', include('audio.urun.urls')),

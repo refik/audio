@@ -26,7 +26,13 @@ class IletisimForm(ModelForm):
         fields = ('isim', 'sehir', 'telefon', 'email', 'mesaj')
 
 class StandForm(ModelForm):
-    TEMPLATE = 'stand.html'
+    TEMPLATE = 'dukkan_standi.html'
+    class Meta:
+        model = Bilgi
+        fields = ('isim', 'sehir', 'ilce', 'firma', 'adres', 'no', 'telefon', 'email')
+
+class SunumKitForm(ModelForm):
+    TEMPLATE = 'sunum_kiti.html'
     class Meta:
         model = Bilgi
         fields = ('isim', 'sehir', 'ilce', 'firma', 'adres', 'no', 'telefon', 'email')
