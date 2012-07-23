@@ -43,7 +43,7 @@ def state_to_message(state, message):
     translations = {
         'single': 'apartman', 'multiple': 'site', 'villa': 'villa', 'two-doors': 'iki kapi', 'extra-monitor': 'ekstra sube', 
         'security': 'guvenlik', 'extra-camera': 'ekstra kamera', 'market': 'marketle konusma', 'doormen': 'kapici', 
-        'light-base': 'isikli panel altligi', '': ''
+        'light-base': 'isikli panel altligi', 'alarm': 'alarm karti', 'memory': 'fotograf hafiza karti', '': ''
     }
     t = lambda s: translations[s]
     info_tuple = (message, t(state['building']), state['apartment'], state['block'], 

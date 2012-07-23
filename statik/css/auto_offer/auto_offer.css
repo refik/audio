@@ -327,6 +327,15 @@ p {
     .panels.set[data-system="8+n"] .features {
         margin-top: 135px;
     }
+    .panels.set[data-system="gts"] .undos {
+        width: 305px;
+        height: 350px;
+        float: left;
+        margin: 20px 120px 0px 120px;
+    }
+    .panels.set[data-system="gts"] .features {
+        margin-top: 135px;
+    }
     .panels.set[data-system="4+n"] .undos {
         width: 305px;
         height: 350px;

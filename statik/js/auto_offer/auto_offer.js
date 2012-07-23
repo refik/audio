@@ -8,7 +8,7 @@ window.onload = function(){
 
     // For ease of development
     var sampleUrl = $('.orbimot img').prop('src')
-      , urlBase = sampleUrl.slice(0, sampleUrl.search('auto_offer') + 10)
+      , urlBase = sampleUrl.slice(0, sampleUrl.search('auto_offer_v5') + 13)
 
     // State of the users choices
     state = {
@@ -173,8 +173,16 @@ window.onload = function(){
 
     // Content for popovers with keys
     var popovers = {
+        'call-control': 'Bu özellik sayesinde rahatsız edilmek istemediğiniz zaman şubenizi sessize alabilirsiniz. ' +
+                        'Ek olarak, sistemden size ulaşmasını istemediğiniz belli yerler varsa, bunu da ayarlayabilirsiniz.', 
+        'alarm': 'Evinizden çıkarken alarm kurabilirsiniz ve şifresiz yapılan girişlerde sistem sizi ' +
+                 'telefonla arayarak haber verir. Cihazınıza takılacak sensörün maliyeti ekstradır.',
+        'pick-melody': '16 tane farkli zil seçeneğinden beğendiğinizi kullanabilir ve ' + 
+                       'istediğiniz zaman değiştirebilirsiniz',
         'easy-install': 'Bu özellik, binanızdaki mevcut kabloları kullanip ekstra kablo eklemeden isçilik ' + 
                         've kablodan tasarruf etmenizi sağlar',
+        'medium-install': 'Bu özellik sayesinde maliyeti yuksek olan video ' +
+                          'kablosunun kullanılması gerekmez, kurulum kolaylaşır. ',
         'light-base': 'Panelinizin altına eklenen bu aksesuar binanıza şıklık katar' +
                       '<img src="' + urlBase + '/lb/b.jpg"><img src="' + urlBase + '/lb/g.jpg">',
         'camera-angle': 'Kameranın döndürülerek, panelin tam karşısında durmayan misafirlerinizi de görmenizi sağlar',
@@ -286,7 +294,7 @@ window.onload = function(){
         //      '\nWork: ', workCost,
         //      '\nExtra: ', extraCost,
         //      '\n**************************'
-        // )
+        // );
 
         if (state.building != 'villa') {
             var newPriceText = numberWithCommas((state.price / state.apartment).toFixed())
@@ -349,7 +357,7 @@ window.onload = function(){
 
     $('#monitors [data-preference="video"] .orbimot').orbimot({
         ellipseConstant: 64,
-        minimumScale: 0.05,
+        minimumScale: 0.20,
         changeOpacity: true,
         duration: time,
         sizeSet: true
@@ -677,4 +685,11 @@ window.onload = function(){
     // Slowly reveal the page and position it
     setTimeout(function(){window.scrollTo(0,0)}, 1000)
     $('.curtain').fadeOut(time)
+
+    // Start preloading the images for better transitions
+    for(var i = 0; i < products.length; i++) { 
+        var image = new Array(); 
+        image[i] = new Image(); 
+        image[i].src = urlBase + products[i].src; 
+    }
 }
