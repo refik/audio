@@ -209,7 +209,7 @@ var products = [
         price: 290
     },
     {
-        features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'gold','gdm'],
+        features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'bronz','gdm'],
         src: '/gdm/b.png',
         system: 'plus',
         id: '001720B',
@@ -230,7 +230,7 @@ var products = [
         price: 304
     },
     {
-        features: ['3,5', 'handsfree', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'gold','gdm'],
+        features: ['3,5', 'handsfree', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'bronz','gdm'],
         src: '/gdm/b.png',
         system: 'plus',
         id: '001705',
@@ -238,19 +238,11 @@ var products = [
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'flash', 'gold','gdm'],
-        src: '/gdm/kpb.png',
+        src: '/gdm/gmn.png',
         system: 'plus',
         id: '001729',
         price: 324
     },
-    {
-        features: ['3,5', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'antrasit','gdm'],
-        src: '/gdm/a.png',
-        system: 'plus',
-        id: '001729',
-        price: 324
-    },
-
     {
         features: ['3,5', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'antrasit','gdm'],
         src: '/gdm/kpa.png',
@@ -260,7 +252,7 @@ var products = [
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'flash', 'intercom','memory', 'gold','gdm'],
-        src: '/gdm/kpbp.png',
+        src: '/gdm/gm.png',
         system: 'plus',
         id: '001724',
         price: 460
@@ -275,7 +267,7 @@ var products = [
         price: 444
     },
     {
-        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'gold','gdl'],
+        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/bnkp.png',
         system: 'plus',
         id: '001730/BRONZ',
@@ -296,7 +288,7 @@ var products = [
         price: 464
     },
     {
-        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'gold','gdl'],
+        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/bnkp.png',
         system: 'plus',
         id: '001733/BRONZ',
@@ -317,7 +309,7 @@ var products = [
         price: 458
     },
     {
-        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'gold','gdl'],
+        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/b.png',
         system: 'plus',
         id: '001731/BRONZ',
@@ -338,7 +330,7 @@ var products = [
         price: 478
     },
     {
-        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'gold','gdl'],
+        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/b.png',
         system: 'plus',
         id: '001734/BRONZ',

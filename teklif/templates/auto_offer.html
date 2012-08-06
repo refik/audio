@@ -8,9 +8,8 @@
     <meta charset="utf-8">
     <meta name="description" content="Dünyanin en kolay interkom tekliflendirme sitesi">
     <meta name="author" content="Refik Türkeli">
-    {% if 'MSIE' in request.META.HTTP_USER_AGENT %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {% endif %}
+	<meta name="viewport" content="initial-scale=1.0" />
 
     <!-- Styles -->
     <!--[if IE 8]>
@@ -28,10 +27,10 @@
     <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/auto_offer.css" type="text/css">
     <style type="text/css">
         #buildings-information-box {
-            background-image: url('{{ STATIC_CODE }}resim/auto_offer_v5/se/info.png')
+            background-image: url('{{ STATIC_CODE }}resim/auto_offer_v7/se/info.png')
         }
         [class^="icon-"],[class*=" icon-"] {
-            background-image: url('{{ STATIC_CODE }}resim/auto_offer_v5/tbs/glyphicons-halflings.png')
+            background-image: url('{{ STATIC_CODE }}resim/auto_offer_v7/tbs/glyphicons-halflings.png')
         }
     </style>
     {% endcompress %}
@@ -54,7 +53,7 @@
 </head>
 <body>
     <!-- Curtain for smooth entrace -->
-    <div class="curtain"><img src="{{ STATIC_CODE }}resim/auto_offer_v5/se/load.gif" alt=""></div>
+    <div class="curtain"><img src="{{ STATIC_CODE }}resim/auto_offer_v7/se/load.gif" alt=""></div>
 
     <!-- Vertically centering the page -->
     <div class="vertical"></div>
@@ -69,7 +68,7 @@
                 TL
             </h4>
             <a href="/">
-                <img id="header-logo" src="{{ STATIC_CODE }}resim/auto_offer_v5/se/logo_temel.png" alt="Audio Elektronik Logo" />
+                <img id="header-logo" src="{{ STATIC_CODE }}resim/auto_offer_v7/se/logo_temel.png" alt="Audio Elektronik Logo" />
             </a>
             <h1 id="header-description">
                 <span>Binanız</span> 
@@ -86,9 +85,9 @@
                     <a href="#" data-direction="right" class="btn btn-large">&lt;</a>
                 </div>
                 <div class="orbimot">
-                    <img data-type="single" src="{{ STATIC_CODE }}resim/auto_offer_v5/b/single.png" alt="" />
-                    <img data-type="multiple" src="{{ STATIC_CODE }}resim/auto_offer_v5/b/multiple.png" alt="" />
-                    <img data-type="villa" src="{{ STATIC_CODE }}resim/auto_offer_v5/b/villa.png" alt="" /> 
+                    <img data-type="single" src="{{ STATIC_CODE }}resim/auto_offer_v7/b/single.png" alt="" />
+                    <img data-type="multiple" src="{{ STATIC_CODE }}resim/auto_offer_v7/b/multiple.png" alt="" />
+                    <img data-type="villa" src="{{ STATIC_CODE }}resim/auto_offer_v7/b/villa.png" alt="" /> 
                     <div id="buildings-information-box">
                         <div id="buildings-information">Apartman</div>
                     </div>
@@ -117,11 +116,11 @@
                 <div id="preferences-input-container">
                     <a href="#" class="btn btn-large btn-success preferences-input" data-preference="video">
                         Görüntülü
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/se/camera.png" alt="" />
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/se/camera.png" alt="" />
                     </a>
                     <a href="#" class="btn btn-large preferences-input" data-preference="sound">
                         Görüntüsüz
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/se/speaker.png" alt="" />
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/se/speaker.png" alt="" />
                     </a>
                 </div>
             </div>
@@ -142,11 +141,11 @@
                     </div>
                     <div class="monitors-body">
                         <div class="orbimot">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/gdm/k35.png" data-mold="gdm" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/gdl/ankp.png" data-mold="gdl" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/slim/kpn.png" data-mold="slim" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/eko/c.png" data-mold="eko" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/gt/35.png" data-mold="gt" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gdm/k35.png" data-mold="gdm" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gdl/ankp.png" data-mold="gdl" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/slim/kpn.png" data-mold="slim" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/eko/c.png" data-mold="eko" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gt/35.png" data-mold="gt" alt="">
                         </div>
 
                         <!-- Monitör Set Features -->
@@ -167,8 +166,9 @@
                                 <li>
                                     Renk
                                     <span class='right'>
-                                        <input type="radio" value="white" name="cg">Krem — 
-                                        <input type="radio" value="gold" name="cg">Altın — 
+                                        <input type="radio" value="white" name="cg">Krem—
+                                        <input type="radio" value="bronz" name="cg">Bronz—
+                                        <input type="radio" value="gold" name="cg">Gold—
 										<input type="radio" value="antrasit" name="cg">Antrasit
                                     </span>
                                 </li>
@@ -250,7 +250,7 @@
                                     Renk
                                     <span class='right'>
                                         <input type="radio" value="white" name="cl">Krem — 
-                                        <input type="radio" value="gold" name="cl">Bronz — 
+                                        <input type="radio" value="bronz" name="cl">Bronz — 
 										<input type="radio" value="antrasit" name="cl" data-default>Antrasit
                                     </span>
                                 </li>
@@ -571,11 +571,11 @@
                     
                     <div class="monitors-body">
                         <div class="orbimot">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/fnk/wkpn.png" data-mold="fnk" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/sa/dn.png" data-mold="sa" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/kd/g.png" data-mold="kd" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/t/l.jpg" data-mold="telefon" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v5/e/w.png" data-mold="e" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/fnk/wkpn.png" data-mold="fnk" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/sa/dn.png" data-mold="sa" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/kd/g.png" data-mold="kd" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/t/l.jpg" data-mold="telefon" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/e/w.png" data-mold="e" alt="">
                         </div>
 
                         <div class="features" data-mold="fnk" data-scroll>
@@ -820,9 +820,9 @@
                     </div>
 
                     <div class="orbimot">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/lightp/gb.png" data-focused data-mold="light-panel" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/toughp/bd.png" data-mold="tough-panel" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/luksp/pc.png" data-mold="luks" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/lightp/gb.png" data-focused data-mold="light-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/toughp/bd.png" data-mold="tough-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/luksp/pc.png" data-mold="luks" alt="">
                     </div>
 
                     <div class="inner-navigation">
@@ -938,7 +938,7 @@
 
                 <div class="panels set" data-system="plus+n">
                     <div class="undos">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/lightp/gb.png" data-focused data-mold="light-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/lightp/gb.png" data-focused data-mold="light-panel" alt="">
                     </div>
                     <div class="features" data-mold="light-panel">
                         <h3>Dinamik</h3>
@@ -977,8 +977,8 @@
                     </div>
 
                     <div class="undos">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/lightp/gb.png" data-focused data-mold="light-panel" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/luksp/pc.png" data-mold="luks" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/lightp/gb.png" data-focused data-mold="light-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/luksp/pc.png" data-mold="luks" alt="">
                     </div>
 
                     <div class="features" data-mold="light-panel">
@@ -1048,8 +1048,8 @@
                     </div>
 
                     <div class="undos">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/toughp/gb.png" data-focused data-mold="tough-panel" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/lightp/sg.png" data-mold="light-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/toughp/gb.png" data-mold="tough-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/lightp/sg.png" data-focused data-mold="light-panel" alt="">
                     </div>
 
                     <div class="features" data-mold="tough-panel">
@@ -1097,8 +1097,8 @@
                     </div>
 
                     <div class="undos">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/toughp/gb.png" data-focused data-mold="tough-panel" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/lightp/sg.png" data-mold="light-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/toughp/gb.png" data-mold="tough-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/lightp/sg.png" data-focused data-mold="light-panel" alt="">
                     </div>
 
                     <div class="features" data-mold="tough-panel">
@@ -1142,7 +1142,7 @@
 
                 <div class="panels set" data-system="ft">
                     <div class="undos">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/toughp/gb.png" data-focused data-mold="tough-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/toughp/gb.png" data-focused data-mold="tough-panel" alt="">
                     </div>
                     <div class="features" data-mold="tough-panel">
                         <h3>Dinamik</h3>
@@ -1166,7 +1166,7 @@
 
                 <div class="panels set" data-system="et">
                     <div class="undos">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/lightp/sg.png" data-focused data-mold="light-panel" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/lightp/sg.png" data-focused data-mold="light-panel" alt="">
                     </div>
                     <div class="features" data-mold="light-panel">
                         <h3>Dinamik</h3>
@@ -1270,10 +1270,10 @@
                 </div>
                 <div class="villa-body">
                     <div class="orbimot">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/7vk/a.png" data-mold="gdl-villa" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/56vk/x.png" data-mold="x-villa" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/etv/t.png" data-mold="telefon-villa" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v5/evk/ekoc.png" data-mold="eko-villa" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/7vk/a.png" data-mold="gdl-villa" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/56vk/x.png" data-mold="x-villa" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/etv/t.png" data-mold="telefon-villa" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/evk/ekoc.png" data-mold="eko-villa" alt="">
                     </div>
 
                     <!-- Villa Set Features -->

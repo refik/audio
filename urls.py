@@ -8,6 +8,8 @@ from audio.teklif.views import OtomatikTeklif
 from audio.dokuman.models import Dokuman
 from audio.urun.models import Urun, Kategori
 from audio.ortakVeri.sitemap import EkstraSitemap
+from django.views.decorators.cache import never_cache
+
 admin.autodiscover()
 
 urun_dict = {
@@ -43,7 +45,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^takip/', include('audio.bilgiTakip.urls')),
     (r'^teklif/', include('audio.teklif.urls')),
-    (r'^teklif-istiyorum/', OtomatikTeklif.as_view()),
+    (r'^teklif-istiyorum/', never_cache(OtomatikTeklif.as_view())),
     (r'^dokuman/', include('audio.dokuman.urls')),
     (r'^accounts/login/$','django.contrib.auth.views.login'),
     (r'^', include('audio.urun.urls')),

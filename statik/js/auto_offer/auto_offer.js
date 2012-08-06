@@ -8,7 +8,7 @@ window.onload = function(){
 
     // For ease of development
     var sampleUrl = $('.orbimot img').prop('src')
-      , urlBase = sampleUrl.slice(0, sampleUrl.search('auto_offer_v5') + 13)
+      , urlBase = sampleUrl.slice(0, sampleUrl.search('auto_offer_v7') + 13)
 
     // State of the users choices
     state = {
@@ -411,6 +411,10 @@ window.onload = function(){
     // Interrupt tab key, it with layout
     $(document).keydown(function(event) {
         if(event.keyCode == 9) event.preventDefault()
+    })
+
+    $(document).mousedown(function(event) {
+        if(event.button == 1) return false
     })
 
     $(document).scroll(function(event) {
