@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.contrib.comments.views.comments import post_comment
+from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.core.files.base import ContentFile
 from django.dispatch import receiver
@@ -9,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.views.generic import ListView, CreateView, DetailView, TemplateView
+from django.db.models import Q
 from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum, Teklif, Yapildi
 from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm, AxaptaForm
@@ -137,6 +139,7 @@ class OfferView(ListView):
         context = super(OfferView, self).get_context_data(**kwargs)
         self.get_queryset
         context['pk'] = self.kwargs.get('pk',0)
+        context['sorumlular'] = User.objects.filter(Q(profile__birincil=True) | Q(profile__ikincil=True)).order_by('first_name')
         return context
 
 

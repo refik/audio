@@ -483,46 +483,9 @@
 		<select style='margin-bottom:10px' class='span3' 
 				onchange='update_filter("#search-sorumlu select", this, search_sorumlu);'>
 			<option value="-" selected="selected">Hepsi</option>
-			<option value="AbdullahErkan">Abdullah Erkan</option>
-			<option value="Ahmet SerkanGüntaç">Ahmet Serkan Güntaç</option>
-			<option value="AhmetBulucu">Ahmet Bulucu</option>
-			<option value="BirkanKösedağ">Birkan Kösedağ</option>
-			<option value="BurakTokmak">Burak Tokmak</option>
-			<option value="CanerBombar">Caner Bombar</option>
-			<option value="CemÇelik">Cem Çelik</option>
-			<option value="CemMalkoç">Cem Malkoç</option>
-			<option value="DenizFalcıoğlu">Deniz Falcıoğlu</option>
-			<option value="ErdemÇil">Erdem Çil</option>
-			<option value="ErgünAydın">Ergün Aydın</option>
-			<option value="ErgünVarol">Ergün Varol</option>
-			<option value="ErkanEmir">Erkan Emir</option>
-			<option value="ErtanAydın">Ertan Aydın</option>
-			<option value="FatihŞentürk">Fatih Şentürk</option>
-			<option value="GökhanDurak">Gökhan Durak</option>
-			<option value="HakanAkdaş">Hakan Akdaş</option>
-			<option value="HakanGüçlü">Hakan Güçlü</option>
-			<option value="HalitDere">Halit Dere</option>
-			<option value="HüseyinDemir">Hüseyin Demir</option>
-			<option value="HüseyinHüsmenoğlu">Hüseyin Hüsmenoğlu</option>
-			<option value="İlhanYetişkin">İlhan Yetişkin</option>
-			<option value="İlkerDenge">İlker Denge</option>
-			<option value="İsmailPekdoğan">İsmail Pekdoğan</option>
-			<option value="KenanGülveren">Kenan Gülveren</option>
-			<option value="LeventKaya">Levent Kaya</option>
-			<option value="MahmutArslan">MahmutArslan</option>
-			<option value="MetinTezel">Metin Tezel</option>
-			<option value="MuratNazli">Murat Nazli</option>
-			<option value="MuratŞahin">Murat Şahin</option>
-			<option value="MuratTekin">Murat Tekin</option>
-			<option value="NecmettinAdsay">Necmettin Adsay</option>
-			<option value="ÖzkanAykut">Özkan Aykut</option>
-			<option value="RecaiÇıtak">Recai Çıtak</option>
-			<option value="RızaSeyri">Rıza Seyri</option>
-			<option value="SavaşAkman">Savaş Akman</option>
-			<option value="SerhatSaygun">Serhat Saygun</option>
-			<option value="SinanGüngör">Sinan Güngör</option>
-			<option value="TimurTaymis">Timur Taymis</option>
-			<option value="YakupÖzel">Yakup Özel</option>
+			{% for sorumlu in sorumlular %}
+				<option value="{{ sorumlu.username }}">{{ sorumlu.first_name }} {{ sorumlu.last_name }}</option>
+			{% endfor %}
 		</select>
 	</div>
 
