@@ -8,4 +8,5 @@ urlpatterns = patterns('audio.ozelSayfa.views',
     (r'^password/done/$', password_change_done),
     (r'^stand-secimi/','stand_secimi'),
     (r'^numune-panosu/','numune_panosu'),
+    (r'^baglanti-semalari/','baglanti_semalari'),
 )

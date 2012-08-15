@@ -34,3 +34,7 @@ def stand_secimi(request):
 def numune_panosu(request):
     return render_to_response('numune_panosu.html', context_instance=RequestContext(request)) 
 
+def baglanti_semalari(request):
+    return render_to_response('baglanti_semalari.html', context_instance=RequestContext(request)) 
+
+

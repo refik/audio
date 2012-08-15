@@ -1,0 +1,83 @@
+{% extends 'taban.html' %}
+
+{% block baslik %}Stand Secimi - Audio Elektronik{% endblock %}
+
+{% block aciklama %}Bilgi almak istediginiz standi secin {% endblock %}
+
+{% block icerik %}
+
+{% include 'tekli_ac.html' %}
+<div class="grid_52 push_2 centered">
+    <h1 id="stand-baslik">Bağlantı Şemaları</h1>
+</div>
+{% include 'tekli_kapat.html' with clear='true' %}
+
+<div class="clear"></div>
+
+<div class="grid_18 alpa uclu">
+    <div class="grid_18 topd"></div>
+    <div class="grid_16 push_1">
+        <p class="big-text tri-title centered">Sisteme Göre</p>
+        <ul class="in-tri">
+            <li>Bus Plus (<a href="http://www.audio.com.tr/dokuman/teknik-manuel">teknik manuel</a>) (<a href="http://s.aucdn.net/yukleme/sema/busplus.jpg">şema</a>)</li>
+            <li>Bus Plus+n (<a href="http://www.audio.com.tr/dokuman/teknik-manuel">teknik manuel</a>) (<a href="http://s.aucdn.net/yukleme/sema/busplus+n.jpg">şema</a>)</li>
+            <li>Audio GTS (<a href="http://s.aucdn.net/yukleme/yukleme/sema/audiogts.jpg">şema</a>)</li>
+        </ul>
+    </div>
+</div>
+<div class="grid_18 push_1 uclu">
+    <div class="grid_18 topd"></div>
+    <div class="grid_16 push_1">
+        <p class="big-text tri-title centered">Santrale Göre</p>
+        <ul class="in-tri">
+            <li>AS 202 (<a href="http://s.aucdn.net/yukleme/sema/as202.jpg">şema</a>)</li>
+            <li>AS 302 (<a href="http://s.aucdn.net/yukleme/sema/as302.jpg">şema</a>)</li>
+            <li>AS 310 (<a href="http://s.aucdn.net/yukleme/sema/as310.pdf">şema</a>)</li>
+            <li>ES 102 (<a href="http://s.aucdn.net/yukleme/sema/es102.jpg">şema</a>)</li>
+            <li>ETS 302 (<a href="http://s.aucdn.net/yukleme/sema/ets302.jpg">şema</a>)</li>
+            <li>FTS 300 (<a href="http://s.aucdn.net/yukleme/sema/fts300.jpg">şema</a>)</li>
+            <li>FTS 304 (<a href="http://s.aucdn.net/yukleme/sema/fts304.jpg">şema</a>)</li>
+            <li>VTS 100 (<a href="http://s.aucdn.net/yukleme/sema/vts100.jpg">şema</a>)</li>
+        </ul>
+    </div>
+</div>
+<div class="grid_18 push_2 omega uclu">
+    <div class="grid_18 topd"></div>
+    <div class="grid_16 push_1">
+        <p class="big-text tri-title centered">Ürüne Göre</p>
+        <ul class="in-tri">
+            <li>5,6" Villa kit (<a href="http://s.aucdn.net/yukleme/sema/56villakit.pdf">şema</a>)</li>
+            <li>5,6" Villa kit Kapı Seçmeli (<a href="http://s.aucdn.net/yukleme/sema/56villakitsecmeli.pdf">şema</a>)</li>
+            <li>GTS 301P (<a href="http://s.aucdn.net/yukleme/sema/gts301p.pdf">şema</a>)</li>
+            <li>GTS 301P Çift Kapı Seçmeli (<a href="http://s.aucdn.net/yukleme/sema/gts301pkapisecmeli.pdf">şema</a>)</li>
+            <li>GTS 301P Güvenlik Görüşmeli (<a href="http://s.aucdn.net/yukleme/sema/gts301pguvenlikgorusmeli.pdf">şema</a>)</li>
+            <li>GTS Lux Panel (<a href="http://s.aucdn.net/yukleme/sema/gtsluxpanel.pdf">şema</a>)</li>
+            <li>GTS Lux Panel Programlama (<a href="http://s.aucdn.net/yukleme/sema/gtsluxprogramlama.pdf">şema</a>)</li>
+            <li>KGP 200 (<a href="http://s.aucdn.net/yukleme/sema/kgp200.pdf">şema</a>)</li>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>
+
+<!--
+{% include 'ikili_ac.html' %}
+<div class="grid_24 push_2 centered">
+    <h3>Dükkan Standı</h1>
+    <a href="/stand-formu/">
+        <img style="display:block; margin-bottom: 10px; margin-left:auto; margin-right:auto;" src="http://s.aucdn.net/yukleme/ortak-resimler/65x95_tam.jpg">
+    </a>
+
+</div>
+{% include 'ikili_kapat.html' %}
+
+{% include 'ikili_ac.html' %}
+<div class="grid_26 push_2 centered">
+    <h3>Taşınabilir Numune Panosu</h1>
+    <a href="/numune-panosu/">
+        <img style="display:block; margin-bottom: 10px; margin-left:auto; margin-right:auto;" src="http://s.aucdn.net/yukleme/ortak-resimler/pano_tasima_0t4.jpg">
+    </a>
+</div>
+{% include 'ikili_kapat.html' with clear='true' %}
+-->
+
+{% endblock %}
