@@ -69,7 +69,7 @@ class UserProxy(User):
         proxy = True
 
     def __unicode__(self):
-        return u'%s, %d' % (self.get_full_name(), Teklif.objects.filter(durum__kapali=False, bilgi__sorumlu=self).count())
+        return u'%s, %d' % (self.get_full_name(), Teklif.objects.filter(durum__kapali=False, temsilci=self).count())
 
 @receiver(post_save,sender=Bilgi)
 def teklif_yarat(sender,**kwargs):

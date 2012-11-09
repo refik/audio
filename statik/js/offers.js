@@ -65,7 +65,7 @@ function number_bool_test(query, txt, _row) {
 
     var operation = query[0];
     var compare = Number(query.replace(query[0],''));
-    var value = Number(txt.replace(',',''));
+    var value = Number(txt.replace(/,/g,''));
     if(value != '-'){
         if(operation == '<' && value < compare){
             to_return = true;
@@ -143,7 +143,7 @@ var sum = function(items) {
     var result = 0;
 	if(items.length){
     	items.each(function() {
-        	result += Number($(this).html().replace(',',''));
+        	result += Number($(this).html().replace(/,/g,''));
     	});
 	}
     return result
