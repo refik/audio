@@ -2,9 +2,15 @@
 from ntlm.smtp import ntlm_authenticate
 from audio.sifre import DOMAIN, PASSWORD
 from audio.settings import GELISTIRME
+from django.utils.encoding import smart_str
 import smtplib
 
 def audiomail(kimden,kime,konu,mesaj):
+    konu = smart_str(konu)
+    mesaj = smart_str(mesaj)
+    kime = smart_str(kime)
+    kimden = smart_str(kimden)
+
     # Mail function shouldn't work on development machine.
     if GELISTIRME:
         print kimden, kime, konu, mesaj
