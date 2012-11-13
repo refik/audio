@@ -22,7 +22,7 @@ def audiomail(kimden,kime,konu,mesaj):
     fromaddr = kimden
     toaddrs  = kime
     message = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s" % (fromaddr, ", ".join(toaddrs),konu,mesaj))
-    msg = unicode(message).encode("utf-8")
+    msg = smart_str(message)
     server.sendmail(fromaddr, toaddrs, msg)
     server.quit()
 

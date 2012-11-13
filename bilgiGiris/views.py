@@ -83,7 +83,7 @@ def formIslem(request,tip):
             bilgi_db.save()
             sorumlular = User.objects.filter(profile__sorumluTip__isim__contains = tip)
             if tip == 'teklif':
-                sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir']).exclude(Q(profile__birincil=True) | Q(profile__ikincil=True))
+                sorumlular = sorumlular.filter(profile__sorumluSehir__isim__contains = bilgi.cleaned_data['sehir'], profile__ucuncul=True)
             gonderilecek = []
             for sorumlu in sorumlular:
                 gonderilecek += [sorumlu.email]
