@@ -79,9 +79,12 @@ def teklif_yarat(sender,**kwargs):
     except:
         if kwargs['created'] == False:
             if 'Teklif' in created_bilgi.tip.isim:
-                t = Teklif(bilgi=kwargs['instance'])
+                b = kwargs['instance']
+                t = Teklif(bilgi=b)
                 t.durum = Durum.objects.get(pk=1)
-                kisi = User.objects.get(profile__ucuncul=True)
+                kisi = User.objects.get(profile__sorumluSehir=b.sehir,
+                                        profile__gorev__isim__contains='yonetici', 
+                                        profile__ucuncul=True)
                 t.temsilci = kisi
                 t.son_eylem = created_bilgi.tarih
                 t.save()

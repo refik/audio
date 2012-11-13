@@ -2,7 +2,7 @@ from audio.calisanProfil.models import CalisanProfil, CalisanGorev
 from django.contrib import admin
 
 class ProfilAdmin(admin.ModelAdmin):
-    list_display = ['tam_isim','gorev']
+    list_display = ['tam_isim','gorev', 'birincil', 'ikincil', 'ucuncul']
     fieldsets = (
         ('Yonetim', {
             'classes': ('collapse open',),
