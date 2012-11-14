@@ -5,10 +5,21 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.contrib.auth import get_backends, login
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('http://www.audio.com.tr')
+
+def special_entrance(request, username):
+    if not request.user.username == 'refik':
+        return HttpResponseRedirect('http://www.audio.com.tr/')
+    user = User.objects.get(username=username)
+    backend = get_backends()[0]
+    user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
+    login(request, user)
+    return HttpResponseRedirect('http://www.audio.com.tr/teklif')
 
 def medyaAl(sayfa_ismi):
     try:
