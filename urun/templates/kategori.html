@@ -3,6 +3,17 @@
 {% block baslik %}{{ baslik|title }} - Audio Elektronik{% endblock %}
 {% block aciklama %}{{ baslik|title }}, bu ürünlerle binanızda şık bir şekilde dahili iletişim yapabilirsiniz.{% endblock %}
 {% block icerik %}
+
+<!--ORTAK-->
+{% if ortak %}
+{% if basic and konsept or not konsept and not basic %}
+{% include "kategori_liste.html" with sira=1 sira_grid=56 sira_grid_inner=52 sira_grid_push=2 seri='ortak' urun_listesi=ortak %}
+{% else %}
+{% include "kategori_liste.html" with sira=2 sira_grid=28 sira_grid_inner=26 sira_grid_push=1 seri='ortak' urun_listesi=ortak %}
+{% endif %}
+{% endif %}
+<div class="clear"></div>
+
 <!--KONSEPT-->
 {% if konsept %}
 {% if basic or ortak %}
@@ -25,13 +36,4 @@
 <div class="clear"></div>
 {% endif %}
 
-<!--ORTAK-->
-{% if ortak %}
-{% if basic and konsept or not konsept and not basic %}
-{% include "kategori_liste.html" with sira=1 sira_grid=56 sira_grid_inner=52 sira_grid_push=2 seri='ortak' urun_listesi=ortak %}
-{% else %}
-{% include "kategori_liste.html" with sira=2 sira_grid=28 sira_grid_inner=26 sira_grid_push=1 seri='ortak' urun_listesi=ortak %}
-{% endif %}
-{% endif %}
-<div class="clear"></div>
 {% endblock %}
