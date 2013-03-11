@@ -76,9 +76,9 @@
  </div>
 {% include 'tekli_kapat.html' %}
 
-{% if panelKonsept or panelBasic %}
+{% if panelKonsept or panelBasic or panelJenerik %}
 {% include 'sistem_liste_urun.html' with sira=2 sira_grid=28 sira_grid_inner=25 sira_grid_push=2 tanitim_grid=18 %}
-{% if panelKonsept or panelBasic %}
+{% if panelKonsept or panelBasic or panelJenerik%}
  {% include 'ikili_ac.html' %}
   <div class="grid_28 topd"></div>
   <div class="grid_28 centered"><strong>Bu Ürün İle Kullanabileceğiniz Paneller</strong></div>
@@ -89,6 +89,9 @@
    {% endif %}
    {% if panelBasic %}
    {% include 'panel_liste.html' with seri='basic' panel=panelBasic %}
+   {% endif %}
+   {% if panelJenerik %}
+   {% include 'panel_liste.html' with seri='jenerik' panel=panelJenerik %}
    {% endif %}
    <div class='grid_24 alpha omega' style='height:20px'></div>
   </div>
