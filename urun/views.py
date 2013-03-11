@@ -15,9 +15,14 @@ def urun(request,urun):
     if not 'panel' in istenenUrun.kategori.isim:
         panelKonsept = istenenUrun.panel.filter(seri='konsept')
         panelBasic = istenenUrun.panel.filter(seri='basic')
+        if not panelBasic and not panelKonsept:
+            panelJenerik = istenenUrun.panel.all()
+        else:
+            panelJenerik = []
+        print panelBasic, panelKonsept, panelJenerik
     else:
         panelKonsept, panelBasic = [], []
-    return render_to_response('urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
+    return render_to_response('urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelJenerik':panelJenerik,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
 
 def urunler(request,kategori):
     kategori_db = get_object_or_404(Kategori, slug=kategori)

@@ -1,7 +1,9 @@
 {% load fb_versions %}
 {% load ortakVeri %}
 <div class="grid_12 alpha">
+ {% if not seri == 'jenerik' %}
  <div class="grid_12 centered"><img src="{{ STATIC_CODE }}resim/{{ seri }}.jpg"/></div>
+ {% endif %}
  <div class="grid_12 centered">
   {% for p in panel %}
   <a href='/urun/{{ p.slug }}' style="margin-right:4px;">
@@ -11,7 +13,11 @@
  </div>
  <div class="grid_11 push_1">
   <div class="grid_11 topd"></div>
+  {% if seri == 'jenerik' %}
+  <strong style='text-transform:capitalize'>Paneller</strong>
+  {% else %}
   <strong style='text-transform:capitalize'>{{ seri }} serisi paneller</strong>
+  {% endif %}
   {% for p in panel %}
   <div class="grid_11">- {{ p.isim }}</div>
   {% endfor %}
