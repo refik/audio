@@ -1,7 +1,7 @@
 /* Generated classes for django-media-bundler sprites.  Don't edit! */
 
 .products {
-     background-image: url('http://s.aucdn.net/resim/productsgnnih8.png');
+     background-image: url('http://s.aucdn.net/resim/productsrplg5b.png');
 }
 
 .products-basic_gt_kapali_yeni_ufak-jpg {
@@ -10,26 +10,92 @@
      height: 75px;
 }
 
+.products-vision_yeni_ufak-jpg {
+     width: 33px;
+     background-position: -72px 0px;
+     height: 75px;
+}
+
+.products-city_yeni_ufak-jpg {
+     width: 26px;
+     background-position: -105px 0px;
+     height: 75px;
+}
+
+.products-crea_tek_yeni_ufak-jpg {
+     width: 26px;
+     background-position: -131px 0px;
+     height: 75px;
+}
+
 .products-konsept_gdl_antrasit_tuslu_yeni_ufak-jpg {
      width: 90px;
-     background-position: -72px 0px;
+     background-position: -157px 0px;
      height: 74px;
+}
+
+.products-bronz_yeni_ufak-jpg {
+     width: 90px;
+     background-position: 0px -75px;
+     height: 74px;
+}
+
+.products-bronz_yeni_ufak-jpg {
+     width: 90px;
+     background-position: -90px -75px;
+     height: 74px;
+}
+
+.products-btn-siyah_yeni_ufak-jpg {
+     width: 90px;
+     background-position: -180px -75px;
+     height: 64px;
+}
+
+.products-beyaz_yeni_ufak-jpg {
+     width: 90px;
+     background-position: 0px -149px;
+     height: 61px;
+}
+
+.products-siyah_yeni_ufak-jpg {
+     width: 90px;
+     background-position: -90px -149px;
+     height: 61px;
+}
+
+.products-beyaz_yeni_ufak-jpg {
+     width: 90px;
+     background-position: -180px -149px;
+     height: 61px;
 }
 
 .products-bronz_tussuz_35_yeni_ufak-jpg {
      width: 90px;
-     background-position: 0px -75px;
+     background-position: 0px -210px;
      height: 53px;
 }
 
 .products-antrasit_tuslu_35_yeni_ufak-jpg {
      width: 90px;
-     background-position: 0px -128px;
+     background-position: -90px -210px;
+     height: 53px;
+}
+
+.products-beyaz_tus_takimsiz_yeni_ufak-jpg {
+     width: 90px;
+     background-position: -180px -210px;
      height: 53px;
 }
 
 .products-gdl_villa_kit_yeni_e06_yeni_ufak-jpg {
      width: 90px;
-     background-position: 0px -181px;
+     background-position: 0px -263px;
      height: 51px;
+}
+
+.products-43_villa_n61_yeni_ufak-jpg {
+     width: 90px;
+     background-position: -90px -263px;
+     height: 41px;
 }
