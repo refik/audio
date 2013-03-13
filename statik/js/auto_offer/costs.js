@@ -6,35 +6,44 @@ var products = [
         src: '/etv/t.png',
         system: 'villa',
         id: '001344',
-        price: 160
+        price: 190
     },
     {
         features: ['bw', 'eko-villa'],
         src: '/evk/ekobw.png',
         system: 'villa',
         id: '001390',
-        price: 450
+        price: 500
     },
     {
         features: ['c', 'eko-villa'],
         src: '/evk/ekoc.png',
         system: 'villa',
         id: '001389',
-        price: 550
+        price: 600
     },
     {
         features: ['x-villa'],
         src: '/56vk/x.png',
         system: 'villa',
         id: '001421',
-        price: 650
+        price: 700
     },
     {
+        // FIXME: resim degisti
         features: ['gdl-villa'],
         src: '/7vk/a.png',
         system: 'villa',
         id: '001366',
         price: 650
+    },
+    {
+        // FIXME: urun eklendi, komple duzenle
+        features: ['gdl-villa'],
+        src: '/7vk/a.png',
+        system: 'villa',
+        id: '001368',
+        price: 600
     },
 
     // Monitors
@@ -44,7 +53,7 @@ var products = [
         src: '/t/l.jpg',
         system: 'et',
         id: '001072',
-        price: 38
+        price: 46
     },
 
     /* Ft telefon */
@@ -53,7 +62,7 @@ var products = [
         src: '/t/l.png',
         system: 'ft',
         id: '001061',
-        price: 43
+        price: 55
     },
 
     /* 4 + n E */
@@ -62,7 +71,7 @@ var products = [
         src: '/e/w.png',
         system: '4+n',
         id: '001033',
-        price: 19
+        price: 22
     },
 
     /* 4 + n Kd */
@@ -71,7 +80,7 @@ var products = [
         src: '/kd/g.png',
         system: '4+n',
         id: '001227',
-        price: 19
+        price: 22
     },
 
     /* 8 + n Kd */
@@ -80,14 +89,14 @@ var products = [
         src: '/kd/g.png',
         system: '8+n',
         id: '001226',
-        price: 21
+        price: 24
     },
     {
         features: ['two-doors', 'better-melody', 'private', 'doormen', 'adjust-sound', 'kd'],
         src: '/kd/g.png',
         system: '8+n',
         id: '001223',
-        price: 22
+        price: 25
     },
 
     /* 8 + n Fnk */
@@ -96,21 +105,21 @@ var products = [
         src: '/fnk/wkpn.png',
         system: '8+n',
         id: '001430',
-        price: 25
+        price: 27
     },
     {
         features: ['two-doors', 'gold', 'doormen','adjust-sound', 'fnk'],
         src: '/fnk/gkpn.png',
         system: '8+n',
         id: '001435',
-        price: 27
+        price: 29
     },
     {
         features: ['two-doors', 'chrome', 'doormen', 'adjust-sound', 'flash', 'fnk'],
         src: '/fnk/mkpn.png',
         system: '8+n',
         id: '001437',
-        price: 40
+        price: 46
     },
 
     /* 8 + n Sa */
@@ -119,47 +128,47 @@ var products = [
         src: '/sa/dn.png',
         system: '8+n',
         id: '001012',
-        price: 25
+        price: 27
     },
     {
         features: ['two-doors', 'doormen','sa'],
         src: '/sa/d.png',
         system: '8+n',
         id: '001013',
-        price: 26
+        price: 28
     },
-
-    /* Gts Eko */
-    {
-        features: ['bw', 'doormen', 'eko'],
-        src: '/eko/sb.png',
-        system: 'gts',
-        id: '001678',
-        price: 170
-    },
-    {
-        features: ['color', 'doormen', 'eko'],
-        src: '/eko/c.png',
-        system: 'gts',
-        id: '001687',
-        price: 260 
-    },
-
-    /* Gts Gdm */
-    {
-        features: ['2,5', 'doormen', 'white','gdm'],
-        src: '/gdm/k25.png',
-        system: 'gts',
-        id: '001750',
-        price: 180
-    },
-    {
-        features: ['3,5', 'doormen', 'white', 'gdm'],
-        src: '/gdm/k35.png',
-        system: 'gts',
-        id: '001683',
-        price: 210
-    },
+// FIXME: Sistem gitti
+//     /* Gts Eko */
+//     {
+//         features: ['bw', 'doormen', 'eko'],
+//         src: '/eko/sb.png',
+//         system: 'gts',
+//         id: '001678',
+//         price: 170
+//     },
+//     {
+//         features: ['color', 'doormen', 'eko'],
+//         src: '/eko/c.png',
+//         system: 'gts',
+//         id: '001687',
+//         price: 260 
+//     },
+// 
+//     /* Gts Gdm */
+//     {
+//         features: ['2,5', 'doormen', 'white','gdm'],
+//         src: '/gdm/k25.png',
+//         system: 'gts',
+//         id: '001750',
+//         price: 180
+//     },
+//     {
+//         features: ['3,5', 'doormen', 'white', 'gdm'],
+//         src: '/gdm/k35.png',
+//         system: 'gts',
+//         id: '001683',
+//         price: 210
+//     },
 
     /* Bus Plus + n Eko */
     {
@@ -167,14 +176,14 @@ var products = [
         src: '/eko/sb.png',
         system: 'plus+n',
         id: '001560',
-        price: 200
+        price: 230
     },
     {
         features: ['color', 'doormen','medium-install',  'eko'],
         src: '/eko/c.png',
         system: 'plus+n',
         id: '001561',
-        price: 290 
+        price: 300
     },
 
     /* Bus Plus + n Gdm */
@@ -183,14 +192,14 @@ var products = [
         src: '/gdm/k25.png',
         system: 'plus+n',
         id: '001702',
-        price: 220
+        price: 240
     },
     {
         features: ['3,5', 'doormen', 'white', 'medium-install', 'gdm'],
         src: '/gdm/k35.png',
         system: 'plus+n',
         id: '001703',
-        price: 250
+        price: 270
     },
 
     /* Bus Plus Gdm */
@@ -199,149 +208,317 @@ var products = [
         src: '/gdm/k25.png',
         system: 'plus',
         id: '001721',
-        price: 260
+        price: 280
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdm'],
         src: '/gdm/k35.png',
         system: 'plus',
         id: '001720',
-        price: 290
+        price: 310
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'bronz','gdm'],
         src: '/gdm/b.png',
         system: 'plus',
         id: '001720B',
-        price: 296
+        price: 314
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'antrasit','gdm'],
         src: '/gdm/a.png',
         system: 'plus',
         id: '001720A',
-        price: 296
+        price: 314
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'white','gdm'],
         src: '/gdm/kkp.png',
         system: 'plus',
         id: '001719',
-        price: 304
+        price: 330
     },
     {
         features: ['3,5', 'handsfree', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'bronz','gdm'],
         src: '/gdm/b.png',
         system: 'plus',
         id: '001705',
-        price: 310
+        price: 330
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'flash', 'gold','gdm'],
         src: '/gdm/gmn.png',
         system: 'plus',
         id: '001729',
-        price: 324
+        price: 350
     },
     {
         features: ['3,5', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'antrasit','gdm'],
         src: '/gdm/kpa.png',
         system: 'plus',
         id: '001706',
-        price: 324
+        price: 350
     },
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'flash', 'intercom','memory', 'gold','gdm'],
         src: '/gdm/gm.png',
         system: 'plus',
         id: '001724',
-        price: 460
+        price: 500
+    },
+
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001105',
+        price: 320 + KAPAK FIYATLARI
+    },
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001105',
+        price: 320 + KAPAK FIYATLARI
+    },
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001107',
+        price: 340 + KAPAK FIYATLARI
+    },
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001107',
+        price: 340 + KAPAK FIYATLARI
+    },
+
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'intercom','white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001106',
+        price: 340 + KAPAK FIYATLARI
+    },
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'intercom', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001106',
+        price: 340 + KAPAK FIYATLARI
+    },
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'intercom', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001108',
+        price: 360 + KAPAK FIYATLARI
+    },
+    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'intercom', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001108',
+        price: 360 + KAPAK FIYATLARI
+    },
+
+    // FIXME:  Urunu ekle
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001122',
+        price: 380
+    },
+    // FIXME:  Urunu ekle
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'black','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001120',
+        price: 380
+    },
+
+    // FIXME:  Urunu ekle
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001162',
+        price: 450
+    },
+    // FIXME:  Urunu ekle
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'black','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001160',
+        price: 450
+    },
+
+    // FIXME:  Urunu ekle
+    {
+        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001127',
+        price: 520
+    },
+    // FIXME:  Urunu ekle
+    {
+        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'black','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001125',
+        price: 520
+    },
+
+    // FIXME:  Urunu ekle
+    {
+        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'white','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001132',
+        price: 600
+    },
+    // FIXME:  Urunu ekle
+    {
+        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'black','gdm'],
+        src: '/gdm/k35.png',
+        system: 'plus',
+        id: '001130',
+        price: 600
     },
 
     /* Bus Plus Gdl */
+    // FIXME: 1730, 1733, 1731, 1734 u modern kapak icin kopyala (16 tane kopya)
     {
         features: ['doormen', 'two-doors', 'security', 'extra-camera', 'white','gdl'],
         src: '/gdl/knkp.png',
         system: 'plus',
         id: '001730/KREM',
-        price: 444
+        price: 466
     },
     {
         features: ['doormen', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/bnkp.png',
         system: 'plus',
         id: '001730/BRONZ',
-        price: 450
+        price: 470
     },
     {
         features: ['doormen', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
         src: '/gdl/ankp.png',
         system: 'plus',
         id: '001730/ANTRASIT',
-        price: 450
+        price: 470
+    },
+    // FIXME: Resmini degisti 
+    {
+        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        src: '/gdl/ankp.png',
+        system: 'plus',
+        id: '001730/SILVER',
+        price: 470
     },
     {
         features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'white','gdl'],
         src: '/gdl/knkp.png',
         system: 'plus',
         id: '001733/KREM',
-        price: 464
+        price: 486
     },
     {
         features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/bnkp.png',
         system: 'plus',
         id: '001733/BRONZ',
-        price: 470
+        price: 490
     },
     {
         features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
         src: '/gdl/ankp.png',
         system: 'plus',
         id: '001733/ANTRASIT',
-        price: 470
+        price: 490
     },
+    // FIXME: resmini degistir
+    {
+        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        src: '/gdl/ankp.png',
+        system: 'plus',
+        id: '001733/SILVER',
+        price: 490
+    },
+
     {
         features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'white','gdl'],
         src: '/gdl/k.png',
         system: 'plus',
         id: '001731/KREM',
-        price: 458
+        price: 486
     },
     {
         features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/b.png',
         system: 'plus',
         id: '001731/BRONZ',
-        price: 464
+        price: 490
     },
     {
         features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
         src: '/gdl/a.png',
         system: 'plus',
         id: '001731/ANTRASIT',
-        price: 464
+        price: 490
+    },
+    // FIXME: resmini degistir
+    {
+        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        src: '/gdl/a.png',
+        system: 'plus',
+        id: '001731/SILVER',
+        price: 490
     },
     {
         features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'white','gdl'],
         src: '/gdl/k.png',
         system: 'plus',
         id: '001734/KREM',
-        price: 478
+        price: 506
     },
     {
         features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'bronz','gdl'],
         src: '/gdl/b.png',
         system: 'plus',
         id: '001734/BRONZ',
-        price: 484
+        price: 510
     },
     {
         features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
         src: '/gdl/a.png',
         system: 'plus',
         id: '001734/ANTRASIT',
-        price: 484
+        price: 510
+    },
+    // FIXME: resmini degistir
+    {
+        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        src: '/gdl/a.png',
+        system: 'plus',
+        id: '001734/SILVER',
+        price: 510
     },
 
     /* Bus Plus Gt */
@@ -357,24 +534,25 @@ var products = [
         src: '/gt/35.png',
         system: 'plus',
         id: '001667',
-        price: 354
+        price: 360
     },
 
 
     /* Bus Plus Slim */
+    // FIXME: Bunlar gidicek gibi
     {
         features: ['doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'slim'],
         src: '/slim/kpn.png',
         system: 'plus',
         id: '001669',
-        price: 440
+        price: 460
     },
     {
         features: ['doormen', 'easy-install', 'two-doors', 'security', 'market', 'intercom', 'extra-camera', 'slim'],
         src: '/slim/kp.png',
         system: 'plus',
         id: '001672',
-        price: 454
+        price: 480
     },
 
     /* Bus Plus Eko */
@@ -383,28 +561,28 @@ var products = [
         src: '/eko/sb.png',
         system: 'plus',
         id: '001562',
-        price: 230
+        price: 260
     },
     {
         features: ['color', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'eko'],
         src: '/eko/c.png',
         system: 'plus',
         id: '001565',
-        price: 320
+        price: 330
     },
     {
         features: ['bw', 'doormen', 'easy-install', 'two-doors', 'security', 'market', 'intercom', 'extra-camera', 'eko'],
         src: '/eko/sb.png',
         system: 'plus',
         id: '001692',
-        price: 244
+        price: 280
     },
     {
         features: ['color', 'doormen', 'easy-install', 'two-doors', 'security', 'market', 'intercom', 'extra-camera', 'eko'],
         src: '/eko/c.png',
         system: 'plus',
         id: '001691',
-        price: 334
+        price: 350
     },
 
     // Panels
@@ -415,10 +593,10 @@ var products = [
         system: 'ft',
         id: '004962',
         price: function(apartment) {
-            var price = 78
+            var price = 85
               , jumps = [12, 28, 44, 60, 76, 92]
-            price += apartment * 8
-            $.each(jumps, function(i, v){ if(apartment > v) price += 38 })
+            price += apartment * 9
+            $.each(jumps, function(i, v){ if(apartment > v) price += 50 })
             return price
         }
     },
@@ -430,11 +608,11 @@ var products = [
         system: 'et',
         id: '004845',
         price: function(apartment) {
-            var price = 54
+            var price = 68
               , jumps = [20, 46, 72, 52, 68, 84]
             if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 11
-            $.each(jumps, function(i, v){ if(apartment > v) price += 27 })
+            price += apartment / 2 * 12
+            $.each(jumps, function(i, v){ if(apartment > v) price += 32 })
             return price            
         }
     },
@@ -446,11 +624,11 @@ var products = [
         system: '4+n',
         id: '004849',
         price: function(apartment) {
-            var price = 39
+            var price = 48
               , jumps = [20, 46, 72, 52, 68, 84]
             if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 11
-            $.each(jumps, function(i, v){ if(apartment > v) price += 27 })
+            price += apartment / 2 * 12
+            $.each(jumps, function(i, v){ if(apartment > v) price += 32 })
             return price            
         }
     },
@@ -460,10 +638,10 @@ var products = [
         system: '4+n',
         id: '004813',
         price: function(apartment) {
-            var price = 66
+            var price = 75
               , jumps = [12, 28, 44, 60, 76, 92]
-            price += apartment * 8
-            $.each(jumps, function(i, v){ if(apartment > v) price += 38 })
+            price += apartment * 9
+            $.each(jumps, function(i, v){ if(apartment > v) price += 50 })
             return price
         }
     },
@@ -475,11 +653,11 @@ var products = [
         system: '8+n',
         id: '004849',
         price: function(apartment) {
-            var price = 39
+            var price = 48
               , jumps = [20, 46, 72, 52, 68, 84]
             if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 11
-            $.each(jumps, function(i, v){ if(apartment > v) price += 27 })
+            price += apartment / 2 * 12
+            $.each(jumps, function(i, v){ if(apartment > v) price += 32 })
             return price            
         }
     },
@@ -489,54 +667,54 @@ var products = [
         system: '8+n',
         id: '004813',
         price: function(apartment) {
-            var price = 66
+            var price = 75
               , jumps = [12, 28, 44, 60, 76, 92]
-            price += apartment * 8
-            $.each(jumps, function(i, v){ if(apartment > v) price += 38 })
+            price += apartment * 9
+            $.each(jumps, function(i, v){ if(apartment > v) price += 50 })
             return price
         }
     },
-
-    /* Gts Panel */
-    {
-        features: ['panel', 'light-panel'],
-        src: '/lightp/gb.png',
-        system: 'gts',
-        id: '004856',
-        price: function(apartment) {
-            var price = 247
-              , jumps = [20, 46, 72, 52, 68, 84]
-            if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 11
-            $.each(jumps, function(i, v){ if(apartment > v) price += 27 })
-            return price            
-        }
-    },
-    {
-        features: ['panel', 'light-base', 'password', 'light-panel'],
-        src: '/lightp/karma.png',
-        system: 'gts',
-        id: '004855',
-        price: function(apartment) {
-            var price = 380
-              , kgp = 38
-            if(apartment % 2 != 0) apartment++
-            if(apartment > 21) price += 16
-            price += apartment / 2 * 11
-            if(11 < apartment < 21) price = 516
-            price += kgp
-            return price
-        }
-    },
-    {
-        features: ['panel', 'luks'],
-        src: '/luksp/pc.png',
-        system: 'gts',
-        id: '00346X',
-        price: function(apartment) {
-            return 750
-        }
-    },
+// FIXME: Sistem gitti
+//     /* Gts Panel */
+//     {
+//         features: ['panel', 'light-panel'],
+//         src: '/lightp/gb.png',
+//         system: 'gts',
+//         id: '004856',
+//         price: function(apartment) {
+//             var price = 247
+//               , jumps = [20, 46, 72, 52, 68, 84]
+//             if(apartment % 2 != 0) apartment++
+//             price += apartment / 2 * 11
+//             $.each(jumps, function(i, v){ if(apartment > v) price += 27 })
+//             return price            
+//         }
+//     },
+//     {
+//         features: ['panel', 'light-base', 'password', 'light-panel'],
+//         src: '/lightp/karma.png',
+//         system: 'gts',
+//         id: '004855',
+//         price: function(apartment) {
+//             var price = 380
+//               , kgp = 38
+//             if(apartment % 2 != 0) apartment++
+//             if(apartment > 21) price += 16
+//             price += apartment / 2 * 11
+//             if(11 < apartment < 21) price = 516
+//             price += kgp
+//             return price
+//         }
+//     },
+//     {
+//         features: ['panel', 'luks'],
+//         src: '/luksp/pc.png',
+//         system: 'gts',
+//         id: '00346X',
+//         price: function(apartment) {
+//             return 750
+//         }
+//     },
 
     /* Bus Plus + n Panel */
     {
@@ -545,11 +723,11 @@ var products = [
         system: 'plus+n',
         id: '008317',
         price: function(apartment) {
-            var price = 340
+            var price = 368
               , jumps = [10, 20, 40, 52, 68, 84]
             if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 10
-            $.each(jumps, function(i, v){ if(apartment > v) price += 45 })
+            price += apartment / 2 * 12
+            $.each(jumps, function(i, v){ if(apartment > v) price += 60 })
             return price
         }
     },
@@ -559,12 +737,12 @@ var products = [
         system: 'plus+n',
         id: '008330',
         price: function(apartment) {
-            var price = 545
+            var price = 600
               , jumps = [16, 32, 48, 64, 80, 96]
             if(apartment < 10) apartment = 10
             if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 10
-            $.each(jumps, function(i, v){ if(apartment > v && v == 16) price += 55; else if(apartment > v) price += 45})
+            price += apartment / 2 * 12
+            $.each(jumps, function(i, v){ if(apartment > v && v == 16) price += 72; else if(apartment > v) price += 60})
             return price
         }
     },
@@ -576,12 +754,12 @@ var products = [
         system: 'plus',
         id: '008317',
         price: function(apartment) {
-            var price = 340
+            var price = 368
               , jumps = [10, 20, 40, 52, 68, 84]
-              , converter = (apartment / 16 - apartment / 16 % 1) * 50
+              , converter = (apartment / 16 - apartment / 16 % 1) * 70
             if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 10
-            $.each(jumps, function(i, v){ if(apartment > v) price += 45 })
+            price += apartment / 2 * 12
+            $.each(jumps, function(i, v){ if(apartment > v) price += 60 })
             price += converter
             return price
         }
@@ -592,7 +770,7 @@ var products = [
         system: 'plus',
         id: '003480',
         price: function(apartment) {
-            return 540
+            return 580
         }
     },
     {
@@ -601,7 +779,7 @@ var products = [
         system: 'plus',
         id: '008312',
         price: function(apartment) {
-            return 640
+            return 690
         }
     },
     {
@@ -610,88 +788,131 @@ var products = [
         system: 'plus',
         id: '003479',
         price: function(apartment) {
-            return 850
+            return 900
         }
-    }
+    },
+    //FIXME: urun ekle
+    {
+        features: ['panel', 'vision'],
+        src: '/luksp/pc.png',
+        system: 'plus',
+        id: '003488',
+        price: function(apartment) {
+            return 1050
+        }
+    },
+    //FIXME: urun ekle
+    {
+        features: ['panel', 'city', 'light-base'],
+        src: '/luksp/pc.png',
+        system: 'plus',
+        id: '003485',
+        price: function(apartment) {
+            return 950
+        }
+    },
+    //FIXME: urun ekle
+    {
+        features: ['panel', 'light-base', 'password', 'crea'],
+        src: '/lightp/kd.png',
+        system: 'plus',
+        id: '003491',
+        price: function(apartment) {
+            // 16 daire ve katlarinda 70 lira buton donusturucu fiyati (converter)
+            // diger butonlar geldiginde boy standartli panele gore fiyat ekle
+            // light-base ini ayarla eger buton sayisi artarsa
+            var price = 850
+              , jumps = [16, 32, 48, 64, 80, 96]
+            if(apartment < 10) apartment = 10
+            if(apartment % 2 != 0) apartment++
+            price += apartment / 2 * 12
+            $.each(jumps, function(i, v){ if(apartment > v && v == 16) price += 72; else if(apartment > v) price += 60})
+            return price
+        }
+    },
+
+
+
 ]
 
 var systems = {
     'plus': function(state) {
-	    var video = 44 + (state.apartment * 0.2 * 30)
-          , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * 2.1 * 0.7 
+	    var video = 60 + (state.apartment * 0.2 * 34)
+          , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * 2.4 * 0.7 
           , apartment = state.apartment / state.block
           , power
         if(apartment <= 30)
-            power = 110
+            power = 120
         else if(apartment <= 60)
-            power = 220
+            power = 240
         else
-            power = 280
+            power = 320
         power *= state.block
         return video + power + cable
     },
     'plus+n': function(state) {
-	    var video = 44 + (state.apartment * 0.2 * 30)
-          , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * 2.1 * 2 
+	    var video = 60 + (state.apartment * 0.2 * 34)
+          , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * 2.4 * 2 
           , apartment = state.apartment / state.block
           , power
         if(apartment <= 30)
-            power = 110
+            power = 120
         else if(apartment <= 60)
-            power = 220
+            power = 240
         else
-            power = 280
+            power = 320
         power *= state.block
         return video + power + cable
     },
-    'gts': function(state) {
-	    var video = 44 + (state.apartment * 0.2 * 30)
-          , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * (2.9 + 1.5)
-          , cu = 198
-          , notColor = -50
-        if($.inArray('bw', state.monitor.features) != -1)
-            notColor = 0
-        cu *= state.block
-        return video + cu + cable + notColor
-    },
+// FIXME: Sistem gitti
+//     'gts': function(state) {
+// 	    var video = 44 + (state.apartment * 0.2 * 30)
+//           , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * (2.9 + 1.5)
+//           , cu = 198
+//           , notColor = -50
+//         if($.inArray('bw', state.monitor.features) != -1)
+//             notColor = 0
+//         cu *= state.block
+//         return video + cu + cable + notColor
+//     },
     '8+n': function(state) {
         var apartment = state.apartment / state.block
-          , cable = state.apartment * 7 * 2 * 2.1
+          , cable = state.apartment * 7 * 2 * 2.4
           , cu
         if($.inArray('two-doors', state.extra.monitors) != -1 || $.inArray('doormen', state.extra.monitors) != -1)
-            cu = 250
+            cu = 270
         else if(apartment > 25)
-            cu = 190
+            cu = 210
         else
-            cu = 130
+            cu = 150
         cu*= state.block
         return cable + cu
     },
     '4+n': function(state) {
-        var cable = state.apartment * 7 * 1.3  * 2
-          , cu = 140
+        var cable = state.apartment * 7 * 1.5  * 2
+          , cu = 150
         cu *= state.block
     	return cu + cable
     },
     'et': function(state) {
-        var cable = state.apartment * 7 * 1.3  * 2
-          , cu = 150
+        var cable = state.apartment * 7 * 1.5  * 2
+          , cu = 160
         cu*= state.block
     	return cable + cu
     },
     'ft': function(state) {
         var apartment = state.apartment / state.block
-          , cable = state.apartment * 7 * 1.3 * 2
+          , cable = state.apartment * 7 * 1.5 * 2
           , cu
         if($.inArray('two-doors', state.extra.monitors) != -1)
-            cu = 220
+            cu = 240
         else
-            cu = 170
+            cu = 190
         cu*= state.block
         return cable + cu
     }, 
     'villa': function(state) {
-    	return 65
+    	return 70
     }
 }
 
@@ -706,6 +927,7 @@ var work = {
         return state.apartment * 50
     },
     'villa': function(state) {
+        // ucuz urunde ucuz iscilik
         if(state.monitor.id == '001389') return 150
         else return 200
     },
@@ -726,50 +948,53 @@ var work = {
 var extras = {
     'extra-monitor': function(state) {
         if(state.monitor == "001421") return 530 
-        if(state.monitor == "001390") return 220 + 76
-        if(state.monitor == "001389") return 330 + 76
-        if(state.monitor == "001344") return 46
+        if(state.monitor == "001366") return 490 + 100 // FIXME: urunu guncelle
+        if(state.monitor == "001368") return 350 + 100 // FIXME: urunu yok
+        if(state.monitor == "001390") return 230 + 100
+        if(state.monitor == "001389") return 330 + 100
+        if(state.monitor == "001344") return 46 + 9
     },
     'security': function(state) { 
-        return 350 + 80 + 210
+        return 370 + 100 + 240
     },
+    // Bunlar icin yeni kod acildi (alarm, memory)
     'alarm': function(state) {
-        return 80
+        return 90
     },
     'memory': function(state) {
-        return 136
+        return 150
     },
     'extra-camera': function(state) { 
-        var cable = state.block * 70 * 2.1 
-          , module = state.panel.id == "003479" ? 0 : 70
-        return cable + module + 360 + 44 + 80 + 100
+        var cable = state.block * 70 * 2.4 
+          , module = state.panel.id == "003479" ? 0 : 90
+        return cable + module + 400 + 60 + 100 + 100
     },
     'two-doors': function(state) { 
-        if(state.monitor.system == "villa" && state.monitor == "001421") return 330
+        if(state.monitor.system == "villa" && state.monitor == "001421") return 280 + 100
+        else if(state.monitor.system == "villa" && state.monitor == "001366") return 280 // FIXME: urunu guncelle
+        else if(state.monitor.system == "villa" && state.monitor == "001368") return 280 // FIXME: urunu yok
         else return state.panel.price(state.apartment)
     },
     'market': function(state) { 
-        return 150 
+        return 180  // uyarlama fiyat, cihaz + iscilik + kablo
     },
     'doormen': function(state) { 
         if(state.monitor.system == "plus" || state.monitor.system == "plus+n")
-            return 150 
-        else if(state.monitor.system == "gts")
-            return 125
+            return 180 
         else if(state.monitor.system == "et" || state.monitor.system == "ft")
-            return 60
+            return 75 // uyarlama fiyat
         else 
             return 45
     },
     'light-base': function(state) { 
         var basePrice = 0
-        if(state.panel.id == "008312") basePrice = 270
-        else if(state.panel.id == "003480") basePrice = 250
+        if(state.panel.id == "008312") basePrice = 290
+        else if(state.panel.id == "003480") basePrice = 270
         else if(state.panel.id == "008317") {
             var apartment = state.apartment / state.block
-            if(apartment <= 11) basePrice = 250
-            else if(apartment <= 20) basePrice = 290
-            else basePrice = 330
+            if(apartment <= 11) basePrice = 270
+            else if(apartment <= 20) basePrice = 310
+            else basePrice = 350
         }
         basePrice *= state.block
         return basePrice

@@ -56,7 +56,7 @@ urlpatterns = patterns('',
 
 if settings.LOCAL:
     urlpatterns += patterns('',
-         url(r'^static-development/(?P<path>.*)$', 'django.views.static.serve', {
+        url(r'^static-development/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.PROJECT_PATH + '/statik',
         }),
         url(r'^statik/(?P<path>.*)$', 'django.views.static.serve', {
