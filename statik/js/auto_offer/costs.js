@@ -30,17 +30,15 @@ var products = [
         price: 700
     },
     {
-        // FIXME: resim degisti
         features: ['gdl-villa'],
-        src: '/7vk/a.png',
+        src: '/7vk/m.png',
         system: 'villa',
         id: '001366',
         price: 650
     },
     {
-        // FIXME: urun eklendi, komple duzenle
-        features: ['gdl-villa'],
-        src: '/7vk/a.png',
+        features: ['gdm-villa'],
+        src: '/43vk/b.png',
         system: 'villa',
         id: '001368',
         price: 600
@@ -137,38 +135,6 @@ var products = [
         id: '001013',
         price: 28
     },
-// FIXME: Sistem gitti
-//     /* Gts Eko */
-//     {
-//         features: ['bw', 'doormen', 'eko'],
-//         src: '/eko/sb.png',
-//         system: 'gts',
-//         id: '001678',
-//         price: 170
-//     },
-//     {
-//         features: ['color', 'doormen', 'eko'],
-//         src: '/eko/c.png',
-//         system: 'gts',
-//         id: '001687',
-//         price: 260 
-//     },
-// 
-//     /* Gts Gdm */
-//     {
-//         features: ['2,5', 'doormen', 'white','gdm'],
-//         src: '/gdm/k25.png',
-//         system: 'gts',
-//         id: '001750',
-//         price: 180
-//     },
-//     {
-//         features: ['3,5', 'doormen', 'white', 'gdm'],
-//         src: '/gdm/k35.png',
-//         system: 'gts',
-//         id: '001683',
-//         price: 210
-//     },
 
     /* Bus Plus + n Eko */
     {
@@ -267,142 +233,245 @@ var products = [
         price: 500
     },
 
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdmm'],
+        src: '/gdmm/knkp.png',
         system: 'plus',
-        id: '001105',
-        price: 320 + KAPAK FIYATLARI
+        id: '001105/MODERN/KREM',
+        price: 326
     },
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'bronz','gdmm'],
+        src: '/gdmm/bnkp.png',
         system: 'plus',
-        id: '001105',
-        price: 320 + KAPAK FIYATLARI
+        id: '001105/MODERN/BRONZ',
+        price: 330
     },
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'antrasit','gdmm'],
+        src: '/gdmm/ankp.png',
         system: 'plus',
-        id: '001107',
-        price: 340 + KAPAK FIYATLARI
+        id: '001105/MODERN/ANTRASIT',
+        price: 330
     },
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'silver','gdmm'],
+        src: '/gdmm/snkp.png',
         system: 'plus',
-        id: '001107',
-        price: 340 + KAPAK FIYATLARI
+        id: '001105/MODERN/SILVER',
+        price: 330
     },
 
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'intercom','white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdmk'],
+        src: '/gdmk/bnkp.png',
         system: 'plus',
-        id: '001106',
-        price: 340 + KAPAK FIYATLARI
+        id: '001105/KARE/BEYAZ',
+        price: 330
     },
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'intercom', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'black','gdmk'],
+        src: '/gdmk/snkp.png',
         system: 'plus',
-        id: '001106',
-        price: 340 + KAPAK FIYATLARI
-    },
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: modern
-    {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'intercom', 'white','gdm'],
-        src: '/gdm/k35.png',
-        system: 'plus',
-        id: '001108',
-        price: 360 + KAPAK FIYATLARI
-    },
-    // FIXME:  Urunu renklere dagit ozelliklerindeki rengi degistir KAPAK: kare
-    {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'intercom', 'white','gdm'],
-        src: '/gdm/k35.png',
-        system: 'plus',
-        id: '001108',
-        price: 360 + KAPAK FIYATLARI
+        id: '001105/KARE/SIYAH',
+        price: 330
     },
 
-    // FIXME:  Urunu ekle
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'white','gdmm'],
+        src: '/gdmm/knkp.png',
+        system: 'plus',
+        id: '001107/MODERN/KREM',
+        price: 346
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'bronz','gdmm'],
+        src: '/gdmm/bnkp.png',
+        system: 'plus',
+        id: '001107/MODERN/BRONZ',
+        price: 350
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'antrasit','gdmm'],
+        src: '/gdmm/ankp.png',
+        system: 'plus',
+        id: '001107/MODERN/ANTRASIT',
+        price: 350
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'silver','gdmm'],
+        src: '/gdmm/snkp.png',
+        system: 'plus',
+        id: '001107/MODERN/SILVER',
+        price: 350
+    },
+
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white', 'handsfree', 'gdmk'],
+        src: '/gdmk/bnkp.png',
+        system: 'plus',
+        id: '001107/KARE/BEYAZ',
+        price: 350
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'black', 'handsfree', 'gdmk'],
+        src: '/gdmk/snkp.png',
+        system: 'plus',
+        id: '001107/KARE/SIYAH',
+        price: 350
+    },
+
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'white','gdmm'],
+        src: '/gdmm/kkp.png',
+        system: 'plus',
+        id: '001106/MODERN/KREM',
+        price: 346
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'bronz','gdmm'],
+        src: '/gdmm/bkp.png',
+        system: 'plus',
+        id: '001106/MODERN/BRONZ',
+        price: 350
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'antrasit','gdmm'],
+        src: '/gdmm/akp.png',
+        system: 'plus',
+        id: '001106/MODERN/ANTRASIT',
+        price: 350
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'silver','gdmm'],
+        src: '/gdmm/skp.png',
+        system: 'plus',
+        id: '001106/MODERN/SILVER',
+        price: 350
+    },
+
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'white','gdmk'],
+        src: '/gdmk/bkp.png',
+        system: 'plus',
+        id: '001106/KARE/BEYAZ',
+        price: 350
+    },
+    {
+        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'black','gdmk'],
+        src: '/gdmk/skp.png',
+        system: 'plus',
+        id: '001106/KARE/SIYAH',
+        price: 350
+    },
+
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'white','gdmm'],
+        src: '/gdmm/kkp.png',
+        system: 'plus',
+        id: '001108/MODERN/KREM',
+        price: 366
+    },
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'bronz','gdmm'],
+        src: '/gdmm/bkp.png',
+        system: 'plus',
+        id: '001108/MODERN/BRONZ',
+        price: 370
+    },
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'antrasit','gdmm'],
+        src: '/gdmm/akp.png',
+        system: 'plus',
+        id: '001108/MODERN/ANTRASIT',
+        price: 370
+    },
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'silver','gdmm'],
+        src: '/gdmm/skp.png',
+        system: 'plus',
+        id: '001108/MODERN/SILVER',
+        price: 370
+    },
+
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'white','gdmk'],
+        src: '/gdmk/bkp.png',
+        system: 'plus',
+        id: '001108/KARE/BEYAZ',
+        price: 370
+    },
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'black','gdmk'],
+        src: '/gdmk/skp.png',
+        system: 'plus',
+        id: '001108/KARE/SIYAH',
+        price: 370
+    },
+
+    // FIXME:  Urun sablon ekle
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button','white','43s'],
+        src: '/43s/b.png',
         system: 'plus',
         id: '001122',
         price: 380
     },
-    // FIXME:  Urunu ekle
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'black','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','43s'],
+        src: '/43s/s.png',
         system: 'plus',
         id: '001120',
         price: 380
     },
 
-    // FIXME:  Urunu ekle
+    // FIXME:  Urun sablon ekle
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-screen', 'white','43s'],
+        src: '/43s/bt.png',
         system: 'plus',
         id: '001162',
         price: 450
     },
-    // FIXME:  Urunu ekle
     {
-        features: ['4,3', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'black','gdm'],
-        src: '/gdm/k35.png',
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-screen', 'black','43s'],
+        src: '/43s/st.png',
         system: 'plus',
         id: '001160',
         price: 450
     },
 
-    // FIXME:  Urunu ekle
+    // FIXME:  Urun sablon ekle
     {
-        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['7', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'white','7s'],
+        src: '/7s/bb.png',
         system: 'plus',
         id: '001127',
         price: 520
     },
-    // FIXME:  Urunu ekle
     {
-        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-button', 'intercom', 'black','gdm'],
-        src: '/gdm/k35.png',
+        features: ['7', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','7s'],
+        src: '/7s/sb.png',
         system: 'plus',
         id: '001125',
         price: 520
     },
-
-    // FIXME:  Urunu ekle
     {
-        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'white','gdm'],
-        src: '/gdm/k35.png',
+        features: ['7', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-screen', 'white','7s'],
+        src: '/7s/b.png',
         system: 'plus',
         id: '001132',
         price: 600
     },
-    // FIXME:  Urunu ekle
     {
-        features: ['7', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'handsfree', 'touch-screen', 'intercom', 'black','gdm'],
-        src: '/gdm/k35.png',
+        features: ['7', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-screen', 'black','7s'],
+        src: '/7s/s.png',
         system: 'plus',
         id: '001130',
         price: 600
     },
 
     /* Bus Plus Gdl */
-    // FIXME: 1730, 1733, 1731, 1734 u modern kapak icin kopyala (16 tane kopya)
     {
         features: ['doormen', 'two-doors', 'security', 'extra-camera', 'white','gdl'],
         src: '/gdl/knkp.png',
@@ -426,7 +495,7 @@ var products = [
     },
     // FIXME: Resmini degisti 
     {
-        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'silver','gdl'],
         src: '/gdl/ankp.png',
         system: 'plus',
         id: '001730/SILVER',
@@ -455,7 +524,7 @@ var products = [
     },
     // FIXME: resmini degistir
     {
-        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'silver','gdl'],
         src: '/gdl/ankp.png',
         system: 'plus',
         id: '001733/SILVER',
@@ -483,9 +552,9 @@ var products = [
         id: '001731/ANTRASIT',
         price: 490
     },
-    // FIXME: resmini degistir
+    // FIXME: urun sablon ekle, resim ekle
     {
-        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'silver','gdl'],
         src: '/gdl/a.png',
         system: 'plus',
         id: '001731/SILVER',
@@ -512,10 +581,127 @@ var products = [
         id: '001734/ANTRASIT',
         price: 510
     },
-    // FIXME: resmini degistir
+    // FIXME: resim ekle
     {
-        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdl'],
+        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'silver','gdl'],
         src: '/gdl/a.png',
+        system: 'plus',
+        id: '001734/SILVER',
+        price: 510
+    },
+
+
+
+    // FIXME: urun sablon ekle
+    {
+        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'white','gdlm'],
+        src: '/gdlm/knkp.png',
+        system: 'plus',
+        id: '001730/KREM',
+        price: 466
+    },
+    {
+        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'bronz','gdlm'],
+        src: '/gdlm/bnkp.png',
+        system: 'plus',
+        id: '001730/BRONZ',
+        price: 470
+    },
+    {
+        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'antrasit','gdlm'],
+        src: '/gdlm/ankp.png',
+        system: 'plus',
+        id: '001730/ANTRASIT',
+        price: 470
+    },
+    {
+        features: ['doormen', 'two-doors', 'security', 'extra-camera', 'silver','gdlm'],
+        src: '/gdlm/snkp.png',
+        system: 'plus',
+        id: '001730/SILVER',
+        price: 470
+    },
+    {
+        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'white','gdlm'],
+        src: '/gdlm/knkp.png',
+        system: 'plus',
+        id: '001733/KREM',
+        price: 486
+    },
+    {
+        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'bronz','gdlm'],
+        src: '/gdlm/bnkp.png',
+        system: 'plus',
+        id: '001733/BRONZ',
+        price: 490
+    },
+    {
+        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'antrasit','gdlm'],
+        src: '/gdlm/ankp.png',
+        system: 'plus',
+        id: '001733/ANTRASIT',
+        price: 490
+    },
+    {
+        features: ['doormen', 'handsfree', 'two-doors', 'security', 'extra-camera', 'silver','gdlm'],
+        src: '/gdlm/snkp.png',
+        system: 'plus',
+        id: '001733/SILVER',
+        price: 490
+    },
+
+    {
+        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'white','gdlm'],
+        src: '/gdlm/kkp.png',
+        system: 'plus',
+        id: '001731/KREM',
+        price: 486
+    },
+    {
+        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'bronz','gdlm'],
+        src: '/gdlm/bkp.png',
+        system: 'plus',
+        id: '001731/BRONZ',
+        price: 490
+    },
+    {
+        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdlm'],
+        src: '/gdlm/akp.png',
+        system: 'plus',
+        id: '001731/ANTRASIT',
+        price: 490
+    },
+    {
+        features: ['doormen', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'silver','gdlm'],
+        src: '/gdlm/skp.png',
+        system: 'plus',
+        id: '001731/SILVER',
+        price: 490
+    },
+    {
+        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'white','gdlm'],
+        src: '/gdlm/kkp.png',
+        system: 'plus',
+        id: '001734/KREM',
+        price: 506
+    },
+    {
+        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'bronz','gdlm'],
+        src: '/gdlm/bkp.png',
+        system: 'plus',
+        id: '001734/BRONZ',
+        price: 510
+    },
+    {
+        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'antrasit','gdlm'],
+        src: '/gdlm/akp.png',
+        system: 'plus',
+        id: '001734/ANTRASIT',
+        price: 510
+    },
+    {
+        features: ['doormen', 'handsfree', 'alarm', 'memory', 'pick-melody', 'call-control', 'market', 'intercom', 'two-doors', 'security', 'extra-camera', 'silver','gdlm'],
+        src: '/gdlm/skp.png',
         system: 'plus',
         id: '001734/SILVER',
         price: 510
@@ -539,7 +725,6 @@ var products = [
 
 
     /* Bus Plus Slim */
-    // FIXME: Bunlar gidicek gibi
     {
         features: ['doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'slim'],
         src: '/slim/kpn.png',
@@ -674,47 +859,6 @@ var products = [
             return price
         }
     },
-// FIXME: Sistem gitti
-//     /* Gts Panel */
-//     {
-//         features: ['panel', 'light-panel'],
-//         src: '/lightp/gb.png',
-//         system: 'gts',
-//         id: '004856',
-//         price: function(apartment) {
-//             var price = 247
-//               , jumps = [20, 46, 72, 52, 68, 84]
-//             if(apartment % 2 != 0) apartment++
-//             price += apartment / 2 * 11
-//             $.each(jumps, function(i, v){ if(apartment > v) price += 27 })
-//             return price            
-//         }
-//     },
-//     {
-//         features: ['panel', 'light-base', 'password', 'light-panel'],
-//         src: '/lightp/karma.png',
-//         system: 'gts',
-//         id: '004855',
-//         price: function(apartment) {
-//             var price = 380
-//               , kgp = 38
-//             if(apartment % 2 != 0) apartment++
-//             if(apartment > 21) price += 16
-//             price += apartment / 2 * 11
-//             if(11 < apartment < 21) price = 516
-//             price += kgp
-//             return price
-//         }
-//     },
-//     {
-//         features: ['panel', 'luks'],
-//         src: '/luksp/pc.png',
-//         system: 'gts',
-//         id: '00346X',
-//         price: function(apartment) {
-//             return 750
-//         }
-//     },
 
     /* Bus Plus + n Panel */
     {
@@ -791,32 +935,43 @@ var products = [
             return 900
         }
     },
-    //FIXME: urun ekle
+    //FIXME: urun sablon ekle
     {
         features: ['panel', 'vision'],
-        src: '/luksp/pc.png',
+        src: '/vision/m.png',
         system: 'plus',
         id: '003488',
         price: function(apartment) {
             return 1050
         }
     },
-    //FIXME: urun ekle
+    //FIXME: urun sablon ekle, isikli altlikli resim
     {
         features: ['panel', 'city', 'light-base'],
-        src: '/luksp/pc.png',
+        src: '/city/s.png',
         system: 'plus',
         id: '003485',
         price: function(apartment) {
             return 950
         }
     },
-    //FIXME: urun ekle
+    //FIXME: urunu sablon ekle
     {
-        features: ['panel', 'light-base', 'password', 'crea'],
-        src: '/lightp/kd.png',
+        features: ['panel', 'crea'],
+        src: '/crea/m.png',
         system: 'plus',
         id: '003491',
+        price: function(apartment) {
+            var price = 850
+            return price
+        }
+    },
+    //FIXME: urunu sablon ekle
+    {
+        features: ['panel', 'buttons', 'crea'],
+        src: '/crea/m.png',
+        system: 'plus',
+        id: '003491/BUTONLU',
         price: function(apartment) {
             // 16 daire ve katlarinda 70 lira buton donusturucu fiyati (converter)
             // diger butonlar geldiginde boy standartli panele gore fiyat ekle
@@ -864,17 +1019,6 @@ var systems = {
         power *= state.block
         return video + power + cable
     },
-// FIXME: Sistem gitti
-//     'gts': function(state) {
-// 	    var video = 44 + (state.apartment * 0.2 * 30)
-//           , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * (2.9 + 1.5)
-//           , cu = 198
-//           , notColor = -50
-//         if($.inArray('bw', state.monitor.features) != -1)
-//             notColor = 0
-//         cu *= state.block
-//         return video + cu + cable + notColor
-//     },
     '8+n': function(state) {
         var apartment = state.apartment / state.block
           , cable = state.apartment * 7 * 2 * 2.4
@@ -948,8 +1092,8 @@ var work = {
 var extras = {
     'extra-monitor': function(state) {
         if(state.monitor == "001421") return 530 
-        if(state.monitor == "001366") return 490 + 100 // FIXME: urunu guncelle
-        if(state.monitor == "001368") return 350 + 100 // FIXME: urunu yok
+        if(state.monitor == "001366") return 490 + 100
+        if(state.monitor == "001368") return 350 + 100
         if(state.monitor == "001390") return 230 + 100
         if(state.monitor == "001389") return 330 + 100
         if(state.monitor == "001344") return 46 + 9
@@ -971,8 +1115,8 @@ var extras = {
     },
     'two-doors': function(state) { 
         if(state.monitor.system == "villa" && state.monitor == "001421") return 280 + 100
-        else if(state.monitor.system == "villa" && state.monitor == "001366") return 280 // FIXME: urunu guncelle
-        else if(state.monitor.system == "villa" && state.monitor == "001368") return 280 // FIXME: urunu yok
+        else if(state.monitor.system == "villa" && state.monitor == "001366") return 280 
+        else if(state.monitor.system == "villa" && state.monitor == "001368") return 280 
         else return state.panel.price(state.apartment)
     },
     'market': function(state) { 
