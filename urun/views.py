@@ -21,7 +21,7 @@ def urun(request,urun):
             panelJenerik = []
         print panelBasic, panelKonsept, panelJenerik
     else:
-        panelKonsept, panelBasic = [], []
+        panelKonsept = panelBasic = panelJenerik = []
     return render_to_response('urun.html',{'urun':istenenUrun, 'dokuman':dokuman, 'panelBasic':panelBasic,'panelJenerik':panelJenerik,'panelKonsept':panelKonsept},context_instance=RequestContext(request))
 
 def urunler(request,kategori):

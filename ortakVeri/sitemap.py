@@ -9,4 +9,4 @@ class Site(object):
 
 class EkstraSitemap(Sitemap):
     def items(self):
-        return [Site('/teklif-formu'), Site('/iletisim-formu'), Site('/akademi-formu'), Site('/bulten-formu')]
+        return [Site('/teklif-formu/'), Site('/iletisim-formu/'), Site('/akademi-formu/'), Site('/bulten-formu/')]

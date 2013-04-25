@@ -32,11 +32,11 @@ def linkUrl(value):
     if value.sayfa:
         return value.sayfa.url
     elif value.dokuman:
-        return '/dokuman/' + value.dokuman.slug
+        return '/dokuman/' + value.dokuman.slug + '/'
     elif value.kategori:
-        return '/urunler/' + value.kategori.slug
+        return '/urunler/' + value.kategori.slug + '/'
     elif value.urun:
-        return '/urun/' + value.urun.slug
+        return '/urun/' + value.urun.slug + '/'
     elif value.direklink:
         return value.direklink
     elif value.dosya:

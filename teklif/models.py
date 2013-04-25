@@ -37,7 +37,7 @@ class Teklif(models.Model):
     def __unicode__(self):
         return self.bilgi.tip.isim
     def get_absolute_url(self):
-        return 'http://www.audio.com.tr/teklif/%d' % (self.pk,)
+        return 'http://www.audio.com.tr/teklif/%d/' % (self.pk,)
 
 class Yapildi(models.Model):
     kullanici = models.ForeignKey(User)
@@ -82,9 +82,9 @@ def teklif_yarat(sender,**kwargs):
                 b = kwargs['instance']
                 t = Teklif(bilgi=b)
                 t.durum = Durum.objects.get(pk=1)
-                kisi = User.objects.get(profile__sorumluSehir=b.sehir,
-                                        profile__gorev__isim__contains='kordinator', 
-                                        profile__ucuncul=True)
+                kisi = User.objects.filter(profile__sorumluSehir=b.sehir,
+                                           profile__gorev__isim__contains='kordinator', 
+                                           profile__ucuncul=True)[0]
                 t.temsilci = kisi
                 t.son_eylem = created_bilgi.tarih
                 t.save()
