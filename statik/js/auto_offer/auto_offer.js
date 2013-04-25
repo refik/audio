@@ -194,7 +194,9 @@ window.onload = function(){
                          'kaçırılmaması için belli bir süre çalmaya devam eder',
         'private': 'Kapıdaki misafirinizle konuşurken, aynı zamanda diafonunu açan başka bina sakinlerinin konuşmalarınızı ' +
                    'dinlemesini engeller',
-        'memory': 'Kapıya gelen misafirlerinizin fotoğrafını çekip, hafızasında saklama imkanı sunar'
+        'memory': 'Kapıya gelen misafirlerinizin fotoğrafını çekip, hafızasında saklama imkanı sunar',
+        'touch-button': 'Kapasitif dokunmatik butonlara sahiptir',
+        'touch-screen': 'Ekran üzerindeki ikonlara dokunarak cihaz kolayca kullanılır'
     }
 
     /*
@@ -357,7 +359,7 @@ window.onload = function(){
 
     $('#monitors [data-preference="video"] .orbimot').orbimot({
         ellipseConstant: 64,
-        minimumScale: 0.20,
+        minimumScale: 0.10,
         changeOpacity: true,
         duration: time,
         sizeSet: true
@@ -621,10 +623,10 @@ window.onload = function(){
                                 
                                 // Sniffing IE8
                                 if(image.height) { 
-                                    $(image).css('height', image.height * 0.25 + 'px')
+                                    $(image).css('height', image.height * 0.15 + 'px')
                                 } else {
-                                    $(image).prop('height', image.getAttribute('height') * 0.25)
-                                    $(image).prop('width', image.getAttribute('width') * 0.25)
+                                    $(image).prop('height', image.getAttribute('height') * 0.15)
+                                    $(image).prop('width', image.getAttribute('width') * 0.15)
                                 }
 
                                 if(image.src.search(state.panel.src) != -1) {
