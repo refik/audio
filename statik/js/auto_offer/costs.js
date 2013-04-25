@@ -926,6 +926,46 @@ var products = [
             return 690
         }
     },
+    //FIXME: urun sablon ekle, isikli altlikli resim
+    {
+        features: ['panel', 'city', 'light-base'],
+        src: '/city/s.png',
+        system: 'plus',
+        id: '003485',
+        price: function(apartment) {
+            return 950
+        }
+    },
+    //FIXME: urunu sablon ekle
+    {
+        features: ['panel', 'crea', 'light-base'],
+        src: '/crea/m.png',
+        system: 'plus',
+        id: '003491',
+        price: function(apartment) {
+            var price = 850
+            return price
+        }
+    },
+    //FIXME: urunu sablon ekle
+    // {
+    //     features: ['panel', 'buttons', 'crea'],
+    //     src: '/crea/m.png',
+    //     system: 'plus',
+    //     id: '003491/BUTONLU',
+    //     price: function(apartment) {
+    //         // 16 daire ve katlarinda 70 lira buton donusturucu fiyati (converter)
+    //         // diger butonlar geldiginde boy standartli panele gore fiyat ekle
+    //         // light-base ini ayarla eger buton sayisi artarsa
+    //         var price = 850
+    //           , jumps = [16, 32, 48, 64, 80, 96]
+    //         if(apartment < 10) apartment = 10
+    //         if(apartment % 2 != 0) apartment++
+    //         price += apartment / 2 * 12
+    //         $.each(jumps, function(i, v){ if(apartment > v && v == 16) price += 72; else if(apartment > v) price += 60})
+    //         return price
+    //     }
+    // },
     {
         features: ['panel', 'luks'],
         src: '/luksp/pc.png',
@@ -944,47 +984,7 @@ var products = [
         price: function(apartment) {
             return 1050
         }
-    },
-    //FIXME: urun sablon ekle, isikli altlikli resim
-    {
-        features: ['panel', 'city', 'light-base'],
-        src: '/city/s.png',
-        system: 'plus',
-        id: '003485',
-        price: function(apartment) {
-            return 950
-        }
-    },
-    //FIXME: urunu sablon ekle
-    {
-        features: ['panel', 'crea'],
-        src: '/crea/m.png',
-        system: 'plus',
-        id: '003491',
-        price: function(apartment) {
-            var price = 850
-            return price
-        }
-    },
-    //FIXME: urunu sablon ekle
-    {
-        features: ['panel', 'buttons', 'crea'],
-        src: '/crea/m.png',
-        system: 'plus',
-        id: '003491/BUTONLU',
-        price: function(apartment) {
-            // 16 daire ve katlarinda 70 lira buton donusturucu fiyati (converter)
-            // diger butonlar geldiginde boy standartli panele gore fiyat ekle
-            // light-base ini ayarla eger buton sayisi artarsa
-            var price = 850
-              , jumps = [16, 32, 48, 64, 80, 96]
-            if(apartment < 10) apartment = 10
-            if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 12
-            $.each(jumps, function(i, v){ if(apartment > v && v == 16) price += 72; else if(apartment > v) price += 60})
-            return price
-        }
-    },
+    }
 
 
 
@@ -1132,7 +1132,7 @@ var extras = {
     },
     'light-base': function(state) { 
         var basePrice = 0
-        if(state.panel.id == "008312") basePrice = 290
+        if(state.panel.id == "008312" || state.panel.id == "003485" || state.panel.id == "003491") basePrice = 290
         else if(state.panel.id == "003480") basePrice = 270
         else if(state.panel.id == "008317") {
             var apartment = state.apartment / state.block

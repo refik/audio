@@ -257,8 +257,8 @@ p {
     position: absolute;
     right: 1065px;
     bottom: 10px;
-    height: 113px;
-    width: 150px;
+    height: 90px;
+    width: 200px;
 }
     #monitors-panel-info img {
         margin-left: 5px;
@@ -292,9 +292,9 @@ p {
 }
     #panels .orbimot {
         margin: 0px 20px;
-        margin-top: 20px;
-        width: 400px;
-        height: 350px;
+        margin-top: 0px;
+        width: 420px;
+        height: 400px;
     }
     #panels .features {
         float: left;
@@ -306,7 +306,7 @@ p {
     height: 400px;
 }
     .panels.set[data-system="plus"] .features {
-        margin-left: 40px;
+        margin-left: 20px;
         margin-top: 97px;
     }
     .panels.set[data-system="plus+n"] .undos {
