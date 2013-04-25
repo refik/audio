@@ -1,17 +1,23 @@
 /* Generated classes for django-media-bundler sprites.  Don't edit! */
 
 .news {
-     background-image: url('http://s.aucdn.net/resim/newsdla40z.png');
-}
-
-.news-scan0003_hpf_haber_ufak-jpg {
-     width: 65px;
-     background-position: 0px 0px;
-     height: 48px;
+     background-image: url('http://s.aucdn.net/resim/newsn0yjyq.png');
 }
 
 .news-bus_plus_haber_ufak-jpg {
      width: 65px;
-     background-position: 0px -48px;
+     background-position: 0px 0px;
      height: 22px;
+}
+
+.news-bus_plus_haber_ufak-jpg {
+     width: 65px;
+     background-position: 0px -22px;
+     height: 22px;
+}
+
+.news-bus_plus_n_haber_ufak-jpg {
+     width: 65px;
+     background-position: 0px -44px;
+     height: 18px;
 }
