@@ -58,7 +58,6 @@ def state_to_message(state, message):
 [Fiyat: %iTL]""" % info_tuple
     return formatted_message
 
-@never_cache
 @csrf_exempt
 def formIslem(request,tip):
     form = formSec(tip)
