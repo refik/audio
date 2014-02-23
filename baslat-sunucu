@@ -1,1 +1,1 @@
-/home/refik/virtual_environments/new_audio/bin/gunicorn_django --workers=9 -b unix:/tmp/gunicorn.sock -D -t 90 --pid=/tmp/gunicorn.pid --access-logfile=/tmp/gunicorn.access --error-logfile=/tmp/gunicorn.error settings.py
+/home/refik/virtual_environments/new_audio/bin/gunicorn_django --workers=4 -b unix:/tmp/gunicorn.sock -D -t 90 --pid=/tmp/gunicorn.pid --access-logfile=/tmp/gunicorn.access --error-logfile=/tmp/gunicorn.error settings.py

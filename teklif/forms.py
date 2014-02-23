@@ -66,13 +66,13 @@ class DosyaForm(ModelForm):
 
 
 class DelegeForm(ModelForm):
-    delege = forms.ModelChoiceField(queryset=UserProxy.objects.all(), required=True, 
+    delege = forms.ModelChoiceField(queryset=UserProxy.objects, required=True, 
                                     widget=forms.Select(attrs={'class': 'span3'}))
     def __init__(self, *args, **kwargs):
         super(DelegeForm, self).__init__(*args, **kwargs)
         try:
             teklif_sehir = Teklif.objects.get(pk=kwargs['initial']['teklif']).bilgi.sehir
-            new_queryset = self.fields['delege'].queryset.filter(Q(profile__sorumluSehir=teklif_sehir), 
+            new_queryset = self.fields['delege'].queryset.filter(Q(profile__sorumluSehir=teklif_sehir), Q(is_active=True),
                                                                  Q(profile__birincil=True) | Q(profile__ikincil=True))
             self.fields['delege'].queryset = new_queryset
         except:

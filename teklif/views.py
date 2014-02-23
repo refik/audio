@@ -133,11 +133,14 @@ class OfferView(ListView):
         if not(self.request.user.pk == 1 or self.request.user.pk == 54):
             queryset = queryset.filter(bilgi__sorumlu=user)
 
+        hepsi = self.request.GET.get('hepsi')
+        if hepsi != 'evet':
+            queryset = queryset.filter(Q(durum__kapali=False) | Q(durum__isim='Donduruldu'))
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)
-        self.get_queryset
         context['pk'] = self.kwargs.get('pk',0)
         context['sorumlular'] = User.objects.filter(Q(profile__birincil=True) | Q(profile__ikincil=True)).order_by('first_name')
         return context
