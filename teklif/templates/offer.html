@@ -66,6 +66,7 @@
 		{{ offer.bilgi.isim|chars:10|title }}
 		</span>
 	</td>
+	<td>{{ offer.bilgi.telefon.split|join:""|chars:11 }}</td>
 	<td>
 		<div class='isim-mesaj' style='display:none;'>  {{ offer.pk }} 
 														{{ offer.bilgi.isim }} 
