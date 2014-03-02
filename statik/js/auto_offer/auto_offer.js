@@ -304,7 +304,8 @@ window.onload = function(){
         else {
             var newPriceText = numberWithCommas(state.price.toFixed())
         }
-        if(newPriceText != currentPriceText)
+        // if(newPriceText != currentPriceText)
+        if(true)
             $('#header-price').fadeOut(time/2, function(){$(this).html(newPriceText)}).fadeIn(time/2)
     }
 
