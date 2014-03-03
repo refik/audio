@@ -6,7 +6,7 @@
 {% block aciklama %}Audio Elektronik, ürün gamındaki diafon ve telefon sistemlerinin, görüntülü ve sesli seçenekleri ile konutların dahili iletişim ihtiyaçlarını karşılamaktadır.{% endblock %}
 
 {% block icerik %}
-<div class="grid_14">
+<div class="grid_14" style='z-index:1;'>
  <div class="grid_14 sprites sprites-ceyrek_yarim-png">
   <div class="grid_14 topd"></div>
   <div class="grid_1 alpha topd"></div>
@@ -38,6 +38,7 @@
 <div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sag_resim|linkUrl }}' {% ifequal orta_sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sag_resim.gorunum.url }}" alt='{{ orta_sag_resim.yazi }}'></a></div>
 
 <div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ sag_resim|linkUrl }}' {% ifequal sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ sag_resim.gorunum.url }}" alt='{{ sag_resim.yazi }}'></a></div>
+
 
 <div class="clear"></div>
 {% endblock %}
