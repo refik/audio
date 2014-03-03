@@ -6,6 +6,33 @@
 {% block aciklama %}Audio Elektronik, ürün gamındaki diafon ve telefon sistemlerinin, görüntülü ve sesli seçenekleri ile konutların dahili iletişim ihtiyaçlarını karşılamaktadır.{% endblock %}
 
 {% block icerik %}
+<div class="grid_14">
+ <div class="grid_14 sprites sprites-ceyrek_yarim-png">
+  <div class="grid_14 topd"></div>
+  <div class="grid_1 alpha topd"></div>
+  <div class="grid_12" style='color:red;'><strong>Ürünlerimiz</strong></div>
+  <div class="grid_12 push_1" id='yeni_urunler'>
+   {% for urun in yeni_urun %}
+   <div class="grid_12" style='height:90px;'>
+    <div class="grid_6 alpha centered" style='margin-top:0px;'><a style='text-decoration:none;color:black;background-color:white;' href="/urun/{{ urun.slug }}">{{ urun.isim }}</a></div>
+    <div class="grid_6 omega centered">
+      <div onclick="location.href='/urun/{{ urun.slug }}'" class="products products-{{ urun.resim.filename_root }}_yeni_ufak-{{ urun.resim.extension|cut:'.' }}" style="margin: 0 auto; cursor:pointer;"></div>
+    </div>
+   </div>
+   {% endfor %}
+  </div>
+  <div class="grid_1 omega topd"></div>
+ </div>
+ <div class="grid_14 sprites sprites-ceyrek_yarim_ufak-png">
+  <div class="grid_14 topd"></div>
+  <div class="grid_12 push_1 centered"><a style='text-decoration:none;color:black;' href='{{ sol_orta_yazi|linkUrl }}'><strong>{{ sol_orta_yazi.yazi }}</strong></a></div>
+ </div>
+ <div class="grid_14 sprites sprites-ceyrek_yarim_orta-png">
+  <div class="grid_14 topd"></div>
+  <div class="grid_12 push_1 centered"><a style='text-decoration:none;color:red;' href='{{ sol_alt_yazi|linkUrl }}'><strong>{{ sol_alt_yazi.yazi }}</strong></a></div>
+ </div>
+</div>
+
 <div class="grid_14" style='z-index:1;'>
  <div class="grid_14 sprites sprites-ceyrek_yarim-png alpha omega">
   <div class="grid_14 topd"></div>
@@ -27,33 +54,12 @@
   <a href='{{ sol_alt_resim|linkUrl }}' {% ifequal sol_alt_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ sol_alt_resim.gorunum.url }}" alt="{{ sol_alt_resim.yazi }}"></a>
  </div>
 </div>
+
 <div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sol_resim|linkUrl }}' {% ifequal orta_sol_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sol_resim.gorunum.url }}" alt='{{ orta_sol_resim.yazi }}'></a></div>
+
 <div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sag_resim|linkUrl }}' {% ifequal orta_sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sag_resim.gorunum.url }}" alt='{{ orta_sag_resim.yazi }}'></a></div>
-<div class="grid_14">
- <div class="grid_14 sprites sprites-ceyrek_yarim-png">
-  <div class="grid_14 topd"></div>
-  <div class="grid_1 alpha topd"></div>
-  <div class="grid_12" style='color:red;'><strong>Ürünlerimiz</strong></div>
-  <div class="grid_12 push_1" id='yeni_urunler'>
-   {% for urun in yeni_urun %}
-   <div class="grid_12" style='height:90px;'>
-    <div class="grid_6 alpha centered" style='margin-top:0px;'><a style='text-decoration:none;color:black;background-color:white;' href="/urun/{{ urun.slug }}">{{ urun.isim }}</a></div>
-    <div class="grid_6 omega centered">
-      <div onclick="location.href='/urun/{{ urun.slug }}'" class="products products-{{ urun.resim.filename_root }}_yeni_ufak-{{ urun.resim.extension|cut:'.' }}" style="margin: 0 auto; cursor:pointer;"></div>
-    </div>
-   </div>
-   {% endfor %}
-  </div>
-  <div class="grid_1 omega topd"></div>
- </div>
- <div class="grid_14 sprites sprites-ceyrek_yarim_ufak-png">
-  <div class="grid_14 topd"></div>
-  <div class="grid_12 push_1 centered"><a style='text-decoration:none;color:black;' href='{{ sag_orta_yazi|linkUrl }}'><strong>{{ sag_orta_yazi.yazi }}</strong></a></div>
- </div>
- <div class="grid_14 sprites sprites-ceyrek_yarim_orta-png">
-  <div class="grid_14 topd"></div>
-  <div class="grid_12 push_1 centered"><a style='text-decoration:none;color:red;' href='{{ sag_alt_yazi|linkUrl }}'><strong>{{ sag_alt_yazi.yazi }}</strong></a></div>
- </div>
-</div>
+
+<div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ sag_resim|linkUrl }}' {% ifequal sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ sag_resim.gorunum.url }}" alt='{{ sag_resim.yazi }}'></a></div>
+
 <div class="clear"></div>
 {% endblock %}
