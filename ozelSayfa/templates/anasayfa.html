@@ -33,28 +33,6 @@
  </div>
 </div>
 
-<div class="grid_14" style='z-index:1;'>
- <div class="grid_14 sprites sprites-ceyrek_yarim-png alpha omega">
-  <div class="grid_14 topd"></div>
-  <div class="grid_1 alpha topd"></div>
-  <div class="grid_12" style='color:red;'><strong>Audio' dan Haberler</strong></div>
-  <div class="grid_12 push_1" id='haberler'>
-   {% for h in haber %}
-   <div class="grid_12">       
-    <div class="grid_12" style='background-color:white;' ><strong>{{ h.baslik }}</strong></div>
-    <div class="grid_8 alpha">{{ h.icerik }} {% if h.detay %}<a href="{{ h.get_absolute_url }}">Devamı</a>{% endif %}</div>
-    <div class="grid_4 omega centered">
-     <div class="news news-{{ h.resim.filename_root }}_haber_ufak-{{ h.resim.extension|cut:'.' }}" style="margin: 0 auto;"></div>
-    </div>
-   </div>
-   {% endfor %}
-  </div>
- </div>
- <div class="grid_14 sprites sprites sprites-ceyrek_yarim-png alpha omega">
-  <a href='{{ sol_alt_resim|linkUrl }}' {% ifequal sol_alt_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ sol_alt_resim.gorunum.url }}" alt="{{ sol_alt_resim.yazi }}"></a>
- </div>
-</div>
-
 <div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sol_resim|linkUrl }}' {% ifequal orta_sol_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sol_resim.gorunum.url }}" alt='{{ orta_sol_resim.yazi }}'></a></div>
 
 <div class="grid_14 sprites sprites-ceyrek-png"><a href='{{ orta_sag_resim|linkUrl }}' {% ifequal orta_sag_resim.dosya.filetype 'Image'%}class='tek_resim'{% endifequal %}><img src="{{ orta_sag_resim.gorunum.url }}" alt='{{ orta_sag_resim.yazi }}'></a></div>
