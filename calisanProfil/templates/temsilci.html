@@ -1527,7 +1527,6 @@ function guncel(sehir, ayd){
 	var table = $('<table>');
 		table.append($('<tr>').append($('<td>').text('İsim').attr('style','font-weight:bold')).append($('<td>').text('Telefon').attr('style','font-weight:bold')));
 	$.each(people, function(i, val) {
-		console.log(val);
 		table.append($('<tr>').append($('<td>').text(val.name)).append($('<td>').text(val.phone)));
 	});
 	table.addClass('bilgi-tablosu')
@@ -1556,7 +1555,6 @@ function guncelle() {
 		$("#ilce-rum").hide();
 	}
 	$.each(people, function(i, val) {
-		console.log(val);
 		table.append($('<tr>').append($('<td>').text(val.name)).append($('<td>').text(val.phone)));
 	});
 	table.addClass('bilgi-tablosu')
