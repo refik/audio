@@ -10,8 +10,14 @@ class Tip(models.Model):
     def __unicode__(self):
         return self.isim
 
+class Bolge(models.Model):
+    isim = models.CharField('Bolge', max_length = 200)
+    def __unicode__(self):
+        return self.isim
+
 class Sehir(models.Model):
     isim = models.CharField('Şehir',max_length = 200)
+    bolge = models.ForeignKey(Bolge, default=None, null=True)
     def __unicode__(self):
         return self.isim
 

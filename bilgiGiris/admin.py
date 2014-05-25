@@ -1,4 +1,4 @@
-from audio.bilgiGiris.models import Bilgi, Tip, Sehir, Ilce
+from audio.bilgiGiris.models import Bilgi, Tip, Sehir, Ilce, Bolge
 from django.contrib import admin
 
 class BilgiAdmin(admin.ModelAdmin):
@@ -24,3 +24,4 @@ admin.site.register(Bilgi, BilgiAdmin)
 admin.site.register(Ilce)
 admin.site.register(Sehir)
 admin.site.register(Tip)
+admin.site.register(Bolge)

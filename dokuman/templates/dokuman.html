@@ -1,18 +1,12 @@
-{% load compress %}
 {% spaceless %}
 <html>
  <head>
   <title>{{ dokuman.isim|title }} - Audio Elektronik</title>
   <meta name="description" content="{{ dokuman.isim|title }} dokümanını inceleme sayfası">
-{% compress css %}
   <link rel="stylesheet" href="{{ STATIC_CODE }}css/reset.css" />
   <link rel="stylesheet" href="{{ STATIC_CODE }}css/text.css" />
   <link rel="stylesheet" href="{{ STATIC_CODE }}css/dokuman.css" />
-{% endcompress %}
-{% compress js %}
  <script type="text/javascript" src="{{ STATIC_CODE }}js/flexpaper_flash.js"></script>
-{% endcompress %}
-{% compress js inline %}
   <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-26169028-1']);
@@ -23,7 +17,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
   </script>
-{% endcompress %}
  </head>
  <body>
   <div id='container'>
@@ -42,7 +35,6 @@
    </div>
    <a id="viewerPlaceHolder" style="display:block;"></a>
   </div>
-{% compress js inline %}
   <script type="text/javascript">
    var viewportwidth;
    var viewportheight;
@@ -102,7 +94,6 @@
    }});
   onDocumentLoaded = function(){ getDocViewer().fitHeight(); }
   onCurrentPageChanged = function(num){ getDocViewer().fitHeight(); }
-{% endcompress %}
   </script>
   <div class='buton'><img class='tikla' src='{{ STATIC_CODE }}resim/ileri.png' onClick="getDocViewer().nextPage()"/></div>
   </div>

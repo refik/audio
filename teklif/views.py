@@ -14,6 +14,7 @@ from django.db.models import Q
 from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum, Teklif, Yapildi
 from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm, AxaptaForm
+from django.views.decorators.cache import never_cache
 import re
 
 class OtomatikTeklif(TemplateView):
@@ -25,7 +26,7 @@ class OtomatikTeklif(TemplateView):
         if 'MSIE' in agent_string:
             agent_list = agent_string.split(' ')
             msie_version = float(re.sub(r'[a-zA-Z;]','',agent_list[agent_list.index('MSIE') + 1]))
-            if msie_version < 8 and not 'Trident' in agent_string:
+            if msie_version < 8 and not 'Trident' in agent_string and False:
                 templates.insert(0, 'upgrade_browser.html')
         return templates
     
@@ -115,10 +116,16 @@ class DoneView(CreateView):
     def get_form_class(self, *args, **kwargs):
         if self.request.method == 'GET':
             form_type = self.request.GET.get('form_type','')
+            offer_pk = self.request.GET.get('pk','')
+            form_class = self.what_to_use[form_type][0]
+            form_class.base_fields['teklif'].queryset = Teklif.objects.filter(pk=offer_pk)
         else:
             form_type = self.request.POST.get('form_type','')
-        return self.what_to_use[form_type][0]
-
+            form_class = self.what_to_use[form_type][0]
+            offer_pk = self.request.POST.get('teklif','')
+            form_class.base_fields['teklif'].queryset = Teklif.objects.filter(pk=int(offer_pk))
+      
+        return form_class
 
 class OfferView(ListView):
     template_name = 'offers.html'
@@ -148,6 +155,7 @@ class OfferView(ListView):
 
 @require_POST
 @csrf_exempt
+@never_cache
 def yapildi_yolla(request):
     form = TeklifYapildiForm(request.POST)
     if form.is_valid():

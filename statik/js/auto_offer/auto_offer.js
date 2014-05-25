@@ -6,6 +6,8 @@ window.onload = function(){
     // Duration of animations
     var time = 1000
 
+    window.CONVERSION_REPORTED = false;
+
     // For ease of development
     var sampleUrl = $('.orbimot img').prop('src')
       , urlBase = sampleUrl.slice(0, sampleUrl.search('auto_offer_v7') + 13)
@@ -137,14 +139,24 @@ window.onload = function(){
         sent: function() {
             // Button state
             $('#navigation-continue').html('Baştan Başla').unbind('click').on('click', function(){ 
-                location.reload(true) 
+                location.reload(true);
             })
 
             // Hide back button at navigation
-            $('#navigation-back').fadeOut(time)
+            $('#navigation-back').fadeOut(time);
 
             //Hide price at header
-            $('#header-price-container').hide(time)
+            $('#header-price-container').hide(time);
+
+            if(!window.CONVERSION_REPORTED) {
+                goog_report_conversion();
+                var ebRand = Math.random()+'';
+                ebRand = ebRand * 1000000;
+                var ebConversionImg = new Image();
+                ebConversionImg.src = "http://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&ActivityID=488486&rnd=" + ebRand;
+                window.CONVERSION_REPORTED = true;
+            }
+            
         },
         villa: function() {
             // Showing price at top
