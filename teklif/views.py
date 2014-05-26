@@ -64,22 +64,10 @@ class NewView(DetailView):
             templates.insert(0, 'success.html')
         return templates
 
-#class IscilikTutarView(TemplateView):
-#    template_name = 'iscilik_tutar.html'
-#
-#    def get_context_data(self, **kwargs):
-#        context = super(IscilikTutarView, self).get_context_data(**kwargs)
-#        iscilikli = Yapildi.objects.exclude(iscilik=None)
-#        list_pk = self.request.GET.get('pks','')
-#        if not list_pk:
-#            return context
-#        pk_numbers = [int(pk_string) for pk_string in list_pk.split('-')]
-#        for pk_num in pk_numbers:
-#            iscilikli = iscilikli.exclude(pk=pk_num)
-#        iscilikler = [yapilan.iscilik for yapilan in iscilikli]
-#        context['sayi'] = len(iscilikler)
-#        context['toplam'] = sum(iscilikler)
-#        return context
+
+class IscilikTutarView(TemplateView):
+    template_name = 'confirm.html'
+
 
 class DoneView(CreateView):
     template_name = 'done_form.html'

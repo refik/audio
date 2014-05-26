@@ -130,7 +130,9 @@ window.onload = function(){
                 } else {
                     var postDict = $('#offer form').serializeArray()
                     postDict.push({name: 'type', value: 'offer'}, {name: 'state', value: JSON.stringify(state)})
-                    $.post('/teklif-formu/', postDict) 
+                    $.post('/teklif-formu/', postDict, function(data){
+                        window.location = 'http://www.audio.com.tr/teklif-isteginiz-alindi/';
+                    }) 
                 }
             })
 
@@ -138,12 +140,13 @@ window.onload = function(){
         },
         sent: function() {
             // Button state
-            $('#navigation-continue').html('Baştan Başla').unbind('click').on('click', function(){ 
-                location.reload(true);
-            })
+            //$('#navigation-continue').html('Baştan Başla').unbind('click').on('click', function(){ 
+            //    location.reload(true);
+            //})
 
             // Hide back button at navigation
             $('#navigation-back').fadeOut(time);
+            $('#navigation-continue').fadeOut(time)
 
             //Hide price at header
             $('#header-price-container').hide(time);

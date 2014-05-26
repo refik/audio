@@ -60,6 +60,7 @@ def state_to_message(state, message):
 
 @csrf_exempt
 def formIslem(request,tip):
+    success = False
     form = formSec(tip)
     record = None # Will be used if request is from auto offer
     sub_dict = lambda d, keys: {k:v for k,v in d.iteritems() if k in keys}
@@ -94,6 +95,7 @@ def formIslem(request,tip):
             audiomail('audioweb@audio.com.tr', [bilgi.cleaned_data['email']],konu,'İsteğiniz elimize ulaştı, size en kısa zamanda cevap vereceğiz.\n\nİstek kodunuz: #%d\n\nAudio Elektronik\nwww.audio.com.tr - 444 11 58\n\nnot: lütfen bu adrese cevap atmayın, kontrol edilmiyor.'.decode('utf-8') % bilgi_db.id )
             yollaForm = form()
             geri_donus = 'İsteğiniz Elimize Ulaşmıştır'
+            success = True
         else:
             yollaForm = bilgi
             geri_donus = 'Lütfen Formdaki Hataları Kontrol Edin'
@@ -108,6 +110,6 @@ def formIslem(request,tip):
         return HttpResponse('success')
     # Give user feedback if there is a mistake
     else:
-        return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm, 'tip':tip,'mesaj':geri_donus},
+        return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm, 'tip':tip,'mesaj':geri_donus, 'basari': success},
                                   context_instance=RequestContext(request))
 
