@@ -132,7 +132,7 @@ window.onload = function(){
                     postDict.push({name: 'type', value: 'offer'}, {name: 'state', value: JSON.stringify(state)})
                     $.post('/teklif-formu/', postDict, function(data){
                         window.location = 'http://www.audio.com.tr/teklif-isteginiz-alindi/';
-                    }) 
+                    });
                 }
             })
 
@@ -151,14 +151,14 @@ window.onload = function(){
             //Hide price at header
             $('#header-price-container').hide(time);
 
-            if(!window.CONVERSION_REPORTED) {
-                goog_report_conversion();
-                var ebRand = Math.random()+'';
-                ebRand = ebRand * 1000000;
-                var ebConversionImg = new Image();
-                ebConversionImg.src = "http://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&ActivityID=488486&rnd=" + ebRand;
-                window.CONVERSION_REPORTED = true;
-            }
+//             if(!window.CONVERSION_REPORTED) {
+//                 goog_report_conversion();
+//                 var ebRand = Math.random()+'';
+//                 ebRand = ebRand * 1000000;
+//                 var ebConversionImg = new Image();
+//                 ebConversionImg.src = "http://bs.serving-sys.com/Serving/ActivityServer.bs?cn=as&ActivityID=488486&rnd=" + ebRand;
+//                 window.CONVERSION_REPORTED = true;
+//             }
             
         },
         villa: function() {
