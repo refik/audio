@@ -14,6 +14,7 @@ from django.db.models import Q
 from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum, Teklif, Yapildi
 from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm, AxaptaForm
+from audio.bilgiGiris.models import Bolge
 from django.views.decorators.cache import never_cache
 import re
 
@@ -114,6 +115,11 @@ class DoneView(CreateView):
             form_class.base_fields['teklif'].queryset = Teklif.objects.filter(pk=int(offer_pk))
       
         return form_class
+
+class YonetimView(ListView):
+    template_name = 'yonetim.html'
+    context_object_name = 'bolgeler'
+    model = Bolge
 
 class OfferView(ListView):
     template_name = 'offers.html'

@@ -14,10 +14,10 @@ class ProfilAdmin(admin.ModelAdmin):
         }),
         ('Kullanicinin Sorumluluklari', {
             'classes': ('collapse open',),
-            'fields' : ('sorumluTip','sorumluSehir',),
+            'fields' : ('sorumluTip','sorumluSehir','sorumluBolge',),
         }),
     )
-    filter_horizontal = ['sorumluTip','sorumluSehir']
+    filter_horizontal = ['sorumluTip','sorumluSehir','sorumluBolge']
 
 admin.site.register(CalisanProfil,ProfilAdmin)
 admin.site.register(CalisanGorev)
