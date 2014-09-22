@@ -24,6 +24,7 @@
 </table>
 
 <input type="submit" value="Giris" />
+<button type="button" onclick="var mail = prompt('Email adresiniz:'); if(mail!=null){post('/teklif/sifremi-unuttum/', {'email': mail});}">Sifremi Unuttum</button>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 </div>

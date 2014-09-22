@@ -32,7 +32,7 @@ class TeklifYapildiForm(ModelForm):
             self.fields['delege'] = forms.ModelChoiceField(
                 queryset=User.objects. \
                 filter(profile__sorumluTip__isim__contains='Teklif') \
-                .exclude(profile__sorumluSehir__isim__contains=''), 
+                .exclude(profile__sorumluBolge__sehir__isim__contains=''), 
                 required=False)
     class Meta:
         model = Yapildi
@@ -72,7 +72,7 @@ class DelegeForm(ModelForm):
         super(DelegeForm, self).__init__(*args, **kwargs)
         try:
             teklif_sehir = Teklif.objects.get(pk=kwargs['initial']['teklif']).bilgi.sehir
-            new_queryset = self.fields['delege'].queryset.filter(Q(profile__sorumluSehir=teklif_sehir), Q(is_active=True),
+            new_queryset = self.fields['delege'].queryset.filter(Q(profile__sorumluBolge__sehir=teklif_sehir), Q(is_active=True),
                                                                  Q(profile__birincil=True) | Q(profile__ikincil=True))
             self.fields['delege'].queryset = new_queryset
         except:

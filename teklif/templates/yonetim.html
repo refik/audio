@@ -17,7 +17,37 @@
 		body {
 		  padding-top: 50px;
 		}
+		.dropdown-menu {
+			height: 400px;
+			overflow-y: scroll;
+		}
 	</style>
+
+	<script>
+		function post(path, params, method) {
+			method = method || "post"; // Set method to post by default if not specified.
+
+			// The rest of this code assumes you are not using a library.
+			// It can be made less wordy if you use one.
+			var form = document.createElement("form");
+			form.setAttribute("method", method);
+			form.setAttribute("action", path);
+
+			for(var key in params) {
+				if(params.hasOwnProperty(key)) {
+					var hiddenField = document.createElement("input");
+					hiddenField.setAttribute("type", "hidden");
+					hiddenField.setAttribute("name", key);
+					hiddenField.setAttribute("value", params[key]);
+
+					form.appendChild(hiddenField);
+				 }
+			}
+
+			document.body.appendChild(form);
+			form.submit();
+		}
+	</script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -41,14 +71,25 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">test</a></li>
-            <li><a href="#">test</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="container">
+		<!-- Single button -->
+		<div class="btn-group" style='margin-top:20px;'>
+		  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+			Temsilci Sil <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+			{% for temsilci in temsilciler %}
+            <li><a href="#" onclick="post('degistir/', {'action': 'temsilci-sil', 'user_pk': {{ temsilci.pk }}})">{{ temsilci.first_name }} {{ temsilci.last_name }}</a></li>
+			{% endfor %}
+		  </ul>
+		</div>
+		  <button type="button" style="margin-top:20px;" class="btn btn-primary" data-toggle="modal" data-target="#temsilci-yarat">Temsilci Yarat</button>
+
 
       {% for bolge in bolgeler %}
       <div class="row bolge" data-bolgepk="{{ bolge.pk }}">
@@ -60,11 +101,13 @@
                 <div class="panel-heading">
                   <div class="btn-group pull-right">
                     <button type="button" class="btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                      Eylem
+                      Ekle
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a href="#">Sehir ekle</a></li>
+					  {% for sehir in sehirler %}
+                      <li><a href="#" onclick="post('degistir/', {'action': 'bolge-sehir-ekle', 'bolge_pk': {{ bolge.pk }}, 'sehir_pk': {{ sehir.pk }}})">{{ sehir.isim }}</a></li>
+					  {% endfor %}
                     </ul>
                   </div>
                   Sehirler
@@ -72,15 +115,6 @@
                 <ul class="list-group">
                   {% for sehir in bolge.sehir_set.all %}
                   <li class="list-group-item sehir" data-sehirpk="{{ sehir.pk }}">
-                    <div class="btn-group pull-right">
-                      <button type="button" class="btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                        Eylem
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Bolgeden cikart</a></li>
-                      </ul>
-                    </div>
                     {{ sehir.isim }}
                   </li>
                   {% endfor %}
@@ -92,27 +126,24 @@
                 <div class="panel-heading">
                   <div class="btn-group pull-right">
                     <button type="button" class="btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                      Eylem
+                      Ekle
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a href="#">Temsilci ekle</a></li>
+					  {% for temsilci in temsilciler %}
+                      <li><a href="#" onclick="post('degistir/', {'action': 'bolge-temsilci-ekle', 'bolge_pk': {{ bolge.pk }}, 'user_pk': {{ temsilci.pk }}})">{{ temsilci.first_name }} {{ temsilci.last_name }}</a></li>
+					  {% endfor %}
                     </ul>
                   </div>
                   Musteri Temsilcileri
                 </div>
                 <ul class="list-group">
-                  {% for temsilci in bolge.calisanprofil_set.all %}
+                  {% for temsilci in bolge.calisanlar %}
                   <li class="list-group-item temsilci" data-temsilcipk="{{ temsilci.user.pk }}">
-                    <div class="btn-group pull-right">
-                      <button type="button" class="btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                        Eylem
-                        <span class="caret"></span>
+                    <div class="pull-right">
+                      <button type="button" class="btn-xs btn-default">
+                        <li><span href="#" onclick="post('degistir/', {'action': 'temsilci-bolgeden-cikart', 'user_pk': {{ temsilci.user.pk }}, 'bolge_pk': {{ bolge.pk }}})">Cikart</span></li>
                       </button>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Bolgeden cikart</a></li>
-                        <li><a href="#">Sifre sifirla</a></li>
-                      </ul>
                     </div>
                     {{ temsilci.user.get_full_name }}
                   </li>
@@ -128,10 +159,61 @@
     </div><!-- /.container -->
 
 
+<div class="modal fade" id="temsilci-yarat" tabindex="-1" role="dialog" aria-labelledby="temsilci-yarat" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Yeni Temsilci</h4>
+      </div>
+      <div class="modal-body">
+
+<form role="form" id='yarat-form' action='degistir/' method='post'>
+  <div class="form-group">
+    <label for="isim">Isim</label>
+    <input type="text" name="isim" class="form-control" id="isim" placeholder="Ahmet">
+  </div>
+  <div class="form-group">
+    <label for="soyisim">Soyisim</label>
+    <input type="text" name="soyisim" class="form-control" id="soyisim" placeholder="Can">
+  </div>
+  <div class="form-group">
+    <label for="kullanici-adi">Kullanici Adi</label>
+    <input type="text" name="kullanici-adi" class="form-control" id="kullanici-adi" placeholder="ahmetcan">
+  </div>
+    <input type="hidden" name="action" id="action" value="temsilci-yarat">
+  <div class="form-group">
+    <label for="email">Email adresi</label>
+    <input type="email" name="email" class="form-control" id="email" placeholder="temsilci@audio.com.tr">
+  </div>
+
+	<div class="form-group">
+		<label for="bolge">Bolge</label>
+		<select class="form-control" name="bolge" id="bolge">
+		  {% for bolge in bolgeler %}
+		  <option>{{ bolge.isim }}</option>
+		  {% endfor %}
+		</select>
+	</div>
+ 
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Iptal</button>
+        <button type="submit" class="btn btn-primary" >Yarat</button>
+      </div>
+</form>
+    </div>
+  </div>
+</div>
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://audio.com.tr/statik/bs/js/bootstrap.min.js"></script>
+    <script src="http://audio.com.tr/statik/bs/js/bootstrap-modal.js"></script>
   </body>
 </html>

@@ -14,9 +14,15 @@ from django.db.models import Q
 from audio.ortakVeri.mail import audiomail
 from audio.teklif.models import Durum, Teklif, Yapildi
 from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaForm, DelegeForm, SebepForm, MesajForm, DondurForm, AxaptaForm
-from audio.bilgiGiris.models import Bolge
+from audio.bilgiGiris.models import Bolge, Sehir, Tip
+from audio.calisanProfil.models import CalisanProfil, CalisanGorev
 from django.views.decorators.cache import never_cache
+import random
+import string
 import re
+
+def generate_password():
+    return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(10)) 
 
 class OtomatikTeklif(TemplateView):
     template_name = 'auto_offer.html'
@@ -120,6 +126,88 @@ class YonetimView(ListView):
     template_name = 'yonetim.html'
     context_object_name = 'bolgeler'
     model = Bolge
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['sehirler'] = Sehir.objects.all()
+        context['temsilciler'] = User.objects.filter(Q(profile__birincil=True) | Q(profile__ikincil=True), is_active=True).order_by('first_name')
+        return context
+
+@csrf_exempt
+def sifremi_unuttum(request):
+    mail = request.POST['email']
+    user = User.objects.filter(email=mail, is_active=True)
+    if user:
+        user = user[0]
+        password = generate_password()
+        user.set_password(password)
+        audiomail('audioweb@audio.com.tr', [user.email], 'Audio Kullanici Sifre', """
+Merhaba %s,
+
+Bu maili, Audio Teklif sitesi girisindeki "sifremi unuttum" butonuna tikladiginiz icin aliyorsunuz. Bir yanlislik oldugunu dusunuyorsaniz lutfen birim yoneticinizle irtibata gecin.
+
+Kullanici adiniz: %s
+Yeni gecici sifreniz: %s
+
+Lutfen bu sifreyi http://www.audio.com.tr/sifre-degistir adresinden degistirin.""" % (user.get_full_name(), user.username, password))
+        print 'sifre', password
+        user.save()
+    return HttpResponse('Lutfen maillarinizi kontrol edin')
+
+
+@csrf_exempt
+def yonetim_degistir(request):
+    data = request.POST
+    print data
+    if data['action'] == 'bolge-sehir-ekle':
+        sehir = Sehir.objects.get(pk=data['sehir_pk'])
+        sehir.bolge_id = data['bolge_pk']
+        sehir.save()
+        print sehir, 'changed bolge', sehir.bolge_id
+    elif data['action'] == 'temsilci-bolgeden-cikart':
+        user = User.objects.get(pk=data['user_pk'])
+        bolge = Bolge.objects.get(pk=data['bolge_pk'])
+        user.profile.sorumluBolge.remove(bolge)
+        print user, 'removed bolge', bolge
+    elif data['action'] == 'bolge-temsilci-ekle':
+        user = User.objects.get(pk=data['user_pk'])
+        bolge = Bolge.objects.get(pk=data['bolge_pk'])
+        user.profile.sorumluBolge.add(bolge)
+        print user, 'added bolge', bolge
+    elif data['action'] =='temsilci-sifre-sifirla':
+        user = User.objects.get(pk=data['user_pk'])
+        print user, 'sent password deletion' 
+    elif data['action'] =='temsilci-sil':
+        user = User.objects.get(pk=data['user_pk'])
+        user.is_active = False
+        user.save()
+        print user, 'deactivated' 
+    elif data['action'] =='temsilci-yarat':
+        bolge = Bolge.objects.get(isim=data['bolge'])
+        user = User(first_name=data['isim'], last_name=data['isim'], username=data['kullanici-adi'])
+        password = generate_password()
+        user.set_password(password)
+        user.save()
+        gorev = CalisanGorev.objects.get(isim='Musteri Temsilcisi')
+        profil = CalisanProfil(user=user, birincil=True, gorev=gorev)
+        profil.save()
+        tip = Tip.objects.get(isim='Teklif Formu')
+        profil.sorumluTip.add(tip)
+        user.profile.sorumluBolge.add(bolge)
+        audiomail('audioweb@audio.com.tr', [user.email], 'Audio Teklif Kullanici', """
+Merhaba %s,
+
+Web teklifleri sitesi icin bilgileriniz su sekilde:
+kullanici adi: %s
+sifre : %s
+
+Sayfanin adresi http://www.audio.com.tr/teklif
+Lutfen sifrenizi su adresten degistirin http://www.audio.com.tr/sifre-degistir
+
+Iyi calismalar""" % (user.get_full_name(), user.username, password))
+
+    return redirect('/teklif/yonetim/')
+
 
 class OfferView(ListView):
     template_name = 'offers.html'

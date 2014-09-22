@@ -82,7 +82,7 @@ def teklif_yarat(sender,**kwargs):
                 b = kwargs['instance']
                 t = Teklif(bilgi=b)
                 t.durum = Durum.objects.get(pk=1)
-                kisi = User.objects.filter(profile__sorumluSehir=b.sehir,
+                kisi = User.objects.filter(profile__sorumluBolge__sehir=b.sehir,
                                            profile__gorev__isim__contains='kordinator', 
                                            profile__ucuncul=True)[0]
                 t.temsilci = kisi

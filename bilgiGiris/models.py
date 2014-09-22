@@ -12,6 +12,11 @@ class Tip(models.Model):
 
 class Bolge(models.Model):
     isim = models.CharField('Bolge', max_length = 200)
+
+    @property
+    def calisanlar(self):
+        return self.calisanprofil_set.filter(user__is_active=True)
+
     def __unicode__(self):
         return self.isim
 
