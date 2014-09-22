@@ -184,7 +184,7 @@ def yonetim_degistir(request):
         print user, 'deactivated' 
     elif data['action'] =='temsilci-yarat':
         bolge = Bolge.objects.get(isim=data['bolge'])
-        user = User(first_name=data['isim'], last_name=data['isim'], username=data['kullanici-adi'])
+        user = User(first_name=data['isim'], last_name=data['isim'], username=data['kullanici-adi'], email=data['email'])
         password = generate_password()
         user.set_password(password)
         user.save()
