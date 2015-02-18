@@ -82,10 +82,14 @@ def teklif_yarat(sender,**kwargs):
                 b = kwargs['instance']
                 t = Teklif(bilgi=b)
                 t.durum = Durum.objects.get(pk=1)
-                kisi = User.objects.filter(profile__sorumluBolge__sehir=b.sehir,
-                                           profile__gorev__isim__contains='kordinator', 
-                                           profile__ucuncul=True)[0]
-                t.temsilci = kisi
+                kisiler = User.objects.filter(profile__sorumluBolge__sehir=b.sehir,
+                                              profile__gorev__isim__contains='kordinator', 
+                                              profile__ucuncul=True)
+                if not kisiler:
+                    # Varsayilan temsilci Yasar bey
+                    t.temsilci = User.objects.get(pk=40)
+                else:
+                    t.temsilci = kisiler[0]
                 t.son_eylem = created_bilgi.tarih
                 t.save()
 

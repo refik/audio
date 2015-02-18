@@ -135,6 +135,9 @@
 					  {% endfor %}
                     </ul>
                   </div>
+        			<div class="pull-right" style="margin-right:10px;">
+						Son Giriş |                     
+                    </div>
                   Musteri Temsilcileri
                 </div>
                 <ul class="list-group">
@@ -143,6 +146,9 @@
                     <div class="pull-right">
                       <button type="button"  onclick="post('degistir/', {'action': 'temsilci-bolgeden-cikart', 'user_pk': {{ temsilci.user.pk }}, 'bolge_pk': {{ bolge.pk }}})" class="btn-xs btn-default"> Cikart
                       </button>
+                    </div>
+	    			<div class="pull-right" style="margin-right:14px;">
+                      {{ temsilci.user.last_login|date:'d F H:i' }} | 
                     </div>
                     {{ temsilci.user.get_full_name }}
                   </li>

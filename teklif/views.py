@@ -17,10 +17,11 @@ from audio.teklif.forms import TeklifYapildiForm, TutarForm, DaireForm, DosyaFor
 from audio.bilgiGiris.models import Bolge, Sehir, Tip
 from audio.calisanProfil.models import CalisanProfil, CalisanGorev
 from django.views.decorators.cache import never_cache
+import logging
 import random
 import string
 import re
-
+logging.basicConfig(filename='/home/refik/delege.log',level=logging.DEBUG)
 def generate_password():
     return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(10)) 
 
@@ -104,6 +105,7 @@ class DoneView(CreateView):
                 pass
         else:
             initial = {}
+        logging.debug('working %s %s', args, kwargs)
         arguments = super(DoneView, self).get_form_kwargs(*args, **kwargs)
         arguments['initial'].update(initial)
         return arguments
@@ -184,7 +186,7 @@ def yonetim_degistir(request):
         print user, 'deactivated' 
     elif data['action'] =='temsilci-yarat':
         bolge = Bolge.objects.get(isim=data['bolge'])
-        user = User(first_name=data['isim'], last_name=data['isim'], username=data['kullanici-adi'], email=data['email'])
+        user = User(first_name=data['isim'], last_name=data['soyisim'], username=data['kullanici-adi'], email=data['email'])
         password = generate_password()
         user.set_password(password)
         user.save()
@@ -231,7 +233,7 @@ class OfferView(ListView):
     def get_context_data(self, **kwargs):
         context = super(OfferView, self).get_context_data(**kwargs)
         context['pk'] = self.kwargs.get('pk',0)
-        context['sorumlular'] = User.objects.filter(Q(profile__birincil=True) | Q(profile__ikincil=True)).order_by('first_name')
+        context['sorumlular'] = User.objects.filter(Q(profile__birincil=True) | Q(profile__ikincil=True), is_active=True).order_by('first_name')
         return context
 
 
