@@ -5,6 +5,7 @@ from audio.ortakVeri.mail import audiomail
 from django.contrib.auth.models import User
 from django.contrib.comments.moderation import CommentModerator, moderator
 
+
 class Tip(models.Model):
     isim = models.CharField('Alan',max_length = 200)
     def __unicode__(self):
@@ -40,6 +41,7 @@ class Bilgi(models.Model):
     email = models.EmailField('Email')
     firma = models.CharField('Firma', max_length = 200)
     adres = models.CharField('Adres', max_length = 200)
+    ax_code = models.CharField('Ax Code', max_length = 200, null=True, blank=True)
     no = models.CharField('TC, Vergi No', max_length = 200)
     mesaj = models.TextField('Mesaj')
     tip = models.ForeignKey(Tip)
@@ -51,3 +53,5 @@ class Bilgi(models.Model):
 
     def __unicode__(self):
         return self.isim
+
+

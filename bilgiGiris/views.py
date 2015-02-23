@@ -10,6 +10,7 @@ from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponse
 from django.db.models import Q
 from django.views.decorators.cache import never_cache
+from send_ax import AX_QUEUE_FOLDER, send_ax
 import json
 import os
 SIRA = ['isim','email','sehir', 'ilce', 'adres', 'firma', 'no', 'telefon','mesaj']
@@ -80,16 +81,16 @@ def formIslem(request,tip):
         if bilgi.is_valid():
             bilgi_db = bilgi.save()
             if tip == 'teklif':
-                ax_queue_folder = '/home/refik/ax-queue'
-                path = os.path.join(ax_queue_folder, str(bilgi_db.pk))
+                path = os.path.join(AX_QUEUE_FOLDER, str(bilgi_db.pk))
                 data = {'name': bilgi_db.isim, 
                         'city': bilgi_db.sehir.isim,
-                        'county': bilgi_db.county.isim,
+                        'county': bilgi_db.ilce.isim if bilgi_db.ilce else None,
                         'phone': bilgi_db.telefon,
                         'email': bilgi_db.email,
                         'message': bilgi_db.mesaj}
                 with open(path, 'w+') as outfile:
                     json.dump(data, outfile)
+                send_ax()
             tip_db = Tip.objects.get(isim__contains = tip)
             bilgi_db.tip = tip_db 
             bilgi_db.save()

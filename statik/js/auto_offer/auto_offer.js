@@ -230,6 +230,15 @@ window.onload = function(){
         return re.test(string)
     }
 
+    // Replace non digits and check valid phone number
+    function isPhoneNumber(string) {
+        stripped = string.replace(/[^0-9]/g, "");
+        if(stripped && stripped[0] == '0')
+            return stripped.length == 11;
+        else
+            return stripped.length == 10;
+    }
+
     // Validate and style the inputs
     function checkInput(inputList) {
         var flag = true
@@ -237,7 +246,7 @@ window.onload = function(){
             var controlGroup = $(this).parents('.control-group')
               , value = $(this).val()
             if((value == "" && $(this).prop('name') != 'mesaj') || ($(this).prop('name') == 'email' && validateEmail(value) != true) || 
-               ($(this).parents('#apartments').length && !onlyNumbers(value))) {
+               ($(this).parents('#apartments').length && !onlyNumbers(value)) || ($(this).prop('name') == 'telefon' && isPhoneNumber(value) != true)) {
                 controlGroup.addClass('error')
                 flag = false
             }
