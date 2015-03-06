@@ -16,6 +16,13 @@ var products = [
         price: 910
     },
     {
+        features: ['style-villa'],
+        src: '/7vk2/p.png',
+        system: 'villa',
+        id: '001454',
+        price: 1050
+    },
+    {
         features: ['gdm-villa'],
         src: '/43vk/b.png',
         system: 'villa',
@@ -40,24 +47,6 @@ var products = [
         system: 'ft',
         id: '001061',
         price: 80
-    },
-
-    /* 4 + n E SILINECEK */ 
-    {
-        features: ['e'],
-        src: '/e/w.png',
-        system: '4+n',
-        id: '001033',
-        price: 25
-    },
-
-    /* 4 + n Kd SILINECEK */
-    {
-        features: ['kd'],
-        src: '/kd/g.png',
-        system: '4+n',
-        id: '001227',
-        price: 25
     },
 
     /* 8 + n Kd */
@@ -115,49 +104,6 @@ var products = [
         price: 38
     },
 
-    /* Bus Plus + n Eko SILINECEK */
-    {
-        features: ['bw', 'doormen','medium-install', 'eko'],
-        src: '/eko/sb.png',
-        system: 'plus+n',
-        id: '001560',
-        price: 250
-    },
-    {
-        features: ['color', 'doormen','medium-install',  'eko'],
-        src: '/eko/c.png',
-        system: 'plus+n',
-        id: '001561',
-        price: 310
-    },
-
-    /* Bus Plus + n Gdm SILINECEK */
-    {
-        features: ['2,5', 'doormen', 'white', 'medium-install', 'gdm'],
-        src: '/gdm/k25.png',
-        system: 'plus+n',
-        id: '001702',
-        price: 268
-    },
-    {
-        features: ['3,5', 'doormen', 'white', 'medium-install', 'gdm'],
-        src: '/gdm/k35.png',
-        system: 'plus+n',
-        id: '001703',
-        price: 300
-    },
-
-    /* Bus Plus + n Gdmm SILINECEK */
-    {
-        features: ['4,3', 'doormen', 'white', 'medium-install', 'gdmm'],
-        src: '/gdmm/knkp.png',
-        system: 'plus+n',
-        id: '001704',
-        price: 300
-    },
-
-
-
     /* Bus Plus Gdm */
     {
         features: ['2,5', 'doormen', 'easy-install', 'two-doors', 'security', 'extra-camera', 'white','gdm'],
@@ -173,24 +119,6 @@ var products = [
         id: '001720',
         price: 370
     },
-
-    /* SILINECEK */
-    {
-        features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'white','gdm'],
-        src: '/gdm/kkp.png',
-        system: 'plus',
-        id: '001719',
-        price: 360
-    },
-    {
-        features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'flash', 'gold','gdm'],
-        src: '/gdm/gmn.png',
-        system: 'plus',
-        id: '001729',
-        price: 380
-    },
-
-
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'flash', 'intercom','memory', 'gold','gdm'],
         src: '/gdm/gm.png',
@@ -374,6 +302,13 @@ var products = [
         price: 414
     },
     {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','43s'],
+        src: '/43s/s.png',
+        system: 'plus',
+        id: '001120',
+        price: 440
+    },
+    {
         features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button','white','43s'],
         src: '/43s/b.png',
         system: 'plus',
@@ -381,15 +316,19 @@ var products = [
         price: 440
     },
     {
-        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','43s'],
-        src: '/43s/s.png',
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button','white','dk'],
+        src: '/dk/b.jpg',
         system: 'plus',
-        id: '001120',
+        id: '001122D',
         price: 440
     },
-
-
-    /* 1122D 1120D GELSIN */
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','dk'],
+        src: '/dk/s.jpg',
+        system: 'plus',
+        id: '001120D',
+        price: 440
+    },
 
 
     {
@@ -724,9 +663,9 @@ var products = [
             $.each(jumps, function(i, v){ if(apartment > v) price += 72 }) // Yan sira farki
             return price
         }
-	// Nasil bulduk?
-	// Paket listede 12 liden 11 li cikartilir ondan da sube fiyati cikartilir
-	// ondan da buton fiyati cikartinca ek panelin taban fiyati bulunur
+    // Nasil bulduk?
+    // Paket listede 12 liden 11 li cikartilir ondan da sube fiyati cikartilir
+    // ondan da buton fiyati cikartinca ek panelin taban fiyati bulunur
     },
 
     /* Et Panel */
@@ -742,35 +681,6 @@ var products = [
             price += apartment / 2 * 16 // usttekinden alttakini cikartip
             $.each(jumps, function(i, v){ if(apartment > v) price += 50 })
             return price            
-        }
-    },
-
-    /* 4 + n Panel SILINECEK alttakiyle beraber */
-    {
-        features: ['panel', 'light-panel'],
-        src: '/lightp/sg.png',
-        system: '4+n',
-        id: '004849',
-        price: function(apartment) {
-            var price = 54
-              , jumps = [20, 46, 72, 98]
-            if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 14
-            $.each(jumps, function(i, v){ if(apartment > v) price += 34 })
-            return price            
-        }
-    },
-    {
-        features: ['panel', 'tough-panel'],
-        src: '/toughp/gb.png',
-        system: '4+n',
-        id: '004813',
-        price: function(apartment) {
-            var price = 82
-              , jumps = [12, 28, 44, 60, 76, 92]
-            price += apartment * 10
-            $.each(jumps, function(i, v){ if(apartment > v) price += 54 })
-            return price
         }
     },
 
@@ -799,38 +709,6 @@ var products = [
               , jumps = [12, 28, 44, 60, 76, 92]
             price += apartment * 12
             $.each(jumps, function(i, v){ if(apartment > v) price += 72 })
-            return price
-        }
-    },
-
-    /* Bus Plus + n Panel SILINECEK ALTTAKIYLE*/
-    {
-        features: ['panel', 'light-base', 'light-panel'],
-        src: '/lightp/gb.png',
-        system: 'plus+n',
-        id: '008317',
-        price: function(apartment) {
-            var price = 416
-              , jumps = [10, 20, 40, 52, 68, 84]
-            if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 14
-            $.each(jumps, function(i, v){ if(apartment > v) price += 62 })
-            return price
-        }
-    },
-    {
-        features: ['panel', 'light-base', 'password', 'light-panel'],
-        src: '/lightp/kd.png',
-        system: 'plus+n',
-        id: '008330',
-        price: function(apartment) {
-            var price = 642
-              , jumps = [16, 32, 48, 64, 80, 96]
-            if(apartment < 10) apartment = 10
-            if(apartment % 2 != 0) apartment++
-            price += apartment / 2 * 14
-            // $.each(jumps, function(i, v){ if(apartment > v && v == 16) price += 72; else if(apartment > v) price += 60})
-            $.each(jumps, function(i, v){ if(apartment > v)  price += 62})
             return price
         }
     },
@@ -932,7 +810,7 @@ var products = [
 
 var systems = {
     'plus': function(state) {
-	    var video = 98 + (state.apartment * 0.2 * 44)
+        var video = 98 + (state.apartment * 0.2 * 44)
           // , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * 2.7 * 0.7  // 23 Subat 2015, buraya yeni bina cok gelmiyor ve cikarinca bizim musteriye verdigimiz teklifle ayni fiyata geliyor burasi
           , apartment = state.apartment / state.block
           , power
@@ -943,21 +821,7 @@ var systems = {
         else
             power = 362
         power *= state.block
-        return video + power + cable
-    },
-    'plus+n': function(state) { // SILINECEK
-	    var video = 70 + (state.apartment * 0.2 * 40)
-          , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * 2.7 * 2 
-          , apartment = state.apartment / state.block
-          , power
-        if(apartment <= 30)
-            power = 130
-        else if(apartment <= 60)
-            power = 260
-        else
-            power = 350
-        power *= state.block
-        return video + power + cable
+        return video + power
     },
     '8+n': function(state) {
         var apartment = state.apartment / state.block
@@ -972,17 +836,11 @@ var systems = {
         cu*= state.block
         return cable + cu
     },
-    '4+n': function(state) { // SILINECEK
-        var cable = state.apartment * 7 * 1.7  * 2
-          , cu = 166
-        cu *= state.block
-    	return cu + cable
-    },
     'et': function(state) {
         var cable = state.apartment * 7 * 2  * 2
           , cu = 214
         cu*= state.block
-    	return cable + cu
+        return cable + cu
     },
     'ft': function(state) {
         var apartment = state.apartment / state.block
@@ -996,7 +854,7 @@ var systems = {
         return cable + cu
     }, 
     'villa': function(state) {
-    	return 80 // kablo fiyati
+        return 80 // kablo fiyati
     }
 }
 
@@ -1004,16 +862,10 @@ var work = {
     'plus': function(state) {
         return state.apartment * 50
     }, 
-    'plus+n': function(state) { // SILINECEK
-        return state.apartment * 50
-    },
     'villa': function(state) {
         return 200
     },
     '8+n': function(state) {
-        return state.price * 0.3 + state.apartment * 15 
-    },
-    '4+n': function(state) { // SILINECEK
         return state.price * 0.3 + state.apartment * 15 
     },
     'ft': function(state) {
