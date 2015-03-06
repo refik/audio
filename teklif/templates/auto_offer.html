@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/jquery.scrollpane.css" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_CODE }}css/auto_offer/auto_offer.css" type="text/css">
+    {% endcompress %}
     <style type="text/css">
         #buildings-information-box {
             background-image: url('{{ STATIC_CODE }}resim/auto_offer_v7/se/info.png')
@@ -33,7 +34,6 @@
             background-image: url('{{ STATIC_CODE }}resim/auto_offer_v7/tbs/glyphicons-halflings.png')
         }
     </style>
-    {% endcompress %}
 
     <!-- Scripts -->
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -155,11 +155,12 @@
                     <div class="monitors-body">
                         <div class="orbimot">
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gdmk/bnkp.png" data-mold="gdmk" alt="">
+                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/dk/b.jpg" data-mold="dk" alt="">
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/43s/s.png" data-mold="43s" alt="">
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gdlm/snkp.png" data-mold="gdlm" alt="">
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gdm/k35.png" data-mold="gdm" alt="">
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gdl/ankp.png" data-mold="gdl" alt="">
-                            <img src="{{ STATIC_CODE }}resim/auto_offer_v7/eko/c.png" data-mold="eko" alt="">
+                            <!--<img src="{{ STATIC_CODE }}resim/auto_offer_v7/eko/c.png" data-mold="eko" alt="">-->
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gt/35.png" data-mold="gt" alt="">
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/gdmm/bnkp.png" data-mold="gdmm" alt="">
                             <img src="{{ STATIC_CODE }}resim/auto_offer_v7/7s/sb.png" data-mold="7s" alt="">
@@ -250,6 +251,96 @@
                                 <li data-info="medium-install">
                                     Kolay kurulum
                                     <span class="right"><input type="checkbox" value="medium-install"></span>
+                                </li>
+                                <li>Kapıyı görerek konuşma <span class='right'><i class="icon-ok"></i></span></li>
+                                <li>İki farkli zil sesi <span class='right'><i class="icon-ok"></i></span></li>
+                            </ul>
+                        </div>
+
+                        <div class="features" data-mold="dk" data-scroll>
+                            <h3>Gdm Style Dik</h3>
+                            <div class="features-title">
+                                <strong>Özellik</strong>
+                                <strong class="right">Durum</strong>
+                            </div>
+                            <ul class="unstyled">
+                                <li>
+                                    Ekran 
+                                    <span class='right'>
+                                        4,3"
+                                    </span>
+                                </li>
+                                <li>
+                                    Renk
+                                    <span class='right'>
+                                        <input type="radio" value="white" name="cgu" data-default>Krem—
+                                        <input type="radio" value="black" name="cgu" >Siyah
+                                    </span>
+                                </li>
+                                <li data-info="alarm">
+                                    Alarm Yönetimi
+                                    <span class="right"><i class="icon-remove"></i></span>
+                                </li>
+								<li data-info="touch-screen">
+									Dokunmatik Ekran
+									<span class="right"><i class="icon-remove"></i></span>
+								</li>
+                                <li data-info="easy-install">
+                                    Çok kolay kurulum
+									<span class="right"><i class="icon-ok"></i></span>
+                                </li>
+								<li data-info="touch-button">
+									Dokunmatik Buton
+									<span class="right"><i class="icon-remove"></i></span>
+								</li>
+                                <li>
+                                    Daireler arası görüşme
+                                    <span class="right"><input type="checkbox" value="intercom"></span>
+                                </li>
+
+                                <li data-info="memory">
+                                    Fotoğraf hafızası
+									<span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li data-info="flash">
+                                    Flash led ile uyarı
+									<span class="right"><i class="icon-remove"></i></span>
+                                </li>
+                                <li data-info="pick-melody">
+                                    Zil melodi seçimi
+                                    <span class="right"><input type="checkbox" value="pick-melody"></span>
+                                </li>
+                                <li data-info="call-control">
+                                    Çağrı kontrolü
+                                    <span class="right"><input type="checkbox" value="call-control"></span>
+                                </li>
+                                <li>
+                                    Handsfree
+                                    <span class="right"><input type="checkbox" value="handsfree"></span>
+                                </li>
+                                <li>
+                                    Ekstra güvenlik kamerası
+                                    <span class="right"><input type="checkbox" value="extra-camera" data-extra></span>
+                                </li>
+                                <li>
+                                    Ek bina girişi 
+                                    <span class="right"><input type="checkbox" value="two-doors" data-extra></span>
+                                </li>
+                                <li>
+                                    Market ile konuşma
+                                    <span class="right"><input type="checkbox" value="market" data-extra></span>
+                                </li>
+                                <li>
+                                    Kapıcı ile konuşma
+                                    <span class="right"><input type="checkbox" value="doormen" data-extra></span>
+                                </li>
+                                <li>
+                                    Güvenlik ile görüşme
+                                    <span class="right"><input type="checkbox" value="security" data-extra></span>
+                                </li>
+                                <li data-info="medium-install">
+                                    Kolay kurulum
+									<span class="right"><i class="icon-remove"></i></span>
                                 </li>
                                 <li>Kapıyı görerek konuşma <span class='right'><i class="icon-ok"></i></span></li>
                                 <li>İki farkli zil sesi <span class='right'><i class="icon-ok"></i></span></li>
@@ -1645,8 +1736,8 @@
                     <div class="orbimot">
                         <img src="{{ STATIC_CODE }}resim/auto_offer_v7/43vk/b.png" data-mold="gdm-villa" alt="">
                         <img src="{{ STATIC_CODE }}resim/auto_offer_v7/7vk/m.png" data-mold="gdl-villa" alt="">
-                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/7vk2/p.png" data-mold="touch-villa" alt="">
                         <img src="{{ STATIC_CODE }}resim/auto_offer_v7/etv/t.png" data-mold="telefon-villa" alt="">
+                        <img src="{{ STATIC_CODE }}resim/auto_offer_v7/7vk2/p.png" data-mold="style-villa" alt="">
                     </div>
 
                     <!-- Villa Set Features -->
@@ -1670,6 +1761,8 @@
                                     4,3"
                                 </span>
                             </li>
+                            <li>Dokunmatik buton <span class='right'><i class="icon-remove"></i></span></li>
+                            <li>Handsfree <span class='right'><i class="icon-remove"></i></span></li>
                             <li>Ek şube <span class='right'><i class="icon-ok"></i></span></li>
                             <li>Şubeler arası görüşme <span class='right'><i class="icon-ok"></i></span></li>
                             <li>İkinci kapı <span class='right'><i class="icon-ok"></i></span></li>
@@ -1696,6 +1789,36 @@
                                     7"
                                 </span>
                             </li>
+                            <li>Dokunmatik buton <span class='right'><i class="icon-remove"></i></span></li>
+                            <li>Handsfree <span class='right'><i class="icon-remove"></i></span></li>
+                            <li>Ek şube <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>Şubeler arası görüşme <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>İkinci kapı <span class='right'><i class="icon-ok"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="features" data-mold="style-villa">
+                        <h3>Style Villa</h3>
+                        <div class="features-title">
+                            <strong>Özellik</strong>
+                            <strong class="right">Durum</strong>
+                        </div>
+                        <!-- An input element has to exist --><input style="display: none;">
+                        <ul class="unstyled">
+                            <li>
+                                Tip
+                                <span class='right'>
+                                    Görüntülü
+                                </span>
+                            </li>
+                            <li>
+                                Ekran
+                                <span class='right'>
+                                    7"
+                                </span>
+                            </li>
+                            <li>Dokunmatik buton <span class='right'><i class="icon-ok"></i></span></li>
+                            <li>Handsfree <span class='right'><i class="icon-ok"></i></span></li>
                             <li>Ek şube <span class='right'><i class="icon-ok"></i></span></li>
                             <li>Şubeler arası görüşme <span class='right'><i class="icon-ok"></i></span></li>
                             <li>İkinci kapı <span class='right'><i class="icon-ok"></i></span></li>
@@ -1717,6 +1840,8 @@
                                 </span>
                             </li>
                             <li>Ekran <span class='right'><i class="icon-remove"></i></span></li>
+                            <li>Dokunmatik buton <span class='right'><i class="icon-remove"></i></span></li>
+                            <li>Handsfree <span class='right'><i class="icon-remove"></i></span></li>
                             <li>Ek şube <span class='right'><i class="icon-ok"></i></span></li>
                             <li>Şubeler arası görüşme <span class='right'><i class="icon-ok"></i></span></li>
                             <li>İkinci kapı <span class='right'><i class="icon-remove"></i></span></li>

@@ -16,18 +16,18 @@ var products = [
         price: 910
     },
     {
+        features: ['style-villa'],
+        src: '/7vk2/p.png',
+        system: 'villa',
+        id: '001454',
+        price: 1050
+    },
+    {
         features: ['gdm-villa'],
         src: '/43vk/b.png',
         system: 'villa',
         id: '001368',
         price: 800
-    },
-    {
-        features: ['touch-villa'],
-        src: '/7vk2/p.png',
-        system: 'villa',
-        id: '001454',
-        price: 1050
     },
 
     // Monitors
@@ -119,24 +119,6 @@ var products = [
         id: '001720',
         price: 370
     },
-
-    /* SILINECEK */
-    {
-        features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'white','gdm'],
-        src: '/gdm/kkp.png',
-        system: 'plus',
-        id: '001719',
-        price: 360
-    },
-    {
-        features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'flash', 'gold','gdm'],
-        src: '/gdm/gmn.png',
-        system: 'plus',
-        id: '001729',
-        price: 380
-    },
-
-
     {
         features: ['3,5', 'doormen', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'flash', 'intercom','memory', 'gold','gdm'],
         src: '/gdm/gm.png',
@@ -320,6 +302,13 @@ var products = [
         price: 414
     },
     {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','43s'],
+        src: '/43s/s.png',
+        system: 'plus',
+        id: '001120',
+        price: 440
+    },
+    {
         features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button','white','43s'],
         src: '/43s/b.png',
         system: 'plus',
@@ -327,15 +316,19 @@ var products = [
         price: 440
     },
     {
-        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','43s'],
-        src: '/43s/s.png',
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button','white','dk'],
+        src: '/dk/b.jpg',
         system: 'plus',
-        id: '001120',
+        id: '001122D',
         price: 440
     },
-
-
-    /* 1122D 1120D GELSIN */
+    {
+        features: ['4,3', 'doormen', 'handsfree', 'pick-melody', 'call-control', 'easy-install', 'two-doors', 'market', 'security', 'extra-camera', 'intercom', 'touch-button', 'black','dk'],
+        src: '/dk/s.jpg',
+        system: 'plus',
+        id: '001120D',
+        price: 440
+    },
 
 
     {
@@ -670,9 +663,9 @@ var products = [
             $.each(jumps, function(i, v){ if(apartment > v) price += 72 }) // Yan sira farki
             return price
         }
-	// Nasil bulduk?
-	// Paket listede 12 liden 11 li cikartilir ondan da sube fiyati cikartilir
-	// ondan da buton fiyati cikartinca ek panelin taban fiyati bulunur
+    // Nasil bulduk?
+    // Paket listede 12 liden 11 li cikartilir ondan da sube fiyati cikartilir
+    // ondan da buton fiyati cikartinca ek panelin taban fiyati bulunur
     },
 
     /* Et Panel */
@@ -817,7 +810,7 @@ var products = [
 
 var systems = {
     'plus': function(state) {
-	    var video = 98 + (state.apartment * 0.2 * 44)
+        var video = 98 + (state.apartment * 0.2 * 44)
           // , cable = (state.apartment * 7 + 100 - (state.apartment * 7 % 100)) * 2.7 * 0.7  // 23 Subat 2015, buraya yeni bina cok gelmiyor ve cikarinca bizim musteriye verdigimiz teklifle ayni fiyata geliyor burasi
           , apartment = state.apartment / state.block
           , power
@@ -828,8 +821,47 @@ var systems = {
         else
             power = 362
         power *= state.block
-        return video + power + cable
+        return video + power
     },
+    '8+n': function(state) {
+        var apartment = state.apartment / state.block
+          , cable = state.apartment * 7 * 2 * 3 // 7 her dairede kulanilan kablo mesafesi, 2 de tolerans, 3 fiyat
+          , cu
+        if($.inArray('two-doors', state.extra.monitors) != -1 || $.inArray('doormen', state.extra.monitors) != -1)
+            cu = 320
+        else if(apartment > 25)
+            cu = 260
+        else
+            cu = 200
+        cu*= state.block
+        return cable + cu
+    },
+    'et': function(state) {
+        var cable = state.apartment * 7 * 2  * 2
+          , cu = 214
+        cu*= state.block
+        return cable + cu
+    },
+    'ft': function(state) {
+        var apartment = state.apartment / state.block
+          , cable = state.apartment * 7 * 2 * 2
+          , cu
+        if($.inArray('two-doors', state.extra.monitors) != -1)
+            cu = 310
+        else
+            cu = 250
+        cu*= state.block
+        return cable + cu
+    }, 
+    'villa': function(state) {
+        return 80 // kablo fiyati
+    }
+}
+
+var work = {
+    'plus': function(state) {
+        return state.apartment * 50
+    }, 
     'villa': function(state) {
         return 200
     },
@@ -875,7 +907,7 @@ var extras = {
         return 200  // uyarlama fiyat, cihaz + iscilik + kablo
     },
     'doormen': function(state) { 
-        if(state.monitor.system == "plus")
+        if(state.monitor.system == "plus" || state.monitor.system == "plus+n")
             return 200
         else if(state.monitor.system == "et" || state.monitor.system == "ft")
             return 100 // uyarlama fiyat
