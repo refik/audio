@@ -22,6 +22,13 @@ var products = [
         id: '001368',
         price: 800
     },
+    {
+        features: ['touch-villa'],
+        src: '/7vk2/p.png',
+        system: 'villa',
+        id: '001454',
+        price: 1050
+    },
 
     // Monitors
     /* Et telefon */
