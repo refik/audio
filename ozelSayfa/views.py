@@ -19,7 +19,7 @@ def special_entrance(request, username):
     backend = get_backends()[0]
     user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
     login(request, user)
-    return HttpResponseRedirect('http://www.audio.com.tr/teklif')
+    return HttpResponseRedirect('http://audio.com.tr/teklif')
 
 def medyaAl(sayfa_ismi):
     try:
