@@ -222,7 +222,10 @@ class OfferView(ListView):
 
         # Needs a better distinction for top management
         if not(self.request.user.pk == 1 or self.request.user.pk == 54):
-            queryset = queryset.filter(bilgi__sorumlu=user)
+            if user.profile.ikincil or user.profile.ucuncul:
+                queryset = queryset.filter(bilgi__sorumlu=user)
+            else:
+                queryset = queryset.filter(temsilci=user)
 
         hepsi = self.request.GET.get('hepsi')
         if hepsi != 'evet':

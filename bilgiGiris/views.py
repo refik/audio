@@ -10,6 +10,7 @@ from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponse
 from django.db.models import Q
 from django.views.decorators.cache import never_cache
+from audio.settings import GELISTIRME
 from send_ax import AX_QUEUE_FOLDER, send_ax
 import json
 import os
@@ -41,15 +42,15 @@ def formSec(tip):
     else:
         raise Http404
 
+translations = {
+    'single': 'apartman', 'multiple': 'site', 'villa': 'villa', 'two-doors': 'iki kapi', 'extra-monitor': 'ekstra sube', 
+    'security': 'guvenlik', 'extra-camera': 'ekstra kamera', 'market': 'marketle konusma', 'doormen': 'kapici', 
+    'light-base': 'isikli panel altligi', 'alarm': 'alarm karti', 'memory': 'fotograf hafiza karti', '': ''
+}
+t = lambda s: translations[s]
 def state_to_message(state, message):
-    translations = {
-        'single': 'apartman', 'multiple': 'site', 'villa': 'villa', 'two-doors': 'iki kapi', 'extra-monitor': 'ekstra sube', 
-        'security': 'guvenlik', 'extra-camera': 'ekstra kamera', 'market': 'marketle konusma', 'doormen': 'kapici', 
-        'light-base': 'isikli panel altligi', 'alarm': 'alarm karti', 'memory': 'fotograf hafiza karti', '': ''
-    }
-    t = lambda s: translations[s]
     info_tuple = (message, t(state['building']), state['apartment'], state['block'], 
-        state['monitor']['id'], state['panel']['id'], 
+        state['monitor']['id'], state['panel']['id'] if state.get('panel') else '-', 
         ', '.join([t(extra) for extra in state['extra']['monitors']] + [t(extra) for extra in state['extra']['panels']]), 
         state['price'])
     formatted_message = \
@@ -69,10 +70,12 @@ def formIslem(request,tip):
     if request.method == 'POST':
         post_dict = request.POST.copy() # Copy so it can be processed
 
+        offer_state = None
+        message = post_dict.get('mesaj') # Original message
         if post_dict.get('type','') == 'offer': # Check if it came from offer site
-            message = post_dict.get('mesaj') # Original message
             state = post_dict.get('state') # State object to better inform
-            request_info = state_to_message(json.loads(state), message) # Addition to original message
+            offer_state = json.loads(state)
+            request_info = state_to_message(offer_state, message) # Addition to original message
             post_dict.setlist('mesaj', [request_info]) # Update with new message
             sub_meta = sub_dict(request.META, ['REMOTE_ADDR', 'HTTP_USER_AGENT', 'HTTP_REFERER']) # Get customer info
             record = OtomatikTeklif(musteri=json.dumps(sub_meta), durum=state) # Pack usefull info
@@ -87,10 +90,23 @@ def formIslem(request,tip):
                         'county': bilgi_db.ilce.isim if bilgi_db.ilce else None,
                         'phone': bilgi_db.telefon,
                         'email': bilgi_db.email,
-                        'message': bilgi_db.mesaj}
-                with open(path, 'w+') as outfile:
-                    json.dump(data, outfile)
-                send_ax()
+                        'message': message, #saving unaltered message
+                        'buildingType': None,
+                        'product': None}
+                if offer_state:
+                    data['buildingType'] = t[offer_state['building']]
+                    data['quoteAmount'] = offer_state['price']
+                    data['daireSayisi'] = offer_state['apartment']
+                    data['blokSayisi'] = offer_state['block']
+                    data['product'] = ("monitor: %s\n"
+                                       "panel: %s\n"
+                                       "ekstra: %s") % (offer_state['monitor']['id'], 
+                                                        offer_state['panel']['id'] if offer_state.get('panel') else '',
+                                                        ', '.join([t(extra) for extra in offer_state['extra']['monitors']] + [t(extra) for extra in offer_state['extra']['panels']])) 
+                if not GELISTIRME:
+                    with open(path, 'w+') as outfile:
+                        json.dump(data, outfile)
+                    send_ax()
             tip_db = Tip.objects.get(isim__contains = tip)
             bilgi_db.tip = tip_db 
             bilgi_db.save()
