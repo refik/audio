@@ -71,7 +71,7 @@ def formIslem(request,tip):
         post_dict = request.POST.copy() # Copy so it can be processed
 
         offer_state = None
-        message = post_dict.get('mesaj') # Original message
+        message = post_dict.get('mesaj','') # Original message
         if post_dict.get('type','') == 'offer': # Check if it came from offer site
             state = post_dict.get('state') # State object to better inform
             offer_state = json.loads(state)
@@ -94,8 +94,8 @@ def formIslem(request,tip):
                         'buildingType': None,
                         'product': None}
                 if offer_state:
-                    data['buildingType'] = t[offer_state['building']]
-                    data['quoteAmount'] = offer_state['price']
+                    data['buildingType'] = t(offer_state['building'])
+                    data['quoteAmount'] = int(offer_state['price'])
                     data['daireSayisi'] = offer_state['apartment']
                     data['blokSayisi'] = offer_state['block']
                     data['product'] = ("monitor: %s\n"
