@@ -21,7 +21,7 @@ import logging
 import random
 import string
 import re
-logging.basicConfig(filename='/home/refik/delege.log',level=logging.DEBUG)
+
 def generate_password():
     return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(10)) 
 

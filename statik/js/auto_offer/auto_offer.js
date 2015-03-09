@@ -94,6 +94,11 @@ window.onload = function(){
             $('#panels .features').hide().filter(
                 '[data-mold="' + focusedProduct($('#panels').find('.undos:visible, .orbimot:visible')).data("mold") + '"]'
             ).show()
+            
+            if(state.apartment && state.apartment > 15) {
+               // Digital is better for apartments bigger than 15
+               $('[name=blp][value=digital]').click() 
+            }
 
             $('#navigation-continue').unbind('click')
         },
