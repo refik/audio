@@ -35,6 +35,5 @@ def _send_ax():
             bilgi.save()
         except:
             logging.exception('hello')
-            return
         else:
             os.unlink(path)
