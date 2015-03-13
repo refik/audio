@@ -186,7 +186,20 @@ def yonetim_degistir(request):
         print user, 'deactivated' 
     elif data['action'] =='temsilci-yarat':
         bolge = Bolge.objects.get(isim=data['bolge'])
-        user = User(first_name=data['isim'], last_name=data['soyisim'], username=data['kullanici-adi'], email=data['email'])
+        first = data['isim']
+        last = data['soyisim']
+        username = (first + last).lower()
+        replace = {
+            u' ': '', 
+            u'ı': 'i', 
+            u'ö': 'o', 
+            u'ü': 'u',
+            u'ş': 's',
+            u'ç': 'c',
+            u'ğ': 'g'}
+        for k, v in replace.items():
+            username = username.replace(k, v)
+        user = User(first_name=first, last_name=last, username=username, email=data['email'])
         password = generate_password()
         user.set_password(password)
         user.save()
