@@ -4,7 +4,8 @@ import os
 import threading
 import logging
 from audio.bilgiGiris.models import Bilgi
-from pysimplesoap.client import SoapClient
+from audio.ortakVeri.mail import audiomail
+from pysimplesoap.client import SoapClient, SoapFault
 
 logging.basicConfig(level=logging.DEBUG)
 AX_QUEUE_FOLDER = '/home/refik/ax-queue'
@@ -33,7 +34,12 @@ def _send_ax():
             bilgi = Bilgi.objects.get(pk=int(name))
             bilgi.ax_code = ax_code
             bilgi.save()
-        except:
+        except Exception as e:
+            if isinstance(e, SoapFault) and e.faultcode == 'soap:Server':
+                body = "%s\n\nRequest:\n\n%s\n\n\nResponse:\n\n%s\n" % (unicode(e).encode('utf8'), client.xml_request, client.xml_response)
+                subject = 'Web Teklif Axapta Server Hatasi'
+                audiomail('audioweb@audio.com.tr', ['ibrahimbulbul@audio.com.tr '], subject, body)
+                audiomail('audioweb@audio.com.tr', ['refik.rfk@gmail.com'], subject, body)
             logging.exception('hello')
         else:
             os.unlink(path)
