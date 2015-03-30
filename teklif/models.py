@@ -71,7 +71,7 @@ class UserProxy(User):
     def __unicode__(self):
         return u'%s, %d' % (self.get_full_name(), Teklif.objects.filter(durum__kapali=False, temsilci=self).count())
 
-@receiver(post_save,sender=Bilgi)
+#@receiver(post_save,sender=Bilgi)
 def teklif_yarat(sender,**kwargs):
     created_bilgi = kwargs['instance']
     try:
