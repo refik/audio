@@ -83,15 +83,15 @@ def formIslem(request,tip):
 
         bilgi = form(post_dict)
         valid = bilgi.is_valid()
-		duplicate = None
-		
-		if valid:
-			# cleaned_data attr is not present if the
-			# form is not valid
-			duplicate = bool(Bilgi.objects.filter(
-				tarih__gt=datetime.date.today(),
-				isim=bilgi.cleaned_data['isim'],
-				mesaj=bilgi.cleaned_data['mesaj']).all())
+        duplicate = None
+
+        if valid:
+            # cleaned_data attr is not present if the
+            # form is not valid
+            duplicate = bool(Bilgi.objects.filter(
+                tarih__gt=datetime.date.today(),
+                isim=bilgi.cleaned_data['isim'],
+                mesaj=bilgi.cleaned_data['mesaj']).all())
 
         if valid and not duplicate:
             bilgi_db = bilgi.save()
