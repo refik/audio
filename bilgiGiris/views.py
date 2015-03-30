@@ -1,6 +1,6 @@
 # coding: utf-8
 from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm, StandForm, SunumKitForm
-from audio.bilgiGiris.models import Tip
+from audio.bilgiGiris.models import Tip, Bilgi
 from audio.teklif.models import OtomatikTeklif
 from audio.ortakVeri.mail import audiomail
 from django.views.decorators.csrf import csrf_exempt
@@ -12,6 +12,7 @@ from django.db.models import Q
 from django.views.decorators.cache import never_cache
 from audio.settings import GELISTIRME
 from send_ax import AX_QUEUE_FOLDER, send_ax
+import datetime
 import json
 import os
 SIRA = ['isim','email','sehir', 'ilce', 'adres', 'firma', 'no', 'telefon','mesaj']
@@ -81,7 +82,18 @@ def formIslem(request,tip):
             record = OtomatikTeklif(musteri=json.dumps(sub_meta), durum=state) # Pack usefull info
 
         bilgi = form(post_dict)
-        if bilgi.is_valid():
+        valid = bilgi.is_valid()
+		duplicate = None
+		
+		if valid:
+			# cleaned_data attr is not present if the
+			# form is not valid
+			duplicate = bool(Bilgi.objects.filter(
+				tarih__gt=datetime.date.today(),
+				isim=bilgi.cleaned_data['isim'],
+				mesaj=bilgi.cleaned_data['mesaj']).all())
+
+        if valid and not duplicate:
             bilgi_db = bilgi.save()
             if tip == 'teklif':
                 path = os.path.join(AX_QUEUE_FOLDER, str(bilgi_db.pk))
@@ -125,6 +137,9 @@ def formIslem(request,tip):
             yollaForm = form()
             geri_donus = 'İsteğiniz Elimize Ulaşmıştır'
             success = True
+        elif duplicate:
+            yollaForm = form()
+            geri_donus = 'İsteğiniz Elimize Ulaşmıştır.'
         else:
             yollaForm = bilgi
             geri_donus = 'Lütfen Formdaki Hataları Kontrol Edin'
