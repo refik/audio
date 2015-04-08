@@ -90,11 +90,7 @@ class TipListView(ListView):
         return context
 
 def to_new_site(request, primary_key):
-    try:
-        bilgi = Bilgi.objects.get(pk=primary_key)
-        return HttpResponseRedirect('/teklif/%d' %  bilgi.teklif.pk)
-    except:
-        return HttpResponseRedirect('/teklif')
+    return HttpResponseRedirect('/teklif/%d' %  int(primary_key))
 
 class BilgiDetailView(DetailView):
     model = Bilgi
