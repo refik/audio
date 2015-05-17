@@ -62,7 +62,8 @@ class OtomatikTeklif(models.Model):
     tarih = models.DateTimeField('Gelis Tarihi', auto_now_add=True)
     musteri = models.TextField('Musteri Ozellikleri')
     durum = models.TextField('Istek ve eylemler')
-    teklif = models.OneToOneField(Teklif)
+    teklif = models.OneToOneField(Teklif, null=True)
+    bilgi = models.OneToOneField(Bilgi, null=True)
 
 class UserProxy(User):
     class Meta:

@@ -7,7 +7,6 @@ from audio.bilgiGiris.models import Bilgi
 from audio.ortakVeri.mail import audiomail
 from pysimplesoap.client import SoapClient, SoapFault
 
-logging.basicConfig(level=logging.DEBUG)
 AX_QUEUE_FOLDER = '/home/refik/ax-queue'
 
 class SendThread(threading.Thread):

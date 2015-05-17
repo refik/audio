@@ -149,7 +149,7 @@ def formIslem(request,tip):
     
     # Save the record for auto offer, assume input is correct
     if record: 
-        record.teklif = bilgi_db.teklif
+        record.bilgi = bilgi_db
         record.save()
         return HttpResponse('success')
     # Give user feedback if there is a mistake
