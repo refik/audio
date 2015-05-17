@@ -79,6 +79,7 @@ def formIslem(request,tip):
             request_info = state_to_message(offer_state, message) # Addition to original message
             post_dict.setlist('mesaj', [request_info]) # Update with new message
             sub_meta = sub_dict(request.META, ['REMOTE_ADDR', 'HTTP_USER_AGENT', 'HTTP_REFERER']) # Get customer info
+            sub_meta['source'] = request.COOKIES.get('__utmz')
             record = OtomatikTeklif(musteri=json.dumps(sub_meta), durum=state) # Pack usefull info
 
         bilgi = form(post_dict)

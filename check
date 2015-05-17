@@ -1,0 +1,12 @@
+#!/bin/bash
+while :
+do
+    if pgrep -c gunicorn;
+    then
+        echo "Gunicorn running..."
+    else
+        echo "Dead. Starting..."
+        /home/refik/projects/production/audio/baslat-sunucu
+    fi
+    sleep 5
+done
