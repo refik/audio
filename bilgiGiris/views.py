@@ -15,6 +15,8 @@ from send_ax import AX_QUEUE_FOLDER, send_ax
 import datetime
 import json
 import os
+import logging
+#logging.basicConfig(filename='/home/refik/audio.log',level=logging.DEBUG)
 SIRA = ['isim','email','sehir', 'ilce', 'adres', 'firma', 'no', 'telefon','mesaj']
 
 def mesajOlustur(sozluk):
@@ -68,19 +70,23 @@ def formIslem(request,tip):
     form = formSec(tip)
     record = None # Will be used if request is from auto offer
     sub_dict = lambda d, keys: {k:v for k,v in d.iteritems() if k in keys}
+    offer_state = None
     if request.method == 'POST':
         post_dict = request.POST.copy() # Copy so it can be processed
 
-        offer_state = None
         message = post_dict.get('mesaj','') # Original message
+        sub_meta = sub_dict(request.META, ['HTTP_X_FORWARDED_FOR', 'HTTP_USER_AGENT', 'HTTP_REFERER']) # Get customer info
+        sub_meta['source'] = request.COOKIES.get('__utmz')
+
         if post_dict.get('type','') == 'offer': # Check if it came from offer site
             state = post_dict.get('state') # State object to better inform
             offer_state = json.loads(state)
             request_info = state_to_message(offer_state, message) # Addition to original message
             post_dict.setlist('mesaj', [request_info]) # Update with new message
-            sub_meta = sub_dict(request.META, ['REMOTE_ADDR', 'HTTP_USER_AGENT', 'HTTP_REFERER']) # Get customer info
-            sub_meta['source'] = request.COOKIES.get('__utmz')
             record = OtomatikTeklif(musteri=json.dumps(sub_meta), durum=state) # Pack usefull info
+        elif tip == 'teklif':
+            record = OtomatikTeklif(musteri=json.dumps(sub_meta), durum={})
+
 
         bilgi = form(post_dict)
         valid = bilgi.is_valid()
@@ -149,11 +155,12 @@ def formIslem(request,tip):
         geri_donus = ''
     
     # Save the record for auto offer, assume input is correct
-    if record: 
+    if record and valid and not duplicate: 
         record.bilgi = bilgi_db
         record.save()
+
+    if offer_state:
         return HttpResponse('success')
-    # Give user feedback if there is a mistake
     else:
         return render_to_response(yollaForm.TEMPLATE,{'form':yollaForm, 'tip':tip,'mesaj':geri_donus, 'basari': success},
                                   context_instance=RequestContext(request))
