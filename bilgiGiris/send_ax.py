@@ -28,9 +28,11 @@ def _send_ax():
             with open(path, 'r') as infile:
                 data = json.load(infile)
             #data = dict([(k.encode('utf8'), v.encode('utf8')) for k, v in data.items()])
+            bilgi = Bilgi.objects.get(pk=int(name))
+            if bilgi.ax_code:
+                raise Exception('Teklif %s already has an ax_code: %s, no duplicate allowed. %s' % (name, bilgi.ax_code, bilgi.tarih))
             resp = client.call('AddWebQuotationForm', **data)
             ax_code = str(resp.AddWebQuotationFormResult) 
-            bilgi = Bilgi.objects.get(pk=int(name))
             bilgi.ax_code = ax_code
             bilgi.save()
         except Exception as e:
