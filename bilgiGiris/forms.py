@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from django import forms
 from django.forms import ModelForm
 from audio.bilgiGiris.models import Bilgi
 from django.core.exceptions import ValidationError
@@ -30,11 +32,21 @@ class BultenForm(ModelForm):
         model = Bilgi
         fields = ('isim', 'sehir', 'telefon', 'email')
 
+konular = (
+        ('', '---------'),
+        ('10', 'Teknik Destek'),
+        ('2', 'Satış / Pazarlama'),
+        ('13', 'Teşekkür / Şikayet'),
+        ('12', 'Diğer')
+        )
+
 class IletisimForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
+    konu = forms.ChoiceField(required=True, choices=konular)
+    baslik = forms.CharField(label='Başlık', required=True)
     class Meta:
         model = Bilgi
-        fields = ('isim', 'sehir', 'telefon', 'email', 'mesaj')
+        fields = ('isim', 'sehir', 'telefon', 'email', 'konu', 'baslik', 'mesaj')
 
 class StandForm(ModelForm):
     TEMPLATE = 'dukkan_standi.html'

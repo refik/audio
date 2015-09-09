@@ -38,6 +38,8 @@ class Bilgi(models.Model):
     sehir = models.ForeignKey(Sehir)
     ilce = models.ForeignKey(Ilce, null=True, blank=True)
     telefon = models.CharField('Telefon', max_length = 50)
+    baslik = models.CharField('Başlık', max_length = 50, null=True, blank=True)
+    konu = models.CharField('Konu', max_length = 50, null=True, blank=True)
     email = models.EmailField('Email')
     firma = models.CharField('Firma', max_length = 200)
     adres = models.CharField('Adres', max_length = 200)

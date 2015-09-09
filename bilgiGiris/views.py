@@ -12,6 +12,7 @@ from django.db.models import Q
 from django.views.decorators.cache import never_cache
 from audio.settings import GELISTIRME
 from send_ax import AX_QUEUE_FOLDER, send_ax
+from send_os import OS_QUEUE_FOLDER, send_os
 import datetime
 import json
 import os
@@ -126,6 +127,22 @@ def formIslem(request,tip):
                     with open(path, 'w+') as outfile:
                         json.dump(data, outfile)
                     send_ax()
+            elif tip == 'iletisim':
+                path = os.path.join(OS_QUEUE_FOLDER, str(bilgi_db.pk))
+                data = {'name': bilgi_db.isim, 
+                        'city': bilgi_db.sehir.isim,
+                        'phone': bilgi_db.telefon,
+                        'subject': bilgi_db.baslik,
+                        'topicId': int(bilgi_db.konu),
+                        'email': bilgi_db.email,
+                        'ip': request.META.get('REMOTE_ADDR', 31.222.163.32),
+                        'message': message}
+
+                if not GELISTIRME:
+                    with open(path, 'w+') as outfile:
+                        json.dump(data, outfile)
+                    send_os()
+ 
             tip_db = Tip.objects.get(isim__contains = tip)
             bilgi_db.tip = tip_db 
             bilgi_db.save()
@@ -139,8 +156,13 @@ def formIslem(request,tip):
             konu = 'Audio ' + tip.capitalize() + ' Formu'
             mesaj = mesajOlustur(bilgi.cleaned_data)
             mesaj += u'http://www.audio.com.tr/takip/%d adresinden detayli inceleyebilirsiniz' % bilgi_db.pk
-            audiomail('audioweb@audio.com.tr',['refik.rfk@gmail.com'] + gonderilecek, konu, mesaj)
-            audiomail('audioweb@audio.com.tr', [bilgi.cleaned_data['email']],konu,'İsteğiniz elimize ulaştı, size en kısa zamanda cevap vereceğiz.\n\nİstek kodunuz: #%d\n\nAudio Elektronik\nwww.audio.com.tr - 444 11 58\n\nnot: lütfen bu adrese cevap atmayın, kontrol edilmiyor.'.decode('utf-8') % bilgi_db.id )
+
+            if tip == 'iletisim':
+                url = 'https://destek.audio.com.tr/api/http.php/tickets.json'
+            else:
+                audiomail('audioweb@audio.com.tr',['refik.rfk@gmail.com'] + gonderilecek, konu, mesaj)
+                audiomail('audioweb@audio.com.tr', [bilgi.cleaned_data['email']],konu,'İsteğiniz elimize ulaştı, size en kısa zamanda cevap vereceğiz.\n\nİstek kodunuz: #%d\n\nAudio Elektronik\nwww.audio.com.tr - 444 11 58\n\nnot: lütfen bu adrese cevap atmayın, kontrol edilmiyor.'.decode('utf-8') % bilgi_db.id )
+
             yollaForm = form()
             geri_donus = 'İsteğiniz Elimize Ulaşmıştır'
             success = True
