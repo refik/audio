@@ -135,7 +135,7 @@ def formIslem(request,tip):
                         'subject': bilgi_db.baslik,
                         'topicId': int(bilgi_db.konu),
                         'email': bilgi_db.email,
-                        'ip': request.META.get('REMOTE_ADDR', 31.222.163.32),
+                        'ip': request.META.get('REMOTE_ADDR', '31.222.163.32'),
                         'message': message}
 
                 if not GELISTIRME:
