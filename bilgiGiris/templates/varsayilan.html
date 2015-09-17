@@ -4,7 +4,7 @@
 {% block icerik %}
 {% include 'tekli_ac.html' %}
  <div class="grid_56 capitalize centered">
-  <h2>{{ tip }} Formu</h2>
+     <h2>{%if tip == 'otomasyon' %}Akıllı Ev Teklif{% else %}{{ tip }}{% endif %} Formu</h2>
  </div>
  {% include 'form.html' with grid=26 push=14 class='form' %}
  {% ifequal tip 'iletisim' %}

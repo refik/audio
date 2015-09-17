@@ -1,5 +1,5 @@
 # coding: utf-8
-from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm, StandForm, SunumKitForm
+from audio.bilgiGiris.forms import TeklifForm, BultenForm, AkademiForm, IletisimForm, StandForm, SunumKitForm, OtomasyonForm
 from audio.bilgiGiris.models import Tip, Bilgi
 from audio.teklif.models import OtomatikTeklif
 from audio.ortakVeri.mail import audiomail
@@ -42,6 +42,9 @@ def formSec(tip):
         return StandForm
     elif tip == 'sunum-kiti':
         return SunumKitForm
+    elif tip == 'otomasyon':
+        return OtomasyonForm
+
 
     else:
         raise Http404
@@ -127,16 +130,19 @@ def formIslem(request,tip):
                     with open(path, 'w+') as outfile:
                         json.dump(data, outfile)
                     send_ax()
-            elif tip == 'iletisim':
+            elif tip in ['iletisim', 'otomasyon']:
                 path = os.path.join(OS_QUEUE_FOLDER, str(bilgi_db.pk))
                 data = {'name': bilgi_db.isim, 
                         'city': bilgi_db.sehir.isim,
                         'phone': bilgi_db.telefon,
                         'subject': bilgi_db.baslik,
-                        'topicId': int(bilgi_db.konu),
                         'email': bilgi_db.email,
                         'ip': request.META.get('REMOTE_ADDR', '31.222.163.32'),
                         'message': message}
+                if tip == 'otomasyon':
+                    data['topicId'] = 14
+                else:
+                    data['topicId'] = int(bilgi_db.konu)
 
                 if not GELISTIRME:
                     with open(path, 'w+') as outfile:
@@ -157,7 +163,7 @@ def formIslem(request,tip):
             mesaj = mesajOlustur(bilgi.cleaned_data)
             mesaj += u'http://www.audio.com.tr/takip/%d adresinden detayli inceleyebilirsiniz' % bilgi_db.pk
 
-            if tip == 'iletisim':
+            if tip in ['iletisim', 'otomasyon']:
                 url = 'https://destek.audio.com.tr/api/http.php/tickets.json'
             else:
                 audiomail('audioweb@audio.com.tr',['refik.rfk@gmail.com'] + gonderilecek, konu, mesaj)

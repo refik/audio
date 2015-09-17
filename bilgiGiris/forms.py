@@ -42,11 +42,19 @@ konular = (
 
 class IletisimForm(ModelForm):
     TEMPLATE = 'varsayilan.html'
-    konu = forms.ChoiceField(required=True, choices=konular)
     baslik = forms.CharField(label='Başlık', required=True)
+    konu = forms.ChoiceField(required=True, choices=konular)
     class Meta:
         model = Bilgi
         fields = ('isim', 'sehir', 'telefon', 'email', 'konu', 'baslik', 'mesaj')
+
+
+class OtomasyonForm(ModelForm):
+    TEMPLATE = 'varsayilan.html'
+    baslik = forms.CharField(label='Projeniz', required=True)
+    class Meta:
+        model = Bilgi
+        fields = ('isim', 'sehir', 'telefon', 'email', 'baslik', 'mesaj')
 
 class StandForm(ModelForm):
     TEMPLATE = 'dukkan_standi.html'
